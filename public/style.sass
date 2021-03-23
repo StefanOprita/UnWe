@@ -1,0 +1,130 @@
+$colorPrimary: #26A69A
+$colorPrimary06: #26A69A88
+$colorSecondary: #009688
+$colorSurface: #333333
+$colorOnSurface: #e0e0e0
+$silver: #e0e0e0
+$silver06: #e0e0e088
+$black: #000000
+$black04: #00000066
+
+html, body
+    margin: 0
+    padding: 0
+    font-family: 'Roboto', sans-serif
+
+.container
+    width: 100vw
+    height: 100vh
+    display: flex
+    flex-direction: column
+
+.background-image
+    width: 100%
+    height: 100%
+    position: absolute
+    z-index: -2
+    background-image: url("background.png")
+    background-size: cover
+    background-position: center
+
+.background-overlay
+    width: 100%
+    height: 100%
+    position: absolute
+    z-index: -1
+    background-color: $black
+    opacity: .7
+
+.header
+    width: 100%
+    height: 5.4em
+    align-items: center
+    box-sizing: border-box
+    display: flex
+    background-color: $black04
+    justify-content: space-between
+
+.title
+    font-size: 3em
+    font-weight: bold
+    margin-left: 1em
+    color: $colorOnSurface
+
+    span
+        color: $colorPrimary
+
+.menu
+    width: 20vw
+    height: 100%
+    display: table
+
+    .menu__item
+        height: 100%
+        font-size: 1.14em
+        letter-spacing: .1em
+        flex: auto
+        text-decoration: none
+        display: table-cell
+        padding-left: 1em
+        padding-right: 1em
+        vertical-align: middle
+        text-align: center
+        color: $colorPrimary
+        font-weight: 400
+
+        &:hover
+            background-color: $colorPrimary
+            cursor: pointer
+            transition: .2s
+            color: $silver
+
+    .menu__last-item
+        padding-left: 1.2em
+        padding-right: 1.8em
+
+.info-box
+    width: 30vw
+    margin: auto
+    border-color: $colorSurface
+
+
+    &__info
+        font-size: 1.8em
+        color: $colorOnSurface
+
+    &__first-info
+        font-size: 2.1em
+
+    &__button-box
+        width: 100%
+        display: flex
+
+    &__button
+        width: 9em
+        min-width: 6.5em
+        height: 3em
+        border: 1px solid $colorPrimary
+        border-radius: 10px
+
+        font-size: 1.3em
+        color: $colorPrimary
+        background-color: transparent
+
+        &:first-of-type
+            background-color: $colorPrimary06
+            color: $silver
+            border: none
+            margin-right: 1em
+
+        &:first-of-type:hover
+            background-color: $colorPrimary
+            color: $silver
+
+        &:hover
+            cursor: pointer
+            background-color: $colorPrimary
+            color: $silver
+            transition: .2s
+
+    // if width is smaller, align to start
