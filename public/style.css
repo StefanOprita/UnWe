@@ -1,0 +1,105 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Roboto', sans-serif; }
+
+.container {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column; }
+
+.background-image {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  z-index: -2;
+  background-image: url("background.png");
+  background-size: cover;
+  background-position: center; }
+
+.background-overlay {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  z-index: -1;
+  background-color: #000000;
+  opacity: .7; }
+
+.header {
+  width: 100%;
+  height: 5.4em;
+  box-sizing: border-box;
+  display: flex;
+  background-color: #00000066;
+  justify-content: space-between; }
+
+.title {
+  font-size: 3em;
+  font-weight: bold;
+  margin-left: 1em;
+  margin-top: .3em;
+  color: #e0e0e0; }
+  .title span {
+    color: #26A69A; }
+
+.menu {
+  width: 20vw;
+  height: 100%;
+  display: table; }
+  .menu .menu__item {
+    height: 100%;
+    font-size: 1.14em;
+    letter-spacing: .1em;
+    flex: auto;
+    text-decoration: none;
+    display: table-cell;
+    padding-left: 1em;
+    padding-right: 1em;
+    vertical-align: middle;
+    text-align: center;
+    color: #26A69A;
+    font-weight: 400; }
+    .menu .menu__item:hover {
+      background-color: #26A69A;
+      cursor: pointer;
+      transition: .2s;
+      color: #e0e0e0; }
+  .menu .menu__last-item {
+    padding-left: 1.2em;
+    padding-right: 1.8em; }
+
+.info-box {
+  width: 30vw;
+  margin: auto;
+  border-color: #333333; }
+  .info-box__info {
+    font-size: 1.8em;
+    color: #e0e0e0; }
+  .info-box__first-info {
+    font-size: 2.1em; }
+  .info-box__button-box {
+    width: 100%;
+    display: flex; }
+  .info-box__button {
+    width: 9em;
+    min-width: 6.5em;
+    height: 3em;
+    border: 1px solid #26A69A;
+    border-radius: 10px;
+    font-size: 1.3em;
+    color: #26A69A;
+    background-color: transparent; }
+    .info-box__button:first-of-type {
+      background-color: #26A69A88;
+      color: #e0e0e0;
+      border: none;
+      margin-right: 1em; }
+    .info-box__button:first-of-type:hover {
+      background-color: #26A69A;
+      color: #e0e0e0; }
+    .info-box__button:hover {
+      cursor: pointer;
+      background-color: #26A69A;
+      color: #e0e0e0;
+      transition: .2s; }
