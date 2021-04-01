@@ -33,6 +33,7 @@ function onMouseLeaveFunctions(event) {
 }
 
 
+//functia asta trebuie rulata neaparat
 function initializeJudet() {
     for (let index = 0; index < paths.length; index++) {
         const judet = paths[index];
@@ -85,6 +86,8 @@ function addJudetFunction(typeOfEvent, Function){
 }
 
 
+
+//exemple de cum utilizare
 addJudetFunction('onclick', function (element){
     console.log('Ai apasat pe ' + element.getAttribute('title'));
 });
