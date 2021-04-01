@@ -1,0 +1,197 @@
+$colorPrimary: #26A69A
+$colorPrimary06: #26A69A88
+$colorSecondary: #009688
+$colorSurface: #333333
+$colorOnSurface: #e0e0e0
+$silver: #e0e0e0
+$silver06: #e0e0e088
+$black: #000000
+$black04: #00000066
+$black08: #000000CC
+
+$menuLayoutThreshold: 700px
+
+html, body
+    margin: 0
+    padding: 0
+    font-family: 'Roboto', sans-serif
+    overflow: hidden
+
+.container
+    display: flex
+    flex-direction: column
+    width: 100%
+    height: 100vh
+
+.background-image
+    position: absolute
+    width: 100%
+    height: 100%
+    background-image: url("background.png")
+    background-size: cover
+    background-position: center
+    z-index: -2
+
+.background-overlay
+    position: absolute
+    width: 100%
+    height: 100%
+    background-color: $black
+    opacity: .7
+    z-index: -1
+
+.header
+    // position: relative
+    display: flex
+    justify-content: space-between
+    width: 100%
+    height: auto
+    min-height: 5.4em
+    background-color: $black04
+
+.title
+    margin-left: 1em
+    margin-top: .3em
+    font-size: 3em
+    font-weight: bold
+    color: $colorOnSurface
+
+    span
+        color: $colorPrimary
+
+.menu-button
+    right: 0
+    width: 5em
+    height: 100%
+    background-image: url("menu-black-18dp.svg")
+    background-size: 50%
+    background-position: center
+    background-repeat: no-repeat
+    opacity: 0
+    z-index: -1
+    transition: .2s
+
+    @media (max-width: $menuLayoutThreshold)
+        opacity: 1
+        z-index: 0
+
+        &:hover
+            background-color: $colorPrimary
+
+        &--opened
+            opacity: 0
+
+.menu
+    display: flex
+    flex-wrap: wrap
+    max-width: 60vw
+    height: 100%
+
+    @media (max-width: $menuLayoutThreshold)
+        position: absolute
+        display: flex
+        flex-direction: column
+        flex-wrap: nowrap
+        width: 14em
+        right: 0
+        background-color: $black08
+        transform: translateX(100%)
+        transition: .4s
+
+        &--opened
+            transform: translateX(0)
+
+    .menu__item
+        height: 100%
+        box-sizing: border-box
+        padding-top: 1.5em
+        padding-right: 1em
+        padding-left: 1em
+        font-size: 1.14em
+        letter-spacing: .1em
+        text-decoration: none
+        color: $colorPrimary
+        font-weight: 400
+
+        @media (max-width: $menuLayoutThreshold)
+            height: 4em
+            justify-content: flex-start
+            padding-top: 0
+            line-height: 4em
+
+            &:hover
+                background-color: $colorPrimary
+                cursor: pointer
+                color: $silver
+                transition: .2s
+
+        &:hover
+            background-color: $colorPrimary
+            cursor: pointer
+            color: $silver
+            transition: .2s
+
+    .menu__item-selected
+        text-decoration: underline $colorPrimary 2px
+        text-underline-offset: .2em
+
+    .menu__last-item
+        padding-left: 1.2em
+        padding-right: 1.8em
+
+.info-box
+    margin: auto
+    margin-left: 30vw
+    margin-right: 30vw
+    border-color: $colorSurface
+
+    @media (max-width: 1200px)
+        margin-top: auto
+        margin-right: 20vw
+        margin-bottom: auto
+        margin-left: 20vw
+
+    @media (max-width: 1600px)
+        margin-left: 25vw
+        margin-right: 25vw
+
+    &__info
+        font-size: 1.8em
+        color: $colorOnSurface
+
+        &:first-of-type
+            font-size: 2.1em
+
+    &__button-box
+        display: flex
+        flex-wrap: wrap
+        width: 100%
+
+    &__button
+        width: 9em
+        min-width: 6.5em
+        height: 3em
+        margin-right: 1em
+        margin-bottom: 5%
+        border: 1px solid $colorPrimary
+        border-radius: 10px
+        font-size: 1.3em
+        color: $colorPrimary
+        background-color: transparent
+        transition: .2s
+
+        &:first-of-type
+            background-color: $colorPrimary06
+            color: $silver
+            border: none
+
+        &:first-of-type:hover
+            background-color: $colorPrimary
+            color: $silver
+
+        &:hover
+            cursor: pointer
+            background-color: $colorPrimary
+            color: $silver
+
+    // if width is smaller, align to start

@@ -1,0 +1,11 @@
+{
+    "name": "UnWE",
+    "contributors": [],
+    "devDependencies": {
+        "node-sass": "^5.0.0"
+    },
+    "scripts": {
+        "dev": "node-sass -w public/style.sass public/style.css",
+        "build:css": "node-sass public/style.sass public/style.css"
+    }
+}
