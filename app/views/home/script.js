@@ -17,8 +17,6 @@ setTheme('theme-dark');
 window.addEventListener('DOMContentLoaded', (event) => {
     setUX();
     setAnimation();
-
-
 });
 
 function setUX() {
@@ -26,8 +24,8 @@ function setUX() {
     nav = document.getElementsByClassName('menu')[0];
 
     menuBtn.addEventListener('click', function() {
-        nav.classList.add('opened');
-        menuBtn.classList.add('opened');
+        nav.classList.add('menu--opened');
+        menuBtn.classList.add('menu-button--opened');
 
     });
 
@@ -36,8 +34,8 @@ function setUX() {
             return;
         }
 
-        nav.classList.remove('opened');
-        menuBtn.classList.remove('opened');
+        nav.classList.remove('menu--opened');
+        menuBtn.classList.remove('menu-button--opened');
 
     });
 

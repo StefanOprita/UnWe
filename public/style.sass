@@ -79,6 +79,10 @@ html, body
     @media (max-width: 80em)
         width: 95vw
 
+    @media (max-width: $menuLayoutThreshold)
+        width: 100%
+        margin: 0
+
 .title
     position: relative
     margin-left: 1em
@@ -92,16 +96,18 @@ html, body
         color: var(--color-primary)
 
 .menu-button
+    display: flex
     float: right
     width: 5em
     height: 0
-    background-image: url("menu-black-18dp.svg")
-    background-size: 50%
-    background-position: center
-    background-repeat: no-repeat
+    color: var(--color-on-surface)
     opacity: 0
-    z-index: -1
+    // z-index: -1
     transition: .2s
+
+    span
+        margin: auto
+        font-size: 2.4em
 
     @media (max-width: $menuLayoutThreshold)
         opacity: 1
@@ -123,7 +129,6 @@ html, body
 
     @media (max-width: $menuLayoutThreshold)
         position: absolute
-        display: flex
         flex-direction: column
         flex-wrap: nowrap
         width: 14em
@@ -131,11 +136,11 @@ html, body
         top: 0
         right: 0
         padding: 0 10px
-        background-color: $black08
+        background-color: var(--color-surface)
         transform: translateX(100%)
         transition: .4s
 
-        .opened
+        &--opened
             transform: translateX(0)
             height: 100vh
 
