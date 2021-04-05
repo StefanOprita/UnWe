@@ -27,6 +27,9 @@ var Animation = function(ctx) {
 
         for(let i = 0; i < dots.length; i++) {
             dots[i].update(delta);
+            for(let j = 0; j < boxes.length; j++) {
+                dots[i].setAngle(boxes[j].checkAndComputeCollision(dots[i].getX(), dots[i].getY(), dots[i].getAngle()));
+            }
         }
 
 
@@ -36,9 +39,9 @@ var Animation = function(ctx) {
         for(let i = 0; i < dots.length; i++) {
             dots[i].draw(ctx);
         }
-        for(var i = 0; i < boxes.length; i++) {
-            boxes[i].draw(ctx);
-        }
+        // for(var i = 0; i < boxes.length; i++) {
+        //     boxes[i].draw(ctx);
+        // }
 
         // checkCollisions();
 

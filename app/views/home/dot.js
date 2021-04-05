@@ -2,7 +2,7 @@ var Dot = function() {
     var x = Math.random() * screenWidth;
     var y = Math.random() * screenHeight;
     var radius = 5;
-    var speed = 3;
+    var speed = Math.random() * 2 + 1;
     var angle = Math.random() * 2 * Math.PI;
     var trailX = [];
     var trailY = [];
@@ -10,6 +10,10 @@ var Dot = function() {
     var trailCount = 50;
     var image = document.getElementById("dot");
 
+
+    var setAngle = function setAngle(newAngle) {
+        angle = newAngle;
+    }
 
     var draw = function(ctx) {
         ctx.beginPath();
@@ -63,6 +67,7 @@ var Dot = function() {
         getX: () => x,
         getY: () => y,
         getAngle: () => angle,
+        setAngle: setAngle,
         draw: draw,
         update: update,
     };
