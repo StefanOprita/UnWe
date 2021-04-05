@@ -16,8 +16,6 @@ var Animation = function(ctx) {
         oldMillisecond = millisecond;
         if(delta < 0) delta += 1000;
 
-        // console.log(delta)
-
         count += delta;
         if(count > 200 && dots.length < 10) {
             dots.push(Dot());
@@ -49,13 +47,14 @@ var Animation = function(ctx) {
 
 
     function initBoxes() {
-        boxes.push(
-            Box(document.getElementsByClassName('title')[0]),
-            Box(document.getElementsByClassName('menu')[0])
+        // boxes.push(
+            // Box(document.getElementsByClassName('title')[0]),
+            // Box(document.getElementsByClassName('menu')[0]),
+            // Box(document.getElementsByClassName('showcase-hint')[0])
             // Box(document.getElementsByClassName('info-box__button-box')[0])
-        );
-        Array.from(document.getElementsByClassName('info-box__info'), (elem) => boxes.push(Box(elem)));
-        Array.from(document.getElementsByClassName('info-box__button'), (elem) => boxes.push(Box(elem)));
+        // );
+        Array.from(document.getElementsByClassName('collision-box'), (elem) => boxes.push(Box(elem)));
+        // Array.from(document.getElementsByClassName('info-box__button'), (elem) => boxes.push(Box(elem)));
         // var array = document.getElementsByClassName('info-box__info');
         // for(let i = 0; i < array.length; i++) {
         //     boxes.push(Box(array[i]));

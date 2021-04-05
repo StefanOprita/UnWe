@@ -1,68 +1,100 @@
 $colorPrimary: #26A69A
 $colorPrimary06: #26A69A88
-$colorSecondary: #009688
-$colorSurface: #333333
-$colorOnSurface: #e0e0e0
-$silver: #e0e0e0
-$silver06: #e0e0e088
-$black: #000000
-$black04: #00000066
-$black08: #000000CC
+$colorSecondary: #186B64
+
+$white: #EBEBEB
+$black: #1F1E25
+$black04: #1F1E2566
+$black08: #1F1E25CC
+
+$silver: #B0B2C3
+$silver06: #B0B2C388
+$dark: #6D6A7B
+
+$gray: #F3F3F3
 
 $menuLayoutThreshold: 700px
+
+.theme-light
+   --color-primary: #26A69A
+   --color-primary06: #26A69A88
+   --color-secondary: #186B64
+   --color-surface: #EBEBEB
+   --color-on-surface: #1F1E25
+   --color-on-surface-variant: #6D6A7B
+
+.theme-dark
+    --color-primary: #26A69A
+    --color-primary06: #26A69A88
+    --color-secondary: #186B64
+    --color-surface: #1F1E25
+    --color-on-surface: #EBEBEB
+    --color-on-surface-variant: #B0B2C3
 
 html, body
     margin: 0
     padding: 0
-    font-family: 'Roboto', sans-serif
-    overflow: hidden
+    font-family: 'Ubuntu', sans-serif
+    // overflow: hidden
+    transition: background 2s
 
 .container
     display: flex
     flex-direction: column
     width: 100%
     height: 100vh
+    overflow: hidden
 
-.background-image
+.background
     position: absolute
     width: 100%
     height: 100%
-    background-image: url("background.png")
-    background-size: cover
-    background-position: center
+    background: var(--color-surface)
     z-index: -2
 
-.background-overlay
+#dot
+    position: absolute
+    transform: translateX(-100%) translateY(-100%)
+
+#canvas
     position: absolute
     width: 100%
-    height: 100%
-    background-color: $black
-    opacity: .7
+    margin: auto
     z-index: -1
 
 .header
-    // position: relative
-    display: flex
-    justify-content: space-between
-    width: 100%
+    position: relative
+    width: 70vw
     height: auto
-    min-height: 5.4em
-    background-color: $black04
+    min-height: 4em
+    margin-left: auto
+    margin-right: auto
+
+    @media (max-width: 100em)
+        width: 77vw
+
+    @media (max-width: 90em)
+        width: 85vw
+
+    @media (max-width: 80em)
+        width: 95vw
 
 .title
+    position: relative
     margin-left: 1em
     margin-top: .3em
     font-size: 3em
     font-weight: bold
-    color: $colorOnSurface
+    float: left
+    color: var(--color-on-surface)
 
     span
-        color: $colorPrimary
+        color: var(--color-primary)
 
 .menu-button
-    right: 0
+    float: right
     width: 5em
-    height: 100%
+    height: 0
     background-image: url("menu-black-18dp.svg")
     background-size: 50%
     background-position: center
@@ -74,18 +106,20 @@ html, body
     @media (max-width: $menuLayoutThreshold)
         opacity: 1
         z-index: 0
+        height: 100%
 
         &:hover
-            background-color: $colorPrimary
+            background-color: var(--color-primary)
 
         &--opened
             opacity: 0
 
 .menu
+    position: relative
+    float: right
     display: flex
-    flex-wrap: wrap
-    max-width: 60vw
-    height: 100%
+    top: 2.1em
+    z-index: 1
 
     @media (max-width: $menuLayoutThreshold)
         position: absolute
@@ -93,105 +127,180 @@ html, body
         flex-direction: column
         flex-wrap: nowrap
         width: 14em
+        height: 100vh
+        top: 0
         right: 0
+        padding: 0 10px
         background-color: $black08
         transform: translateX(100%)
         transition: .4s
 
-        &--opened
+        .opened
             transform: translateX(0)
+            height: 100vh
 
-    .menu__item
-        height: 100%
+    .item
+        position: relative
+        height: 2.1em
+        margin-right: 1.7em
+        padding: 10px 0
         box-sizing: border-box
-        padding-top: 1.5em
-        padding-right: 1em
-        padding-left: 1em
-        font-size: 1.14em
-        letter-spacing: .1em
+        font-size: 1.16em
+        letter-spacing: .15em
         text-decoration: none
-        color: $colorPrimary
+        color: var(--color-on-surface-variant)
         font-weight: 400
+        overflow: hidden
+
+        &--selected
+            color: var(--color-on-surface)
+
+        &:last-of-type
+            padding-left: 8px
+            padding-right: 8px
+
+        &:hover
+            cursor: pointer
+            color: var(--color-on-surface)
+
+        &:hover::before
+            width: 100%
+            left: 0
+
+        &::before
+            content: ''
+            position: absolute
+            width: 0
+            height: 3px
+            right: 0
+            bottom: 0
+            left: auto
+            background-color: var(--color-primary)
+            transition: .25s
 
         @media (max-width: $menuLayoutThreshold)
             height: 4em
             justify-content: flex-start
             padding-top: 0
             line-height: 4em
+            margin: 0
+            padding: 0
 
-            &:hover
-                background-color: $colorPrimary
-                cursor: pointer
-                color: $silver
-                transition: .2s
+            &::before
+                bottom: .8em
 
-        &:hover
-            background-color: $colorPrimary
-            cursor: pointer
-            color: $silver
-            transition: .2s
+            &:last-of-type
+                padding: 0
 
-    .menu__item-selected
-        text-decoration: underline $colorPrimary 2px
-        text-underline-offset: .2em
-
-    .menu__last-item
-        padding-left: 1.2em
-        padding-right: 1.8em
 
 .info-box
+    width: 90%
+    max-width: 980px
     margin: auto
-    margin-left: 30vw
-    margin-right: 30vw
-    border-color: $colorSurface
+    border-color: var(--color-surface)
+    text-align: center
 
-    @media (max-width: 1200px)
-        margin-top: auto
-        margin-right: 20vw
-        margin-bottom: auto
-        margin-left: 20vw
+    .info
+        margin-bottom: .5em
+        font-size: 3em
+        font-weight: 300
+        font-family: 'Roboto'
+        color: var(--color-on-surface)
 
-    @media (max-width: 1600px)
-        margin-left: 25vw
-        margin-right: 25vw
+        span
+            display: inline-block
+            font-weight: 400
+            color: var(--color-primary)
+            border-bottom: 2px dashed var(--color-primary)
+            text-decoration-style: dashed
 
-    &__info
-        font-size: 1.8em
-        color: $colorOnSurface
+    .last-info
+        margin-top: 0
+        margin-bottom: 2em
+        font-size: 1.7em
+        font-weight: 300
+        padding-top: 0
 
-        &:first-of-type
-            font-size: 2.1em
+    @media (max-width: 60em)
+        // background-color: $silver06
 
-    &__button-box
-        display: flex
-        flex-wrap: wrap
+        .info
+            font-size: 1.6em
+
+            &:first-of-type
+                font-size: 1.8em
+
+    .button-box
         width: 100%
 
-    &__button
-        width: 9em
-        min-width: 6.5em
-        height: 3em
-        margin-right: 1em
-        margin-bottom: 5%
-        border: 1px solid $colorPrimary
-        border-radius: 10px
-        font-size: 1.3em
-        color: $colorPrimary
-        background-color: transparent
-        transition: .2s
+        .button
+            position: relative
+            display: inline-block
+            width: 12em
+            min-width: 6.5em
+            height: 3.3em
+            margin: 0 1.5em
+            margin-bottom: 5%
+            border: 1px solid var(--color-primary)
+            font-family: 'Ubuntu'
+            font-size: 1.3em
+            font-weight: 600
+            text-transform: uppercase
+            letter-spacing: 1px
+            color: var(--color-primary)
+            background-color: transparent
+            transition: .2s
+            overflow: hidden
 
-        &:first-of-type
-            background-color: $colorPrimary06
-            color: $silver
-            border: none
+            span
+                display: block
+                position: relative
 
-        &:first-of-type:hover
-            background-color: $colorPrimary
-            color: $silver
+            &:first-of-type
+                background-color: var(--color-secondary)
+                color: var(--color-on-surface-variant)
+                border: none
 
-        &:hover
-            cursor: pointer
-            background-color: $colorPrimary
-            color: $silver
+            &:first-of-type:hover
+                background-color: var(--color-primary)
+                color: var(--color-on-surface)
 
-    // if width is smaller, align to start
+            &:hover
+                cursor: pointer
+                background-color: var(--color-primary)
+
+            &:hover span
+                color: var(--color-on-surface)
+
+            &:hover::before
+                width: 100%
+                left: 0
+
+            &::before
+                content: ''
+                position: absolute
+                width: 0
+                height: 100%
+                right: 0
+                bottom: 0
+                left: auto
+                background-color: var(--color-primary)
+                transition: .25s
+
+.showcase-hint
+    position: relative
+    bottom: 0
+    margin-right: auto
+    margin-left: auto
+
+    .text
+        padding-bottom: 2em
+        font-size: 1.2em
+        color: var(--color-on-surface)
+
+    .line
+        width: 2px
+        height: 4em
+        margin: auto
+        margin-top: .4em
+        background-color: var(--color-primary)

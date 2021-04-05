@@ -10,7 +10,6 @@ var Box = function(element) {
             var closestArray = [Math.abs(y - rect.top), Math.abs(x - rect.right), Math.abs(y - rect.bottom), Math.abs(x - rect.left)];
 
             var index = closestArray.indexOf(Math.min(...closestArray));
-            console.log(index);
             angle = sidesAction[index]();
 
             // if(angleSection < 2) { // top side
