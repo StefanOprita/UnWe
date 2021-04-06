@@ -8,7 +8,7 @@
     <title>UnWe</title>
 
     <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
@@ -22,41 +22,91 @@
 </head>
 
 <body>
-    <div class="container">
+    <div class="statistics-container">
         <div class="background"></div>
         <img id="dot" src="../../../public/dot.svg" alt="">
-        <canvas id="canvas" width="100%" height="80%"></canvas>
+        <canvas id="canvas"></canvas>
         <header class="header">
             <div class="title collision-box">Un<span>We</span></div>
             <div class="menu-button"><span class="material-icons">menu</span></div>
             <div class="menu collision-box">
                 <a class="item" href="../home/index.html">Home</a>
-                <a class="item" href="../map/index.html">Map</a>
-                <a class="item item--selected" href="../filters/index.html">Filters</a>
+                <a class="item item--selected" href="../statistics/index.html">Statistics</a>
                 <a class="item" href="../api/index.html">Api</a>
-                <a class="item theme"><span class="material-icons">mode_night</span></a>
+                <a class="item theme">
+                    <span id="theme-icon" class="material-icons theme-dark">dark_mode</span>
+                    <span id="theme-icon" class="material-icons theme-light">light_mode</span>
+                </a>
             </div>
         </header>
 
-        <div class="info-box">
-            <p class="info collision-box">There are <span>350</span> unemployed people in Romania.</p>
-            <p class="info last-info collision-box">There are <span>350</span> unemployed people.</p>
-            <div class="button-box">
-                <button type="button" name="button1" class="button collision-box"><span>GoTo1</span></button>
-                <button type="button" name="button2" class="button collision-box"><span>GoTo2</span></button>
+        <div class="map-button">
+            <span class="material-icons">map</span>
+        </div>
+
+        <div class="counties-bar">
+            <div class="item">
+                <span class="county-text">SV</span>
+                <div class="close-button"></div>
+                <span class="county-text material-icons">close</span>
+            </div>
+            <div class="item">
+                <span class="county-text">IS</span>
+                <div class="close-button"></div>
+                <span class="county-text material-icons">close</span>
+            </div>
+            <div class="item">
+                <span class="county-text">IS</span>
+                <div class="close-button"></div>
+                <span class="county-text material-icons">close</span>
+            </div>
+            <div class="item">
+                <span class="county-text">IS</span>
+                <div class="close-button"></div>
+                <span class="county-text material-icons">close</span>
+            </div>
+            <div class="item">
+                <span class="county-text">IS</span>
+                <div class="close-button"></div>
+                <span class="county-text material-icons">close</span>
+            </div>
+            <div class="item">
+                <span class="county-text">IS</span>
+                <div class="close-button"></div>
+                <span class="county-text material-icons">close</span>
+            </div>
+            <div class="item">
+                <span class="county-text">IS</span>
+                <div class="close-button"></div>
+                <span class="county-text material-icons">close</span>
+            </div>
+            <div class="item">
+                <span class="county-text">IS</span>
+                <div class="close-button"></div>
+                <span class="county-text material-icons">close</span>
+            </div>
+            <div class="item">
+                <span class="county-text">IS</span>
+                <div class="close-button"></div>
+                <span class="county-text material-icons">close</span>
+            </div>
+            <div class="item">
+                <span class="county-text">IS</span>
+                <div class="close-button"></div>
+                <span class="county-text material-icons">close</span>
+            </div>
+            <div class="item">
+                <span class="county-text">IS</span>
+                <div class="close-button"></div>
+                <span class="county-text material-icons">close</span>
+            </div>
+            <div class="item">
+                <span class="county-text">IS</span>
+                <div class="close-button"></div>
+                <span class="county-text material-icons">close</span>
             </div>
         </div>
 
-        <div class="showcase-hint collision-box">
-            <span class="text">showcase</span>
-            <div class="line"></div>
-        </div>
-    </div>
-    <div class="show-case-container">
-        <p>ana are mere</p>
-    </div>
-    <div class="show-case">
-        ana are mere verzi
     </div>
 </body>
 
