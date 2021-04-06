@@ -8,35 +8,55 @@
     <title>UnWe</title>
 
     <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
     <link rel="stylesheet" href="../../../public/style.css">
 
     <script src="script.js" charset="utf-8"></script>
+    <script src="../../../public/js/info.js" charset="utf-8"></script>
+    <script src="../../../public/js/dot.js" charset="utf-8"></script>
+    <script src="../../../public/js/box.js" charset="utf-8"></script>
+    <script src="../../../public/js/animation.js" charset="utf-8"></script>
 </head>
 
 <body>
     <div class="container">
-        <div class="background-image"></div>
-        <div class="background-overlay"></div>
+        <div class="background"></div>
+        <img id="dot" src="../../../public/dot.svg" alt="">
+        <canvas id="canvas" width="100%" height="80%"></canvas>
         <header class="header">
-            <div class="title">Un<span>We</span></div>
-            <div class="menu-button"></div>
-            <div class="menu">
-                <a class="menu__item" href="../home/index.html">HOME</a>
-                <a class="menu__item" href="../map/index.html">MAP</a>
-                <a class="menu__item menu__item-selected" href="../filters/index.html">FILTERS</a>
-                <a class="menu__item menu__last-item" href="../api/index.html">API</a>
+            <div class="title collision-box">Un<span>We</span></div>
+            <div class="menu-button"><span class="material-icons">menu</span></div>
+            <div class="menu collision-box">
+                <a class="item" href="../home/index.html">Home</a>
+                <a class="item" href="../map/index.html">Map</a>
+                <a class="item item--selected" href="../filters/index.html">Filters</a>
+                <a class="item" href="../api/index.html">Api</a>
+                <a class="item theme"><span class="material-icons">mode_night</span></a>
             </div>
         </header>
+
         <div class="info-box">
-            <p class="info-box__info info-box__first-info">The quick brown fox jumped over the lazy dog.</p>
-            <p class="info-box__info">Info2</p>
-            <p class="info-box__info">Info3</p>
-            <div class="info-box__button-box">
-                <button type="button" name="button1" class="info-box__button">GoTo1</button>
-                <button type="button" name="button2" class="info-box__button">GoTo2</button>
+            <p class="info collision-box">There are <span>350</span> unemployed people in Romania.</p>
+            <p class="info last-info collision-box">There are <span>350</span> unemployed people.</p>
+            <div class="button-box">
+                <button type="button" name="button1" class="button collision-box"><span>GoTo1</span></button>
+                <button type="button" name="button2" class="button collision-box"><span>GoTo2</span></button>
             </div>
         </div>
+
+        <div class="showcase-hint collision-box">
+            <span class="text">showcase</span>
+            <div class="line"></div>
+        </div>
+    </div>
+    <div class="show-case-container">
+        <p>ana are mere</p>
+    </div>
+    <div class="show-case">
+        ana are mere verzi
     </div>
 </body>
 
