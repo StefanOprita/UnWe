@@ -25,6 +25,7 @@ setTheme('theme-dark');
 window.addEventListener('DOMContentLoaded', (event) => {
     setUX();
     setAnimation();
+    //addSelectedCounty('SV');
 });
 
 function setUX() {
@@ -103,3 +104,29 @@ function setAddCountyButton() {
         });
     }
 }
+
+var listOfSelectedCountys = [];
+
+function addSelectedCounty(countyId) {
+    listOfSelectedCountys.push(countyId);
+    const itemDiv = document.createElement('div');
+
+    itemDiv.classList.add('item');
+
+    itemDiv.innerHTML = `
+        <span class="county-text"> ${countyId} </span>
+        <div class="close-button"></div>
+        <span class="county-text material-icons">close</span>
+    `;
+    // <div class="item">
+    //             <span class="county-text">SV</span>
+    //             <div class="close-button"></div>
+    //             <span class="county-text material-icons">close</span>
+    //         </div>
+
+    document.getElementsByClassName('counties-bar')[0].appendChild(itemDiv);
+
+}
+
+
+
