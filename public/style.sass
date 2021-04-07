@@ -404,7 +404,6 @@ html, body
             color: var(--color-on-surface)
             font-family: 'Roboto'
             font-weight: 500
-            z-index: -1
 
             span
                 margin: 5px 8px
@@ -427,6 +426,7 @@ html, body
 
                 &:hover ~.county-text
                     color: var(--color-surface)
+                    // cursor: pointer
 
         .item-add
             position: relative
@@ -451,7 +451,7 @@ html, body
                 width: 36px
                 height: 36px
                 right: 0
-                z-index: 1
+                z-index: 2
 
             span
                 margin: auto
@@ -464,6 +464,7 @@ html, body
                 border-top-left-radius: 40px
                 border-bottom-left-radius: 40px
                 transition: .25s
+                z-index: 1
 
                 &--opened
                     width: 11em
@@ -490,6 +491,7 @@ html, body
                         font-weight: 500
 
                 .selector
+                    position: absolute
                     display: flex
                     flex-direction: column
                     flex-wrap: nowrap

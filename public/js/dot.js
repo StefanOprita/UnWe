@@ -4,6 +4,7 @@ var Dot = function() {
     var radius = 5;
     var speed = Math.random() * 2 + 1;
     var angle = Math.random() * 2 * Math.PI;
+    var radius = 5;
     var trailX = [];
     var trailY = [];
     // var trailCount = 50;
@@ -21,6 +22,9 @@ var Dot = function() {
         ctx.translate(x, y);
         ctx.drawImage(image, -image.width / 2, -image.height / 2);
         ctx.restore();
+        // ctx.fillStyle = teal;
+        // ctx.arc(x, y, radius, 0, 2 * Math.PI, false);
+        // ctx.fill();
 
         for(var i = 1; i < trailX.length; i++) {
             ctx.strokeStyle = 'rgba(' + tealRgb + ', ' + (1 - i / trailCount) / 10 + ')';
