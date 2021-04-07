@@ -381,7 +381,7 @@ html, body {
         width: 36px;
         height: 36px;
         right: 0;
-        z-index: 1; }
+        z-index: 2; }
       .statistics-container .counties-bar .item-add span {
         margin: auto; }
       .statistics-container .counties-bar .item-add .county-select-container {
@@ -391,7 +391,8 @@ html, body {
         opacity: 0;
         border-top-left-radius: 40px;
         border-bottom-left-radius: 40px;
-        transition: .25s; }
+        transition: .25s;
+        z-index: 1; }
         .statistics-container .counties-bar .item-add .county-select-container--opened {
           width: 11em;
           opacity: 1; }
@@ -414,6 +415,7 @@ html, body {
             font-family: 'Roboto';
             font-weight: 500; }
         .statistics-container .counties-bar .item-add .county-select-container .selector {
+          position: absolute;
           display: flex;
           flex-direction: column;
           flex-wrap: nowrap;
