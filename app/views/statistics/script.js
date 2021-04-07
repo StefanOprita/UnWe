@@ -85,13 +85,6 @@ function setAddCountyButton() {
         console.log("added class")
 
 
-        //cod pentru a face etichetele cu judetele sa fie sub search items
-        countyItems = document.getElementsByClassName('item');
-        
-        for (let index = 0; index < countyItems.length; index++) {
-            const element = countyItems[index];
-            element.style.zIndex = -1;
-        }
 
     });
 
@@ -101,12 +94,6 @@ function setAddCountyButton() {
         document.getElementsByClassName('county-add-icon')[0].style.margin = 'auto';
         selectorContainer.classList.remove('county-select-container--opened');
         countyItems = document.getElementsByClassName('item');
-        
-        //facem reverse-ul la ce am facut mai devreme
-        for (let index = 0; index < countyItems.length; index++) {
-            const element = countyItems[index];
-            element.style.zIndex = 0;
-        }
     });
 
     for(var i = 0; i < selectorItems.length; i++) {
