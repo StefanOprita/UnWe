@@ -347,6 +347,7 @@ html, body
         bottom: 0
         margin-top: auto
         margin-bottom: auto
+        transition: 0.25s
 
         @media (max-width: $menuLayoutThreshold)
             margin: 0
@@ -391,8 +392,8 @@ html, body
         margin-top: 5.2em
         margin-right: auto
         margin-left: auto
-        // background-color: #efefef10
-
+        transition: flex-grow 1000ms linear
+        
         .item
             position: relative
             display: flex
@@ -404,6 +405,7 @@ html, body
             color: var(--color-on-surface)
             font-family: 'Roboto'
             font-weight: 500
+            transition: 0.25s
 
             span
                 margin: 5px 8px
@@ -423,6 +425,7 @@ html, body
                 width: 2.5em
                 height: 100%
                 cursor: pointer
+              
 
                 &:hover ~.county-text
                     color: var(--color-surface)
@@ -534,3 +537,68 @@ html, body
 
                         &:hover
                             color: var(--color-primary)
+
+    .map-centerer
+        position: absolute
+        width: 40%
+        height: 100%
+        display: flex
+        align-items: center
+        right: 2.8em
+
+        @media (max-width: $menuLayoutThreshold)
+            align-items: flex-start
+            right: 0
+            top: 100%
+            width: 100%
+        
+        .map-menu
+            transition: 0s
+            width: 100%
+            z-index: 100
+            border: solid 1px var(--color-primary)
+            background: var(--color-primary04)
+
+            &--closed
+                transform: translate(120%, 0)
+
+            &--opened
+                transform: translate(0, 0)
+
+            @media (max-width: $menuLayoutThreshold)
+                transform: translate(0, 0)
+
+                &--closed
+                    transform: translate(0, 0)
+                &--opened
+                    transform: translate(0, -100%)
+
+   
+
+            .map-container
+
+                .land
+                    fill: #FFFFFFAA
+                    fill-opacity: 1
+                    stroke: var(--color-primary)
+                    stroke-opacity: 1
+                    stroke-width: 0.8
+                    transition: 0.25s
+
+                    &:hover
+                        opacity: 0.7
+            .map-close-button
+                position: absolute
+                right: 0.5em
+                top: 0.5em
+                z-index: 2
+                span
+                    font-size: 2em
+                    border-radius: 40px
+                    transition: 0.25s
+                    &:hover
+                    
+                        background: #FFFFFFAA
+                        cursor: pointer
+                     
+                 

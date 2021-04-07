@@ -10,7 +10,7 @@ window.onload = function() {
 
     // let c = colors[0];
     // charts.push(MyChart(ctx, 'line', colors));
-    chart = MyLineChart(ctx, colors);
+    chart = MyPieChart(ctx, colors);
     // chart = MyPieChart(ctx, colors);
 
 
