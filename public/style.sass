@@ -1,5 +1,5 @@
 $colorPrimary: #26A69A
-$colorPrimary06: #26A69A88
+$colorPrimary04: #26A69A66
 $colorSecondary: #186B64
 
 $white: #EBEBEB
@@ -17,7 +17,7 @@ $menuLayoutThreshold: 700px
 
 .theme-light
    --color-primary: #26A69A
-   --color-primary06: #26A69A88
+   --color-primary04: #26A69A88
    --color-secondary: #3DC7BC
    --color-surface: #EBEBEB
    --color-on-surface: #1F1E25
@@ -25,7 +25,7 @@ $menuLayoutThreshold: 700px
 
 .theme-dark
     --color-primary: #26A69A
-    --color-primary06: #26A69A88
+    --color-primary04: #26A69A88
     --color-secondary: #186B64
     --color-surface: #1F1E25
     --color-on-surface: #EBEBEB
@@ -197,13 +197,15 @@ html, body
             &:last-of-type
                 padding: 0
 
-        .theme-light
-            position: absolute
-            opacity: 0
+        .theme-dark-button
+            opacity: 1
             transition: .4s
 
-        .theme-dark
-            opacity: 1
+        .theme-light-button
+            position: absolute
+            opacity: 0
+            left: 0
+            padding-left: 8px
             transition: .4s
 
 .info-box
@@ -402,6 +404,7 @@ html, body
             color: var(--color-on-surface)
             font-family: 'Roboto'
             font-weight: 500
+            z-index: -1
 
             span
                 margin: 5px 8px
@@ -420,6 +423,112 @@ html, body
                 right: 0
                 width: 2.5em
                 height: 100%
+                cursor: pointer
 
                 &:hover ~.county-text
                     color: var(--color-surface)
+
+        .item-add
+            position: relative
+            display: flex
+            height: 36px
+            min-width: 36px
+            margin-right: 20px
+            margin-bottom: 20px
+            border: 1px solid var(--color-primary)
+            border-radius: 40px
+            color: var(--color-on-surface)
+            font-family: 'Roboto'
+            font-weight: 500
+            transition: .25s
+
+            &:hover
+                color: var(--color-primary)
+                cursor: pointer
+
+            .item-add-surface
+                position: absolute
+                width: 36px
+                height: 36px
+                right: 0
+                z-index: 1
+
+            span
+                margin: auto
+
+            .county-select-container
+                position: relative
+                width: 0
+                height: 100%
+                opacity: 0
+                border-top-left-radius: 40px
+                border-bottom-left-radius: 40px
+                transition: .25s
+
+                &--opened
+                    width: 11em
+                    opacity: 1
+
+                input
+                    position: absolute
+                    width: 100%
+                    height: 100%
+                    margin: 0
+                    padding: 0 15px
+                    box-sizing: border-box
+                    border: none
+                    background-color: transparent
+                    color: var(--color-on-surface)
+                    font-size: 1.3em
+                    font-family: 'Roboto'
+                    font-weight: 500
+                    outline-width: 0
+
+                    &::placeholder
+                        color: var(--color-primary04)
+                        font-family: 'Roboto'
+                        font-weight: 500
+
+                .selector
+                    display: flex
+                    flex-direction: column
+                    flex-wrap: nowrap
+                    width: 100%
+                    max-height: 140px
+                    margin-top: 37px
+                    margin-left: 1em
+                    border-bottom: 1px solid var(--color-primary)
+                    outline-width: 0
+                    overflow: hidden scroll
+                    background-color: var(--color-surface)
+
+                    &::-webkit-scrollbar
+                        width: 5px
+
+                    /* Track */
+                    &::-webkit-scrollbar-track
+                        // box-shadow: inset 0 0 5px grey
+                        // border-radius: 10px
+
+                    /* Handle */
+                    &::-webkit-scrollbar-thumb
+                        background: var(--color-primary04)
+                        border-radius: 0
+
+                    /* Handle on hover */
+                    &::-webkit-scrollbar-thumb:hover
+                        background: var(--color-primary)
+
+                    .selector-item
+                        padding: 8px 0 5px 5px
+                        font-size: 1.1em
+                        font-family: 'Roboto'
+                        font-weight: 500
+                        color: var(--color-on-surface)
+                        transition: .25s
+
+                        &:first-of-type
+                            // padding-top: 0
+
+                        &:hover
+                            color: var(--color-primary)

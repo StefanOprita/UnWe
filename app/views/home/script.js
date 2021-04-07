@@ -7,15 +7,15 @@ function toggleTheme() {
     console.log('test theme change')
     if(localStorage.getItem('theme') === 'theme-dark') {
         setTheme('theme-light');
-        document.getElementById('theme-icon').innerHTML = 'light_mode';
-        document.getElementsByClassName('theme-dark')[0].style.opacity = 0;
-        document.getElementsByClassName('theme-light')[0].style.opacity = 1;
+        // document.getElementById('theme-icon').innerHTML = 'light_mode';
+        document.getElementsByClassName('theme-dark-button')[0].style.opacity = 0;
+        document.getElementsByClassName('theme-light-button')[0].style.opacity = 1;
         //light_mode
     } else {
         setTheme('theme-dark');
-        document.getElementById('theme-icon').innerHTML = 'dark_mode';
-        document.getElementsByClassName('theme-dark')[0].style.opacity = 0;
-        document.getElementsByClassName('theme-light')[0].style.opacity = 1;
+        // document.getElementById('theme-icon').innerHTML = 'dark_mode';
+        document.getElementsByClassName('theme-dark-button')[0].style.opacity = 1;
+        document.getElementsByClassName('theme-light-button')[0].style.opacity = 0;
         //dark_mode
     }
 }
@@ -28,6 +28,24 @@ window.addEventListener('DOMContentLoaded', (event) => {
 });
 
 function setUX() {
+    setMenu();
+    setThemeButton();
+}
+
+function setAnimation() {
+    var canvas = document.getElementById('canvas');
+    var ctx = canvas.getContext('2d');
+
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    screenWidth = canvas.width;
+    screenHeight = canvas.height;
+
+    Animation(ctx);
+}
+
+function setMenu() {
     menuBtn = document.getElementsByClassName('menu-button')[0];
     nav = document.getElementsByClassName('menu')[0];
 
@@ -47,19 +65,8 @@ function setUX() {
 
     });
 
+}
+function setThemeButton() {
     document.getElementsByClassName('theme')[0].addEventListener('click', toggleTheme);
 
-}
-
-function setAnimation() {
-    var canvas = document.getElementById('canvas');
-    var ctx = canvas.getContext('2d');
-
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-
-    screenWidth = canvas.width;
-    screenHeight = canvas.height;
-
-    Animation(ctx);
 }

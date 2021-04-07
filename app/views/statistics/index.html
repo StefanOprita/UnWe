@@ -8,17 +8,17 @@
     <title>UnWe</title>
 
     <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
     <link rel="stylesheet" href="../../../public/style.css">
 
-    <script src="script.js" charset="utf-8"></script>
-    <script src="../../../public/js/info.js" charset="utf-8"></script>
-    <script src="../../../public/js/dot.js" charset="utf-8"></script>
-    <script src="../../../public/js/box.js" charset="utf-8"></script>
-    <script src="../../../public/js/animation.js" charset="utf-8"></script>
+    <script src="script.js"></script>
+    <script src="../../../public/js/info.js"></script>
+    <script src="../../../public/js/dot.js"></script>
+    <script src="../../../public/js/box.js"></script>
+    <script src="../../../public/js/animation.js"></script>
 </head>
 
 <body>
@@ -34,8 +34,8 @@
                 <a class="item item--selected" href="../statistics/index.html">Statistics</a>
                 <a class="item" href="../api/index.html">Api</a>
                 <a class="item theme">
-                    <span id="theme-icon" class="material-icons theme-dark">dark_mode</span>
-                    <span id="theme-icon" class="material-icons theme-light">light_mode</span>
+                    <span class="material-icons theme-dark-button">dark_mode</span>
+                    <span class="material-icons theme-light-button">light_mode</span>
                 </a>
             </div>
         </header>
@@ -45,6 +45,23 @@
         </div>
 
         <div class="counties-bar">
+            <div class="item-add">
+                <div class="item-add-surface"></div>
+                <div class="county-select-container">
+                    <input class="search" type="text" name="" value="" placeholder="Search">
+                    <div id="counties-selector" class="selector">
+                        <div class="selector-item" value='SV'>Suceava</div>
+                        <div class="selector-item" value='IS'>Iasi</div>
+                        <div class="selector-item" value='BT'>Botosani</div>
+                        <div class="selector-item" value='B'>Bucuresti</div>
+                        <div class="selector-item" value='TM'>Timisoara</div>
+                        <div class="selector-item" value='VS'>Vaslui</div>
+                        <div class="selector-item" value='AB'>Alba Iulia</div>
+                        <div class="selector-item" value='BH'>Bihor</div>
+                    </div>
+                </div>
+                <span class="county-add-icon material-icons">add</span>
+            </div>
             <div class="item">
                 <span class="county-text">SV</span>
                 <div class="close-button"></div>
@@ -56,52 +73,17 @@
                 <span class="county-text material-icons">close</span>
             </div>
             <div class="item">
-                <span class="county-text">IS</span>
+                <span class="county-text">VS</span>
                 <div class="close-button"></div>
                 <span class="county-text material-icons">close</span>
             </div>
             <div class="item">
-                <span class="county-text">IS</span>
+                <span class="county-text">BT</span>
                 <div class="close-button"></div>
                 <span class="county-text material-icons">close</span>
             </div>
             <div class="item">
-                <span class="county-text">IS</span>
-                <div class="close-button"></div>
-                <span class="county-text material-icons">close</span>
-            </div>
-            <div class="item">
-                <span class="county-text">IS</span>
-                <div class="close-button"></div>
-                <span class="county-text material-icons">close</span>
-            </div>
-            <div class="item">
-                <span class="county-text">IS</span>
-                <div class="close-button"></div>
-                <span class="county-text material-icons">close</span>
-            </div>
-            <div class="item">
-                <span class="county-text">IS</span>
-                <div class="close-button"></div>
-                <span class="county-text material-icons">close</span>
-            </div>
-            <div class="item">
-                <span class="county-text">IS</span>
-                <div class="close-button"></div>
-                <span class="county-text material-icons">close</span>
-            </div>
-            <div class="item">
-                <span class="county-text">IS</span>
-                <div class="close-button"></div>
-                <span class="county-text material-icons">close</span>
-            </div>
-            <div class="item">
-                <span class="county-text">IS</span>
-                <div class="close-button"></div>
-                <span class="county-text material-icons">close</span>
-            </div>
-            <div class="item">
-                <span class="county-text">IS</span>
+                <span class="county-text">B</span>
                 <div class="close-button"></div>
                 <span class="county-text material-icons">close</span>
             </div>
