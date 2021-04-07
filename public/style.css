@@ -293,7 +293,8 @@ html, body {
     right: 2.8em;
     bottom: 0;
     margin-top: auto;
-    margin-bottom: auto; }
+    margin-bottom: auto;
+    transition: 0.25s; }
     @media (max-width: 700px) {
       .statistics-container .map-button {
         margin: 0;
@@ -330,7 +331,8 @@ html, body {
     height: 60px;
     margin-top: 5.2em;
     margin-right: auto;
-    margin-left: auto; }
+    margin-left: auto;
+    transition: flex-grow 1000ms linear; }
     .statistics-container .counties-bar .item {
       position: relative;
       display: flex;
@@ -341,7 +343,8 @@ html, body {
       border-radius: 40px;
       color: var(--color-on-surface);
       font-family: 'Roboto';
-      font-weight: 500; }
+      font-weight: 500;
+      transition: 0.25s; }
       .statistics-container .counties-bar .item span {
         margin: 5px 8px;
         font-size: 1.1em;
@@ -446,3 +449,54 @@ html, body {
             transition: .25s; }
             .statistics-container .counties-bar .item-add .county-select-container .selector .selector-item:hover {
               color: var(--color-primary); }
+  .statistics-container .map-centerer {
+    position: absolute;
+    width: 40%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    right: 2.8em; }
+    @media (max-width: 700px) {
+      .statistics-container .map-centerer {
+        align-items: flex-start;
+        right: 0;
+        top: 100%;
+        width: 100%; } }
+    .statistics-container .map-centerer .map-menu {
+      transition: 0s;
+      width: 100%;
+      z-index: 100;
+      border: solid 1px var(--color-primary);
+      background: var(--color-primary04); }
+      .statistics-container .map-centerer .map-menu--closed {
+        transform: translate(120%, 0); }
+      .statistics-container .map-centerer .map-menu--opened {
+        transform: translate(0, 0); }
+      @media (max-width: 700px) {
+        .statistics-container .map-centerer .map-menu {
+          transform: translate(0, 0); }
+          .statistics-container .map-centerer .map-menu--closed {
+            transform: translate(0, 0); }
+          .statistics-container .map-centerer .map-menu--opened {
+            transform: translate(0, -100%); } }
+      .statistics-container .map-centerer .map-menu .map-container .land {
+        fill: #FFFFFFAA;
+        fill-opacity: 1;
+        stroke: var(--color-primary);
+        stroke-opacity: 1;
+        stroke-width: 0.8;
+        transition: 0.25s; }
+        .statistics-container .map-centerer .map-menu .map-container .land:hover {
+          opacity: 0.7; }
+      .statistics-container .map-centerer .map-menu .map-close-button {
+        position: absolute;
+        right: 0.5em;
+        top: 0.5em;
+        z-index: 2; }
+        .statistics-container .map-centerer .map-menu .map-close-button span {
+          font-size: 2em;
+          border-radius: 40px;
+          transition: 0.25s; }
+          .statistics-container .map-centerer .map-menu .map-close-button span:hover {
+            background: #FFFFFFAA;
+            cursor: pointer; }
