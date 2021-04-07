@@ -341,8 +341,7 @@ html, body {
       border-radius: 40px;
       color: var(--color-on-surface);
       font-family: 'Roboto';
-      font-weight: 500;
-      z-index: -1; }
+      font-weight: 500; }
       .statistics-container .counties-bar .item span {
         margin: 5px 8px;
         font-size: 1.1em;
