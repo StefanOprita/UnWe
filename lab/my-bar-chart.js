@@ -1,4 +1,4 @@
-var MyLineChart = function(ctx, colors) {
+var MyBarChart = function(ctx, colors) {
     var chart = initChart(ctx);
     var nrOfDatasets = 0;
     // var colors = [];
@@ -8,7 +8,7 @@ var MyLineChart = function(ctx, colors) {
 
     function initChart(ctx) {
         let chart = new Chart(ctx, {
-            type: 'line',
+            type: 'bar',
             data: {
                 labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
             },
@@ -27,8 +27,8 @@ var MyLineChart = function(ctx, colors) {
                 }
             }
         });
-        // chart.canvas.parentNode.style.width = '100vw';
-        // chart.canvas.parentNode.style.height = '100vh';
+        chart.canvas.parentNode.style.width = '100vw';
+        chart.canvas.parentNode.style.height = '100vh';
 
         return chart;
     }
