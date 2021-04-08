@@ -32,7 +32,7 @@
             <div class="menu collision-box">
                 <a class="item" href="../home/index.html">Home</a>
                 <a class="item item--selected" href="../statistics/index.html">Statistics</a>
-                <a class="item" href="../api/index.html">Api</a>
+                <a class="item" href="../api/index.html">API</a>
                 <a class="item theme">
                     <span class="material-icons theme-dark-button">dark_mode</span>
                     <span class="material-icons theme-light-button">light_mode</span>
@@ -119,7 +119,82 @@
             </div>
         </div>
         
-       
+
+        <div class="statistics-viewer">
+            <div class="download-button">
+                <span class="material-icons">
+                    file_download
+                </span>
+            </div>
+
+
+            <div class="chart">
+
+            </div>
+
+            <!--type-of-chart-selector-item-selected-->
+            <div class="type-of-chart-selector">
+                <div class="type-of-chart-selector-item type-of-chart-selector-item-selected" onclick="chartButtonClicked(this)">
+                    <span class="material-icons" >
+                        show_chart
+                    </span>
+                </div>
+                
+                <div class="type-of-chart-selector-item" onclick="chartButtonClicked(this)">
+                    <span class="material-icons" >
+                        bar_chart
+                    </span>
+                </div>
+
+                <div class="type-of-chart-selector-item" onclick="chartButtonClicked(this)">
+                    <span class="material-icons" >
+                        pie_chart
+                    </span>
+                </div>
+                
+
+            </div> 
+            
+            
+            <div class="chart-options-menu">
+                <div class="category-select">
+                    <div class="top-bar-centerer">
+                        <div class="top-bar" onclick="clickChartCategorySelector()">
+                            <span class="text"> 
+                                Îndemnizați/Neîndemnizați 
+                            </span>
+
+                            <span class="material-icons" >
+                                expand_more
+                            </span>
+                        </div>
+                        <div class="chart-options-menu-selector chart-options-menu-selector-closed" >
+                            <div class="chart-options-menu-selector-option" onclick="changeCurrentChartCategory(this)">
+                                Femei/Bărbați
+                            </div>
+                            <div class="chart-options-menu-selector-option" onclick="changeCurrentChartCategory(this)">
+                                Îndemnizați/Neîndemnizați
+                            </div>
+                            <div class="chart-options-menu-selector-option" onclick="changeCurrentChartCategory(this)">
+                                Învățământ
+                            </div>
+                            <div class="chart-options-menu-selector-option" onclick="changeCurrentChartCategory(this)">
+                                Mediu urban/rural
+                            </div>
+                            <div class="chart-options-menu-selector-option" onclick="changeCurrentChartCategory(this)">
+                                Vârsta
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+           
+        </div>
+
+
+    
 
     </div>
 </body>
