@@ -380,7 +380,7 @@ html, body
         span
             margin: auto
             font-size: 4em
-            color: var(--color-primary)
+            color: var(--color-on-surface)
             z-index: 1
             transition: .25s
 
@@ -388,11 +388,12 @@ html, body
         display: flex
         flex-wrap: wrap
         width: 70vw
-        height: 60px
+        height: fit-content
         margin-top: 5.2em
         margin-right: auto
         margin-left: auto
         transition: flex-grow 1000ms linear
+    
         
         .item
             position: relative
@@ -578,7 +579,7 @@ html, body
             .map-container
 
                 .land
-                    fill: #FFFFFFAA
+                    fill: #FFFFFF
                     fill-opacity: 1
                     stroke: var(--color-primary)
                     stroke-opacity: 1
@@ -600,5 +601,151 @@ html, body
                     
                         background: #FFFFFFAA
                         cursor: pointer
-                     
-                 
+
+    .statistics-viewer
+        position: relative
+        border: solid var(--color-primary) 2px
+        width: 75vw
+        margin-top: 1.2em
+        margin-left: auto
+        margin-right: auto
+        height: 65vh
+        background: var(--color-surface)
+        @media (max-width: $menuLayoutThreshold)
+            height: 40vh  
+        .download-button
+            color: var(--color-on-surface)          
+            position: absolute
+            top: 0.1em
+            right: 0.1em
+            
+            span
+                font: 'Ubuntu'
+                font-size: 3.5em
+                transition: 0.25s
+                &:hover
+                    cursor: pointer
+                    color: var(--color-primary)
+        
+        .chart
+            position: absolute
+            top: 2%
+            left: 1%
+            width: 64%
+            height: 95%
+            border: solid red 2px
+
+        .type-of-chart-selector
+            position: absolute
+            //border: solid red 1px
+            height: 20%
+            width: fit-content
+            right: 102%
+            display: flex
+            flex-direction: column
+            justify-content: center
+            top: 20vh
+
+           
+            
+
+            &-item
+                width: 100%
+                color: var(--color-on-surface-variant)
+                text-align: center
+                transition: 0.2s
+
+
+                span
+                    font-size: 4.5em
+                    width: fit-content
+                    margin-top: 4px
+                    transition: 0.2s
+                    @media (max-width: $menuLayoutThreshold)
+                        font-size: 4em
+                &:hover
+                    cursor: pointer
+                    color: var(--color-on-surface)
+
+                &-selected
+                    color: var(--color-primary)
+                    span
+                        //font-size: 6.5em
+                    &:hover
+                        cursor: normal
+                        color: var(--color-primary)
+
+        .chart-options-menu
+            position: absolute
+            border: solid orange 1px
+            width: 28%
+            height: 75%
+            right: 5%
+            top: 10%
+
+            .category-select
+               .top-bar-centerer
+                   position: absolute
+                   top: 1em
+                   display: flex
+                   justify-content: center
+                   width: 100%
+                   
+                   .top-bar
+                       position: relative
+                       width: 80%
+                       color: var(--color-on-surface)
+                       border: solid var(--color-primary) 1px
+                       display: flex
+                       justify-content: space-between
+                       .text    
+                            font-size: 0.9
+                            font-family: 'Ubuntu'
+                            margin-top: 0.2em
+                            margin-left: 0.2em
+
+                       .material-icons
+                            right: 1%
+                            &:hover
+                                color: var(--color-primary)
+                                cursor: pointer
+                   .chart-options-menu-selector
+                       position: absolute
+                       width: 80%
+                       top: 100%
+                       display: flex
+                       flex-direction: column
+                       border-bottom: 1px solid var(--color-primary)
+                       overflow: hidden scroll
+                       transition: 0.25s
+
+                       &-closed
+                           height: 0em
+
+
+                       &-opened
+                            height: 4.5em
+
+                       &-option
+                           transition: 0.25s
+                           &:hover
+                               cursor: pointer
+                               color: var(--color-primary)
+                       
+                       &::-webkit-scrollbar
+                           width: 5px
+
+                       &::-webkit-scrollbar-track
+                       
+                       &::-webkit-scrollbar-thumb
+                           background: var(--color-primary04)
+                           border-radius: 0
+                        
+                       &::-webkit-scrollbar-thumb:hover
+                           background: var(--color-primary)
+
+                       &-option
+                            padding: 8px 0 5px 5px
+                            font-family: 'Ubuntu'
+                            color: var(--color-on-surface)
+
