@@ -11,10 +11,12 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="../../../public/prism-dark.css">
 
     <link rel="stylesheet" href="../../../public/style.css">
 
     <script src="script.js" charset="utf-8"></script>
+    <script src="../../../public/prism-dark.js"></script>
     <script src="../../../public/js/info.js" charset="utf-8"></script>
     <script src="../../../public/js/dot.js" charset="utf-8"></script>
     <script src="../../../public/js/box.js" charset="utf-8"></script>
@@ -22,7 +24,7 @@
 </head>
 
 <body>
-    <div class="container">
+    <div class="api-container">
         <div class="background"></div>
         <img id="dot" src="../../../public/dot.svg" alt="">
         <canvas id="canvas" width="100%" height="80%"></canvas>
@@ -31,33 +33,261 @@
             <div class="menu-button"><span class="material-icons">menu</span></div>
             <div class="menu collision-box">
                 <a class="item" href="../home/index.html">Home</a>
-                <a class="item" href="../map/index.html">Map</a>
-                <a class="item" href="../filters/index.html">Filters</a>
-                <a class="item item--selected" href="../api/index.html">Api</a>
-                <a class="item theme"><span class="material-icons">mode_night</span></a>
+                <a class="item" href="../statistics/index.html">Statistics</a>
+                <a class="item item--selected" href="../api/index.html">API</a>
+                <a class="item theme">
+                    <span class="material-icons theme-dark-button">dark_mode</span>
+                    <span class="material-icons theme-light-button">light_mode</span>
+                </a>
             </div>
         </header>
-
-        <div class="info-box">
-            <p class="info collision-box">There are <span>350</span> unemployed people in Romania.</p>
-            <p class="info last-info collision-box">There are <span>350</span> unemployed people.</p>
-            <div class="button-box">
-                <button type="button" name="button1" class="button collision-box"><span>GoTo1</span></button>
-                <button type="button" name="button2" class="button collision-box"><span>GoTo2</span></button>
+        <section class="examples">
+            <div class="snippet">
+                <pre class="line-numbers">
+                    <code class="language-json">
+                        {
+                            "counties": ["SV", "Botoșani"]
+                        }
+                    </code>
+                </pre>
             </div>
-        </div>
 
-        <div class="showcase-hint collision-box">
-            <span class="text">showcase</span>
-            <div class="line"></div>
-        </div>
+            <div class="snippet">
+                <pre class="line-numbers">
+                    <code class="language-json">
+                        [
+                        {
+                            "name": "Botoșani",
+                            "id" : "BT",
+                            "total" : 2000,
+                            "gender" : {
+                                "male": 1200,
+                                "female": 800
+                            },
+                            "compensation": {
+                                "compensated": 900,
+                                "not-compensated": 1100
+                            },
+                            "education": {
+                                "no education": 100,
+                                "primary": 400,
+                                "middleschool": 500,
+                                "highschool": 200,
+                                "bachelors": 800
+                            },
+                            "environment": {
+                                "urban": 1300,
+                                "rural": 700
+                            },
+                            "age": {
+                                "&lt25": 20,
+                                "25-29": 100,
+                                "30-39": 120,
+                                "40-49": 500,
+                                "50-55": 800,
+                                ">55": 460
+                            }
+                    
+                    
+                            
+                        },
+                        {
+                            "name": "Suceava",
+                            "id": "SV",
+                            "total" : 2000,
+                            "gender" : {
+                                "male": 1200,
+                                "female": 800
+                            },
+                            "compensation": {
+                                "compensated": 900,
+                                "not-compensated": 1100
+                            },
+                            "education": {
+                                "no education": 100,
+                                "primary": 400,
+                                "middleschool": 500,
+                                "highschool": 200,
+                                "bachelors": 800
+                            },
+                            "environment": {
+                                "urban": 1300,
+                                "rural": 700
+                            },
+                            "age": {
+                                "&lt25": 20,
+                                "25-29": 100,
+                                "30-39": 120,
+                                "40-49": 500,
+                                "50-55": 800,
+                                ">55": 460
+                            }
+                        }
+                    ]
+                    </code>
+                </pre>
+            </div>
+
+            <div class="snippet">
+                <pre class="line-numbers">
+                    <code class="language-json">
+                        {
+                            "counties": ["Botoșani", "Suceava"],
+                            "categories": ["total"]
+                        }
+                    </code>
+                </pre>
+            </div>
+
+            <div class="snippet">
+                <pre class="line-numbers">
+                    <code class="language-json">
+                        [
+                        {
+                            "name": "Botoșani",
+                            "id" : "BT",
+                            "total" : 2000
+                        },
+                        {
+                            "name": "Suceava",
+                            "id": "SV",
+                            "total" : 2000,
+                            "gender" : {
+                                "male": 1200,
+                                "female": 800
+                            }
+                        }
+                        ]
+                    </code>
+                </pre>
+            </div>
+
+
+            <div class="snippet">
+                <pre class="line-numbers">
+                    <code class="language-json">
+                        [
+                        {
+                            "name": "Botoșani",
+                            "id" : "BT",
+                            "total" : 2000
+                        },
+                        {
+                            "name": "Suceava",
+                            "id": "SV",
+                            "total" : 2000,
+                            "gender" : {
+                                "male": 1200,
+                                "female": 800
+                            }
+                        }
+                        ]
+                    </code>
+                </pre>
+            </div>
+
+
+            <div class="snippet">
+                <pre class="line-numbers">
+                    <code class="language-json">
+                        [
+                        {
+                            "name": "Botoșani",
+                            "id" : "BT",
+                            "total" : 2000
+                        },
+                        {
+                            "name": "Suceava",
+                            "id": "SV",
+                            "total" : 2000,
+                            "gender" : {
+                                "male": 1200,
+                                "female": 800
+                            }
+                        }
+                        ]
+                    </code>
+                </pre>
+            </div>
+
+
+
+            <div class="snippet">
+                <pre class="line-numbers">
+                    <code class="language-json">
+                        [
+                        {
+                            "name": "Botoșani",
+                            "id" : "BT",
+                            "total" : 2000
+                        },
+                        {
+                            "name": "Suceava",
+                            "id": "SV",
+                            "total" : 2000,
+                            "gender" : {
+                                "male": 1200,
+                                "female": 800
+                            }
+                        }
+                        ]
+                    </code>
+                </pre>
+            </div>
+
+
+
+            <div class="snippet">
+                <pre class="line-numbers">
+                    <code class="language-json">
+                        [
+                        {
+                            "name": "Botoșani",
+                            "id" : "BT",
+                            "total" : 2000
+                        },
+                        {
+                            "name": "Suceava",
+                            "id": "SV",
+                            "total" : 2000,
+                            "gender" : {
+                                "male": 1200,
+                                "female": 800
+                            }
+                        }
+                        ]
+                    </code>
+                </pre>
+            </div>
+
+
+            <div class="snippet">
+                <pre class="line-numbers">
+                    <code class="language-json">
+                        [
+                        {
+                            "name": "Botoșani",
+                            "id" : "BT",
+                            "total" : 2000
+                        },
+                        {
+                            "name": "Suceava",
+                            "id": "SV",
+                            "total" : 2000,
+                            "gender" : {
+                                "male": 1200,
+                                "female": 800
+                            }
+                        }
+                        ]
+                    </code>
+                </pre>
+            </div>
+
+            
+        </section>
     </div>
-    <div class="show-case-container">
-        <p>ana are mere</p>
-    </div>
-    <div class="show-case">
-        ana are mere verzi
-    </div>
+    
 </body>
 
 </html>
