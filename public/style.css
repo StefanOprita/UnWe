@@ -27,8 +27,16 @@ html, body {
   height: 100vh;
   overflow: hidden; }
 
+.api-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: auto;
+  overflow: hidden; }
+
 .background {
-  position: absolute;
+  position: fixed;
+  top: 0px;
   width: 100%;
   height: 100%;
   background: var(--color-surface);
@@ -620,3 +628,20 @@ html, body {
             padding: 8px 0 5px 5px;
             font-family: 'Ubuntu';
             color: var(--color-on-surface); }
+
+.examples {
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto; }
+
+.snippet {
+  border-radius: 5px;
+  margin-left: 40px;
+  padding-left: 0px; }
+
+pre, code {
+  overflow: auto;
+  word-wrap: normal;
+  white-space: pre;
+  padding: 0;
+  margin: 0; }
