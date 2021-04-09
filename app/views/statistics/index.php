@@ -103,6 +103,18 @@
                 </div>
 
                 <div class="categories-list collision-box" action="" method="post"></div>
+
+                <div class="range-selector collision-box">
+                    <div class="selector">
+                        <label for="start">Start range:</label><br>
+                        <input type="month" id="start" name="start" min="2000-01" value="2021-04">
+                    </div>
+                    <div class="line"></div>
+                    <div class="selector">
+                        <label for="start">End range:</label><br>
+                        <input type="month" id="start" name="start" min="2000-01" value="2021-04">
+                    </div>
+                </div>
             </div>
 
             <div class="chart-type-container collision-box">

@@ -1,11 +1,11 @@
-var Animation = function(ctx) {
+var Animation = function(ctx, withCollision = true) {
 
     var count = 0;
     var delta = 0;
     var oldMillisecond = 0;
 
     var boxes = [];
-    initBoxes();
+    if(withCollision) initBoxes();
 
     dots = [];
     dots.push(Dot(boxes));

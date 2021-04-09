@@ -43,29 +43,8 @@ var Box = function(element) {
             var index = lineCollisionArray.indexOf(true);
             if(multipleCollisions == 1) angle = sidesAction[index]();
 
-            console.log(lineCollisionArray);
-
-
-            // if(angleSection < 2) { // top side
-            //     console.log('test1');
-            //     angle = 2 * Math.PI - angle;
-            // } else if(angleSection % 3 != 0) { // right side
-            //     console.log('test2');
-            //     angle = Math.PI - angle;
-            // } else if(angleSection > 1) { // bottom side
-            //     console.log('test3');
-            //     angle = Math.PI - (angle - Math.PI);
-            // } else if(angleSection % 3 == 0) { // left side
-            //     console.log('test4');
-            //     angle = Math.PI - angle;
-            // }
         }
 
-        // if(y < 0 && (angleSection == 2 || angleSection == 3)) angle = Math.PI - (angle - Math.PI);
-        // if(y > screenHeight && (angleSection == 0 || angleSection == 1)) angle = 2 * Math.PI - angle;
-        // if(x < 0 && (angleSection == 1 || angleSection == 2)) angle = Math.PI - angle;
-        // if(x > screenWidth && (angleSection == 3 || angleSection == 0)) angle = Math.PI - angle;
-        // console.log(angle);
         return angle;
 
     };
