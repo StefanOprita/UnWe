@@ -33,7 +33,8 @@ html, body {
   width: 100%;
   height: 100%;
   background: var(--color-surface);
-  z-index: -2; }
+  z-index: -2;
+  transition: .25s; }
 
 #dot {
   position: absolute;
@@ -73,7 +74,8 @@ html, body {
   font-size: 3em;
   font-weight: bold;
   float: left;
-  color: var(--color-on-surface); }
+  color: var(--color-on-surface);
+  transition: .25s; }
   .title span {
     color: var(--color-primary); }
 
@@ -521,16 +523,18 @@ html, body {
     @media (max-width: 1200px) {
       .statistics-container .chart-container {
         flex-direction: column;
-        width: 70vw; } }
+        width: 80vw;
+        margin-left: 15vw; } }
     .statistics-container .chart-container .chart {
+      position: relative;
       width: 75% !important;
       height: 100% !important; }
       @media (max-width: 1200px) {
         .statistics-container .chart-container .chart {
           width: 100% !important; } }
-      .statistics-container .chart-container .chart #chartCanvas {
-        width: 100% !important;
-        height: 90% !important; }
+      @media (max-width: 1200px) {
+        .statistics-container .chart-container .chart .chartCanvas {
+          height: 40vh !important; } }
     .statistics-container .chart-container .chart-options {
       width: 25%;
       height: 100%;
@@ -546,6 +550,11 @@ html, body {
         font-size: 1.34em;
         font-weight: 500;
         color: var(--color-on-surface); }
+        @media (max-width: 700px) {
+          .statistics-container .chart-container .chart-options .download-options {
+            font-size: 1.2em; } }
+        .statistics-container .chart-container .chart-options .download-options .download {
+          transition: .25s; }
         .statistics-container .chart-container .chart-options .download-options .download:hover {
           cursor: pointer;
           color: var(--color-primary);
@@ -590,11 +599,17 @@ html, body {
           box-sizing: border-box;
           color: var(--color-on-surface);
           transition: .25s; }
+          @media (max-width: 700px) {
+            .statistics-container .chart-container .chart-options .category-selector .top {
+              font-size: 1.2em; } }
           .statistics-container .chart-container .chart-options .category-selector .top:hover {
             cursor: pointer;
             color: var(--color-primary); }
           .statistics-container .chart-container .chart-options .category-selector .top .material-icons {
             font-size: 1.34em; }
+            @media (max-width: 700px) {
+              .statistics-container .chart-container .chart-options .category-selector .top .material-icons {
+                font-size: 1.2em; } }
         .statistics-container .chart-container .chart-options .category-selector .options-list {
           position: absolute;
           display: flex;
@@ -626,6 +641,9 @@ html, body {
           color: var(--color-on-surface-variant);
           border-left: 2px solid var(--color-primary);
           box-sizing: border-box; }
+          @media (max-width: 700px) {
+            .statistics-container .chart-container .chart-options .category-selector .option {
+              font-size: 1.08em; } }
           .statistics-container .chart-container .chart-options .category-selector .option:hover {
             cursor: pointer;
             color: var(--color-on-surface); }
@@ -641,6 +659,9 @@ html, body {
           font-size: 1.16em;
           font-weight: 500;
           color: var(--color-on-surface); }
+          @media (max-width: 700px) {
+            .statistics-container .chart-container .chart-options .categories-list .label {
+              font-size: 1.08em; } }
           .statistics-container .chart-container .chart-options .categories-list .label--unchecked {
             color: var(--color-on-surface-variant); }
           .statistics-container .chart-container .chart-options .categories-list .label:hover {
@@ -666,16 +687,15 @@ html, body {
                 left: 0;
                 top: 0;
                 text-align: center;
-                transform: translateY(-3px);
-                color: var(--color-on-surface); }
+                transform: translateY(-4px);
+                color: #EBEBEB; }
           .statistics-container .chart-container .chart-options .categories-list .label span {
             margin-left: 36px; }
     .statistics-container .chart-container .chart-type-container {
       position: absolute;
       display: flex;
       width: fit-content;
-      height: 20%;
-      top: 20vh;
+      top: 10vh;
       right: 102%;
       flex-direction: column;
       justify-content: center; }

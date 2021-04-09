@@ -15,12 +15,17 @@
     <link rel="stylesheet" href="../../../public/style.css">
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js" charset="utf-8"></script>
-    <script src="script.js"></script>
     <script src="../../../public/js/info.js"></script>
+    <script src="script.js"></script>
     <script src="../../../public/js/dot.js"></script>
     <script src="../../../public/js/box.js"></script>
     <script src="../../../public/js/animation.js"></script>
     <script src="../../../lab/my-line-chart.js"></script>
+    <script src="../../../lab/my-bar-chart.js"></script>
+    <script src="../../../lab/my-pie-chart.js"></script>
+
+    <script src="https://jsuites.net/v4/jsuites.js"></script>
+    <link rel="stylesheet" href="https://jsuites.net/v4/jsuites.css" type="text/css" />
 </head>
 
 <body>
@@ -68,11 +73,13 @@
 
         <div class="chart-container">
             <div class="chart">
-                <canvas id="chartCanvas"></canvas>
+                <canvas class="chartCanvas"></canvas>
+                <!-- <canvas class="chartCanvas"></canvas> -->
+                <!-- <canvas class="chartCanvas"></canvas> -->
             </div>
 
             <div class="chart-options">
-                <div class="download-options">
+                <div class="download-options collision-box">
                     <span class="download">Download</span>
                     <span class="option option--selected svg">svg</span>/
                     <span class="option csv">csv</span>/
@@ -80,7 +87,7 @@
                     <span class="material-icons">download</span>
                 </div>
 
-                <div class="category-selector">
+                <div class="category-selector collision-box">
                     <div class="top">
                         <span class="text">Age</span>
                         <span class="material-icons">expand_more</span>
@@ -95,10 +102,10 @@
                     </div>
                 </div>
 
-                <div class="categories-list" action="" method="post"></div>
+                <div class="categories-list collision-box" action="" method="post"></div>
             </div>
 
-            <div class="chart-type-container">
+            <div class="chart-type-container collision-box">
                 <div class="item item--selected">
                     <span class="material-icons">show_chart</span>
                 </div>

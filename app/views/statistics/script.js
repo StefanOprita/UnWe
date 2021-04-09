@@ -30,31 +30,44 @@ let countyColors = [
     '#2d4200', '#750d37', '#19aabd', '#ff666d'
 ]
 
+var theme = THEME_DARK;
+// var darkGridColor = '#B0B2C3';
+// var lightGridColor = '#6D6A7B';
+var darkGridColor = '#1F1E25';
+var lightGridColor = '#EBEBEB';
+var chart;
+
 let availableCountyColors = countyColors;
 
 function setTheme(themeName) {
     localStorage.setItem('theme', themeName);
     document.documentElement.className = themeName;
-}
 
+    theme = themeName;
+    Chart.defaults.global.defaultFontColor = (theme == THEME_DARK ? lightGridColor : darkGridColor);
+    if(typeof chart !== 'undefined') {
+        chart.setGridColor(((theme == THEME_DARK ? lightGridColor : darkGridColor) + '44'));
+        chart.getChart().update();
+    }
+
+}
 function toggleTheme() {
     console.log('test theme change')
-    if(localStorage.getItem('theme') === 'theme-dark') {
-        setTheme('theme-light');
+    if(localStorage.getItem('theme') === THEME_DARK) {
+        setTheme(THEME_LIGHT);
         // document.getElementById('theme-icon').innerHTML = 'light_mode';
         document.getElementsByClassName('theme-dark-button')[0].style.opacity = 0;
         document.getElementsByClassName('theme-light-button')[0].style.opacity = 1;
         //light_mode
     } else {
-        setTheme('theme-dark');
+        setTheme(THEME_DARK);
         // document.getElementById('theme-icon').innerHTML = 'dark_mode';
         document.getElementsByClassName('theme-dark-button')[0].style.opacity = 1;
         document.getElementsByClassName('theme-light-button')[0].style.opacity = 0;
         //dark_mode
     }
 }
-
-setTheme('theme-dark');
+setTheme(THEME_DARK);
 
 window.addEventListener('DOMContentLoaded', (event) => {
     setUX();
@@ -85,6 +98,7 @@ function setUX() {
     setCategorySelector();
 
     setDownloadType();
+    setRangePicker();
 
 
 }
@@ -186,28 +200,41 @@ function setMap() {
 }
 
 function setChart() {
+    Chart.defaults.global.defaultFontFamily = 'Ubuntu';
+
     var buttons = document.querySelectorAll('.chart-type-container .item');
     var chartElement = document.querySelectorAll('.chart-container .chart')[0];
 
-    buttons.forEach(button => {
-        button.addEventListener('click', function() {
-            for(let i = 0; i < buttons.length; i++) {
-                if(buttons[i] == button) buttons[i].classList.add('item--selected');
-                else buttons[i].classList.remove('item--selected');
-            }
-        });
-    });
-
     var rect = chartElement.getBoundingClientRect();
 
-    var canvas = document.getElementById('chartCanvas');
+    var canvas = document.querySelectorAll('.chart .chartCanvas')[0];
     var ctx = canvas.getContext('2d');
 
     canvas.width = rect.width;
     canvas.height = rect.height;
 
-    chart = MyLineChart(ctx, ['red', 'blue', 'yellow']);
+
+    chart = MyLineChart(ctx, MAIN_COLORS);
     chart.setSize(canvas.width, canvas.height);
+    chart.setGridColor(((theme == THEME_DARK ? lightGridColor : darkGridColor) + '44'));
+
+    buttons.forEach(button => {
+        button.addEventListener('click', function() {
+            chart.getChart().destroy();
+            for(let i = 0; i < buttons.length; i++) {
+                if(buttons[i] == button) {
+                    buttons[i].classList.add('item--selected');
+
+                    chart = (i == 0 ? MyLineChart(ctx, MAIN_COLORS) : i == 1 ? MyBarChart(ctx, MAIN_COLORS) : MyPieChart(ctx, MAIN_COLORS))
+                    chart.setGridColor(((theme == THEME_DARK ? lightGridColor : darkGridColor) + '44'));
+                } else {
+                    buttons[i].classList.remove('item--selected');
+                }
+            }
+        });
+    });
+
+
 
 }
 
@@ -560,6 +587,9 @@ function setDownloadType() {
             options[index].classList.add('option--selected');
         });
     });
+}
+function setRangePicker() {
+    
 }
 
 addCountyFunction('onclick', changeColorOfCounty);

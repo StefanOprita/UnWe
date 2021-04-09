@@ -58,6 +58,14 @@ var MyPieChart = function(ctx, colors) {
         chart.update();
     }
 
+    function setGridColor(color) {
+        chart.options.scales.xAxes.forEach(ax => ax.gridLines.color = color);
+        chart.options.scales.yAxes.forEach(ax => ax.gridLines.color = color);
+        // chart.getChart().options.scales.xAxes[0].gridLines.color = color;
+        // chart.getChart().options.scales.yAxes[0].gridLines.color = color;
+        chart.update();
+    }
+
     function addLabel(label) {
         chart.data.labels.push(label);
         chart.update();
@@ -105,6 +113,7 @@ var MyPieChart = function(ctx, colors) {
     return {
         setSize: setSize,
         setLabels: setLabels,
+        setGridColor: setGridColor,
         addLabel: addLabel,
         addCircle: addCircle,
         addSlice: addSlice,

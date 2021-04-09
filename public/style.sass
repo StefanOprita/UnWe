@@ -52,6 +52,7 @@ html, body
     height: 100%
     background: var(--color-surface)
     z-index: -2
+    transition: .25s
 
 #dot
     position: absolute
@@ -92,6 +93,7 @@ html, body
     font-weight: bold
     float: left
     color: var(--color-on-surface)
+    transition: .25s
 
     span
         color: var(--color-primary)
@@ -626,22 +628,46 @@ html, body
 
         @media (max-width: $chartLayoutThreshold)
             flex-direction: column
-            width: 70vw
+            width: 80vw
+            margin-left: 15vw
 
         // @media (max-width: $menuLayoutThreshold)
         //     height: 40vh
 
         .chart
+            position: relative
             width: 75% !important
             height: 100% !important
+
             // background-color: #FF000011
 
             @media (max-width: $chartLayoutThreshold)
                 width: 100% !important
 
-            #chartCanvas
-                width: 100% !important
-                height: 90% !important
+            .chartCanvas
+
+                @media (max-width: $chartLayoutThreshold)
+                    height: 40vh !important
+
+
+            // canvas
+            //     position: absolute
+            //     top: 0
+            //     left: 0
+            //     width: 100% !important
+            //     height: 90% !important
+            //     opacity: 0
+            //
+            // .chartCanvas
+            //     position: absolute
+            //     top: 0
+            //     left: 0
+            //     width: 100% !important
+            //     height: 90% !important
+            //     opacity: 0
+            //
+            //     &:first-of-type
+            //         opacity: 1
 
         .chart-options
             width: 25%
@@ -659,6 +685,12 @@ html, body
                 font-size: 1.34em
                 font-weight: 500
                 color: var(--color-on-surface)
+
+                @media (max-width: $menuLayoutThreshold)
+                    font-size: 1.2em
+
+                .download
+                    transition: .25s
 
                 .download:hover
                     cursor: pointer
@@ -722,12 +754,18 @@ html, body
                     color: var(--color-on-surface)
                     transition: .25s
 
+                    @media (max-width: $menuLayoutThreshold)
+                        font-size: 1.2em
+
                     &:hover
                         cursor: pointer
                         color: var(--color-primary)
 
                     .material-icons
                         font-size: 1.34em
+
+                        @media (max-width: $menuLayoutThreshold)
+                            font-size: 1.2em
 
                 .options-list
                     position: absolute
@@ -771,6 +809,9 @@ html, body
                     box-sizing: border-box
                     // transition: color 0.25s
 
+                    @media (max-width: $menuLayoutThreshold)
+                        font-size: 1.08em
+
                     &:hover
                         cursor: pointer
                         color: var(--color-on-surface)
@@ -792,6 +833,9 @@ html, body
                     font-size: 1.16em
                     font-weight: 500
                     color: var(--color-on-surface)
+
+                    @media (max-width: $menuLayoutThreshold)
+                        font-size: 1.08em
 
                     &--unchecked
                         color: var(--color-on-surface-variant)
@@ -822,8 +866,8 @@ html, body
                                 left: 0
                                 top: 0
                                 text-align: center
-                                transform: translateY(-3px)
-                                color: var(--color-on-surface)
+                                transform: translateY(-4px)
+                                color: $white
 
 
                     span
@@ -833,8 +877,8 @@ html, body
             position: absolute
             display: flex
             width: fit-content
-            height: 20%
-            top: 20vh
+            // height: 20%
+            top: 10vh
             right: 102%
             flex-direction: column
             justify-content: center
