@@ -48,6 +48,7 @@ function setTheme(themeName) {
     if(typeof chart !== 'undefined') {
         chart.setGridColor(((theme == THEME_DARK ? lightGridColor : darkGridColor) + '44'));
         chart.getChart().update();
+        // document.querySelectorAll('.range-selector .selector input::-webkit-calendar-picker-indicator').style.filter = (theme == THEME_DARK ? INVERT_DARK : INVERT_LIGHT);
     }
 
 }
@@ -383,7 +384,6 @@ function addCountyToList(countyId) {
 
     setTimeout(function() {
         itemDiv.style.opacity = 1;
-
     }, 200);
 
 }
@@ -429,6 +429,13 @@ function onClickCounty(event) {
         const Function = CountyOnClickFunctions[index];
         Function(element);
     }
+    console.log(element.id);
+
+    let length = 6;
+    let randomArray = [];
+    for(let i = 0; i < length; i++) randomArray.push(Math.random() * 5 + 5);
+
+    chart.addLine(element.id, randomArray);
 }
 
 function onMouseEnterCounty(event) {
@@ -588,8 +595,9 @@ function setDownloadType() {
         });
     });
 }
+
 function setRangePicker() {
-    
+
 }
 
 addCountyFunction('onclick', changeColorOfCounty);

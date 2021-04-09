@@ -3,7 +3,7 @@ var MyLineChart = function(ctx, colors) {
     var nrOfDatasets = 0;
     // var colors = [];
 
-    addLine("# of nrs", [12, 19, 3, 5, 2, 3]);
+    addLine("# of nrs", [8, 9, 3, 5, 2, 3]);
 
 
     function initChart(ctx) {

@@ -15,7 +15,7 @@
 
     <link rel="stylesheet" href="../../../public/style.css">
 
-    
+
 
     <script src="script.js"></script>
     <script id ="prismJs" src="../../../public/prism-dark.js"></script>
@@ -29,13 +29,13 @@
     <div class="api-container">
         <div class="background"></div>
         <img id="dot" src="../../../public/dot.svg" alt="">
-        <canvas id="canvas"></canvas>
+        <canvas id="api-canvas"></canvas>
         <header class="header">
             <div class="title collision-box">Un<span>We</span></div>
             <div class="menu-button"><span class="material-icons">menu</span></div>
             <div class="menu collision-box">
                 <a class="item" href="../home/index.html">Home</a>
-                <a class="item" href="../statistics/index.html">Statistics</a>
+                <a class="item" href="../statistics/index.php">Statistics</a>
                 <a class="item item--selected" href="../api/index.html">API</a>
                 <a class="item theme">
                     <span class="material-icons theme-dark-button">dark_mode</span>
@@ -48,14 +48,14 @@
             <p class="info collision-box">API documentation</p>
             <p class="info last-info collision-box">(WIP, for we haven't made the server yet)</p>
         </div>
-        
+
         <div class="examples">
             <h2>Introduction</h2>
             <div class="text">
                 If you wish to use our data in your application, we've got you covered!
             </div>
             <div class="text">
-                All you have to do it's to send an HTTP request using the <code class="language-http">GET</code> method and with the data parameter set to 
+                All you have to do it's to send an HTTP request using the <code class="language-http">GET</code> method and with the data parameter set to
                 your search parameters in a <code class="language-http">JSON</code> file. We'll process your request and send you the response in a the form of a <code class="language-http">JSON</code> file
 
                 For example, if you are using <code class="language-http">javascript</code> and you want to send the request with <code class="language-http">AJAX</code>:
@@ -83,12 +83,12 @@
                 <ul>
                     <li>
                         <code class="language-json">"counties":["countyName1",(...)]</code> - this field <b>CANNOT</b> be missing. It represents the counties
-                        you want information about. Each <code class="language-json">"countyNameX"</code> can either be in full form 
+                        you want information about. Each <code class="language-json">"countyNameX"</code> can either be in full form
                         (<code class="language-json">"Botoșani"</code>) or their short-form (<code class="language-json">"BT"</code>)
                     </li>
                     <li>
                         <code class="language-json">"category":["category1",(...)]</code> - if you only want only some information, you can specify it's category
-                        in this field. The possible values for <code class="language-json">"categoryX"</code> are: 
+                        in this field. The possible values for <code class="language-json">"categoryX"</code> are:
                             <code class="language-json">"total"</code>,
                             <code class="language-json">"gender"</code>,
                             <code class="language-json">"compensation"</code>,
@@ -96,20 +96,20 @@
                             <code class="language-json">"age"</code>
                     </li>
                     <li>
-                        <code class="language-json">"years":["year1",(...)]</code> - if you want the statistics from specific years. If this key it's not present in your 
+                        <code class="language-json">"years":["year1",(...)]</code> - if you want the statistics from specific years. If this key it's not present in your
                         request, we'll send information from the curent month of the curent year.
                     </li>
                     <li>
-                        <code class="language-json">"start": "startingYear" </code> - if you want a range of years, instead of the  <code class="language-json">"years"</code> (or use it in conjunction) field you can use 
+                        <code class="language-json">"start": "startingYear" </code> - if you want a range of years, instead of the  <code class="language-json">"years"</code> (or use it in conjunction) field you can use
                         this one. We'll send information starting from <code class="language-json">"startingYear"</code>
                     </li>
                     <li>
-                        <code class="language-json">"end": "endYear" </code> - if you want a range of years, instead of the  <code class="language-json">"years"</code> (or use it in conjunction) field you can use 
+                        <code class="language-json">"end": "endYear" </code> - if you want a range of years, instead of the  <code class="language-json">"years"</code> (or use it in conjunction) field you can use
                         this one. We'll send information up until the year <code class="language-json">"endYear"</code>
                     </li>
 
                 </ul>
-                 
+
             </div>
             <h2>Examples</h2>
             <div class="text">
@@ -131,7 +131,7 @@
                 </pre>
             </div>
             <div class="text">
-                The <code class="language-http">JSON</code> file you'll receive would look something like this: 
+                The <code class="language-http">JSON</code> file you'll receive would look something like this:
             </div>
             <div class="snippet">
                 <pre class="line-numbers">
@@ -168,9 +168,9 @@
                                 "50-55": 800,
                                 ">55": 460
                             }
-                    
-                    
-                            
+
+
+
                         },
                         {
                             "name": "Suceava",
@@ -300,7 +300,7 @@
 
         </div>
     </div>
-    
+
 </body>
 
 </html>
