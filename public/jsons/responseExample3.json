@@ -1,0 +1,15 @@
+{
+    "2017": {
+        "january":[
+            {
+                "name": "Botoșani",
+                "id": "BT",
+                "total": 2000
+            }
+        ],
+        "february":["..."],
+        "allTheMonthsOfTheYear":"Array of counties for each month"
+    },
+    "2018": "Same structure as 2017",
+    "2019": "Same structure as 2018"
+}

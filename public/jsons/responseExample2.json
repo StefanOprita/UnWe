@@ -1,0 +1,16 @@
+[
+    {
+        "name": "Botoșani",
+        "id" : "BT",
+        "total" : 2000
+    },
+    {
+        "name": "Suceava",
+        "id": "SV",
+        "total" : 2000,
+        "gender" : {
+            "male": 1200,
+            "female": 800
+        }
+    }
+]
