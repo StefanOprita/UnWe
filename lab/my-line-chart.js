@@ -27,8 +27,8 @@ var MyLineChart = function(ctx, colors) {
                 }
             }
         });
-        chart.canvas.parentNode.style.width = '100vw';
-        chart.canvas.parentNode.style.height = '100vh';
+        // chart.canvas.parentNode.style.width = '100vw';
+        // chart.canvas.parentNode.style.height = '100vh';
 
         return chart;
     }
@@ -42,6 +42,14 @@ var MyLineChart = function(ctx, colors) {
 
     function setLabels(labels) {
         chart.data.labels = labels;
+        chart.update();
+    }
+
+    function setGridColor(color) {
+        chart.options.scales.xAxes.forEach(ax => ax.gridLines.color = color);
+        chart.options.scales.yAxes.forEach(ax => ax.gridLines.color = color);
+        // chart.getChart().options.scales.xAxes[0].gridLines.color = color;
+        // chart.getChart().options.scales.yAxes[0].gridLines.color = color;
         chart.update();
     }
 
@@ -87,6 +95,7 @@ var MyLineChart = function(ctx, colors) {
     return {
         setSize: setSize,
         setLabels: setLabels,
+        setGridColor: setGridColor,
         addLine: addLine,
         addColumn: addColumn,
         removeLine: removeLine,

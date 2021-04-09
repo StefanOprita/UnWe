@@ -1,13 +1,14 @@
-var MyPieChart = function(ctx, colors) {
+var MyBarChart = function(ctx, colors) {
     var chart = initChart(ctx);
+    var nrOfDatasets = 0;
     // var colors = [];
 
-    addCircle("# of nrs", [12, 19, 3, 5, 2, 3], colors);
+    addLine("# of nrs", [12, 19, 3, 5, 2, 3]);
 
 
     function initChart(ctx) {
         let chart = new Chart(ctx, {
-            type: 'pie',
+            type: 'bar',
             data: {
                 labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
             },
@@ -18,25 +19,11 @@ var MyPieChart = function(ctx, colors) {
                     duration: 400
                 },
                 scales: {
-                    xAxes: [{
-                        gridLines: {
-                            display: false
-                        },
-                        ticks: {
-                            display: false
-                        }
-                    }],
                     yAxes: [{
-                        gridLines: {
-                            display: false
-                        },
                         ticks: {
-                            display: false
+                            beginAtZero: true
                         }
                     }]
-                },
-                hover: {
-                    animationDuration: 200
                 }
             }
         });
@@ -66,42 +53,37 @@ var MyPieChart = function(ctx, colors) {
         chart.update();
     }
 
-    function addLabel(label) {
-        chart.data.labels.push(label);
-        chart.update();
-    }
-
-    function addCircle(label, lineData, colors) {
+    function addLine(label, lineData) {
         chart.data.datasets.push({
             label: label,
             data: lineData,
-            backgroundColor: colors,
-            hoverBackgroundColor: Array.from(colors, (color) => color + '88'),
+            backgroundColor: colors[nrOfDatasets],
+            borderColor: colors[nrOfDatasets],
             pointRadius: 5,
             lineTension: .3,
             fill: false,
-            borderWidth: 0
+            borderWidth: 3
         });
 
         chart.update();
+        nrOfDatasets++;
     }
 
-    function addSlice(label, sliceData) {
+    function addColumn(label, columnData) {
         chart.data.labels.push(label);
         chart.data.datasets.forEach((dataset, i) => {
-            dataset.data.push(sliceData[i]);
+            dataset.data.push(columnData[i]);
         });
 
         chart.update();
     }
 
-    function removeCircle(index) {
+    function removeLine(index) {
         chart.data.datasets.splice(index, 1);
         chart.update();
-
     }
 
-    function removeSlice(index) { // TODO
+    function removeColumn(index) { // TODO
         chart.data.labels.splice(index, 1);
         chart.data.datasets.forEach((dataset) => {
             dataset.data.splice(index, 1);
@@ -114,11 +96,10 @@ var MyPieChart = function(ctx, colors) {
         setSize: setSize,
         setLabels: setLabels,
         setGridColor: setGridColor,
-        addLabel: addLabel,
-        addCircle: addCircle,
-        addSlice: addSlice,
-        removeCircle: removeCircle,
-        removeSlice: removeSlice,
+        addLine: addLine,
+        addColumn: addColumn,
+        removeLine: removeLine,
+        removeColumn: removeColumn,
 
 
         getChart: () => chart
