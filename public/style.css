@@ -283,8 +283,13 @@ html, body {
 .showcase-container {
   display: inline-block;
   width: 100%;
-  height: 0;
-  background-color: #F3F3F3; }
+  height: 100%;
+  font-family: 'Roboto';
+  font-size: 1.4em;
+  padding: 4em 10em;
+  box-sizing: border-box;
+  background-color: #F3F3F3;
+  color: var(--color-surface); }
 
 .statistics-container {
   position: relative;
