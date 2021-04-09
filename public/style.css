@@ -630,14 +630,35 @@ html, body {
             color: var(--color-on-surface); }
 
 .examples {
-  width: 80%;
+  width: 60%;
   margin-left: auto;
-  margin-right: auto; }
+  margin-right: auto;
+  font-family: 'Ubuntu';
+  color: var(--color-on-surface);
+  transition: 0.25s;
+  text-align: center; }
+  @media (max-width: 700px) {
+    .examples {
+      width: 85%; } }
+  .examples .snippet {
+    border-radius: 5px;
+    padding: 10px 0px; }
+  .examples h2 {
+    text-align: left; }
+  .examples h3 {
+    text-align: left; }
+  .examples .text {
+    font-family: 'Roboto';
+    font-weight: 300;
+    letter-spacing: 1px;
+    font-size: 1.3em;
+    text-align: left; }
+    .examples .text ul li {
+      margin-top: 15px; }
 
-.snippet {
-  border-radius: 5px;
-  margin-left: 40px;
-  padding-left: 0px; }
+.footer {
+  height: 20%;
+  width: 100%; }
 
 pre, code {
   overflow: auto;

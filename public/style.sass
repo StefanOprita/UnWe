@@ -761,14 +761,41 @@ html, body
 
 
 .examples
-    width: 80%
+    width: 60%
     margin-left: auto
     margin-right: auto
+    font-family: 'Ubuntu'
+    color: var(--color-on-surface)
+    transition: 0.25s
+    text-align: center
+    @media (max-width: $menuLayoutThreshold)
+        width: 85%
+    .snippet
+        border-radius: 5px
+        padding: 10px 0px
+    h2
+        text-align: left
+    h3 
+        text-align: left
+    .text
+        font-family: 'Roboto'
+        font-weight: 300
+        letter-spacing: 1px
+        font-size: 1.3em
+        text-align: left
 
-.snippet
-    border-radius: 5px
-    margin-left: 40px
-    padding-left: 0px
+        ul
+            li
+                margin-top: 15px
+
+
+.footer
+    height: 20%
+    width: 100%
+
+
+
+        
 
 pre, code 
     overflow: auto
