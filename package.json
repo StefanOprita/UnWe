@@ -6,7 +6,7 @@
     },
     "scripts": {
         "dev": "node-sass -w public/style.sass public/style.css",
-        "dev2": "node-sass -w public/style2.sass public/style2.css",
+        "dev2": "node-sass -w documentation/style.sass documentation/style.css",
         "build:css": "node-sass public/style.sass public/style.css"
     }
 }
