@@ -382,9 +382,18 @@ function addCountyToList(countyId) {
     var countiesBar = document.getElementsByClassName('counties-bar')[0];
     countiesBar.insertBefore(itemDiv, countiesBar.children[1]);
 
+
+
     setTimeout(function() {
         itemDiv.style.opacity = 1;
     }, 200);
+
+
+    let length = 6;
+    let randomArray = [];
+    for(let i = 0; i < length; i++) randomArray.push(Math.random() * 5 + 5);
+
+    chart.addLine(countyId, randomArray);
 
 }
 
@@ -415,6 +424,7 @@ function removeCountyFromList(countyId) {
                     }
                 );
 
+                chart.removeLine(0);
 
                 break;
             }
@@ -431,11 +441,7 @@ function onClickCounty(event) {
     }
     console.log(element.id);
 
-    let length = 6;
-    let randomArray = [];
-    for(let i = 0; i < length; i++) randomArray.push(Math.random() * 5 + 5);
-
-    chart.addLine(element.id, randomArray);
+ 
 }
 
 function onMouseEnterCounty(event) {
