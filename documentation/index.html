@@ -62,8 +62,8 @@
     <section typeof="sa:Abstract" id="abstract" role="doc-abstract">
         <h2><span>1. </span>Cerință</h2>
         <p>
-            Să se realizeze un instrument Web de vizualizare și de comparare multi-criteriala (pe județe, 
-            nivel de educație, grupe de vârstă, mediu, perioadă de timp etc.) a 
+            Să se realizeze un instrument Web de vizualizare și de comparare multi-criteriala (pe județe,
+            nivel de educație, grupe de vârstă, mediu, perioadă de timp etc.) a
             <span typeof="schema:GovernmentOrganization" resource="https://data.gov.ro/dataset">
                 <span property="schema:copyrightHolder" typeof="Organization">
                     <meta property="schema:name" content="Data Governamental">
@@ -74,8 +74,8 @@
                         datelor publice referitoare la șomajul din România
                     </span>
                 </a>
-            </span>    
-            pe ultimele N luni (minim 12). De asemenea, Statisticile, plus vizualizările generate – minim 3 maniere, 
+            </span>
+            pe ultimele N luni (minim 12). De asemenea, Statisticile, plus vizualizările generate – minim 3 maniere,
             plus cele cartografice pe baza unor servicii Web de profil – vor putea fi exportate in formatele CSV, SVG si PDF.
         </p>
     </section>
@@ -83,71 +83,50 @@
     <section id="introduction">
         <h2><span>2. </span>Introducere</h2>
         <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-            labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
-            nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit
-            esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-            culpa qui officia deserunt mollit anim id est laborum.
+            Șomajul reprezintă o statistică relevantă pt fiecare țară și multe studii se bazează pe datele referitoare la acesta.
+            Considerăm că este important să existe o unealtă pentru vizualizarea și compararea ușoară a datelor de șomaj în România.
+            <br><br>
+            Ne propunem să face o aplicație web cu acest scop și de asemenea să oferim un API care să fie ușor de folosit pentru alte aplicații.
         </p>
     </section>
 
     <section id="architecture">
         <h2><span>3. </span>Arhitectura aplicației</h2>
         <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-            labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
-            nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit
-            esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-            culpa qui officia deserunt mollit anim id est laborum.
+            În diagrama de mai jos este descrisă arhitectura aplicație noastre:
         </p>
-        
+
         <img src="arhitecturaAplicatiei.svg" alt="Arhitectura aplicatiei">
+
+        <p>
+            La nivel de client, modulele importante sunt cele de generat și de exportat diagramele.
+            La nivel de server, Query Manager este modulul ce procură statisticile cerute de către utilizatori ori prin intermediul
+            aplicației ori prin API.
+        </p>
 
     </section>
 
-    <!-- <section id="architecture">
-        <h3><span>1.1 </span>Rutarea</h3>
-        <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-            labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
-            nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit
-            esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-            culpa qui officia deserunt mollit anim id est laborum.
-        </p>
-        
-        <p>
-            Lorem ipsum dolor sit amet, <a href="#"><span property="schema:name">consectetur</span></a> adipiscing elit, sed do eiusmod tempor incididunt ut
-            labore et dolore magna aliqua.
-        </p>
-
-        <ul>
-            <li><span>item 1</span></li>
-            <li><span>item 2</span></li>
-            <li><span>item 3</span></li>
-        </ul>
-    </section> -->
-
     <section id="pages">
-        <h2><span>4. </span>Paginile aplicației Web</h2> 
+        <h2><span>4. </span>Paginile aplicației Web</h2>
         <section id="pages-home">
             <h3><span>4.1 </span>Home</h3>
             <p>
-                Pagina
-                <span typeof="schema:WebSite" resource="to be added hosted TODO">
+                Pagina Home
+                <!-- <span typeof="schema:WebSite" resource="to be added hosted TODO">
                     <span property="schema:copyrightHolder" typeof="WebSite">
                         <meta property="schema:name" content="Home Page">
                         <meta property="schema:url" content="to be added hosted TODO">
                     </span>
                     <a href="to be added hoste TODO"><span property="schema:name">Home</span></a>
-                </span>
-                conține informații pe scurt referitoare la numărul de șomeri din România, numărul de șomeri din județul tău, 
-                un buton ce duce la statisticile cu aceste informații și alt buton care duce la API. 
+                </span> -->
+                conține informații pe scurt referitoare la numărul de șomeri din România, numărul de șomeri din județul tău,
+                un buton ce duce la statisticile cu aceste informații și alt buton care duce la API.
             </p>
-            
+
             <img src="HomePageFINAL.png" alt="Home Page" class="img-ss">
         </section>
-    
-        
+
+
         <section id="pages-statistics">
             <h3><span>4.2 </span>Statistics</h3>
             <p>
@@ -160,10 +139,10 @@
             </p>
 
             <img src="Statistics.png" alt="Statistics Page" class="img-ss">
-            
-        
+
+
         </section>
-    
+
         <section id="pages-API">
             <h3><span>4.3 </span>API</h3>
             <p>
@@ -171,30 +150,21 @@
                 <br>
                 Este prezentat formatul fișierului JSON și cateva exemple de cereri și răspunsuri.
             </p>
-            
+
             <img src="API.png" alt="API Page" class="img-ss">
         </section>
     </section>
 
-    
+
 
 
     <section id="implementation">
         <h2><span>5. </span>Detalii de implementare</h2>
-        <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-            labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
-            nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit
-            esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-            culpa qui officia deserunt mollit anim id est laborum.
-        </p>
-
-
         <section id="implementation-wisps">
             <h3><span>5.1 </span>Wisps</h3>
             <p>
-                Fundalul paginii are o animație creată din buline care se plimbă și lasă în urmă o linie cu opacitate ce scade în timp. 
-                Efectul create dinamizează background-ul paginii.
+                Fundalul paginii are o animație creată din buline care se plimbă și lasă în urmă o linie cu opacitate ce scade în timp.
+                Efectul creat dinamizează background-ul paginii.
                 Bulinele sunt de fapt o imagine care își schimbă poziția în timp și linia lăsată în urmă este un array de linii a căror opacitate scade
                 cu cât se îndepărtează mai tare de bulină.
                 <br><br>
@@ -203,7 +173,6 @@
 
                 Coliziunile cu elementele HTML se verifică cu următoare funcție:
             </p>
-            
             <pre>
                 <code class="language-javascript">
                     function intersects(line1X1, line1Y1, line1X2, line1Y2, line2X1, line2Y1, line2X2, line2Y2) {
@@ -219,11 +188,9 @@
                     };
                 </code>
             </pre>
-    
-                
         </section>
 
-        
+
         <section id="implementation-search-bar">
             <h3><span>5.2 </span>Search bar</h3>
             <p>
@@ -237,7 +204,7 @@
                         normalizedCountyName = normalizedCountyName.replace(/ă/g, 'a');
                         normalizedCountyName = normalizedCountyName.replace(/â/g, 'a');
                         normalizedCountyName = normalizedCountyName.replace(/î/g, 'i');
-            
+
                         //also, scoatem whitespace-ul
                         var normalizedInput = searchInput.toLowerCase().trim();
                         normalizedInput = normalizedInput.replace(/ș/g, 's');
@@ -253,15 +220,12 @@
                 din search-bar normalizat.
 
             </p>
-            <img src="https://fakeimg.pl/300/">
         </section>
 
-
-                
         <section id="implementation-map">
             <h3><span>5.3 </span>Map</h3>
             <p>
-                Am ales să folosim un   
+                Am ales să folosim un
                 <span typeof="schema:DefinedTerm" resource="https://wikipedia.org">
                     <span property="schema:copyrightHolder" typeof="WebSite">
                         <meta property="schema:name" content="Wikipedia">
@@ -269,8 +233,8 @@
                     </span>
                     <a href="https://ro.wikipedia.org/wiki/Scalable_Vector_Graphics"><span property="schema:name">svg</span></a>
                 </span>
-                oferit de 
-                <span typeof="schema:DefinedTerm" resource="https://www.amcharts.com/">
+                oferit de
+                <span typeof="schema:WebSite" resource="https://www.amcharts.com/">
                     <span property="schema:copyrightHolder" typeof="WebSite">
                         <meta property="schema:name" content="amCharts">
                         <meta property="schema:url" content="https://www.amcharts.com/svg-maps/?map=romania">
@@ -278,39 +242,85 @@
                     <a href="https://www.amcharts.com/svg-maps/?map=romania"><span property="schema:name">amCharts</span></a>
                 </span>
                 pentru a face o hartă politică interactivă. Fiecare path din svg reprezintă un județ, care este memorat într-o listă de județe:
-                <br> <br>
+                <br><br>
                 <code class="language-javascript">
                     counties = document.getElementsByTagName('path');
                 </code>
-                <br>
-
+                <br><br>
                 Pentru fiecare element, adăugam un event listener pentru a-l face interactiv și pentru a reacționa la click-ul utilizatorului.
-
-
-               
-          
             </p>
-            <img src="https://fakeimg.pl/300/">
         </section>
 
-
-                
         <section id="implementation-charts">
             <h3><span>5.4 </span>Charts</h3>
             <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit
-                esse cillum dolore eu fugiat nulla pariatur.
+                Pentru afișarea chart-urilor am folosit librăria oferită de
+                <span typeof="schema:WebSite" resource="https://www.chartjs.org/">
+                    <span property="schema:copyrightHolder" typeof="WebSite">
+                        <meta property="schema:name" content="amCharts">
+                        <meta property="schema:url" content="https://www.chartjs.org/docs/latest/">
+                    </span>
+                    <a href="https://www.chartjs.org/docs/latest/"><span property="schema:name">Charts.js</span></a>
+                </span>
+                . Datele diagramelor se actualizează odată cu fiecare județ selectat și pot fi afișate în 3
+                tipuri diferite(line, bar, pie);
+                <pre>
+                    <code class="language-javascript">
+                        let chart = new Chart(ctx, {
+                            type: 'line',
+                            data: {
+                                labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+                            },
+                            options: {
+                                responsive: true,
+                                maintainAspectRatio: false,
+                                animation: {
+                                    duration: 400
+                                },
+                                scales: {
+                                    yAxes: [{
+                                        ticks: {
+                                            beginAtZero: true
+                                        }
+                                    }]
+                                }
+                            }
+                        });
+                    </code>
+                </pre>
             </p>
-            <img src="https://fakeimg.pl/300/">
         </section>
+
     </section>
 
-    
+    <section id="references">
+        <h2><span>6. </span>Referințe</h2>
+        <!-- <p> -->
+            <ul>
+                <li property="schema:citation" typeof="schema:WebSite" resource="https://developer.mozilla.org/en-US/">
+                    <cite property="schema:name">
+                        <a href="https://developer.mozilla.org/en-US/">MDN Web Docs</a>
+                    </cite>
+                </li>
+                <li property="schema:citation" typeof="schema:WebSite" resource="https://www.chartjs.org/docs/latest/">
+                    <cite property="schema:name">
+                        <a href="https://www.chartjs.org/docs/latest/">Charts.js documentation</a>
+                    </cite>
+                </li>
+                <li property="schema:citation" typeof="schema:WebSite" resource="https://www.amcharts.com/svg-maps/?map=romania">
+                    <cite property="schema:name">
+                        <a href="https://www.amcharts.com/svg-maps/?map=romania">Map from amCharts</a>
+                    </cite>
+                </li>
+                <li property="schema:citation" typeof="schema:WebSite" resource="https://www.w3schools.com/">
+                    <cite property="schema:name">
+                        <a href="https://www.w3schools.com/">w3schools</a>
+                    </cite>
+                </li>
+            </ul>
+        <!-- </p> -->
 
-
-    
+    </section>
 
 </body>
 
