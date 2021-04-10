@@ -36,7 +36,6 @@ dl {
   margin-top: 2em;
   margin-left: 10px; }
 
-
 dt {
   margin-top: .6em;
   font-size: 1.3em;
@@ -63,3 +62,8 @@ li {
 
 img {
   margin: 10px 40px; }
+
+.img-ss {
+  width: 70%;
+  transform-origin: top left;
+  border: 1px solid #EBEBEB; }
