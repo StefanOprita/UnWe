@@ -1,6 +1,14 @@
+<<<<<<< Updated upstream
 .scrolling-bar {
     background-color: lightblue;
     width: 150px;
     height: 300px;
     overflow-y: scroll;
+=======
+.scrolling-bar {
+    background-color: lightblue;
+    width: 150px;
+    height: 300px;
+    overflow-y: scroll;
+>>>>>>> Stashed changes
   }

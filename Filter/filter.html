@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 <!-- <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -62,4 +63,70 @@ chart.render();
 <div id="chartContainer" style="height: 300px; width: 100%;"></div>
 <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 </body>
+=======
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="filters_style.css">
+    <script src="filter.js"></script>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form class="scrolling-bar">
+    <input type="checkbox" name="vehicle1" value="Bike" onchange="handleChange(this)">
+    <label for="vehicle1" > I have a bike</label><br>
+    <input type="checkbox" name="vehicle2" value="Car" onchange="handleChange(this)">
+    <label for="vehicle2"> I have a car</label><br>
+    <input type="checkbox" name="vehicle3" value="Boat" onchange="handleChange(this)">
+    <label for="vehicle3"> I have a boat</label><br>
+    <input type="checkbox" name="vehicle3" value="Boat" onchange="handleChange(this)">
+    <label for="vehicle3"> I have a boat</label><br>
+  </form>
+</body>
+</html> -->
+
+<!DOCTYPE HTML>
+<html>
+<head>  
+<script>
+window.onload = function () {
+
+var chart = new CanvasJS.Chart("chartContainer", {
+	animationEnabled: true,
+	theme: "light2",
+	title:{
+		text: "Simple Line Chart"
+	},
+	data: [{        
+		type: "line",
+      	indexLabelFontSize: 16,
+		dataPoints: [
+			{ y: 450 },
+			{ y: 414},
+			{ y: 520, indexLabel: "\u2191 highest",markerColor: "red", markerType: "triangle" },
+			{ y: 460 },
+			{ y: 200 },
+			{ y: 500 },
+			{ y: 480 },
+			{ y: 480 },
+			{ y: 410 , indexLabel: "\u2193 lowest",markerColor: "DarkSlateGrey", markerType: "cross" },
+			{ y: 500 },
+			{ y: 480 },
+			{ y: 10 }
+		]
+	}]
+});
+chart.render();
+
+}
+</script>
+</head>
+<body>
+<div id="chartContainer" style="height: 300px; width: 100%;"></div>
+<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+</body>
+>>>>>>> Stashed changes
 </html>
