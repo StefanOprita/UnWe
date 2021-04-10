@@ -7,7 +7,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@500;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&family=Ubuntu:wght@500;700&display=swap" rel="stylesheet">
-
+    <link rel="stylesheet" href="../public/prism-dark.css">
+    <script src="../public/prism-dark.js"></script>
     <link rel="stylesheet" href="style.css">
 </head>
 
@@ -128,9 +129,6 @@
 
     <section id="pages">
         <h2><span>4. </span>Paginile aplicației Web</h2> 
-        <p>
-            
-        </p>
         <section id="pages-home">
             <h3><span>4.1 </span>Home</h3>
             <p>
@@ -144,26 +142,24 @@
                 </span>
                 conține informații pe scurt referitoare la numărul de șomeri din România, numărul de șomeri din județul tău, 
                 un buton ce duce la statisticile cu aceste informații și alt buton care duce la API. 
-    
-    
-                <!--
-                    Text 1: cati sunt in romania.
-                    Text 2: cati sunt in judetul meu.
-                    Buton 1: statistics
-                    Buton 2: api
-    
-                -->
-                
             </p>
-
+            
+            <img src="HomePageFINAL.png" alt="Home Page" class="img-ss">
         </section>
     
         
         <section id="pages-statistics">
             <h3><span>4.2 </span>Statistics</h3>
             <p>
-                În această pagină, utilizatorul 
+                În această pagină, utilizatorul alege ce județe dorește să vizualizeze prin intermediul barei de căutare sau a hărții.
+                De asemenea, acesta poate alege între un line-graph, bar plot sau pie chart, între categoriile de date (vârsta, gen, educație
+                mediu, îndemnizare) și perioada pentru care se afișează datele.
+                <br>
+                <br>
+                Acesta poate descărca diagrama generată în format SVG, CSV sau PDF.
             </p>
+
+            <img src="Statistics.png" alt="Statistics Page" class="img-ss">
             
         
         </section>
@@ -171,13 +167,12 @@
         <section id="pages-API">
             <h3><span>4.3 </span>API</h3>
             <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit
-                esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-                culpa qui officia deserunt mollit anim id est laborum.
+                În această pagină se oferă documentația API-ul oferit de website-ul nostru.
+                <br>
+                Este prezentat formatul fișierului JSON și cateva exemple de cereri și răspunsuri.
             </p>
             
+            <img src="API.png" alt="API Page" class="img-ss">
         </section>
     </section>
 
@@ -193,40 +188,127 @@
             esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
             culpa qui officia deserunt mollit anim id est laborum.
         </p>
-    </section>
 
-    <section id="introduction" role="doc-introduction">
-        <h3><span>1.1 </span>Subpoint</h3>
-        <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-            labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
-            nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit
-            esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-            culpa qui officia deserunt mollit anim id est laborum.
-        </p>
+
+        <section id="implementation-wisps">
+            <h3><span>5.1 </span>Wisps</h3>
+            <p>
+                Fundalul paginii are o animație creată din buline care se plimbă și lasă în urmă o linie cu opacitate ce scade în timp. 
+                Efectul create dinamizează background-ul paginii.
+                Bulinele sunt de fapt o imagine care își schimbă poziția în timp și linia lăsată în urmă este un array de linii a căror opacitate scade
+                cu cât se îndepărtează mai tare de bulină.
+                <br><br>
+                Bulinele se pot "izbi" de unele elemente HTML, schimbându-și traiectoria, simulând efectul unui ricoșeu. Pentru a face acest lucru,
+                elementele de care se pot izbi au clasa "collision-box".
+
+                Coliziunile cu elementele HTML se verifică cu următoare funcție:
+            </p>
+            
+            <pre>
+                <code class="language-javascript">
+                    function intersects(line1X1, line1Y1, line1X2, line1Y2, line2X1, line2Y1, line2X2, line2Y2) {
+                        var det, gamma, lambda;
+                        det = (line1X2 - line1X1) * (line2Y2 - line2Y1) - (line2X2 - line2X1) * (line1Y2 - line1Y1);
+                        if(det === 0) {
+                            return false;
+                        } else {
+                            lambda = ((line2Y2 - line2Y1) * (line2X2 - line1X1) + (line2X1 - line2X2) * (line2Y2 - line1Y1)) / det;
+                            gamma = ((line1Y1 - line1Y2) * (line2X2 - line1X1) + (line1X2 - line1X1) * (line2Y2 - line1Y1)) / det;
+                            return (0 < lambda && lambda < 1) && (0 < gamma && gamma < 1);
+                        }
+                    };
+                </code>
+            </pre>
+    
+                
+        </section>
+
         
-        <p>
-            Lorem ipsum dolor sit amet, <a href="#"><span property="schema:name">consectetur</span></a> adipiscing elit, sed do eiusmod tempor incididunt ut
-            labore et dolore magna aliqua.
-        </p>
+        <section id="implementation-search-bar">
+            <h3><span>5.2 </span>Search bar</h3>
+            <p>
+                În primul rând, pentru o utilizare ușoară a search-bar-ului, am implementat-o astfel încât să nu depindă de diacritice, litere mari/mici sau spații.
+                <pre>
+                    <code class="language-javascript">
+                        //fac aceste transformari ca sa nu conteze daca scrii cu diacritice sau nu
+                        var normalizedCountyName = countyIdtoNameMap[id].toLowerCase();
+                        normalizedCountyName = normalizedCountyName.replace(/ș/g, 's');
+                        normalizedCountyName = normalizedCountyName.replace(/ț/g, 't');
+                        normalizedCountyName = normalizedCountyName.replace(/ă/g, 'a');
+                        normalizedCountyName = normalizedCountyName.replace(/â/g, 'a');
+                        normalizedCountyName = normalizedCountyName.replace(/î/g, 'i');
+            
+                        //also, scoatem whitespace-ul
+                        var normalizedInput = searchInput.toLowerCase().trim();
+                        normalizedInput = normalizedInput.replace(/ș/g, 's');
+                        normalizedInput = normalizedInput.replace(/ț/g, 't');
+                        normalizedInput = normalizedInput.replace(/ă/g, 'a');
+                        normalizedInput = normalizedInput.replace(/â/g, 'a');
+                        normalizedInput = normalizedInput.replace(/î/g, 'i');
+                    </code>
+                </pre>
+                <br>
+                Pentru fiecare caracter introdus în search-bar, se actualizează județele afișate.
+                Ca un județ să fie afișat, acesta trebuie să nu fie deja adăugat în lista de județe deja selectate și să înceapă cu șirul de caractere
+                din search-bar normalizat.
 
-        <ul>
-            <li><span>item 1</span></li>
-            <li><span>item 2</span></li>
-            <li><span>item 3</span></li>
-        </ul>
+            </p>
+            <img src="https://fakeimg.pl/300/">
+        </section>
+
+
+                
+        <section id="implementation-map">
+            <h3><span>5.3 </span>Map</h3>
+            <p>
+                Am ales să folosim un   
+                <span typeof="schema:DefinedTerm" resource="https://wikipedia.org">
+                    <span property="schema:copyrightHolder" typeof="WebSite">
+                        <meta property="schema:name" content="Wikipedia">
+                        <meta property="schema:url" content="https://ro.wikipedia.org/wiki/Scalable_Vector_Graphics">
+                    </span>
+                    <a href="https://ro.wikipedia.org/wiki/Scalable_Vector_Graphics"><span property="schema:name">svg</span></a>
+                </span>
+                oferit de 
+                <span typeof="schema:DefinedTerm" resource="https://www.amcharts.com/">
+                    <span property="schema:copyrightHolder" typeof="WebSite">
+                        <meta property="schema:name" content="amCharts">
+                        <meta property="schema:url" content="https://www.amcharts.com/svg-maps/?map=romania">
+                    </span>
+                    <a href="https://www.amcharts.com/svg-maps/?map=romania"><span property="schema:name">amCharts</span></a>
+                </span>
+                pentru a face o hartă politică interactivă. Fiecare path din svg reprezintă un județ, care este memorat într-o listă de județe:
+                <br> <br>
+                <code class="language-javascript">
+                    counties = document.getElementsByTagName('path');
+                </code>
+                <br>
+
+                Pentru fiecare element, adăugam un event listener pentru a-l face interactiv și pentru a reacționa la click-ul utilizatorului.
+
+
+               
+          
+            </p>
+            <img src="https://fakeimg.pl/300/">
+        </section>
+
+
+                
+        <section id="implementation-charts">
+            <h3><span>5.4 </span>Charts</h3>
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
+                nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit
+                esse cillum dolore eu fugiat nulla pariatur.
+            </p>
+            <img src="https://fakeimg.pl/300/">
+        </section>
     </section>
 
-    <section id="some-id">
-        <h3><span>1.2 </span>Another subpoint</h3>
-        <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-            labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
-            nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit
-            esse cillum dolore eu fugiat nulla pariatur.
-        </p>
-        <img src="https://fakeimg.pl/300/">
-    </section>
+    
+
 
     
 
