@@ -21,7 +21,7 @@ function toggleTheme() {
         document.getElementsByClassName('theme-dark-button')[0].style.opacity = 1;
         document.getElementsByClassName('theme-light-button')[0].style.opacity = 0;
 
-        
+
         document.getElementById("prismCss").href="../../../public/prism-dark.css";
         document.getElementById("prismJs").href="../../../public/prism-dark.js";
         //dark_mode
@@ -62,7 +62,7 @@ function setUX() {
 }
 
 function setAnimation() {
-    var canvas = document.getElementById('canvas');
+    var canvas = document.getElementById('api-canvas');
     var ctx = canvas.getContext('2d');
 
     canvas.width = window.innerWidth;
@@ -71,5 +71,5 @@ function setAnimation() {
     screenWidth = canvas.width;
     screenHeight = canvas.height;
 
-    Animation(ctx);
+    Animation(ctx, false);
 }

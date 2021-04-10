@@ -1,10 +1,12 @@
+@charset "UTF-8";
 .theme-light {
   --color-primary: #26A69A;
   --color-primary04: #26A69A88;
   --color-secondary: #3DC7BC;
   --color-surface: #EBEBEB;
   --color-on-surface: #1F1E25;
-  --color-on-surface-variant: #6D6A7B; }
+  --color-on-surface-variant: #6D6A7B;
+  --invert-value: '.127'; }
 
 .theme-dark {
   --color-primary: #26A69A;
@@ -12,7 +14,8 @@
   --color-secondary: #186B64;
   --color-surface: #1F1E25;
   --color-on-surface: #EBEBEB;
-  --color-on-surface-variant: #B0B2C3; }
+  --color-on-surface-variant: #B0B2C3;
+  --invert-value: '.921'; }
 
 html, body {
   margin: 0;
@@ -27,20 +30,13 @@ html, body {
   height: 100vh;
   overflow: hidden; }
 
-.api-container {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  height: auto;
-  overflow: hidden; }
-
 .background {
   position: fixed;
-  top: 0px;
   width: 100%;
   height: 100%;
   background: var(--color-surface);
-  z-index: -2; }
+  z-index: -2;
+  transition: .25s; }
 
 #dot {
   position: absolute;
@@ -48,6 +44,12 @@ html, body {
 
 #canvas {
   position: absolute;
+  width: 100%;
+  margin: auto;
+  z-index: -1; }
+
+#api-canvas {
+  position: fixed;
   width: 100%;
   margin: auto;
   z-index: -1; }
@@ -80,7 +82,8 @@ html, body {
   font-size: 3em;
   font-weight: bold;
   float: left;
-  color: var(--color-on-surface); }
+  color: var(--color-on-surface);
+  transition: .25s; }
   .title span {
     color: var(--color-primary); }
 
@@ -277,11 +280,16 @@ html, body {
     margin-top: .4em;
     background-color: var(--color-primary); }
 
-.show-case-container {
+.showcase-container {
   display: inline-block;
   width: 100%;
   height: 100%;
-  background-color: #F3F3F3; }
+  font-family: 'Roboto';
+  font-size: 1.4em;
+  padding: 4em 10em;
+  box-sizing: border-box;
+  background-color: #F3F3F3;
+  color: var(--color-surface); }
 
 .statistics-container {
   position: relative;
@@ -292,7 +300,7 @@ html, body {
   min-height: 100vh;
   overflow: hidden; }
   .statistics-container .map-button {
-    position: absolute;
+    position: fixed;
     display: flex;
     align-items: center;
     height: fit-content;
@@ -302,7 +310,8 @@ html, body {
     bottom: 0;
     margin-top: auto;
     margin-bottom: auto;
-    transition: 0.25s; }
+    transition: 0.25s;
+    z-index: 1; }
     @media (max-width: 700px) {
       .statistics-container .map-button {
         margin: 0;
@@ -326,6 +335,8 @@ html, body {
       bottom: 0;
       background-color: var(--color-primary);
       transition: .25s; }
+    .statistics-container .map-button--opened {
+      opacity: 0; }
     .statistics-container .map-button span {
       margin: auto;
       font-size: 4em;
@@ -341,6 +352,9 @@ html, body {
     margin-right: auto;
     margin-left: auto;
     transition: flex-grow 1000ms linear; }
+    @media (max-width: 700px) {
+      .statistics-container .counties-bar {
+        width: 80vw; } }
     .statistics-container .counties-bar .item {
       position: relative;
       display: flex;
@@ -353,16 +367,28 @@ html, body {
       font-family: 'Roboto';
       font-weight: 500;
       transition: 0.25s; }
+      @media (max-width: 700px) {
+        .statistics-container .counties-bar .item {
+          height: 30px;
+          margin-right: 16px;
+          margin-bottom: 16px; } }
       .statistics-container .counties-bar .item span {
         margin: 5px 8px;
         font-size: 1.1em;
         line-height: 100%;
         margin: auto 12px;
         padding: 0; }
+        @media (max-width: 700px) {
+          .statistics-container .counties-bar .item span {
+            font-size: .98em;
+            margin: auto 10px; } }
       .statistics-container .counties-bar .item span:last-of-type {
         font-size: 1.3em;
         margin-left: 0;
         transition: .25s; }
+        @media (max-width: 700px) {
+          .statistics-container .counties-bar .item span:last-of-type {
+            font-size: 1.16em; } }
       .statistics-container .counties-bar .item .close-button {
         position: absolute;
         right: 0;
@@ -374,8 +400,8 @@ html, body {
     .statistics-container .counties-bar .item-add {
       position: relative;
       display: flex;
-      height: 36px;
       min-width: 36px;
+      height: 36px;
       margin-right: 20px;
       margin-bottom: 20px;
       border: 1px solid var(--color-primary);
@@ -384,6 +410,12 @@ html, body {
       font-family: 'Roboto';
       font-weight: 500;
       transition: .25s; }
+      @media (max-width: 700px) {
+        .statistics-container .counties-bar .item-add {
+          min-width: 30px;
+          height: 30px;
+          margin-right: 16px;
+          margin-bottom: 16px; } }
       .statistics-container .counties-bar .item-add:hover {
         color: var(--color-primary);
         cursor: pointer; }
@@ -395,7 +427,7 @@ html, body {
         z-index: 2; }
       .statistics-container .counties-bar .item-add span {
         margin: auto; }
-      .statistics-container .counties-bar .item-add .county-select-container {
+      .statistics-container .counties-bar .item-add .county-selector-container {
         position: relative;
         width: 0;
         height: 100%;
@@ -404,10 +436,10 @@ html, body {
         border-bottom-left-radius: 40px;
         transition: .25s;
         z-index: 1; }
-        .statistics-container .counties-bar .item-add .county-select-container--opened {
+        .statistics-container .counties-bar .item-add .county-selector-container--opened {
           width: 11em;
           opacity: 1; }
-        .statistics-container .counties-bar .item-add .county-select-container input {
+        .statistics-container .counties-bar .item-add .county-selector-container input {
           position: absolute;
           width: 100%;
           height: 100%;
@@ -417,23 +449,23 @@ html, body {
           border: none;
           background-color: transparent;
           color: var(--color-on-surface);
-          font-size: 1.3em;
+          font-size: 1.27em;
           font-family: 'Roboto';
           font-weight: 500;
           outline-width: 0; }
-          .statistics-container .counties-bar .item-add .county-select-container input::placeholder {
+          .statistics-container .counties-bar .item-add .county-selector-container input::placeholder {
             color: var(--color-primary04);
             font-family: 'Roboto';
             font-weight: 500; }
-        .statistics-container .counties-bar .item-add .county-select-container .selector {
+        .statistics-container .counties-bar .item-add .county-selector-container .selector {
           position: absolute;
           display: flex;
           flex-direction: column;
           flex-wrap: nowrap;
-          width: 100%;
-          max-height: 140px;
-          margin-top: 37px;
-          margin-left: 1em;
+          width: calc(100% + 36px);
+          max-height: 210px;
+          margin-top: 40px;
+          margin-left: .1em;
           border-bottom: 1px solid var(--color-primary);
           outline-width: 0;
           overflow: hidden scroll;
@@ -441,193 +473,318 @@ html, body {
           /* Track */
           /* Handle */
           /* Handle on hover */ }
-          .statistics-container .counties-bar .item-add .county-select-container .selector::-webkit-scrollbar {
+          .statistics-container .counties-bar .item-add .county-selector-container .selector::-webkit-scrollbar {
             width: 5px; }
-          .statistics-container .counties-bar .item-add .county-select-container .selector::-webkit-scrollbar-thumb {
+          .statistics-container .counties-bar .item-add .county-selector-container .selector::-webkit-scrollbar-thumb {
             background: var(--color-primary04);
             border-radius: 0; }
-          .statistics-container .counties-bar .item-add .county-select-container .selector::-webkit-scrollbar-thumb:hover {
+          .statistics-container .counties-bar .item-add .county-selector-container .selector::-webkit-scrollbar-thumb:hover {
             background: var(--color-primary); }
-          .statistics-container .counties-bar .item-add .county-select-container .selector .selector-item {
-            padding: 8px 0 5px 5px;
+          .statistics-container .counties-bar .item-add .county-selector-container .selector .selector-item {
+            padding: 10px 0 6px 5px;
             font-size: 1.1em;
-            font-family: 'Roboto';
+            font-family: 'Ubuntu';
             font-weight: 500;
-            color: var(--color-on-surface);
-            transition: .25s; }
-            .statistics-container .counties-bar .item-add .county-select-container .selector .selector-item:hover {
+            color: var(--color-on-surface); }
+            .statistics-container .counties-bar .item-add .county-selector-container .selector .selector-item:hover {
               color: var(--color-primary); }
-  .statistics-container .map-centerer {
+  .statistics-container .map {
     position: absolute;
-    width: 40%;
-    height: 100%;
     display: flex;
+    width: 40%;
+    height: 50%;
+    top: 0;
+    bottom: 0;
+    margin-top: auto;
+    margin-bottom: auto;
     align-items: center;
     right: 2.8em; }
     @media (max-width: 700px) {
-      .statistics-container .map-centerer {
+      .statistics-container .map {
         align-items: flex-start;
         right: 0;
         top: 100%;
         width: 100%; } }
-    .statistics-container .map-centerer .map-menu {
-      transition: 0s;
+    .statistics-container .map .map-menu {
       width: 100%;
-      z-index: 100;
+      height: 100%;
       border: solid 1px var(--color-primary);
-      background: var(--color-primary04); }
-      .statistics-container .map-centerer .map-menu--closed {
-        transform: translate(120%, 0); }
-      .statistics-container .map-centerer .map-menu--opened {
-        transform: translate(0, 0); }
+      background: var(--color-primary04);
+      pointer-events: none;
+      opacity: 0;
+      z-index: 2;
+      transition: .25s; }
+      .statistics-container .map .map-menu--opened {
+        opacity: 1;
+        pointer-events: auto; }
       @media (max-width: 700px) {
-        .statistics-container .map-centerer .map-menu {
+        .statistics-container .map .map-menu {
           transform: translate(0, 0); }
-          .statistics-container .map-centerer .map-menu--closed {
+          .statistics-container .map .map-menu--closed {
             transform: translate(0, 0); }
-          .statistics-container .map-centerer .map-menu--opened {
+          .statistics-container .map .map-menu--opened {
             transform: translate(0, -100%); } }
-      .statistics-container .map-centerer .map-menu .map-container .land {
+      .statistics-container .map .map-menu .map-svg {
+        height: 100%; }
+      .statistics-container .map .map-menu .land {
         fill: #FFFFFF;
         fill-opacity: 1;
         stroke: var(--color-primary);
         stroke-opacity: 1;
         stroke-width: 0.8;
         transition: 0.25s; }
-        .statistics-container .map-centerer .map-menu .map-container .land:hover {
+        .statistics-container .map .map-menu .land:hover {
           opacity: 0.7; }
-      .statistics-container .map-centerer .map-menu .map-close-button {
+      .statistics-container .map .map-menu .map-close-button {
         position: absolute;
         right: 0.5em;
         top: 0.5em;
         z-index: 2; }
-        .statistics-container .map-centerer .map-menu .map-close-button span {
+        .statistics-container .map .map-menu .map-close-button span {
           font-size: 2em;
           border-radius: 40px;
           transition: 0.25s; }
-          .statistics-container .map-centerer .map-menu .map-close-button span:hover {
+          .statistics-container .map .map-menu .map-close-button span:hover {
             background: #FFFFFFAA;
             cursor: pointer; }
-  .statistics-container .statistics-viewer {
+  .statistics-container .chart-container {
     position: relative;
-    border: solid var(--color-primary) 2px;
-    width: 75vw;
+    display: flex;
+    width: 80vw;
+    height: 60vh;
     margin-top: 1.2em;
     margin-left: auto;
-    margin-right: auto;
-    height: 65vh;
-    background: var(--color-surface); }
-    @media (max-width: 700px) {
-      .statistics-container .statistics-viewer {
-        height: 40vh; } }
-    .statistics-container .statistics-viewer .download-button {
-      color: var(--color-on-surface);
-      position: absolute;
-      top: 0.1em;
-      right: 0.1em; }
-      .statistics-container .statistics-viewer .download-button span {
-        font: 'Ubuntu';
-        font-size: 3.5em;
-        transition: 0.25s; }
-        .statistics-container .statistics-viewer .download-button span:hover {
+    margin-right: auto; }
+    @media (max-width: 1200px) {
+      .statistics-container .chart-container {
+        flex-direction: column;
+        width: 80vw;
+        height: auto;
+        margin-bottom: 80px;
+        margin-left: 15vw; } }
+    .statistics-container .chart-container .chart {
+      position: relative;
+      width: 75% !important;
+      height: 100% !important; }
+      @media (max-width: 1200px) {
+        .statistics-container .chart-container .chart {
+          width: 100% !important; } }
+      @media (max-width: 1200px) {
+        .statistics-container .chart-container .chart .chartCanvas {
+          height: 40vh !important; } }
+    .statistics-container .chart-container .chart-options {
+      width: 25%;
+      height: 100%;
+      padding-left: 10px; }
+      @media (max-width: 1200px) {
+        .statistics-container .chart-container .chart-options {
+          width: 100%; } }
+      .statistics-container .chart-container .chart-options .download-options {
+        position: relative;
+        margin-top: 20px;
+        padding-left: 5px;
+        font-family: 'Ubuntu';
+        font-size: 1.34em;
+        font-weight: 500;
+        color: var(--color-on-surface); }
+        @media (max-width: 700px) {
+          .statistics-container .chart-container .chart-options .download-options {
+            font-size: 1.2em; } }
+        .statistics-container .chart-container .chart-options .download-options .download {
+          transition: .25s; }
+        .statistics-container .chart-container .chart-options .download-options .download:hover {
           cursor: pointer;
+          color: var(--color-primary);
+          transition: .25s; }
+        .statistics-container .chart-container .chart-options .download-options .download:hover .material-icons {
           color: var(--color-primary); }
-    .statistics-container .statistics-viewer .chart {
+        .statistics-container .chart-container .chart-options .download-options .option {
+          color: var(--color-on-surface-variant);
+          pointer-events: auto; }
+          .statistics-container .chart-container .chart-options .download-options .option:hover {
+            cursor: pointer;
+            color: var(--color-on-surface); }
+          .statistics-container .chart-container .chart-options .download-options .option--selected {
+            color: var(--color-primary);
+            pointer-events: none; }
+            .statistics-container .chart-container .chart-options .download-options .option--selected:hover {
+              color: var(--color-primary); }
+        .statistics-container .chart-container .chart-options .download-options .material-icons {
+          position: absolute;
+          top: 0;
+          bottom: 0;
+          margin-left: .5em;
+          padding-top: 0.1em;
+          text-align: center;
+          transition: .25s; }
+          .statistics-container .chart-container .chart-options .download-options .material-icons--hover {
+            color: var(--color-primary); }
+      .statistics-container .chart-container .chart-options .category-selector {
+        position: relative;
+        width: 14em;
+        height: 1.8em;
+        margin-top: 20px; }
+        .statistics-container .chart-container .chart-options .category-selector .top {
+          display: flex;
+          justify-content: space-between;
+          width: 100%;
+          height: 1.5em;
+          top: 1em;
+          padding: .1em 5px 0 5px;
+          font-family: 'Ubuntu';
+          font-size: 1.34em;
+          box-sizing: border-box;
+          color: var(--color-on-surface);
+          transition: .25s; }
+          @media (max-width: 700px) {
+            .statistics-container .chart-container .chart-options .category-selector .top {
+              font-size: 1.2em; } }
+          .statistics-container .chart-container .chart-options .category-selector .top:hover {
+            cursor: pointer;
+            color: var(--color-primary); }
+          .statistics-container .chart-container .chart-options .category-selector .top .material-icons {
+            font-size: 1.34em; }
+            @media (max-width: 700px) {
+              .statistics-container .chart-container .chart-options .category-selector .top .material-icons {
+                font-size: 1.2em; } }
+        .statistics-container .chart-container .chart-options .category-selector .options-list {
+          position: absolute;
+          display: flex;
+          flex-direction: column;
+          width: 100%;
+          height: 0;
+          padding: 0 10px;
+          border-bottom: 1px solid var(--color-primary);
+          background-color: var(--color-surface);
+          box-sizing: border-box;
+          overflow: hidden;
+          z-index: 1;
+          transition: .25s; }
+          .statistics-container .chart-container .chart-options .category-selector .options-list--opened {
+            height: 12em;
+            border-bottom: transparent; }
+        .statistics-container .chart-container .chart-options .category-selector::-webkit-scrollbar {
+          width: 0; }
+        .statistics-container .chart-container .chart-options .category-selector::-webkit-scrollbar-thumb {
+          background-color: transparent; }
+        .statistics-container .chart-container .chart-options .category-selector::-webkit-scrollbar-thumb:hover {
+          background-color: transparent; }
+        .statistics-container .chart-container .chart-options .category-selector .option {
+          margin-bottom: 12px;
+          padding: 4px 0 2px 5px;
+          font-family: 'Ubuntu';
+          font-size: 1.16em;
+          font-weight: 500;
+          color: var(--color-on-surface-variant);
+          border-left: 2px solid var(--color-primary);
+          box-sizing: border-box; }
+          @media (max-width: 700px) {
+            .statistics-container .chart-container .chart-options .category-selector .option {
+              font-size: 1.08em; } }
+          .statistics-container .chart-container .chart-options .category-selector .option:hover {
+            cursor: pointer;
+            color: var(--color-on-surface); }
+      .statistics-container .chart-container .chart-options .categories-list {
+        display: flex;
+        flex-direction: column;
+        margin-top: 20px;
+        padding-left: 5px; }
+        .statistics-container .chart-container .chart-options .categories-list .label {
+          position: relative;
+          margin-bottom: .65em;
+          font-family: 'Ubuntu';
+          font-size: 1.16em;
+          font-weight: 500;
+          color: var(--color-on-surface); }
+          @media (max-width: 700px) {
+            .statistics-container .chart-container .chart-options .categories-list .label {
+              font-size: 1.08em; } }
+          .statistics-container .chart-container .chart-options .categories-list .label--unchecked {
+            color: var(--color-on-surface-variant); }
+          .statistics-container .chart-container .chart-options .categories-list .label:hover {
+            cursor: pointer;
+            color: var(--color-on-surface); }
+          .statistics-container .chart-container .chart-options .categories-list .label input {
+            position: absolute;
+            -webkit-appearance: none;
+            width: 15px;
+            height: 15px;
+            border: 1px solid var(--color-primary);
+            border-radius: 0;
+            background-color: transparent;
+            outline: none;
+            transition: .25s; }
+            .statistics-container .chart-container .chart-options .categories-list .label input:checked {
+              background-color: var(--color-primary); }
+              .statistics-container .chart-container .chart-options .categories-list .label input:checked::after {
+                content: "🗙";
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                left: 0;
+                top: 0;
+                text-align: center;
+                transform: translateY(-4px);
+                color: #EBEBEB; }
+          .statistics-container .chart-container .chart-options .categories-list .label span {
+            margin-left: 36px; }
+      .statistics-container .chart-container .chart-options .range-selector {
+        display: flex;
+        flex-direction: column;
+        margin-top: 20px;
+        padding-left: 5px; }
+        .statistics-container .chart-container .chart-options .range-selector .selector {
+          color: var(--color-on-surface); }
+          .statistics-container .chart-container .chart-options .range-selector .selector label {
+            font-size: 1.34em; }
+          .statistics-container .chart-container .chart-options .range-selector .selector input {
+            margin-top: 1em;
+            padding: 5px;
+            color: var(--color-on-surface);
+            background-color: transparent;
+            border: 1px solid var(--color-primary);
+            font-size: 1.24em;
+            outline-width: 0; }
+            .statistics-container .chart-container .chart-options .range-selector .selector input:hover {
+              cursor: text; }
+            .statistics-container .chart-container .chart-options .range-selector .selector input:focus {
+              background-color: var(--color-on-surface-variant); }
+            .statistics-container .chart-container .chart-options .range-selector .selector input::-webkit-calendar-picker-indicator {
+              filter: invert(0.5); }
+              .statistics-container .chart-container .chart-options .range-selector .selector input::-webkit-calendar-picker-indicator:hover {
+                cursor: pointer;
+                filter: invert(0.8); }
+        .statistics-container .chart-container .chart-options .range-selector .line {
+          width: 100%;
+          height: 40px; }
+    .statistics-container .chart-container .chart-type-container {
       position: absolute;
-      top: 2%;
-      left: 1%;
-      width: 64%;
-      height: 95%;
-      border: solid red 2px; }
-    .statistics-container .statistics-viewer .type-of-chart-selector {
-      position: absolute;
-      height: 20%;
-      width: fit-content;
-      right: 102%;
       display: flex;
+      width: fit-content;
+      top: 10vh;
+      right: 102%;
       flex-direction: column;
-      justify-content: center;
-      top: 20vh; }
-      .statistics-container .statistics-viewer .type-of-chart-selector-item {
+      justify-content: center; }
+      .statistics-container .chart-container .chart-type-container .item {
         width: 100%;
         color: var(--color-on-surface-variant);
-        text-align: center;
-        transition: 0.2s; }
-        .statistics-container .statistics-viewer .type-of-chart-selector-item span {
+        text-align: center; }
+        .statistics-container .chart-container .chart-type-container .item span {
           font-size: 4.5em;
           width: fit-content;
           margin-top: 4px;
           transition: 0.2s; }
           @media (max-width: 700px) {
-            .statistics-container .statistics-viewer .type-of-chart-selector-item span {
-              font-size: 4em; } }
-        .statistics-container .statistics-viewer .type-of-chart-selector-item:hover {
+            .statistics-container .chart-container .chart-type-container .item span {
+              font-size: 2.5em; } }
+        .statistics-container .chart-container .chart-type-container .item:hover {
           cursor: pointer;
           color: var(--color-on-surface); }
-        .statistics-container .statistics-viewer .type-of-chart-selector-item-selected {
+        .statistics-container .chart-container .chart-type-container .item--selected {
           color: var(--color-primary); }
-          .statistics-container .statistics-viewer .type-of-chart-selector-item-selected:hover {
+          .statistics-container .chart-container .chart-type-container .item--selected:hover {
             cursor: normal;
             color: var(--color-primary); }
-    .statistics-container .statistics-viewer .chart-options-menu {
-      position: absolute;
-      border: solid orange 1px;
-      width: 28%;
-      height: 75%;
-      right: 5%;
-      top: 10%; }
-      .statistics-container .statistics-viewer .chart-options-menu .category-select .top-bar-centerer {
-        position: absolute;
-        top: 1em;
-        display: flex;
-        justify-content: center;
-        width: 100%; }
-        .statistics-container .statistics-viewer .chart-options-menu .category-select .top-bar-centerer .top-bar {
-          position: relative;
-          width: 80%;
-          color: var(--color-on-surface);
-          border: solid var(--color-primary) 1px;
-          display: flex;
-          justify-content: space-between; }
-          .statistics-container .statistics-viewer .chart-options-menu .category-select .top-bar-centerer .top-bar .text {
-            font-size: 0.9;
-            font-family: 'Ubuntu';
-            margin-top: 0.2em;
-            margin-left: 0.2em; }
-          .statistics-container .statistics-viewer .chart-options-menu .category-select .top-bar-centerer .top-bar .material-icons {
-            right: 1%; }
-            .statistics-container .statistics-viewer .chart-options-menu .category-select .top-bar-centerer .top-bar .material-icons:hover {
-              color: var(--color-primary);
-              cursor: pointer; }
-        .statistics-container .statistics-viewer .chart-options-menu .category-select .top-bar-centerer .chart-options-menu-selector {
-          position: absolute;
-          width: 80%;
-          top: 100%;
-          display: flex;
-          flex-direction: column;
-          border-bottom: 1px solid var(--color-primary);
-          overflow: hidden scroll;
-          transition: 0.25s; }
-          .statistics-container .statistics-viewer .chart-options-menu .category-select .top-bar-centerer .chart-options-menu-selector-closed {
-            height: 0em; }
-          .statistics-container .statistics-viewer .chart-options-menu .category-select .top-bar-centerer .chart-options-menu-selector-opened {
-            height: 4.5em; }
-          .statistics-container .statistics-viewer .chart-options-menu .category-select .top-bar-centerer .chart-options-menu-selector-option {
-            transition: 0.25s; }
-            .statistics-container .statistics-viewer .chart-options-menu .category-select .top-bar-centerer .chart-options-menu-selector-option:hover {
-              cursor: pointer;
-              color: var(--color-primary); }
-          .statistics-container .statistics-viewer .chart-options-menu .category-select .top-bar-centerer .chart-options-menu-selector::-webkit-scrollbar {
-            width: 5px; }
-          .statistics-container .statistics-viewer .chart-options-menu .category-select .top-bar-centerer .chart-options-menu-selector::-webkit-scrollbar-thumb {
-            background: var(--color-primary04);
-            border-radius: 0; }
-          .statistics-container .statistics-viewer .chart-options-menu .category-select .top-bar-centerer .chart-options-menu-selector::-webkit-scrollbar-thumb:hover {
-            background: var(--color-primary); }
-          .statistics-container .statistics-viewer .chart-options-menu .category-select .top-bar-centerer .chart-options-menu-selector-option {
-            padding: 8px 0 5px 5px;
-            font-family: 'Ubuntu';
-            color: var(--color-on-surface); }
 
 .examples {
   width: 60%;

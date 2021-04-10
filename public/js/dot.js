@@ -1,4 +1,4 @@
-var Dot = function() {
+var Dot = function(boxes) {
     var x = Math.random() * screenWidth;
     var y = Math.random() * screenHeight;
     var radius = 5;
@@ -11,6 +11,23 @@ var Dot = function() {
     var trailCount = 50;
     var image = document.getElementById("dot");
 
+    spawnDot();
+
+    function spawnDot() {
+        var insideBox = false;
+        do {
+            insideBox = false;
+            x = Math.random() * screenWidth;
+            y = Math.random() * screenHeight;
+            for(var i = 0; i < boxes.length; i++) {
+                if(boxes[i].checkIfInside(x, y)) {
+                    insideBox = true;
+                    console.log('spawned inside box');
+                    break;
+                }
+            }
+        } while(insideBox);
+    }
 
     var setAngle = function setAngle(newAngle) {
         angle = newAngle;
@@ -44,6 +61,9 @@ var Dot = function() {
         if(angle > 2 * Math.PI) angle -= 2 * Math.PI;
 
         speed = delta / 10 * 5;
+        for(let j = 0; j < boxes.length; j++) {
+            angle = boxes[j].checkAndComputeCollision(x, y, getNextX(), getNextY(), angle);
+        }
         x += Math.cos(angle) * speed;
         y += Math.sin(angle) * speed;
 
@@ -67,9 +87,14 @@ var Dot = function() {
         }
     };
 
+    var getNextX = () => x + Math.cos(angle) * speed;
+    var getNextY = () => y + Math.sin(angle) * speed;
+
     return {
         getX: () => x,
         getY: () => y,
+        getNextX: getNextX,
+        getNextY: getNextY,
         getAngle: () => angle,
         setAngle: setAngle,
         draw: draw,
