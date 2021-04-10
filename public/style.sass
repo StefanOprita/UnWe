@@ -1,0 +1,1033 @@
+$colorPrimary: #26A69A
+$colorPrimary04: #26A69A66
+$colorSecondary: #186B64
+
+$white: #EBEBEB
+$black: #1F1E25
+$black04: #1F1E2566
+$black08: #1F1E25CC
+
+$silver: #B0B2C3
+$silver06: #B0B2C388
+$dark: #6D6A7B
+
+$gray: #F3F3F3
+
+$menuLayoutThreshold: 700px
+$chartLayoutThreshold: 1200px
+
+// var INVERT_LIGHT = 'invert(.127)'
+// var INVERT_DARK = 'invert(.921)'
+.theme-light
+   --color-primary: #26A69A
+   --color-primary04: #26A69A88
+   --color-secondary: #3DC7BC
+   --color-surface: #EBEBEB
+   --color-on-surface: #1F1E25
+   --color-on-surface-variant: #6D6A7B
+   --invert-value: '.127'
+
+.theme-dark
+    --color-primary: #26A69A
+    --color-primary04: #26A69A88
+    --color-secondary: #186B64
+    --color-surface: #1F1E25
+    --color-on-surface: #EBEBEB
+    --color-on-surface-variant: #B0B2C3
+    --invert-value: '.921'
+
+html, body
+    margin: 0
+    padding: 0
+    font-family: 'Ubuntu', sans-serif
+    // overflow: hidden
+    transition: background 2s
+
+.container
+    display: flex
+    flex-direction: column
+    width: 100%
+    height: 100vh
+    overflow: hidden
+
+.background
+    position: fixed
+    width: 100%
+    height: 100%
+    background: var(--color-surface)
+    z-index: -2
+    transition: .25s
+
+#dot
+    position: absolute
+    transform: translateX(-100%) translateY(-100%)
+
+#canvas
+    position: absolute
+    width: 100%
+    margin: auto
+    z-index: -1
+
+#api-canvas
+    position: fixed
+    width: 100%
+    margin: auto
+    z-index: -1
+
+.header
+    position: relative
+    width: 70vw
+    height: auto
+    min-height: 4em
+    margin-left: auto
+    margin-right: auto
+
+    @media (max-width: 100em)
+        width: 77vw
+
+    @media (max-width: 90em)
+        width: 85vw
+
+    @media (max-width: 80em)
+        width: 95vw
+
+    @media (max-width: $menuLayoutThreshold)
+        width: 100%
+        margin: 0
+
+.title
+    position: relative
+    margin-left: 1em
+    margin-top: .3em
+    font-size: 3em
+    font-weight: bold
+    float: left
+    color: var(--color-on-surface)
+    transition: .25s
+
+    span
+        color: var(--color-primary)
+
+.menu-button
+    display: flex
+    float: right
+    width: 5em
+    height: 0
+    margin-top: 1em
+    color: var(--color-on-surface)
+    opacity: 0
+    transition: .25s
+
+    span
+        margin: auto
+        font-size: 2.4em
+
+    @media (max-width: $menuLayoutThreshold)
+        opacity: 1
+        z-index: 0
+        height: 100%
+
+        &:hover
+            background-color: var(--color-primary)
+
+        &--opened
+            opacity: 0
+
+.menu
+    position: relative
+    float: right
+    display: flex
+    top: 2.1em
+    z-index: 1
+
+    @media (max-width: $menuLayoutThreshold)
+        position: absolute
+        flex-direction: column
+        flex-wrap: nowrap
+        width: 14em
+        height: 100vh
+        top: 0
+        right: 0
+        padding: 0 10px
+        background-color: var(--color-surface)
+        transform: translateX(100%)
+        transition: .4s
+
+        &--opened
+            transform: translateX(0)
+            height: 100vh
+
+    .item
+        position: relative
+        height: 2.1em
+        margin-right: 1.7em
+        padding: 10px 0
+        box-sizing: border-box
+        font-size: 1.16em
+        letter-spacing: .15em
+        text-decoration: none
+        color: var(--color-on-surface-variant)
+        font-weight: 400
+        overflow: hidden
+
+        &--selected
+            color: var(--color-on-surface)
+
+        &:last-of-type
+            padding-left: 8px
+            padding-right: 8px
+
+        &:hover
+            cursor: pointer
+            color: var(--color-on-surface)
+
+        &:hover::before
+            width: 100%
+            left: 0
+
+        &::before
+            content: ''
+            position: absolute
+            width: 0
+            height: 3px
+            right: 0
+            bottom: 0
+            left: auto
+            background-color: var(--color-primary)
+            transition: .25s
+
+        @media (max-width: $menuLayoutThreshold)
+            height: 4em
+            justify-content: flex-start
+            padding-top: 0
+            line-height: 4em
+            margin: 0
+            padding: 0
+
+            &::before
+                bottom: .8em
+
+            &:last-of-type
+                padding: 0
+
+        .theme-dark-button
+            opacity: 1
+            transition: .4s
+
+        .theme-light-button
+            position: absolute
+            opacity: 0
+            left: 0
+            padding-left: 8px
+            transition: .4s
+
+.info-box
+    width: 90%
+    max-width: 980px
+    margin: auto
+    border-color: var(--color-surface)
+    text-align: center
+
+    .info
+        margin-bottom: .5em
+        font-size: 3em
+        font-weight: 300
+        font-family: 'Roboto'
+        color: var(--color-on-surface)
+
+        span
+            display: inline-block
+            font-weight: 400
+            color: var(--color-primary)
+            border-bottom: 2px dashed var(--color-primary)
+            text-decoration-style: dashed
+
+    .last-info
+        margin-top: 0
+        margin-bottom: 2em
+        font-size: 1.7em
+        font-weight: 300
+        padding-top: 0
+
+    @media (max-width: 60em)
+        // background-color: $silver06
+
+        .info
+            font-size: 1.6em
+
+            &:first-of-type
+                font-size: 1.8em
+
+    .button-box
+        width: 100%
+
+        .button
+            position: relative
+            display: inline-block
+            width: 12em
+            min-width: 6.5em
+            height: 3.3em
+            margin: 0 1.3em
+            margin-bottom: 5%
+            border: 1px solid var(--color-primary)
+            font-family: 'Ubuntu'
+            font-size: 1.3em
+            font-weight: 600
+            text-transform: uppercase
+            letter-spacing: 1px
+            color: var(--color-primary)
+            background-color: transparent
+            transition: .25s
+            overflow: hidden
+
+            span
+                display: block
+                position: relative
+
+            &:first-of-type
+                background-color: var(--color-secondary)
+                color: var(--color-on-surface-variant)
+                border: none
+
+            &:first-of-type:hover
+                background-color: var(--color-primary)
+                color: var(--color-on-surface)
+
+            &:hover
+                cursor: pointer
+                background-color: var(--color-primary)
+
+            &:hover span
+                color: var(--color-on-surface)
+
+            &:hover::before
+                width: 100%
+                left: 0
+
+            &::before
+                content: ''
+                position: absolute
+                width: 0
+                height: 100%
+                right: 0
+                bottom: 0
+                left: auto
+                background-color: var(--color-primary)
+                transition: .25s
+
+.showcase-hint
+    position: relative
+    bottom: 0
+    margin-right: auto
+    margin-left: auto
+
+    .text
+        padding-bottom: 2em
+        font-size: 1.2em
+        color: var(--color-on-surface)
+
+    .line
+        width: 2px
+        height: 4em
+        margin: auto
+        margin-top: .4em
+        background-color: var(--color-primary)
+
+.showcase-container
+    display: inline-block
+    width: 100%
+    height: 100%
+    font-family: 'Roboto'
+    font-size: 1.4em
+    padding: 4em 10em
+    box-sizing: border-box
+    background-color: $gray
+    color: var(--color-surface)
+
+
+.statistics-container
+    position: relative
+    display: flex
+    flex-direction: column
+    width: 100%
+    height: auto
+    min-height: 100vh
+    overflow: hidden
+
+    .map-button
+        position: fixed
+        display: flex
+        align-items: center
+        height: fit-content
+        width: auto
+        top: 0
+        right: 2.8em
+        bottom: 0
+        margin-top: auto
+        margin-bottom: auto
+        transition: 0.25s
+        z-index: 1
+
+        @media (max-width: $menuLayoutThreshold)
+            margin: 0
+            top: auto
+            right: 1.4em
+            bottom: 1.4em
+
+
+        &:hover
+            cursor: pointer
+
+        &:hover span
+            color: var(--color-on-surface)
+
+        &:hover::after
+            width: 100%
+            right: 0
+            left: auto
+
+        &::after
+            content: ''
+            position: absolute
+            width: 0
+            height: 100%
+            left: 0
+            bottom: 0
+            background-color: var(--color-primary)
+            transition: .25s
+
+        &--opened
+            opacity: 0
+
+        span
+            margin: auto
+            font-size: 4em
+            color: var(--color-on-surface)
+            z-index: 1
+            transition: .25s
+
+    .counties-bar
+        display: flex
+        flex-wrap: wrap
+        width: 70vw
+        height: fit-content
+        margin-top: 5.2em
+        margin-right: auto
+        margin-left: auto
+        transition: flex-grow 1000ms linear
+
+        @media (max-width: $menuLayoutThreshold)
+            width: 80vw
+
+        .item
+            position: relative
+            display: flex
+            height: 36px
+            margin-right: 20px
+            margin-bottom: 20px
+            background-color: var(--color-primary)
+            border-radius: 40px
+            color: var(--color-on-surface)
+            font-family: 'Roboto'
+            font-weight: 500
+            transition: 0.25s
+
+            @media (max-width: $menuLayoutThreshold)
+                height: 30px
+                margin-right: 16px
+                margin-bottom: 16px
+
+            span
+                margin: 5px 8px
+                font-size: 1.1em
+                line-height: 100%
+                margin: auto 12px
+                padding: 0
+
+                @media (max-width: $menuLayoutThreshold)
+                    font-size: .98em
+                    margin: auto 10px
+
+            span:last-of-type
+                font-size: 1.3em
+                margin-left: 0
+                transition: .25s
+
+                @media (max-width: $menuLayoutThreshold)
+                    font-size: 1.16em
+
+            .close-button
+                position: absolute
+                right: 0
+                width: 2.5em
+                height: 100%
+                cursor: pointer
+
+
+                &:hover ~.county-text
+                    color: var(--color-surface)
+                    // cursor: pointer
+
+        .item-add
+            position: relative
+            display: flex
+            min-width: 36px
+            height: 36px
+            margin-right: 20px
+            margin-bottom: 20px
+            border: 1px solid var(--color-primary)
+            border-radius: 40px
+            color: var(--color-on-surface)
+            font-family: 'Roboto'
+            font-weight: 500
+            transition: .25s
+
+            @media (max-width: $menuLayoutThreshold)
+                min-width: 30px
+                height: 30px
+                margin-right: 16px
+                margin-bottom: 16px
+
+            &:hover
+                color: var(--color-primary)
+                cursor: pointer
+
+            .item-add-surface
+                position: absolute
+                width: 36px
+                height: 36px
+                right: 0
+                z-index: 2
+
+            span
+                margin: auto
+
+            .county-selector-container
+                position: relative
+                width: 0
+                height: 100%
+                opacity: 0
+                border-top-left-radius: 40px
+                border-bottom-left-radius: 40px
+                transition: .25s
+                z-index: 1
+
+                &--opened
+                    width: 11em
+                    opacity: 1
+
+                input
+                    position: absolute
+                    width: 100%
+                    height: 100%
+                    margin: 0
+                    padding: 0 15px
+                    box-sizing: border-box
+                    border: none
+                    background-color: transparent
+                    color: var(--color-on-surface)
+                    font-size: 1.27em
+                    font-family: 'Roboto'
+                    font-weight: 500
+                    outline-width: 0
+
+                    &::placeholder
+                        color: var(--color-primary04)
+                        font-family: 'Roboto'
+                        font-weight: 500
+
+                .selector
+                    position: absolute
+                    display: flex
+                    flex-direction: column
+                    flex-wrap: nowrap
+                    width: calc(100% + 36px)
+                    max-height: 210px
+                    margin-top: 40px
+                    margin-left: .1em
+                    border-bottom: 1px solid var(--color-primary)
+                    outline-width: 0
+                    overflow: hidden scroll
+                    background-color: var(--color-surface)
+
+                    &::-webkit-scrollbar
+                        width: 5px
+
+                    /* Track */
+                    &::-webkit-scrollbar-track
+                        // box-shadow: inset 0 0 5px grey
+                        // border-radius: 10px
+
+                    /* Handle */
+                    &::-webkit-scrollbar-thumb
+                        background: var(--color-primary04)
+                        border-radius: 0
+
+                    /* Handle on hover */
+                    &::-webkit-scrollbar-thumb:hover
+                        background: var(--color-primary)
+
+                    .selector-item
+                        padding: 10px 0 6px 5px
+                        font-size: 1.1em
+                        font-family: 'Ubuntu'
+                        font-weight: 500
+                        color: var(--color-on-surface)
+                        // transition: .25s
+
+                        &:first-of-type
+                            // padding-top: 0
+
+                        &:hover
+                            color: var(--color-primary)
+
+    .map
+        position: absolute
+        display: flex
+        width: 40%
+        height: 50%
+        top: 0
+        bottom: 0
+        margin-top: auto
+        margin-bottom: auto
+        align-items: center
+        right: 2.8em
+
+        @media (max-width: $menuLayoutThreshold)
+            align-items: flex-start
+            right: 0
+            top: 100%
+            width: 100%
+
+        .map-menu
+            width: 100%
+            height: 100%
+            border: solid 1px var(--color-primary)
+            background: var(--color-primary04)
+            pointer-events: none
+            opacity: 0
+            z-index: 2
+            transition: .25s
+
+            &--opened
+                opacity: 1
+                pointer-events: auto
+
+            @media (max-width: $menuLayoutThreshold)
+                transform: translate(0, 0)
+
+                &--closed
+                    transform: translate(0, 0)
+
+                &--opened
+                    transform: translate(0, -100%)
+
+            .map-svg
+                height: 100%
+
+            .land
+                fill: #FFFFFF
+                fill-opacity: 1
+                stroke: var(--color-primary)
+                stroke-opacity: 1
+                stroke-width: 0.8
+                transition: 0.25s
+
+                &:hover
+                    opacity: 0.7
+
+            .map-close-button
+                position: absolute
+                right: 0.5em
+                top: 0.5em
+                z-index: 2
+
+                span
+                    font-size: 2em
+                    border-radius: 40px
+                    transition: 0.25s
+                    &:hover
+
+                        background: #FFFFFFAA
+                        cursor: pointer
+
+    .chart-container
+        position: relative
+        display: flex
+        width: 80vw
+        height: 60vh
+        margin-top: 1.2em
+        margin-left: auto
+        margin-right: auto
+        // border: solid var(--color-primary) 2px
+        // background: var(--color-surface)
+
+        @media (max-width: $chartLayoutThreshold)
+            flex-direction: column
+            width: 80vw
+            height: auto
+            margin-bottom: 80px
+            margin-left: 15vw
+
+        // @media (max-width: $menuLayoutThreshold)
+        //     height: 40vh
+
+        .chart
+            position: relative
+            width: 75% !important
+            height: 100% !important
+
+            // background-color: #FF000011
+
+            @media (max-width: $chartLayoutThreshold)
+                width: 100% !important
+
+            .chartCanvas
+
+                @media (max-width: $chartLayoutThreshold)
+                    height: 40vh !important
+
+
+            // canvas
+            //     position: absolute
+            //     top: 0
+            //     left: 0
+            //     width: 100% !important
+            //     height: 90% !important
+            //     opacity: 0
+            //
+            // .chartCanvas
+            //     position: absolute
+            //     top: 0
+            //     left: 0
+            //     width: 100% !important
+            //     height: 90% !important
+            //     opacity: 0
+            //
+            //     &:first-of-type
+            //         opacity: 1
+
+        .chart-options
+            width: 25%
+            height: 100%
+            padding-left: 10px
+
+            @media (max-width: $chartLayoutThreshold)
+                width: 100%
+
+            .download-options
+                position: relative
+                margin-top: 20px
+                padding-left: 5px
+                font-family: 'Ubuntu'
+                font-size: 1.34em
+                font-weight: 500
+                color: var(--color-on-surface)
+
+                @media (max-width: $menuLayoutThreshold)
+                    font-size: 1.2em
+
+                .download
+                    transition: .25s
+
+                .download:hover
+                    cursor: pointer
+                    color: var(--color-primary)
+                    transition: .25s
+
+                .download:hover .material-icons
+                    // cursor: pointer
+                    color: var(--color-primary)
+
+                .option
+                    color: var(--color-on-surface-variant)
+                    pointer-events: auto
+                    // font: 'Ubuntu'
+                    // font-size: 3.5em
+                    // transition: 0.25s
+
+                    &:hover
+                        cursor: pointer
+                        color: var(--color-on-surface)
+
+                    &--selected
+                        color: var(--color-primary)
+                        pointer-events: none
+
+                        &:hover
+                            color: var(--color-primary)
+
+                .material-icons
+                    position: absolute
+                    top: 0
+                    bottom: 0
+                    margin-left: .5em
+                    padding-top: 0.1em
+                    text-align: center
+                    transition: .25s
+                    // color: var(--color-primary)
+
+                    // @media (max-width: 1100px)
+
+                    &--hover
+                        color: var(--color-primary)
+
+            .category-selector
+                position: relative
+                width: 14em
+                height: 1.8em
+                margin-top: 20px
+
+                .top
+                    display: flex
+                    justify-content: space-between
+                    width: 100%
+                    height: 1.5em
+                    top: 1em
+                    padding: .1em 5px 0 5px
+                    font-family: 'Ubuntu'
+                    font-size: 1.34em
+                    box-sizing: border-box
+                    color: var(--color-on-surface)
+                    transition: .25s
+
+                    @media (max-width: $menuLayoutThreshold)
+                        font-size: 1.2em
+
+                    &:hover
+                        cursor: pointer
+                        color: var(--color-primary)
+
+                    .material-icons
+                        font-size: 1.34em
+
+                        @media (max-width: $menuLayoutThreshold)
+                            font-size: 1.2em
+
+                .options-list
+                    position: absolute
+                    display: flex
+                    flex-direction: column
+                    width: 100%
+                    height: 0
+                    padding: 0 10px
+                    border-bottom: 1px solid var(--color-primary)
+                    background-color: var(--color-surface)
+                    box-sizing: border-box
+                    overflow: hidden
+                    z-index: 1
+                    transition: .25s
+
+                    &--opened
+                        height: 12em
+                        border-bottom: transparent
+
+
+                &::-webkit-scrollbar
+                    width: 0
+
+                &::-webkit-scrollbar-track
+
+                &::-webkit-scrollbar-thumb
+                    background-color: transparent
+                    // border-radius: 0
+
+                &::-webkit-scrollbar-thumb:hover
+                    background-color: transparent
+
+                .option
+                    margin-bottom: 12px
+                    padding: 4px 0 2px 5px
+                    font-family: 'Ubuntu'
+                    font-size: 1.16em
+                    font-weight: 500
+                    color: var(--color-on-surface-variant)
+                    border-left: 2px solid var(--color-primary)
+                    box-sizing: border-box
+                    // transition: color 0.25s
+
+                    @media (max-width: $menuLayoutThreshold)
+                        font-size: 1.08em
+
+                    &:hover
+                        cursor: pointer
+                        color: var(--color-on-surface)
+
+                    &:last-child
+                        // padding-bottom: 10px
+                        // border-bottom: 1px solid var(--color-primary)
+
+            .categories-list
+                display: flex
+                flex-direction: column
+                margin-top: 20px
+                padding-left: 5px
+
+                .label
+                    position: relative
+                    margin-bottom: .65em
+                    font-family: 'Ubuntu'
+                    font-size: 1.16em
+                    font-weight: 500
+                    color: var(--color-on-surface)
+
+                    @media (max-width: $menuLayoutThreshold)
+                        font-size: 1.08em
+
+                    &--unchecked
+                        color: var(--color-on-surface-variant)
+
+                    &:hover
+                        cursor: pointer
+                        color: var(--color-on-surface)
+
+                    input
+                        position: absolute
+                        -webkit-appearance: none
+                        width: 15px
+                        height: 15px
+                        border: 1px solid var(--color-primary)
+                        border-radius: 0
+                        background-color: transparent
+                        outline: none
+                        transition: .25s
+
+                        &:checked
+                            background-color: var(--color-primary)
+
+                            &::after
+                                content: "🗙"
+                                position: absolute
+                                width: 100%
+                                height: 100%
+                                left: 0
+                                top: 0
+                                text-align: center
+                                transform: translateY(-4px)
+                                color: $white
+
+
+                    span
+                        margin-left: 36px
+
+            .range-selector
+                display: flex
+                flex-direction: column
+                margin-top: 20px
+                padding-left: 5px
+
+                .selector
+                    color: var(--color-on-surface)
+
+                    label
+                        font-size: 1.34em
+
+                    input
+                        margin-top: 1em
+                        padding: 5px
+                        color: var(--color-on-surface)
+                        background-color: transparent
+                        border: 1px solid var(--color-primary)
+                        font-size: 1.24em
+                        outline-width: 0
+
+                        &:hover
+                            cursor: text
+
+                        &:focus
+                            background-color: var(--color-on-surface-variant)
+
+                        &::-webkit-calendar-picker-indicator
+                            // filter: invert(var(--invert-value))
+                            // filter: invert(.921)
+                            // filter: invert(.127)
+                            filter: invert(.5)
+
+                            &:hover
+                                cursor: pointer
+                                filter: invert(.8)
+
+
+                .line
+                    width: 100%
+                    height: 40px
+                    // background-color: var(--color-primary)
+
+        .chart-type-container
+            position: absolute
+            display: flex
+            width: fit-content
+            // height: 20%
+            top: 10vh
+            right: 102%
+            flex-direction: column
+            justify-content: center
+
+            .item
+                width: 100%
+                color: var(--color-on-surface-variant)
+                text-align: center
+
+                span
+                    font-size: 4.5em
+                    width: fit-content
+                    margin-top: 4px
+                    transition: 0.2s
+
+                    @media (max-width: $menuLayoutThreshold)
+                        font-size: 2.5em
+
+                &:hover
+                    cursor: pointer
+                    color: var(--color-on-surface)
+
+                &--selected
+                    color: var(--color-primary)
+
+                    &:hover
+                        cursor: normal
+                        color: var(--color-primary)
+
+.examples
+    width: 60%
+    margin-left: auto
+    margin-right: auto
+    font-family: 'Ubuntu'
+    color: var(--color-on-surface)
+    transition: 0.25s
+    text-align: center
+    @media (max-width: $menuLayoutThreshold)
+        width: 85%
+    .snippet
+        border-radius: 5px
+        padding: 10px 0px
+    h2
+        text-align: left
+    h3
+        text-align: left
+    .text
+        font-family: 'Roboto'
+        font-weight: 300
+        letter-spacing: 1px
+        font-size: 1.3em
+        text-align: left
+
+        ul
+            li
+                margin-top: 15px
+
+
+.footer
+    height: 20%
+    width: 100%
+
+
+
+
+
+pre, code
+    overflow: auto
+    word-wrap: normal
+    white-space: pre
+    padding: 0
+    margin: 0

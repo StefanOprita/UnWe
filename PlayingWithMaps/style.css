@@ -1,0 +1,16 @@
+.mapPort {
+    border: black solid 2px;
+    height: 400px;
+    width: 500px;
+    align-items: center;
+}
+
+
+
+.land {
+    fill: #CCCCCC;
+    fill-opacity: 1;
+    stroke:white;
+    stroke-opacity: 1;
+    stroke-width:0.5;
+}
