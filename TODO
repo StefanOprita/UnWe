@@ -4,5 +4,9 @@ statistics
     change map background to a blur.. maybe
     change range picker design
     change home middle buttons text
+    fix theme transition for
+        text from download svg/...
+        categories checkboxes text
+        start/end range + calendar text
 
 add about page
