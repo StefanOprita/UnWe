@@ -14,7 +14,7 @@
 
     <link rel="stylesheet" href="../../../public/style.css">
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js" charset="utf-8"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
     <script src="../../../public/js/info.js"></script>
     <script src="script.js"></script>
     <script src="../../../public/js/dot.js"></script>
@@ -102,7 +102,7 @@
                     </div>
                 </div>
 
-                <div class="categories-list collision-box" action="" method="post"></div>
+                <div class="categories-list collision-box"></div>
 
                 <div class="range-selector collision-box">
                     <div class="selector">
@@ -111,8 +111,8 @@
                     </div>
                     <div class="line"></div>
                     <div class="selector">
-                        <label for="start">End range:</label><br>
-                        <input type="month" id="start" name="start" min="2000-01" value="2021-04">
+                        <label for="end">End range:</label><br>
+                        <input type="month" id="end" name="end" min="2000-01" value="2021-04">
                     </div>
                 </div>
             </div>
