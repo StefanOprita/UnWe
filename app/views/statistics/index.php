@@ -38,7 +38,7 @@
             <div class="menu-button"><span class="material-icons">menu</span></div>
             <div class="menu collision-box">
                 <a class="item" href="../home/index.html">Home</a>
-                <a class="item item--selected" href="../statistics/index.html">Statistics</a>
+                <a class="item item--selected" href="../statistics/index.php">Statistics</a>
                 <a class="item" href="../api/index.html">API</a>
                 <a class="item theme">
                     <span class="material-icons theme-dark-button">dark_mode</span>
