@@ -141,7 +141,7 @@ html, body {
     letter-spacing: .15em;
     text-decoration: none;
     color: var(--color-on-surface-variant);
-    font-weight: 400;
+    font-weight: 700;
     overflow: hidden; }
     .menu .item--selected {
       color: var(--color-on-surface); }
