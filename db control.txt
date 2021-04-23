@@ -1,0 +1,9 @@
+mysql://b560e0773ab690:0f3d34db@eu-cdbr-west-01.cleardb.com/heroku_81de4425bb3a4cc?reconnect=true
+
+-> host: eu-cdbr-west-01.cleardb.com
+-> user: b560e0773ab690
+-> pass: 0f3d34db
+
+https://www.doabledanny.com/Deploy-PHP-And-MySQL-to-Heroku
+	-> de la pasul 10 pentru a lucra pe baza de date
+	-> pasul 13 conectare din php la baza de date de pe heroku
