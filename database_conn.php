@@ -8,7 +8,7 @@
     $active_group = 'default';
     $query_builder = TRUE;
 
-    $conn = mysqli_connect($cleardb_server, $cleardb_username, $cleardb_password, "heroku_81de4425bb3a4cc");
+    $conn = mysqli_connect($cleardb_server, $cleardb_username, $cleardb_password, $cleardb_db);
     if($conn->connect_error){
         die("Failed to connect with MySQL: " . $conn -> connect_error);
     }
