@@ -441,7 +441,7 @@ function onClickCounty(event) {
     }
     console.log(element.id);
 
- 
+
 }
 
 function onMouseEnterCounty(event) {
