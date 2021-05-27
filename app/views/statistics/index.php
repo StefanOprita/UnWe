@@ -16,7 +16,7 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
     <script src="../../../public/js/info.js"></script>
-    <script src="script.js"></script>
+    <script src="../../../public/js/script-statistics.js"></script>
     <script src="../../../public/js/dot.js"></script>
     <script src="../../../public/js/box.js"></script>
     <script src="../../../public/js/animation.js"></script>
@@ -66,7 +66,7 @@
         <div class = "map">
             <div class="map-menu map-menu--closed">
                 <svg class="map-svg" width="100%"  viewBox="-5 350 615 450" xmlns="http://www.w3.org/2000/svg" version="1.1"  >
-                    <?php include "./map.html" ?>
+                    <?php include "map.html" ?>
                 </svg>
             </div>
         </div>
