@@ -2,6 +2,10 @@ Options -MultiViews
 RewriteEngine On
 # Options -Indexes
 
+RewriteBase 
+
+# RewriteRule ^api/(.+)$  E:\Repos\UnWe\app\controllers\api.php [QSA, L]
+
 RewriteBase /public
 
 RewriteCond %{REQUEST_FILENAME} !-d
