@@ -137,6 +137,14 @@ class Query {
         //echo "what aici<br> " . $normalizedCounty . "<br>";
         return 'N/A';
     }
+
+    public static function getIdCounty($county) {
+        global $countyNames, $countyIdToNames;
+        $normalizedCounty = strtolower($county);
+
+       return strtoupper(array_search($normalizedCounty,$countyIdToNames,false));
+    }
+
 }
 
 ?>
