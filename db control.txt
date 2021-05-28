@@ -8,6 +8,9 @@ https://www.doabledanny.com/Deploy-PHP-And-MySQL-to-Heroku
 	-> de la pasul 10 pentru a lucra pe baza de date
 	-> pasul 13 conectare din php la baza de date de pe heroku
 
+
+Table name: information
+
 id
 judet
 total_someri

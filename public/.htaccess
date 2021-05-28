@@ -2,7 +2,7 @@ Options -MultiViews
 RewriteEngine On
 # Options -Indexes
 
-RewriteBase 
+RewriteBase
 
 # RewriteRule ^api/(.+)$  E:\Repos\UnWe\app\controllers\api.php [QSA, L]
 
