@@ -1,9 +1,9 @@
 <?php
 class Statistics extends Controller {
 
-    public function index($name) {
+    public function index() {
         $user = $this->model('User');
-        $user->name = $name;
+        //$user->name = $name;
 
         $this->view('statistics/index.php', ['name' => $user->name]);
     }
