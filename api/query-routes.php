@@ -141,7 +141,7 @@ function queryDatabaseForCounty($params, $queryParams, $body, $headers)
     $query->setEndYearAndMonth($year, $month);
     $resultArray = $query->executeQuery();
 
-
+    // print_r($resultArray);
     $jsonFinal = array();
     array_push($jsonFinal, jsonFormat($resultArray[0], $categs));
 
