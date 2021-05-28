@@ -10,6 +10,11 @@ $query_routes = [
         "method" => "GET",
         "url" => "/api/query/:county/:year",
         "handler" => "queryDatabase"
+    ],
+    [
+        "method" => "GET",
+        "url" => "/api/query/:county/:year/:month",
+        "handler" => "queryDatabaseMonth"
     ]
 ];
 
@@ -105,11 +110,7 @@ function jsonYearFormat($resultArray, $categs, $start, $finish)
     $toAdd = [];
     $parity = -1;
     for ($i = $start; $i <= $finish; $i++) {
-
-        $month = [];
-        array_push($month, jsonFormat($resultArray[$i-1], $categs));
-        $toAdd[$months[$i]] = $month;
-
+        $toAdd[$months[$i]] = jsonFormat($resultArray[$i - 1], $categs);
     }
     return $toAdd;
 }
@@ -170,7 +171,7 @@ function queryDatabase($params, $queryParams, $body, $headers)
         $query->setEndYearAndMonth($wantedYear, 2);
         $resultArray = $query->executeQuery();
         $jsonFinal = array();
-        array_push($jsonFinal, jsonYearFormat($resultArray, $categs,1,2));
+        array_push($jsonFinal, jsonYearFormat($resultArray, $categs, 1, 2));
     } else {
         $query->setStartYearAndMonth($wantedYear, 1);
         $query->setEndYearAndMonth($wantedYear, 12);
@@ -181,5 +182,8 @@ function queryDatabase($params, $queryParams, $body, $headers)
     }
 
     print_r(json_encode($jsonFinal));
+}
 
+function queryDatabaseMonth($params, $queryParams, $body, $headers)
+{
 }
