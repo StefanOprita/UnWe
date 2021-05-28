@@ -182,6 +182,7 @@ function queryDatabase($params, $queryParams, $body, $headers)
     }
 
     print_r(json_encode($jsonFinal));
+}
 
 function queryDatabaseMonth($params, $queryParams, $body, $headers){
 
