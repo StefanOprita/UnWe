@@ -41,6 +41,7 @@
         'valcea',
         'vrancea',
         'vaslui',
+        'total tara',
     ];
 
     $countyIdToNames = [
@@ -85,6 +86,7 @@
         'vl' => 'valcea',
         'vn' => 'vrancea',
         'vs' => 'vaslui',
+        'total' => 'total tara',
     ];
 
 ?>
