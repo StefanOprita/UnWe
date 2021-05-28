@@ -85,6 +85,6 @@
         'vl' => 'valcea',
         'vn' => 'vrancea',
         'vs' => 'vaslui',
-    ]
+    ];
 
 ?>

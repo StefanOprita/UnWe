@@ -58,7 +58,7 @@ class Query {
         //inlocuim lista de judete cu ? ca sa putem face bind
         $selectString = str_replace("countyList", $countyList, $selectString);
 
-        echo $selectString;
+        // echo $selectString;
         $stmt = $conn -> prepare($selectString);
         // $stmt -> bind_param('iiii', $this->startYear, $this->startMonth, 
         //                             $this->endYear, $this->endMonth);
@@ -130,6 +130,14 @@ class Query {
         //echo "what aici<br> " . $normalizedCounty . "<br>";
         return 'N/A';
     }
+
+    public static function getIdCounty($county) {
+        global $countyNames, $countyIdToNames;
+        $normalizedCounty = strtolower($county);
+        
+       return strtoupper(array_search($normalizedCounty,$countyIdToNames,false));
+    }
+
 }
 
 ?>
