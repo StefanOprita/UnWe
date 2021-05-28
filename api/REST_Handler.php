@@ -1,8 +1,8 @@
 <?php
     // $querries = array();
-    // 
+    //
     // echo print_r($querries);
-
+    require_once '../app/database.php';
     require_once "./query-routes.php";
     require_once "errorHandling.php";
 
@@ -20,7 +20,7 @@
         if($matchResult == false) {
             continue;
         }
-        
+
         $route["handler"](
             $matchResult["params"],
             $matchResult["queryParams"],
@@ -42,13 +42,13 @@
         $routeUrlTokens = explode('/', filter_var(rtrim($route['url'], '/'), FILTER_SANITIZE_URL));
 
         //daca avem numar diferit de tokenuri, clar nu se potriveste
-       
+
         if(count($uriTokens) != count($routeUrlTokens)) return false;
-    
+
         //asta e regex-ul ca sa vedem daca e un parameru (incepe cu :)
         $paramRegex = "/:([a-zA-Z0-9]+)/";
         $matches = [];
-        
+
         //ce o sa returnam
         $toReturn = [
             "params" => [],
@@ -67,12 +67,12 @@
                 if($uriToken !== $routeUrlToken) return false;
             }
         }
-        
+
         //asa se scot query parameters
         parse_str($_SERVER['QUERY_STRING'], $toReturn["queryParams"]);
-        
+
         return $toReturn;
-    
+
 
         echo print_r($routeUrlTokens);
         echo "<br><br>";
