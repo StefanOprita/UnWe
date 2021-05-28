@@ -8,6 +8,8 @@ class App {
     protected $params = [];
 
     public function __construct() {
+        echo 'test app<br>';
+
         $url = $this->parseUrl();
 
         if(file_exists('../app/controllers/' . $url[0] . '.php')) {

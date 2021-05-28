@@ -72,7 +72,7 @@
         </div>
 
         <div class="chart-container">
-            <div class="chart">
+            <div class="chart collision-box">
                 <canvas class="chartCanvas"></canvas>
                 <!-- <canvas class="chartCanvas"></canvas> -->
                 <!-- <canvas class="chartCanvas"></canvas> -->

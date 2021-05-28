@@ -7,3 +7,38 @@ mysql://b560e0773ab690:0f3d34db@eu-cdbr-west-01.cleardb.com/heroku_81de4425bb3a4
 https://www.doabledanny.com/Deploy-PHP-And-MySQL-to-Heroku
 	-> de la pasul 10 pentru a lucra pe baza de date
 	-> pasul 13 conectare din php la baza de date de pe heroku
+
+
+Table name: information
+
+id
+judet
+total_someri
+total_femei
+total_barbati
+indemnizati
+neindemnizati
+rata_somaj
+rata_somaj_femei
+rata_somaj_barbati
+total_urban
+femei_urban
+barbati_urban
+total_rural
+femei_rural
+barbati_rural
+fara_studii
+invatamant_primar
+invatamant_gimnazial
+invatamant_liceal
+invatamant_post
+invatamant_profesional
+invatamant_universitar
+sub_25
+25_29
+30_39
+40_49
+50_55
+peste_55
+month
+year
