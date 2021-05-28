@@ -1,20 +1,20 @@
 <?php
-require_once "./Query/Query.php";
+require_once './Query/Query.php';
 $query_routes = [
     [
-        "method" => "GET",
-        "url" => "/api/query/:county",
-        "handler" => "queryDatabaseForCounty"
+        'method' => 'GET',
+        'url' => '/api/query/:county',
+        'handler' => 'queryDatabaseForCounty'
     ],
     [
-        "method" => "GET",
-        "url" => "/api/query/:county/:year",
-        "handler" => "queryDatabase"
+        'method' => 'GET',
+        'url' => '/api/query/:county/:year',
+        'handler' => 'queryDatabase'
     ],
     [
-        "method" => "GET",
-        "url" => "/api/query/:county/:year/:month",
-        "handler" => "queryDatabaseMonth"
+        'method' => 'GET',
+        'url' => '/api/query/:county/:year/:month',
+        'handler' => 'queryDatabaseMonth'
     ]
 ];
 
@@ -93,6 +93,7 @@ function jsonFormat($resultArray, $categs)
 
 function jsonYearFormat($resultArray, $categs, $start, $finish)
 {
+    global $months;
     $months = [
         1 => 'january',
         2 => 'february',
@@ -117,7 +118,7 @@ function jsonYearFormat($resultArray, $categs, $start, $finish)
 
 function queryDatabaseForCounty($params, $queryParams, $body, $headers)
 {
-    $countyName = Query::validateCounty($params["county"]);
+    $countyName = Query::validateCounty($params['county']);
     $month = date('m');
     $year1 = date('y') - 1;
     $year = '20' . $year1;
@@ -126,11 +127,11 @@ function queryDatabaseForCounty($params, $queryParams, $body, $headers)
     if ($queryParams == [])
         $categs = [];
     else
-        $categs = explode(" ", $queryParams['category']);
+        $categs = explode(' ', $queryParams['category']);
 
 
     if ($countyName == 'N/A') {
-        echo handle404($params["county"] . " is not a valid county name / id!");
+        echo handle404($params['county'] . ' is not a valid county name / id!');
         exit;
     }
 
@@ -149,23 +150,22 @@ function queryDatabaseForCounty($params, $queryParams, $body, $headers)
 
 function queryDatabase($params, $queryParams, $body, $headers)
 {
-    $countyName = Query::validateCounty($params["county"]);
-    $wantedYear = $params["year"];
+    $countyName = Query::validateCounty($params['county']);
+    $wantedYear = $params['year'];
     // echo $wantedYear;
     if ($queryParams == [])
         $categs = [];
     else
-        $categs = explode(" ", $queryParams['category']);
+        $categs = explode(' ', $queryParams['category']);
 
     if ($countyName == 'N/A') {
-        echo handle404($params["county"] . " is not a valid county name / id!");
+        echo handle404($params['county'] . ' is not a valid county name / id!');
         exit;
     }
 
     $query = new Query();
     $query->addCounty($countyName);
 
-    $jsonAll = [];
     if ($wantedYear == 2021) {
         $query->setStartYearAndMonth($wantedYear, 1);
         $query->setEndYearAndMonth($wantedYear, 2);
@@ -185,5 +185,49 @@ function queryDatabase($params, $queryParams, $body, $headers)
 }
 
 function queryDatabaseMonth($params, $queryParams, $body, $headers){
+    $countyName = Query::validateCounty($params['county']);
+    $month = $params['month'];
+    $year = $params['year'];
+    $months = [
+        1 => 'january',
+        2 => 'february',
+        3 => 'march',
+        4 => 'april',
+        5 => 'may',
+        6 => 'june',
+        7 => 'july',
+        8 => 'august',
+        9 => 'september',
+        10 => 'october',
+        11 => 'november',
+        12 => 'december'
+    ];
+    $months2 = [1,2,3,4,5,6,7,8,9,10,11,12];
+    // echo $year;
+    // echo is_null($queryParams);
+    if ($queryParams == [])
+        $categs = [];
+    else
+        $categs = explode(' ', $queryParams['category']);
 
+    if(in_array($month,$months,false)){
+        $month = array_search($month,$months,false);
+    }
+
+    if ($countyName == 'N/A') {
+        echo handle404($params['county'] . ' is not a valid county name / id!');
+        exit;
+    }
+
+    $query = new Query();
+    $query->addCounty($countyName);
+    $query->setStartYearAndMonth($year, $month);
+    $query->setEndYearAndMonth($year, $month);
+    $resultArray = $query->executeQuery();
+
+
+    $jsonFinal = array();
+    array_push($jsonFinal, jsonFormat($resultArray[0], $categs));
+
+    print_r(json_encode($jsonFinal));
 }
