@@ -63,6 +63,7 @@ class Query {
         }
 
 
+        // print_r($params);
         return $toReturn;
     }
 
