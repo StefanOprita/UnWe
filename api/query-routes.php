@@ -30,21 +30,21 @@ function jsonFormat($resultArray, $categs)
     $toAdd['id'] = Query::getIdCounty($resultArray['judet']);
     $toAdd['total'] = $resultArray['total_someri'];
 
-    if (in_array('gender', $categs, false) || $categs = []) {
+    if (in_array('gender', $categs, false) || $categs == []) {
         $genders = [];
         $genders['male'] =  $resultArray['total_barbati'];
         $genders['female'] =  $resultArray['total_femei'];
         $toAdd['gender'] = $genders;
     }
 
-    if (in_array('compensation', $categs, false) || $categs = []) {
+    if (in_array('compensation', $categs, false) || $categs == []) {
         $comp = [];
         $comp['compensated'] =  $resultArray['indemnizati'];
         $comp['non-compensated'] =  $resultArray['neindemnizati'];
         $toAdd['compensation'] = $comp;
     }
 
-    if (in_array('education', $categs, false) || $categs = []) {
+    if (in_array('education', $categs, false) || $categs == []) {
         $educ = [];
         $educ['no education'] = $resultArray['fara_studii'];
         $educ['primary'] = $resultArray['invatamant_primar'];
@@ -56,7 +56,7 @@ function jsonFormat($resultArray, $categs)
         $toAdd['education'] = $educ;
     }
 
-    if (in_array('rate', $categs, false) || $categs = []) {
+    if (in_array('rate', $categs, false) || $categs == []) {
         $rates = [];
         $rates['total'] = $resultArray['rata_somaj'];
         $rates['male'] = $resultArray['rata_somaj_barbati'];
@@ -64,7 +64,7 @@ function jsonFormat($resultArray, $categs)
         $toAdd['rate'] = $rates;
     }
 
-    if (in_array('environment', $categs, false) || $categs = []) {
+    if (in_array('environment', $categs, false) || $categs == []) {
         $envir = [];
         $urb = [];
         $urb['total'] = $resultArray['total_urban'];
@@ -82,7 +82,7 @@ function jsonFormat($resultArray, $categs)
     }
 
 
-    if (in_array('age', $categs, false) || $categs = []) {
+    if (in_array('age', $categs, false) || $categs == []) {
         $ages = [];
         $ages['<25'] = $resultArray['sub_25'];
         $ages['25-29'] = $resultArray['25_29'];
@@ -239,25 +239,39 @@ function queryDatabaseMonth($params, $queryParams, $body, $headers)
 
 function advancedQuery($params, $queryParams, $body, $headers)
 {
-    $startYear = 2019;
-    $endYear = 2021;
     $countyList = "";
+    // print_r($queryParams);
+
 
     if ($queryParams == []) {
         echo handle404('No params given!');
         exit;
     } else {
-        $county = explode('+', $queryParams['counties']);
-        $countyList = explode(' ', $county[0]);
-        $startYear = $queryParams['startingYear'];
-        $endYear = $queryParams['endingYear'];
-        $sth = explode('+', $queryParams['categories']);
+
+        if (array_key_exists('counties', $queryParams)) {
+            $county = explode('+', $queryParams['counties']);
+            $countyList = explode(' ', $county[0]);
+        } else {
+            echo handle404('No counties given!');
+            exit;
+        }
+
+        if (array_key_exists('startingYear', $queryParams))
+            $startYear = $queryParams['startingYear'];
+        else
+            $startYear = 2019;
+
+        if (array_key_exists('endingYear', $queryParams))
+            $endYear = $queryParams['endingYear'];
+        else
+            $endYear = 2021;
+
+        if (array_key_exists('categories', $queryParams))
+            $categs = explode('+', $queryParams['categories']);
+        else
+            $categs = [];
     }
-    $endYear = 2021;
-    if (isset($sth))
-        $categs = $sth;
-    else
-        $categs = [];
+
     // echo $countyList;
     // if(isset($countyList)){
     //     echo handle404("No county's have been given!");
@@ -283,7 +297,6 @@ function advancedQuery($params, $queryParams, $body, $headers)
                     $countries[Query::getIdCounty($countyName)] = jsonFormat($resultArray[0], $categs);
                 }
                 $year['countries'] = $countries;
-                // print_r($countries);
                 array_push($grandArray, $year);
             }
         } else {
