@@ -439,6 +439,7 @@ function addCountyToList(countyId) {
 async function addCountyToLineChart(countyId) {
 
     console.log("uhm, adaugam linie la chart, uwu");
+    console.log(countyId);
     var range = getRangePickers();
     var startYear = parseInt(range.startRange.split('-')[0]);
     var startMonth = parseInt(range.startRange.split('-')[1]);
@@ -453,13 +454,32 @@ async function addCountyToLineChart(countyId) {
                           "&endYear=" + endYear + 
                           "&endMonth=" + endMonth);
 
-    console.log("uhm iei");
-    var text = await res.text();
-
-
-    console.log(text);
-
     
+    var json = await res.json();
+
+    console.log("lungimea e: " + json.length);
+    console.log(json);
+
+    //fac asa pentru ca asa sunt puse momentan in json
+    var lowerId = countyId.toLowerCase();
+
+
+    var lineData = [];
+
+    //mergem prin fiecare an rezultat
+    for(var i = 0 ; i < json.length; ++i) {
+        //modific imd din countries in counties
+        var countyInfo = json[0].countries[lowerId];
+
+        //aici trebuie sa vina ceva logica mai complicata, sa se uite la 
+        //optiunile alese de utilizator... dar momentan afisez doar totalul
+
+        lineData.push(countyInfo.total);
+    }
+
+    //console.log("Test " + json[0].countries[upperId].name);
+
+    chart.addLine(countyId, lineData);
 }
 
 
