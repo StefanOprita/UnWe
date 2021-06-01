@@ -14,19 +14,10 @@ var CountyOnMouseLeaveFunctions = new Array;
 
 //variabila care are lunile anului 
 
-var monthNames = [];
-monthNames.push(moment().month(0).format("MMMM"));
-monthNames.push(moment().month(1).format("MMMM"));
-monthNames.push(moment().month(2).format("MMMM"));
-monthNames.push(moment().month(3).format("MMMM"));
-monthNames.push(moment().month(4).format("MMMM"));
-monthNames.push(moment().month(5).format("MMMM"));
-monthNames.push(moment().month(6).format("MMMM"));
-monthNames.push(moment().month(7).format("MMMM"));
-monthNames.push(moment().month(8).format("MMMM"));
-monthNames.push(moment().month(9).format("MMMM"));
-monthNames.push(moment().month(10).format("MMMM"));
-monthNames.push(moment().month(11).format("MMMM"));
+var monthNames = ["Jan", "Feb", "Mar", 
+                  "Apr", "May", "June", 
+                  "July", "Aug", "Sept", 
+                  "Oct", "Nov", "Dec"];
 
 console.log(monthNames);
 
@@ -445,7 +436,9 @@ function addCountyToList(countyId) {
 
 }
 
-function addCountyToLineChart() {
+async function addCountyToLineChart(countyId) {
+
+    console.log("uhm, adaugam linie la chart, uwu");
     var range = getRangePickers();
     var startYear = parseInt(range.startRange.split('-')[0]);
     var startMonth = parseInt(range.startRange.split('-')[1]);
@@ -453,6 +446,18 @@ function addCountyToLineChart() {
 
     var endYear = parseInt(range.endRange.split("-")[0]);
     var endMonth = parseInt(range.endRange.split('-')[1]);
+
+    var res = await fetch("/api/query?counties=" + countyId + 
+                          "&startYear=" + startYear + 
+                          "&startMonth=" + startMonth + 
+                          "&endYear=" + endYear + 
+                          "&endMonth=" + endMonth);
+
+    console.log("uhm iei");
+    var text = await res.text();
+
+
+    console.log(text);
 
     
 }
