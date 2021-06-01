@@ -289,38 +289,48 @@ function advancedQuery($params, $queryParams, $body, $headers)
         $query->addCounty($countyName);
     }
 
+    $query->setStartYearAndMonth($startYear, 1);
+
     if ($endYear == 2021)
         $query->setEndYearAndMonth($endYear, 2);
     else
         $query->setEndYearAndMonth($endYear, 12);
 
     $resultArray = $query->executeQuery();
-    // print_r(json_encode($resultArray));
+    // print_r($resultArray[0]);
+    // print_r($resultArray[1]);
+    // print_r($resultArray[2]);
+    // print_r($resultArray[3]);
+
 
     $grandArray = array();
     for ($i = $startYear; $i <= $endYear; $i++) {
+        $counter = 0;
         $year = [];
         $year['year'] = $i;
         if ($i != 2021) {
             for ($j = 1; $j <= 12; $j++) {
                 $year['month'] = $j;
-                $countries = [];
+                $counties = [];
                 for ($k = 0; $k < count($countyList); $k++) {
-                    $countries[strtolower(Query::getIdCounty(Query::validateCounty($countyList[$k])))] = jsonFormat($resultArray[0], $categs);
+                    $counties[strtolower(Query::getIdCounty(Query::validateCounty($countyList[$k])))] = jsonFormat($resultArray[$counter], $categs);
+                    $counter = $counter + 1;
                 }
-                $year['countries'] = $countries;
+                $year['counties'] = $counties;
                 array_push($grandArray, $year);
+
+                // print_r(json_encode($counties));
             }
         } else {
             for ($j = 1; $j <= 2; $j++) {
                 $year['month'] = $j;
-                $countries = [];
+                $counties = [];
                 for ($k = 0; $k < count($countyList); $k++) {
-
-                    $countries[strtolower(Query::getIdCounty(Query::validateCounty($countyList[$k])))] = jsonFormat($resultArray[0], $categs);
+                    $counties[strtolower(Query::getIdCounty(Query::validateCounty($countyList[$k])))] = jsonFormat($resultArray[$counter], $categs);
+                    $counter = $counter + 1;
                 }
-                $year['countries'] = $countries;
-                // print_r($countries);
+                $year['counties'] = $counties;
+                // print_r($counties);
                 array_push($grandArray, $year);
             }
         }
