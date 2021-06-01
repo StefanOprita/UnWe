@@ -468,8 +468,8 @@ async function addCountyToLineChart(countyId) {
 
     //mergem prin fiecare an rezultat
     for(var i = 0 ; i < json.length; ++i) {
-        //modific imd din countries in counties
-        var countyInfo = json[0].countries[lowerId];
+        
+        var countyInfo = json[i].counties[lowerId];
 
         //aici trebuie sa vina ceva logica mai complicata, sa se uite la 
         //optiunile alese de utilizator... dar momentan afisez doar totalul
@@ -480,6 +480,8 @@ async function addCountyToLineChart(countyId) {
     //console.log("Test " + json[0].countries[upperId].name);
 
     chart.addLine(countyId, lineData);
+    chart.update();
+    
 }
 
 
