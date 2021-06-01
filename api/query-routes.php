@@ -305,7 +305,7 @@ function advancedQuery($params, $queryParams, $body, $headers)
                 $year['month'] = $j;
                 $countries = [];
                 for ($k = 0; $k < count($countyList); $k++) {
-                    $countries[Query::getIdCounty($countyList[$k])] = jsonFormat($resultArray[0], $categs);
+                    $countries[Query::getIdCounty(Query::validateCounty($countyList[$k]))] = jsonFormat($resultArray[0], $categs);
                 }
                 $year['countries'] = $countries;
                 array_push($grandArray, $year);
@@ -316,7 +316,7 @@ function advancedQuery($params, $queryParams, $body, $headers)
                 $countries = [];
                 for ($k = 0; $k < count($countyList); $k++) {
 
-                    $countries[Query::getIdCounty($countyName)] = jsonFormat($resultArray[0], $categs);
+                    $countries[Query::getIdCounty(Query::validateCounty($countyList[$k]))] = jsonFormat($resultArray[0], $categs);
                 }
                 $year['countries'] = $countries;
                 // print_r($countries);
