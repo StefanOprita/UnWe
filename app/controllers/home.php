@@ -6,9 +6,11 @@ class Home extends Controller {
         $user = $this->model('User');
         //$user->name = $name;
 
-        // $this->view('home/index.html', ['name' => $user->name]);
+        $this->view('home/index.html', ['name' => $user->name]);
 
-        echo 'test home<br><br><br>';
+        
+
+        // echo 'test home<br><br><br>';
 
         // DBManager::execSelect('SELECT * FROM information');
         // DBManager::execSelect('DESCRIBE information');

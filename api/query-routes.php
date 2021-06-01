@@ -234,7 +234,8 @@ function queryDatabaseMonth($params, $queryParams, $body, $headers)
     $jsonFinal = array();
     array_push($jsonFinal, jsonFormat($resultArray[0], $categs));
 
-    print_r(json_encode($jsonFinal));
+    
+    echo json_encode($jsonFinal);
 }
 
 function advancedQuery($params, $queryParams, $body, $headers)
@@ -320,5 +321,7 @@ function advancedQuery($params, $queryParams, $body, $headers)
         }
     }
 
-    print_r(json_encode($grandArray));
+    header("Content-Type: application/json");
+    http_response_code(200);
+    echo json_encode($grandArray);
 }

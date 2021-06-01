@@ -1,6 +1,6 @@
 <?php
 
-echo 'test init<br>';
+// echo 'test init<br>';
 
 require_once 'database.php';
 require_once 'core/App.php';
