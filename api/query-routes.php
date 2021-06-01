@@ -303,23 +303,23 @@ function advancedQuery($params, $queryParams, $body, $headers)
         if ($i != 2021) {
             for ($j = 1; $j <= 12; $j++) {
                 $year['month'] = $j;
-                $countries = [];
+                $counties = [];
                 for ($k = 0; $k < count($countyList); $k++) {
-                    $countries[strtolower(Query::getIdCounty(Query::validateCounty($countyList[$k])))] = jsonFormat($resultArray[0], $categs);
+                    $counties[strtolower(Query::getIdCounty(Query::validateCounty($countyList[$k])))] = jsonFormat($resultArray[0], $categs);
                 }
-                $year['countries'] = $countries;
+                $year['counties'] = $counties;
                 array_push($grandArray, $year);
             }
         } else {
             for ($j = 1; $j <= 2; $j++) {
                 $year['month'] = $j;
-                $countries = [];
+                $counties = [];
                 for ($k = 0; $k < count($countyList); $k++) {
 
-                    $countries[strtolower(Query::getIdCounty(Query::validateCounty($countyList[$k])))] = jsonFormat($resultArray[0], $categs);
+                    $counties[strtolower(Query::getIdCounty(Query::validateCounty($countyList[$k])))] = jsonFormat($resultArray[0], $categs);
                 }
-                $year['countries'] = $countries;
-                // print_r($countries);
+                $year['counties'] = $counties;
+                // print_r($counties);
                 array_push($grandArray, $year);
             }
         }
