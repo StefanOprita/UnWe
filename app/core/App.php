@@ -8,7 +8,7 @@ class App {
     protected $params = [];
 
     public function __construct() {
-        echo 'test app<br>';
+        // echo 'test app<br>';
 
         $url = $this->parseUrl();
 

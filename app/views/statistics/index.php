@@ -87,12 +87,12 @@
                 <div class="range-selector collision-box">
                     <div class="selector">
                         <label for="start">Start range:</label><br>
-                        <input type="month" id="start" name="start" min="2000-01" value="2021-04">
+                        <input type="month" id="start" name="start" min="2000-01" value="2019-01">
                     </div>
                     <div class="line"></div>
                     <div class="selector">
                         <label for="end">End range:</label><br>
-                        <input type="month" id="end" name="end" min="2000-01" value="2021-04">
+                        <input type="month" id="end" name="end" min="2000-01" value="2021-05">
                     </div>
                 </div>
             </div>
@@ -119,6 +119,7 @@
 
     <link rel="stylesheet" href="../../../public/style.css">
 
+    <script src="https://momentjs.com/downloads/moment.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
     <script src="../../../public/js/info.js"></script>
     <script src="../../../public/js/script-statistics.js"></script>
@@ -128,6 +129,7 @@
     <script src="../../../lab/my-line-chart.js"></script>
     <script src="../../../lab/my-bar-chart.js"></script>
     <script src="../../../lab/my-pie-chart.js"></script>
+
 
     <script src="https://jsuites.net/v4/jsuites.js"></script>
     <link rel="stylesheet" href="https://jsuites.net/v4/jsuites.css" type="text/css" />

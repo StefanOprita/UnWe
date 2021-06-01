@@ -11,6 +11,17 @@ var CountyOnClickFunctions = new Array;
 var CountyOnMouseEnterFunctions = new Array;
 var CountyOnMouseLeaveFunctions = new Array;
 
+
+//variabila care are lunile anului 
+
+var monthNames = ["Jan", "Feb", "Mar", 
+                  "Apr", "May", "June", 
+                  "July", "Aug", "Sept", 
+                  "Oct", "Nov", "Dec"];
+
+console.log(monthNames);
+
+
 // let countyColors = [
 //     '#F44336', '#9C27B0', '#2196F3', '#009688', '#FFEB3B', '#795548',
 //     '#E91E63', '#673AB7', '#3F51B5', '#03A9F4', '#00BCD4', '#4CAF50',
@@ -215,7 +226,33 @@ function setChart() {
     canvas.height = rect.height;
 
 
-    chart = MyLineChart(ctx, MAIN_COLORS);
+    var range = getRangePickers();
+
+    //determin lista de luni care trebuie pusa pe axa Ox
+    var monthsList = [];
+
+    var startYear = parseInt(range.startRange.split('-')[0]);
+    var startMonth = parseInt(range.startRange.split('-')[1]);
+
+
+    var endYear = parseInt(range.endRange.split("-")[0]);
+    var endMonth = parseInt(range.endRange.split('-')[1]);
+
+    var currentYear = startYear;
+    var currentMonth = startMonth;
+
+    do {
+        monthsList.push(monthNames[currentMonth - 1] + "," + currentYear);
+        currentMonth++;
+        if(currentMonth > 12) {
+            currentMonth = 1;
+            currentYear++;
+        }
+    } while(currentYear < endYear || (currentYear == endYear && currentMonth <= endMonth));
+
+    console.log(monthsList);
+
+    chart = MyLineChart(ctx, MAIN_COLORS, monthsList);
     chart.setSize(canvas.width, canvas.height);
     chart.setGridColor(((theme == THEME_DARK ? lightGridColor : darkGridColor) + '44'));
 
@@ -389,13 +426,64 @@ function addCountyToList(countyId) {
     }, 200);
 
 
-    let length = 6;
-    let randomArray = [];
-    for(let i = 0; i < length; i++) randomArray.push(Math.random() * 5 + 5);
+    addCountyToLineChart(countyId);
 
-    chart.addLine(countyId, randomArray);
+    // let length = 6;
+    // let randomArray = [];
+    // for(let i = 0; i < length; i++) randomArray.push(Math.random() * 5 + 5);
+
+    // chart.addLine(countyId, randomArray);
 
 }
+
+async function addCountyToLineChart(countyId) {
+
+    console.log("uhm, adaugam linie la chart, uwu");
+    console.log(countyId);
+    var range = getRangePickers();
+    var startYear = parseInt(range.startRange.split('-')[0]);
+    var startMonth = parseInt(range.startRange.split('-')[1]);
+
+
+    var endYear = parseInt(range.endRange.split("-")[0]);
+    var endMonth = parseInt(range.endRange.split('-')[1]);
+
+    var res = await fetch("/api/query?counties=" + countyId + 
+                          "&startYear=" + startYear + 
+                          "&startMonth=" + startMonth + 
+                          "&endYear=" + endYear + 
+                          "&endMonth=" + endMonth);
+
+    
+    var json = await res.json();
+
+    console.log("lungimea e: " + json.length);
+    console.log(json);
+
+    //fac asa pentru ca asa sunt puse momentan in json
+    var lowerId = countyId.toLowerCase();
+
+
+    var lineData = [];
+
+    //mergem prin fiecare an rezultat
+    for(var i = 0 ; i < json.length; ++i) {
+        
+        var countyInfo = json[i].counties[lowerId];
+
+        //aici trebuie sa vina ceva logica mai complicata, sa se uite la 
+        //optiunile alese de utilizator... dar momentan afisez doar totalul
+
+        lineData.push(countyInfo.total);
+    }
+
+    //console.log("Test " + json[0].countries[upperId].name);
+
+    chart.addLine(countyId, lineData);
+    chart.update();
+    
+}
+
 
 function removeCountyFromList(countyId) {
     console.log(countyId);
@@ -408,7 +496,9 @@ function removeCountyFromList(countyId) {
         if(spans.length != 0) {
             var id = spans[0].innerHTML;
             console.log(id);
-            if(id === countyId) {
+
+            if(id == countyId) {
+          
                 element.style.marginRight = '-' + element.offsetWidth + 'px';
                 element.style.opacity = 0;
 
@@ -417,14 +507,20 @@ function removeCountyFromList(countyId) {
                     countiesBar.removeChild(element);
 
                 }, 250);
+                
+                var indexToRemove = 0;
+
+             
 
                 listOfSelectedCountys = listOfSelectedCountys.filter(
                     function(value, index, arr) {
+                        if(value === countyId) indexToRemove = index;
                         return value != countyId;
                     }
                 );
-
-                chart.removeLine(0);
+                
+                console.log("removing index " + indexToRemove);
+                chart.removeLine(indexToRemove);
 
                 break;
             }
@@ -471,6 +567,9 @@ function addCountyFunction(typeOfEvent, func) {
         CountyOnMouseLeaveFunctions.push(func);
     }
 }
+
+
+
 
 function changeColorOfCounty(element) {
     var elementId = element.id;
@@ -604,6 +703,15 @@ function setDownloadType() {
 
 function setRangePicker() {
 
+}
+
+function getRangePickers() {
+    var startRange = document.getElementById("start").value;
+    var endRange = document.getElementById("end").value;
+
+    return {
+        startRange, endRange
+    };
 }
 
 addCountyFunction('onclick', changeColorOfCounty);

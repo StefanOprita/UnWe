@@ -1,16 +1,16 @@
-var MyLineChart = function(ctx, colors) {
+var MyLineChart = function(ctx, colors, labels) {
     var chart = initChart(ctx);
     var nrOfDatasets = 0;
     // var colors = [];
 
-    addLine("# of nrs", [8, 9, 3, 5, 2, 3]);
+    //addLine("# of nrs", [8, 9, 3, 5, 2, 3]);
 
 
     function initChart(ctx) {
         let chart = new Chart(ctx, {
             type: 'line',
             data: {
-                labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+                labels: labels,
             },
             options: {
                 responsive: true,
@@ -54,6 +54,7 @@ var MyLineChart = function(ctx, colors) {
     }
 
     function addLine(label, lineData) {
+       
         chart.data.datasets.push({
             label: label,
             data: lineData,
