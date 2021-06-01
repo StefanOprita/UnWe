@@ -40,17 +40,17 @@ function jsonFormat($resultArray, $categs)
     if (in_array('compensation', $categs, false) || $categs == []) {
         $comp = [];
         $comp['compensated'] =  $resultArray['indemnizati'];
-        $comp['non-compensated'] =  $resultArray['neindemnizati'];
+        $comp['nonCompensated'] =  $resultArray['neindemnizati'];
         $toAdd['compensation'] = $comp;
     }
 
     if (in_array('education', $categs, false) || $categs == []) {
         $educ = [];
-        $educ['no education'] = $resultArray['fara_studii'];
+        $educ['noEducation'] = $resultArray['fara_studii'];
         $educ['primary'] = $resultArray['invatamant_primar'];
         $educ['middleschool'] = $resultArray['invatamant_gimnazial'];
         $educ['highschool'] = $resultArray['invatamant_liceal'];
-        $educ['post-highschool'] = $resultArray['invatamant_post'];
+        $educ['postHighschool'] = $resultArray['invatamant_post'];
         $educ['professional'] = $resultArray['invatamant_profesional'];
         $educ['bachelors'] = $resultArray['invatamant_universitar'];
         $toAdd['education'] = $educ;
@@ -84,12 +84,12 @@ function jsonFormat($resultArray, $categs)
 
     if (in_array('age', $categs, false) || $categs == []) {
         $ages = [];
-        $ages['<25'] = $resultArray['sub_25'];
-        $ages['25-29'] = $resultArray['25_29'];
-        $ages['30-39'] = $resultArray['30_39'];
-        $ages['40-49'] = $resultArray['40_49'];
-        $ages['50-55'] = $resultArray['50_55'];
-        $ages['>55'] = $resultArray['peste_55'];
+        $ages['lesser25'] = $resultArray['sub_25'];
+        $ages['from25to29'] = $resultArray['25_29'];
+        $ages['from30to39'] = $resultArray['30_39'];
+        $ages['from40to49'] = $resultArray['40_49'];
+        $ages['from50to55'] = $resultArray['50_55'];
+        $ages['greater55'] = $resultArray['peste_55'];
         $toAdd['age'] = $ages;
     }
 
@@ -279,6 +279,24 @@ function advancedQuery($params, $queryParams, $body, $headers)
     //     exit;
     // }
 
+    // print_r($countyList);
+
+    $query = new Query();
+
+    for ($i = 0; $i < count($countyList); $i++) {
+        $countyName = Query::validateCounty($countyList[$i]);
+        // print_r($i);
+        $query->addCounty($countyName);
+    }
+
+    if ($endYear == 2021)
+        $query->setEndYearAndMonth($endYear, 2);
+    else
+        $query->setEndYearAndMonth($endYear, 12);
+
+    $resultArray = $query->executeQuery();
+    // print_r(json_encode($resultArray));
+
     $grandArray = array();
     for ($i = $startYear; $i <= $endYear; $i++) {
         $year = [];
@@ -288,14 +306,7 @@ function advancedQuery($params, $queryParams, $body, $headers)
                 $year['month'] = $j;
                 $countries = [];
                 for ($k = 0; $k < count($countyList); $k++) {
-                    $countyName = Query::validateCounty($countyList[$k]);
-                    $query = new Query();
-                    $query->addCounty($countyName);
-                    $query->setStartYearAndMonth($i, $j);
-                    $query->setEndYearAndMonth($i, $j);
-                    $resultArray = $query->executeQuery();
-
-                    $countries[Query::getIdCounty($countyName)] = jsonFormat($resultArray[0], $categs);
+                    $countries[Query::getIdCounty($countyList[$k])] = jsonFormat($resultArray[0], $categs);
                 }
                 $year['countries'] = $countries;
                 array_push($grandArray, $year);
@@ -305,12 +316,6 @@ function advancedQuery($params, $queryParams, $body, $headers)
                 $year['month'] = $j;
                 $countries = [];
                 for ($k = 0; $k < count($countyList); $k++) {
-                    $countyName = Query::validateCounty($countyList[$k]);
-                    $query = new Query();
-                    $query->addCounty($countyName);
-                    $query->setStartYearAndMonth($i, $j);
-                    $query->setEndYearAndMonth($i, $j);
-                    $resultArray = $query->executeQuery();
 
                     $countries[Query::getIdCounty($countyName)] = jsonFormat($resultArray[0], $categs);
                 }
