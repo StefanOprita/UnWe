@@ -316,60 +316,65 @@ function advancedQuery($params, $queryParams, $body, $headers)
     $copyEnd = $endMonth;
     $copyStart = $startMonth;
     $grandArray = array();
-    for ($i = $startYear; $i <= $endYear; $i++) {
-        $counter = 0;
-        $year = [];
-        $year['year'] = $i;
-        if ($i != 2021) {
-            if ($endYear > $i) {
-                $endMonth = 12;
-            } else {
-                $endMonth = $copyEnd;
-            }
-
-            if ($startYear != $i) {
-                $startMonth = 1;
-            } else {
-                $startMonth = $copyStart;
-            }
-
-            for ($j = $startMonth; $j <= $endMonth; $j++) {
-                $year['month'] = $j;
-                $counties = [];
-                for ($k = 0; $k < count($countyList); $k++) {
-                    $counties[strtolower(Query::getIdCounty(Query::validateCounty($countyList[$k])))] = jsonFormat($resultArray[$counter], $categs);
-                    $counter = $counter + 1;
+    if ($startYear > $endYear) {
+        echo "ceva";
+    } else {
+        for ($i = $startYear; $i <= $endYear; $i++) {
+            $counter = 0;
+            $year = [];
+            $year['year'] = $i;
+            if ($i != 2021) {
+                if ($endYear > $i) {
+                    $endMonth = 12;
+                } else {
+                    $endMonth = $copyEnd;
                 }
-                $year['counties'] = $counties;
-                array_push($grandArray, $year);
 
-                // print_r(json_encode($counties));
-            }
-        } else {
-            if ($endYear > $i) {
-                $endMonth = 2;
-            } else {
-                $endMonth = $copyEnd;
-            }
-
-            if ($startYear != $i) {
-                $startMonth = 1;
-            } else {
-                $startMonth = $copyStart;
-            }
-            for ($j = $startMonth; $j <= $endMonth; $j++) {
-                $year['month'] = $j;
-                $counties = [];
-                for ($k = 0; $k < count($countyList); $k++) {
-                    $counties[strtolower(Query::getIdCounty(Query::validateCounty($countyList[$k])))] = jsonFormat($resultArray[$counter], $categs);
-                    $counter = $counter + 1;
+                if ($startYear != $i) {
+                    $startMonth = 1;
+                } else {
+                    $startMonth = $copyStart;
                 }
-                $year['counties'] = $counties;
-                // print_r($counties);
-                array_push($grandArray, $year);
+
+                for ($j = $startMonth; $j <= $endMonth; $j++) {
+                    $year['month'] = $j;
+                    $counties = [];
+                    for ($k = 0; $k < count($countyList); $k++) {
+                        $counties[strtolower(Query::getIdCounty(Query::validateCounty($countyList[$k])))] = jsonFormat($resultArray[$counter], $categs);
+                        $counter = $counter + 1;
+                    }
+                    $year['counties'] = $counties;
+                    array_push($grandArray, $year);
+
+                    // print_r(json_encode($counties));
+                }
+            } else {
+                if ($endYear > $i) {
+                    $endMonth = 2;
+                } else {
+                    $endMonth = $copyEnd;
+                }
+
+                if ($startYear != $i) {
+                    $startMonth = 1;
+                } else {
+                    $startMonth = $copyStart;
+                }
+                for ($j = $startMonth; $j <= $endMonth; $j++) {
+                    $year['month'] = $j;
+                    $counties = [];
+                    for ($k = 0; $k < count($countyList); $k++) {
+                        $counties[strtolower(Query::getIdCounty(Query::validateCounty($countyList[$k])))] = jsonFormat($resultArray[$counter], $categs);
+                        $counter = $counter + 1;
+                    }
+                    $year['counties'] = $counties;
+                    // print_r($counties);
+                    array_push($grandArray, $year);
+                }
             }
         }
     }
+
 
     header("Content-Type: application/json");
     http_response_code(200);
