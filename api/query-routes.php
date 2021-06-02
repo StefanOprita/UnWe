@@ -234,7 +234,7 @@ function queryDatabaseMonth($params, $queryParams, $body, $headers)
     $jsonFinal = array();
     array_push($jsonFinal, jsonFormat($resultArray[0], $categs));
 
-    
+
     echo json_encode($jsonFinal);
 }
 
@@ -267,6 +267,21 @@ function advancedQuery($params, $queryParams, $body, $headers)
         else
             $endYear = 2021;
 
+        if (array_key_exists('startMonth', $queryParams))
+            $startMonth = $queryParams['startMonth'];
+        else
+            $startMonth = 1;
+
+        if (array_key_exists('endMonth', $queryParams))
+            $endMonth = $queryParams['endMonth'];
+        else {
+            if ($endYear == 2021)
+                $endMonth = 2;
+            else
+                $endMonth = 12;
+        }
+
+
         if (array_key_exists('categories', $queryParams))
             $categs = explode('+', $queryParams['categories']);
         else
@@ -289,12 +304,8 @@ function advancedQuery($params, $queryParams, $body, $headers)
         $query->addCounty($countyName);
     }
 
-    $query->setStartYearAndMonth($startYear, 1);
-
-    if ($endYear == 2021)
-        $query->setEndYearAndMonth($endYear, 2);
-    else
-        $query->setEndYearAndMonth($endYear, 12);
+    $query->setStartYearAndMonth($startYear, $startMonth);
+    $query->setEndYearAndMonth($endYear, $endMonth);
 
     $resultArray = $query->executeQuery();
     // print_r($resultArray[0]);
@@ -302,14 +313,27 @@ function advancedQuery($params, $queryParams, $body, $headers)
     // print_r($resultArray[2]);
     // print_r($resultArray[3]);
 
-
+    $copyEnd = $endMonth;
+    $copyStart = $startMonth;
     $grandArray = array();
     for ($i = $startYear; $i <= $endYear; $i++) {
         $counter = 0;
         $year = [];
         $year['year'] = $i;
         if ($i != 2021) {
-            for ($j = 1; $j <= 12; $j++) {
+            if ($endYear > $i) {
+                $endMonth = 12;
+            } else {
+                $endMonth = $copyEnd;
+            }
+
+            if ($startYear != $i) {
+                $startMonth = 1;
+            } else {
+                $startMonth = $copyStart;
+            }
+
+            for ($j = $startMonth; $j <= $endMonth; $j++) {
                 $year['month'] = $j;
                 $counties = [];
                 for ($k = 0; $k < count($countyList); $k++) {
@@ -322,7 +346,18 @@ function advancedQuery($params, $queryParams, $body, $headers)
                 // print_r(json_encode($counties));
             }
         } else {
-            for ($j = 1; $j <= 2; $j++) {
+            if ($endYear > $i) {
+                $endMonth = 2;
+            } else {
+                $endMonth = $copyEnd;
+            }
+
+            if ($startYear != $i) {
+                $startMonth = 1;
+            } else {
+                $startMonth = $copyStart;
+            }
+            for ($j = $startMonth; $j <= $endMonth; $j++) {
                 $year['month'] = $j;
                 $counties = [];
                 for ($k = 0; $k < count($countyList); $k++) {
