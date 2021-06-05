@@ -8,8 +8,6 @@
     <title>UnWe</title>
     <link rel="shortcut icon" href="../../../public/unwe.ico">
 
-    <link rel="stylesheet" href="../../../public/style.css">
-
 </head>
 
 <body style="background-color: black;">
@@ -120,6 +118,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="../../../public/style.css">
+
 
     <script src="https://momentjs.com/downloads/moment.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
