@@ -1,16 +1,15 @@
-var MyLineChart = function(ctx, colors, labels) {
+var MyPieChart = function(ctx, colors) {
     var chart = initChart(ctx);
-    var nrOfDatasets = 0;
     // var colors = [];
 
-    //addLine("# of nrs", [8, 9, 3, 5, 2, 3]);
+    addCircle("# of nrs", [12, 19, 3, 5, 2, 3], colors);
 
 
     function initChart(ctx) {
         let chart = new Chart(ctx, {
-            type: 'line',
+            type: 'pie',
             data: {
-                labels: labels,
+                labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
             },
             options: {
                 responsive: true,
@@ -19,16 +18,30 @@ var MyLineChart = function(ctx, colors, labels) {
                     duration: 400
                 },
                 scales: {
-                    yAxes: [{
+                    xAxes: [{
+                        gridLines: {
+                            display: false
+                        },
                         ticks: {
-                            beginAtZero: true
+                            display: false
+                        }
+                    }],
+                    yAxes: [{
+                        gridLines: {
+                            display: false
+                        },
+                        ticks: {
+                            display: false
                         }
                     }]
+                },
+                hover: {
+                    animationDuration: 200
                 }
             }
         });
-        // chart.canvas.parentNode.style.width = '100vw';
-        // chart.canvas.parentNode.style.height = '100vh';
+        chart.canvas.parentNode.style.width = '100vw';
+        chart.canvas.parentNode.style.height = '100vh';
 
         return chart;
     }
@@ -53,38 +66,42 @@ var MyLineChart = function(ctx, colors, labels) {
         chart.update();
     }
 
-    function addLine(label, lineData) {
-       
+    function addLabel(label) {
+        chart.data.labels.push(label);
+        chart.update();
+    }
+
+    function addCircle(label, lineData, colors) {
         chart.data.datasets.push({
             label: label,
             data: lineData,
-            backgroundColor: colors[nrOfDatasets],
-            borderColor: colors[nrOfDatasets],
+            backgroundColor: colors,
+            hoverBackgroundColor: Array.from(colors, (color) => color + '88'),
             pointRadius: 5,
             lineTension: .3,
             fill: false,
-            borderWidth: 3
+            borderWidth: 0
         });
 
         chart.update();
-        nrOfDatasets++;
     }
 
-    function addColumn(label, columnData) {
+    function addSlice(label, sliceData) {
         chart.data.labels.push(label);
         chart.data.datasets.forEach((dataset, i) => {
-            dataset.data.push(columnData[i]);
+            dataset.data.push(sliceData[i]);
         });
 
         chart.update();
     }
 
-    function removeLine(index) {
+    function removeCircle(index) {
         chart.data.datasets.splice(index, 1);
         chart.update();
+
     }
 
-    function removeColumn(index) { // TODO
+    function removeSlice(index) { // TODO
         chart.data.labels.splice(index, 1);
         chart.data.datasets.forEach((dataset) => {
             dataset.data.splice(index, 1);
@@ -97,11 +114,11 @@ var MyLineChart = function(ctx, colors, labels) {
         setSize: setSize,
         setLabels: setLabels,
         setGridColor: setGridColor,
-        addLine: addLine,
-        addColumn: addColumn,
-        removeLine: removeLine,
-        removeColumn: removeColumn,
-
+        addLabel: addLabel,
+        addCircle: addCircle,
+        addSlice: addSlice,
+        removeCircle: removeCircle,
+        removeSlice: removeSlice,
 
         getChart: () => chart
     }

@@ -12,11 +12,11 @@ var CountyOnMouseEnterFunctions = new Array;
 var CountyOnMouseLeaveFunctions = new Array;
 
 
-//variabila care are lunile anului 
+//variabila care are lunile anului
 
-var monthNames = ["Jan", "Feb", "Mar", 
-                  "Apr", "May", "June", 
-                  "July", "Aug", "Sept", 
+var monthNames = ["Jan", "Feb", "Mar",
+                  "Apr", "May", "June",
+                  "July", "Aug", "Sept",
                   "Oct", "Nov", "Dec"];
 
 console.log(monthNames);
@@ -50,6 +50,14 @@ var chart;
 
 let availableCountyColors = countyColors;
 
+window.addEventListener('DOMContentLoaded', (event) => {
+    setUX();
+    setAnimation();
+    initializeMaps();
+    setSearchCountyInput();
+    setCharts();
+});
+
 function setTheme(themeName) {
     localStorage.setItem('theme', themeName);
     document.documentElement.className = themeName;
@@ -80,15 +88,6 @@ function toggleTheme() {
     }
 }
 setTheme(THEME_DARK);
-
-window.addEventListener('DOMContentLoaded', (event) => {
-    setUX();
-    setAnimation();
-    initializeMaps();
-    setSearchCountyInput();
-});
-
-
 
 function setSearchCountyInput() {
     var searchBox = document.getElementsByClassName('search')[0];
@@ -263,8 +262,13 @@ function setChart() {
                 if(buttons[i] == button) {
                     buttons[i].classList.add('item--selected');
 
-                    chart = (i == 0 ? MyLineChart(ctx, MAIN_COLORS) : i == 1 ? MyBarChart(ctx, MAIN_COLORS) : MyPieChart(ctx, MAIN_COLORS))
+                    if(i == 0) chart = MyLineChart(ctx, MAIN_COLORS);
+                    else if(i == 1) chart = MyBarChart(ctx, MAIN_COLORS);
+                    else if(i == 2) chart = MyPieChart(ctx, MAIN_COLORS);
+
+                    // chart = (i == 0 ? MyLineChart(ctx, MAIN_COLORS) : i == 1 ? MyBarChart(ctx, MAIN_COLORS) : MyPieChart(ctx, MAIN_COLORS))
                     chart.setGridColor(((theme == THEME_DARK ? lightGridColor : darkGridColor) + '44'));
+                    
                 } else {
                     buttons[i].classList.remove('item--selected');
                 }
@@ -448,13 +452,13 @@ async function addCountyToLineChart(countyId) {
     var endYear = parseInt(range.endRange.split("-")[0]);
     var endMonth = parseInt(range.endRange.split('-')[1]);
 
-    var res = await fetch("/api/query?counties=" + countyId + 
-                          "&startYear=" + startYear + 
-                          "&startMonth=" + startMonth + 
-                          "&endYear=" + endYear + 
+    var res = await fetch("/api/query?counties=" + countyId +
+                          "&startYear=" + startYear +
+                          "&startMonth=" + startMonth +
+                          "&endYear=" + endYear +
                           "&endMonth=" + endMonth);
 
-    
+
     var json = await res.json();
 
     console.log("lungimea e: " + json.length);
@@ -468,10 +472,10 @@ async function addCountyToLineChart(countyId) {
 
     //mergem prin fiecare an rezultat
     for(var i = 0 ; i < json.length; ++i) {
-        
+
         var countyInfo = json[i].counties[lowerId];
 
-        //aici trebuie sa vina ceva logica mai complicata, sa se uite la 
+        //aici trebuie sa vina ceva logica mai complicata, sa se uite la
         //optiunile alese de utilizator... dar momentan afisez doar totalul
 
         lineData.push(countyInfo.total);
@@ -480,7 +484,7 @@ async function addCountyToLineChart(countyId) {
     //console.log("Test " + json[0].countries[upperId].name);
 
     chart.addLine(countyId, lineData);
-    
+
 }
 
 
@@ -497,7 +501,7 @@ function removeCountyFromList(countyId) {
             console.log(id);
 
             if(id == countyId) {
-          
+
                 element.style.marginRight = '-' + element.offsetWidth + 'px';
                 element.style.opacity = 0;
 
@@ -506,10 +510,10 @@ function removeCountyFromList(countyId) {
                     countiesBar.removeChild(element);
 
                 }, 250);
-                
+
                 var indexToRemove = 0;
 
-             
+
 
                 listOfSelectedCountys = listOfSelectedCountys.filter(
                     function(value, index, arr) {
@@ -517,7 +521,7 @@ function removeCountyFromList(countyId) {
                         return value != countyId;
                     }
                 );
-                
+
                 console.log("removing index " + indexToRemove);
                 chart.removeLine(indexToRemove);
 
