@@ -110,6 +110,12 @@ var MyLineChart = function(ctx, colors, labels) {
         chart.update();
     }
 
+    function removeLines() {
+        chart.data.datasets = [];
+        chart.update();
+        nrOfDatasets = 0;
+    }
+
     return {
         setSize: setSize,
         setLabels: setLabels,
@@ -122,6 +128,7 @@ var MyLineChart = function(ctx, colors, labels) {
         setColumns: setColumns,
         removeLine: removeLine,
         removeColumn: removeColumn,
+        removeLines: removeLines,
 
         getChart: () => chart
     }

@@ -110,6 +110,12 @@ var MyBarChart = function(ctx, colors) {
         chart.update();
     }
 
+    function removeLines() {
+        chart.data.datasets = [];
+        chart.update();
+        nrOfDatasets = 0;
+    }
+
     return {
         setSize: setSize,
         setLabels: setLabels,
@@ -122,6 +128,7 @@ var MyBarChart = function(ctx, colors) {
         setColumns: setColumns,
         removeLine: removeLine,
         removeColumn: removeColumn,
+        removeLines: removeLines,
 
 
         getChart: () => chart
