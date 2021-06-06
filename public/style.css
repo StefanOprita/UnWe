@@ -551,10 +551,11 @@ html, body {
     position: relative;
     display: flex;
     width: 80vw;
-    height: 60vh;
+    height: 30em;
     margin-top: 1.2em;
-    margin-left: auto;
-    margin-right: auto; }
+    margin-right: auto;
+    margin-bottom: 3em;
+    margin-left: auto; }
     @media (max-width: 1200px) {
       .statistics-container .chart-container {
         flex-direction: column;
@@ -572,14 +573,18 @@ html, body {
       @media (max-width: 1200px) {
         .statistics-container .chart-container .chart .chartCanvas {
           height: 40vh !important; } }
-    .statistics-container .chart-container .chart-options {
+    .statistics-container .chart-container .chart-settings-contianer {
       width: 25%;
       height: 100%;
       padding-left: 10px; }
+      .statistics-container .chart-container .chart-settings-contianer .chart-setting.hidden {
+        height: 0;
+        width: 0;
+        opacity: 0; }
       @media (max-width: 1200px) {
-        .statistics-container .chart-container .chart-options {
+        .statistics-container .chart-container .chart-settings-contianer {
           width: 100%; } }
-      .statistics-container .chart-container .chart-options .download-options {
+      .statistics-container .chart-container .chart-settings-contianer .download-options {
         position: relative;
         margin-top: 20px;
         padding-left: 5px;
@@ -588,28 +593,28 @@ html, body {
         font-weight: 500;
         color: var(--color-on-surface); }
         @media (max-width: 700px) {
-          .statistics-container .chart-container .chart-options .download-options {
+          .statistics-container .chart-container .chart-settings-contianer .download-options {
             font-size: 1.2em; } }
-        .statistics-container .chart-container .chart-options .download-options .download {
+        .statistics-container .chart-container .chart-settings-contianer .download-options .download {
           transition: .25s; }
-        .statistics-container .chart-container .chart-options .download-options .download:hover {
+        .statistics-container .chart-container .chart-settings-contianer .download-options .download:hover {
           cursor: pointer;
           color: var(--color-primary);
           transition: .25s; }
-        .statistics-container .chart-container .chart-options .download-options .download:hover .material-icons {
+        .statistics-container .chart-container .chart-settings-contianer .download-options .download:hover .material-icons {
           color: var(--color-primary); }
-        .statistics-container .chart-container .chart-options .download-options .option {
+        .statistics-container .chart-container .chart-settings-contianer .download-options .option {
           color: var(--color-on-surface-variant);
           pointer-events: auto; }
-          .statistics-container .chart-container .chart-options .download-options .option:hover {
+          .statistics-container .chart-container .chart-settings-contianer .download-options .option:hover {
             cursor: pointer;
             color: var(--color-on-surface); }
-          .statistics-container .chart-container .chart-options .download-options .option--selected {
+          .statistics-container .chart-container .chart-settings-contianer .download-options .option--selected {
             color: var(--color-primary);
             pointer-events: none; }
-            .statistics-container .chart-container .chart-options .download-options .option--selected:hover {
+            .statistics-container .chart-container .chart-settings-contianer .download-options .option--selected:hover {
               color: var(--color-primary); }
-        .statistics-container .chart-container .chart-options .download-options .material-icons {
+        .statistics-container .chart-container .chart-settings-contianer .download-options .material-icons {
           position: absolute;
           top: 0;
           bottom: 0;
@@ -617,14 +622,14 @@ html, body {
           padding-top: 0.1em;
           text-align: center;
           transition: .25s; }
-          .statistics-container .chart-container .chart-options .download-options .material-icons--hover {
+          .statistics-container .chart-container .chart-settings-contianer .download-options .material-icons--hover {
             color: var(--color-primary); }
-      .statistics-container .chart-container .chart-options .category-selector {
+      .statistics-container .chart-container .chart-settings-contianer .category-selector {
         position: relative;
         width: 14em;
         height: 1.8em;
         margin-top: 20px; }
-        .statistics-container .chart-container .chart-options .category-selector .top {
+        .statistics-container .chart-container .chart-settings-contianer .category-selector .top {
           display: flex;
           justify-content: space-between;
           width: 100%;
@@ -637,17 +642,17 @@ html, body {
           color: var(--color-on-surface);
           transition: .25s; }
           @media (max-width: 700px) {
-            .statistics-container .chart-container .chart-options .category-selector .top {
+            .statistics-container .chart-container .chart-settings-contianer .category-selector .top {
               font-size: 1.2em; } }
-          .statistics-container .chart-container .chart-options .category-selector .top:hover {
+          .statistics-container .chart-container .chart-settings-contianer .category-selector .top:hover {
             cursor: pointer;
             color: var(--color-primary); }
-          .statistics-container .chart-container .chart-options .category-selector .top .material-icons {
+          .statistics-container .chart-container .chart-settings-contianer .category-selector .top .material-icons {
             font-size: 1.34em; }
             @media (max-width: 700px) {
-              .statistics-container .chart-container .chart-options .category-selector .top .material-icons {
+              .statistics-container .chart-container .chart-settings-contianer .category-selector .top .material-icons {
                 font-size: 1.2em; } }
-        .statistics-container .chart-container .chart-options .category-selector .options-list {
+        .statistics-container .chart-container .chart-settings-contianer .category-selector .options-list {
           position: absolute;
           display: flex;
           flex-direction: column;
@@ -660,16 +665,16 @@ html, body {
           overflow: hidden;
           z-index: 1;
           transition: .25s; }
-          .statistics-container .chart-container .chart-options .category-selector .options-list--opened {
+          .statistics-container .chart-container .chart-settings-contianer .category-selector .options-list--opened {
             height: 12em;
             border-bottom: transparent; }
-        .statistics-container .chart-container .chart-options .category-selector::-webkit-scrollbar {
+        .statistics-container .chart-container .chart-settings-contianer .category-selector::-webkit-scrollbar {
           width: 0; }
-        .statistics-container .chart-container .chart-options .category-selector::-webkit-scrollbar-thumb {
+        .statistics-container .chart-container .chart-settings-contianer .category-selector::-webkit-scrollbar-thumb {
           background-color: transparent; }
-        .statistics-container .chart-container .chart-options .category-selector::-webkit-scrollbar-thumb:hover {
+        .statistics-container .chart-container .chart-settings-contianer .category-selector::-webkit-scrollbar-thumb:hover {
           background-color: transparent; }
-        .statistics-container .chart-container .chart-options .category-selector .option {
+        .statistics-container .chart-container .chart-settings-contianer .category-selector .option {
           margin-bottom: 12px;
           padding: 4px 0 2px 5px;
           font-family: 'Ubuntu';
@@ -679,17 +684,17 @@ html, body {
           border-left: 2px solid var(--color-primary);
           box-sizing: border-box; }
           @media (max-width: 700px) {
-            .statistics-container .chart-container .chart-options .category-selector .option {
+            .statistics-container .chart-container .chart-settings-contianer .category-selector .option {
               font-size: 1.08em; } }
-          .statistics-container .chart-container .chart-options .category-selector .option:hover {
+          .statistics-container .chart-container .chart-settings-contianer .category-selector .option:hover {
             cursor: pointer;
             color: var(--color-on-surface); }
-      .statistics-container .chart-container .chart-options .categories-list {
+      .statistics-container .chart-container .chart-settings-contianer .categories-list {
         display: flex;
         flex-direction: column;
         margin-top: 20px;
         padding-left: 5px; }
-        .statistics-container .chart-container .chart-options .categories-list .label {
+        .statistics-container .chart-container .chart-settings-contianer .categories-list .label {
           position: relative;
           margin-bottom: .65em;
           font-family: 'Ubuntu';
@@ -697,14 +702,14 @@ html, body {
           font-weight: 500;
           color: var(--color-on-surface); }
           @media (max-width: 700px) {
-            .statistics-container .chart-container .chart-options .categories-list .label {
+            .statistics-container .chart-container .chart-settings-contianer .categories-list .label {
               font-size: 1.08em; } }
-          .statistics-container .chart-container .chart-options .categories-list .label--unchecked {
+          .statistics-container .chart-container .chart-settings-contianer .categories-list .label--unchecked {
             color: var(--color-on-surface-variant); }
-          .statistics-container .chart-container .chart-options .categories-list .label:hover {
+          .statistics-container .chart-container .chart-settings-contianer .categories-list .label:hover {
             cursor: pointer;
             color: var(--color-on-surface); }
-          .statistics-container .chart-container .chart-options .categories-list .label input {
+          .statistics-container .chart-container .chart-settings-contianer .categories-list .label input {
             position: absolute;
             -webkit-appearance: none;
             width: 15px;
@@ -714,9 +719,9 @@ html, body {
             background-color: transparent;
             outline: none;
             transition: .25s; }
-            .statistics-container .chart-container .chart-options .categories-list .label input:checked {
+            .statistics-container .chart-container .chart-settings-contianer .categories-list .label input:checked {
               background-color: var(--color-primary); }
-              .statistics-container .chart-container .chart-options .categories-list .label input:checked::after {
+              .statistics-container .chart-container .chart-settings-contianer .categories-list .label input:checked::after {
                 content: "🗙";
                 position: absolute;
                 width: 100%;
@@ -726,18 +731,18 @@ html, body {
                 text-align: center;
                 transform: translateY(-4px);
                 color: #EBEBEB; }
-          .statistics-container .chart-container .chart-options .categories-list .label span {
+          .statistics-container .chart-container .chart-settings-contianer .categories-list .label span {
             margin-left: 36px; }
-      .statistics-container .chart-container .chart-options .range-selector {
+      .statistics-container .chart-container .chart-settings-contianer .range-selector {
         display: flex;
         flex-direction: column;
         margin-top: 20px;
         padding-left: 5px; }
-        .statistics-container .chart-container .chart-options .range-selector .selector {
+        .statistics-container .chart-container .chart-settings-contianer .range-selector .selector {
           color: var(--color-on-surface); }
-          .statistics-container .chart-container .chart-options .range-selector .selector label {
+          .statistics-container .chart-container .chart-settings-contianer .range-selector .selector label {
             font-size: 1.34em; }
-          .statistics-container .chart-container .chart-options .range-selector .selector input {
+          .statistics-container .chart-container .chart-settings-contianer .range-selector .selector input {
             margin-top: 1em;
             padding: 5px;
             color: var(--color-on-surface);
@@ -745,16 +750,16 @@ html, body {
             border: 1px solid var(--color-primary);
             font-size: 1.24em;
             outline-width: 0; }
-            .statistics-container .chart-container .chart-options .range-selector .selector input:hover {
+            .statistics-container .chart-container .chart-settings-contianer .range-selector .selector input:hover {
               cursor: text; }
-            .statistics-container .chart-container .chart-options .range-selector .selector input:focus {
+            .statistics-container .chart-container .chart-settings-contianer .range-selector .selector input:focus {
               background-color: var(--color-on-surface-variant); }
-            .statistics-container .chart-container .chart-options .range-selector .selector input::-webkit-calendar-picker-indicator {
+            .statistics-container .chart-container .chart-settings-contianer .range-selector .selector input::-webkit-calendar-picker-indicator {
               filter: invert(0.5); }
-              .statistics-container .chart-container .chart-options .range-selector .selector input::-webkit-calendar-picker-indicator:hover {
+              .statistics-container .chart-container .chart-settings-contianer .range-selector .selector input::-webkit-calendar-picker-indicator:hover {
                 cursor: pointer;
                 filter: invert(0.8); }
-        .statistics-container .chart-container .chart-options .range-selector .line {
+        .statistics-container .chart-container .chart-settings-contianer .range-selector .line {
           width: 100%;
           height: 40px; }
     .statistics-container .chart-container .chart-type-container {

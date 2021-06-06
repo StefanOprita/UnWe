@@ -2,14 +2,14 @@ var MyPieChart = function(ctx, colors) {
     var chart = initChart(ctx);
     // var colors = [];
 
-    addCircle("# of nrs", [12, 19, 3, 5, 2, 3], colors);
+    // addCircle("# of nrs", [12, 19, 3, 5, 2, 3], colors);
 
 
     function initChart(ctx) {
         let chart = new Chart(ctx, {
             type: 'pie',
             data: {
-                labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+                // labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
             },
             options: {
                 responsive: true,
@@ -95,6 +95,51 @@ var MyPieChart = function(ctx, colors) {
         chart.update();
     }
 
+    function addLine(label, lineData) {
+        chart.data.datasets.push({
+            label: label,
+            data: lineData,
+            // backgroundColor: colors[nrOfDatasets],
+            // borderColor: colors[nrOfDatasets],
+            backgroundColor: colors,
+            borderColor: Array.from(colors, (color) => color + '88'),
+            pointRadius: 5,
+            lineTension: .3,
+            fill: false,
+            borderWidth: 3
+        });
+
+        chart.update();
+        // nrOfDatasets++;
+    }
+
+    function addColumn(label, columnData=[]) {
+        chart.data.labels.push(label);
+        // chart.data.datasets.forEach((dataset, i) => {
+        //     dataset.data.push(columnData[i]);
+        // });
+
+        chart.update();
+    }
+
+    function getLines() {
+        return chart.data.datasets;
+    }
+
+    function getColumns() {
+        return chart.data.labels;
+    }
+
+    function setLines(lines) {
+        chart.data.datasets = lines;
+        chart.update();
+    }
+
+    function setColumns(columns) {
+        chart.data.labels = columns;
+        chart.update();
+    }
+
     function removeCircle(index) {
         chart.data.datasets.splice(index, 1);
         chart.update();
@@ -117,6 +162,12 @@ var MyPieChart = function(ctx, colors) {
         addLabel: addLabel,
         addCircle: addCircle,
         addSlice: addSlice,
+        addLine: addLine,
+        addColumn: addColumn,
+        getLines: getLines,
+        getColumns: getColumns,
+        setLines: setLines,
+        setColumns: setColumns,
         removeCircle: removeCircle,
         removeSlice: removeSlice,
 

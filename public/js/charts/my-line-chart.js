@@ -53,28 +53,46 @@ var MyLineChart = function(ctx, colors, labels) {
         chart.update();
     }
 
-    function addLine(label, lineData) {
+    function addLine(label, lineData=[]) {
         chart.data.datasets.push({
             label: label,
             data: lineData,
             backgroundColor: colors[nrOfDatasets],
             borderColor: colors[nrOfDatasets],
-            pointRadius: 5,
-            lineTension: .3,
+            pointRadius: 3,
+            lineTension: .4,
             fill: false,
-            borderWidth: 3
+            borderWidth: 2
         });
 
         chart.update();
         nrOfDatasets++;
     }
 
-    function addColumn(label, columnData) {
+    function addColumn(label, columnData=[]) {
         chart.data.labels.push(label);
-        chart.data.datasets.forEach((dataset, i) => {
-            dataset.data.push(columnData[i]);
-        });
+        // chart.data.datasets.forEach((dataset, i) => {
+        //     dataset.data.push(columnData[i]);
+        // });
 
+        chart.update();
+    }
+
+    function getLines() {
+        return chart.data.datasets;
+    }
+
+    function getColumns() {
+        return chart.data.labels;
+    }
+
+    function setLines(lines) {
+        chart.data.datasets = lines;
+        chart.update();
+    }
+
+    function setColumns(columns) {
+        chart.data.labels = columns;
         chart.update();
     }
 
@@ -98,6 +116,10 @@ var MyLineChart = function(ctx, colors, labels) {
         setGridColor: setGridColor,
         addLine: addLine,
         addColumn: addColumn,
+        getLines: getLines,
+        getColumns: getColumns,
+        setLines: setLines,
+        setColumns: setColumns,
         removeLine: removeLine,
         removeColumn: removeColumn,
 
