@@ -5,10 +5,12 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>UnWe</title>
+    <title>Unemployment in Romania</title>
+    <link rel="shortcut icon" href="../../../public/unwe.ico">
+
 </head>
 
-<body>
+<body style="background-color: black;">
     <div class="statistics-container">
         <div class="background"></div>
         <img id="dot" src="../../../public/dot.svg" alt="">
@@ -54,12 +56,16 @@
         <div class="chart-container">
             <div class="chart collision-box">
                 <canvas class="chartCanvas"></canvas>
-                <!-- <canvas class="chartCanvas"></canvas> -->
-                <!-- <canvas class="chartCanvas"></canvas> -->
             </div>
 
-            <div class="chart-options">
-                <div class="download-options collision-box">
+            <div class="chart-settings-contianer">
+                <div class="aaa">
+
+                </div>
+                <div class="aaa">
+
+                </div>
+                <div class="download-options chart-setting collision-box">
                     <span class="download">Download</span>
                     <span class="option option--selected svg">svg</span>/
                     <span class="option csv">csv</span>/
@@ -67,7 +73,7 @@
                     <span class="material-icons">download</span>
                 </div>
 
-                <div class="category-selector collision-box">
+                <div class="category-selector chart-setting collision-box">
                     <div class="top">
                         <span class="text">Age</span>
                         <span class="material-icons">expand_more</span>
@@ -82,15 +88,15 @@
                     </div>
                 </div>
 
-                <div class="categories-list collision-box"></div>
+                <div class="categories-list chart-setting collision-box"></div>
 
                 <div class="range-selector collision-box">
-                    <div class="selector">
+                    <div class="selector selector-start chart-setting">
                         <label for="start">Start range:</label><br>
                         <input type="month" id="start" name="start" min="2000-01" value="2019-01">
                     </div>
                     <div class="line"></div>
-                    <div class="selector">
+                    <div class="selector selector-end chart-setting">
                         <label for="end">End range:</label><br>
                         <input type="month" id="end" name="end" min="2000-01" value="2021-05">
                     </div>
@@ -111,24 +117,28 @@
 
         </div>
     </div>
-
+    
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-
     <link rel="stylesheet" href="../../../public/style.css">
+
 
     <script src="https://momentjs.com/downloads/moment.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
     <script src="../../../public/js/info.js"></script>
+
+    <script src="../../../public/js/Category.js"></script>
+    <script src="../../../public/js/ChartData.js"></script>
     <script src="../../../public/js/script-statistics.js"></script>
+
     <script src="../../../public/js/dot.js"></script>
     <script src="../../../public/js/box.js"></script>
     <script src="../../../public/js/animation.js"></script>
-    <script src="../../../lab/my-line-chart.js"></script>
-    <script src="../../../lab/my-bar-chart.js"></script>
-    <script src="../../../lab/my-pie-chart.js"></script>
+    <script src="../../../public/js/charts/my-line-chart.js"></script>
+    <script src="../../../public/js/charts/my-bar-chart.js"></script>
+    <script src="../../../public/js/charts/my-pie-chart.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.22/pdfmake.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.min.js"></script>
