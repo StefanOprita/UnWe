@@ -25,17 +25,6 @@ var monthNames = ["Jan", "Feb", "Mar",
 //     '#000'
 // ];
 
-let countyColors = [
-    '#40db71', '#fc4a26', '#fcc726', '#8ce322', '#002e0c',
-    '#2e0800', '#67cfc8', '#6847a6', '#f7639c', '#50ad78',
-    '#2a2252', '#50ad50', '#f7825c', '#9bf244', '#ca3c25',
-    '#008148', '#ef8a17', '#a882dd', '#2d93ad', '#a62375',
-    '#7272ab', '#53b3cb', '#2191fb', '#b7b868', '#8fd694',
-    '#4f5d75', '#f5cd5f', '#bfc0c0', '#2d3142', '#6247aa',
-    '#a06cd5', '#ff88dc', '#91a6ff', '#c46590', '#bf3232',
-    '#c897ee', '#c24c61', '#c67ebf', '#da4473', '#ffd942',
-    '#2d4200', '#750d37', '#19aabd', '#ff666d'
-]
 
 var theme = THEME_DARK;
 // var darkGridColor = '#B0B2C3';
@@ -45,7 +34,8 @@ var lightGridColor = '#EBEBEB';
 var chart;
 var chartData;
 
-let availableCountyColors = countyColors;
+// let availableCountyColors = countyColors;
+let availableCountyColors = MAIN_COLORS;
 
 window.addEventListener('DOMContentLoaded', (event) => {
     setUX();
@@ -278,16 +268,12 @@ function changeChartTypeToLine(ctx) {
         el.addEventListener('click', chartData.category.singleItemCheckEvent);
     });
 
-    var columns = chart.getColumns();
-    var lines = chart.getLines();
     chart.getChart().destroy();
 
     chart = MyLineChart(ctx, MAIN_COLORS, chartData.timeLabels);
     chart.setGridColor(((theme == THEME_DARK ? lightGridColor : darkGridColor) + '22'));
-    chart.setLines(lines);
-    chart.setColumns(columns);
 
-    // chart = newChart;
+    updateChart();
 }
 
 function changeChartTypeToBar(ctx) {
@@ -297,8 +283,10 @@ function changeChartTypeToBar(ctx) {
 
     var endRangePicker = document.querySelectorAll('.chart-settings-contianer .chart-setting.selector-end')[0];
     endRangePicker.classList.add('hidden');
+    document.querySelectorAll('.range-selector #start')[0].max = '2021-02';
+
     var startRangePicker = document.querySelectorAll('.chart-settings-contianer .chart-setting.selector-start label')[0];
-    startRangePicker.innerText = 'Range:';
+    startRangePicker.innerText = 'Month:';
 
     var categoryOptions = document.querySelectorAll('.chart-settings-contianer .categories-list input');
     categoryOptions.forEach(el => {
@@ -306,14 +294,12 @@ function changeChartTypeToBar(ctx) {
         el.addEventListener('click', chartData.category.multipleItemCheckEvent);
     });
 
-    var columns = chart.getColumns();
-    var lines = chart.getLines();
     chart.getChart().destroy();
 
     chart = MyBarChart(ctx, MAIN_COLORS, chartData.countyLabels);
     chart.setGridColor(((theme == THEME_DARK ? lightGridColor : darkGridColor) + '22'));
-    chart.setLines(lines);
-    // chart.setColumns(columns);
+
+    updateChart();
 }
 
 function changeChartTypeToPie(ctx) {
@@ -323,8 +309,10 @@ function changeChartTypeToPie(ctx) {
 
     var endRangePicker = document.querySelectorAll('.chart-settings-contianer .chart-setting.selector-end')[0];
     endRangePicker.classList.add('hidden');
+    document.querySelectorAll('.range-selector #start')[0].max = '2021-02';
+
     var startRangePicker = document.querySelectorAll('.chart-settings-contianer .chart-setting.selector-start label')[0];
-    startRangePicker.innerText = 'Range:';
+    startRangePicker.innerText = 'Month:';
 
     var categoryOptions = document.querySelectorAll('.chart-settings-contianer .categories-list input');
     categoryOptions.forEach(el => {
@@ -332,18 +320,38 @@ function changeChartTypeToPie(ctx) {
         el.addEventListener('click', chartData.category.multipleItemCheckEvent);
     });
 
-    var columns = chart.getColumns();
-    var lines = chart.getLines();
     chart.getChart().destroy();
 
     chart = MyPieChart(ctx, MAIN_COLORS, chartData.timeLabels);
     chart.setGridColor(((theme == THEME_DARK ? lightGridColor : darkGridColor) + '22'));
-    chart.setLines(lines);
-    chart.setColumns(columns);
+
+    updateChart();
 }
 
 function updateChart() {
-    
+    if(chartData.type.localeCompare('line') == 0) {
+        let lines = chartData.getLines();
+        chart.removeLines();
+        chartData.countyLabels.forEach((label, i) => {
+            chart.addLine(label, lines[i]);
+        });
+        chart.setLabels(chartData.timeLabels);
+    } else if(chartData.type.localeCompare('bar') == 0) {
+        let bars = chartData.getBars();
+        chart.removeLines();
+        let data = chartData.category.getSelectedItems();
+        data.forEach((label, i) => {
+            chart.addLine(label, bars[i]);
+        });
+        chart.setLabels(chartData.countyLabels);
+    } else if(chartData.type.localeCompare('pie') == 0) {
+        let pies = chartData.getPies();
+        chart.removeLines();
+        chartData.countyLabels.forEach((label, i) => {
+            chart.addLine(label, pies[i]);
+        });
+        chart.setLabels(chartData.category.getSelectedItems());
+    }
 }
 
 
@@ -508,24 +516,22 @@ function addCountyToList(countyId) {
 }
 
 async function addCountyToLineChart(countyId) {
-    // var range = getRangePickers();
+    console.log("uhm, adaugam linie la chart, uwu");
+    console.log(countyId);
 
-    // var startYear = parseInt(range.startRange.split('-')[0]);
-    // var startMonth = parseInt(range.startRange.split('-')[1]);
     var startYear = chartData.rangeStartYear;
     var startMonth = chartData.rangeStartMonth;
 
-
-    // var endYear = parseInt(range.endRange.split("-")[0]);
-    // var endMonth = parseInt(range.endRange.split('-')[1]);
     var endYear = chartData.rangeEndYear;
     var endMonth = chartData.rangeEndMonth;
 
-    var res = await fetch("/api/query?counties=" + countyId +
-                          "&startYear=" + startYear +
-                          "&startMonth=" + startMonth +
-                          "&endYear=" + endYear +
-                          "&endMonth=" + endMonth);
+    var res = await fetch(
+        "/api/query?counties=" + countyId +
+        "&startYear=" + startYear +
+        "&startMonth=" + startMonth +
+        "&endYear=" + endYear +
+        "&endMonth=" + endMonth
+    );
 
 
     var json = await res.json();
@@ -535,29 +541,29 @@ async function addCountyToLineChart(countyId) {
     console.log(json);
 
     //fac asa pentru ca asa sunt puse momentan in json
-    var lowerId = countyId.toLowerCase();
+    // var lowerId = countyId.toLowerCase();
 
 
-    var lineData = [];
+    // var lineData = [];
 
     chartData.countyDataArray.push(json);
 
     updateChart();
 
     //mergem prin fiecare an rezultat
-    for(var i = 0 ; i < json.length; ++i) {
-
-        var countyInfo = json[i].counties[lowerId];
-
-        //aici trebuie sa vina ceva logica mai complicata, sa se uite la
-        //optiunile alese de utilizator... dar momentan afisez doar totalul
-
-        lineData.push(countyInfo.total);
-    }
-
-    //console.log("Test " + json[0].countries[upperId].name);
-
-    chart.addLine(countyId, lineData);
+    // for(var i = 0 ; i < json.length; ++i) {
+    //
+    //     var countyInfo = json[i].counties[lowerId];
+    //
+    //     //aici trebuie sa vina ceva logica mai complicata, sa se uite la
+    //     //optiunile alese de utilizator... dar momentan afisez doar totalul
+    //
+    //     lineData.push(countyInfo.total);
+    // }
+    //
+    // //console.log("Test " + json[0].countries[upperId].name);
+    //
+    // chart.addLine(countyId, lineData);
 
 
 
@@ -678,7 +684,8 @@ function changeColorOfCounty(element) {
 }
 
 function extractColor() {
-    var randomIndex = Math.floor(Math.random() * availableCountyColors.length);
+    // var randomIndex = Math.floor(Math.random() * availableCountyColors.length);
+    var randomIndex = 0;
     var color = availableCountyColors[randomIndex];
     availableCountyColors = availableCountyColors.filter(function(value, index, arr) {
         return index != randomIndex;
@@ -735,8 +742,10 @@ function setCategorySelector(e) {
         // box.checked = false;
         box.checked = i == 0;
         box.addEventListener('click', chartData.getItemClickedFunction());
+        box.addEventListener('click', () => updateChart());
     });
 
+    chartData.category.categoryLabel = text.innerText.toLowerCase();
     chartData.category.updateItems();
 
 
@@ -769,9 +778,12 @@ function setCategorySelector(e) {
                 // box.checked = false;
                 box.checked = i == 0;
                 box.addEventListener('click', chartData.getItemClickedFunction());
+                box.addEventListener('click', () => updateChart());
             });
 
+            chartData.category.categoryLabel = text.innerText.toLowerCase();
             chartData.category.updateItems();
+            updateChart();
         });
     }
 
@@ -800,16 +812,24 @@ function setDownloadType() {
 }
 
 function setRangePicker() {
+    var rangeStartInput = document.querySelectorAll('.range-selector #start')[0];
+    var rangeEndInput = document.querySelectorAll('.range-selector #end')[0];
 
-}
+    rangeStartInput.addEventListener('change', () => {
+        rangeEndInput.min = rangeStartInput.value;
+        if(chartData.type.localeCompare('line') == 0) {
+            chartData.setRangeStart(rangeStartInput.value);
+        } else {
+            chartData.setRange(rangeStartInput.value);
+        }
+        updateChart();
+    });
 
-function getRangePickers() {
-    var startRange = document.getElementById("start").value;
-    var endRange = document.getElementById("end").value;
-
-    return {
-        startRange, endRange
-    };
+    rangeEndInput.addEventListener('change', () => {
+        rangeStartInput.max = rangeEndInput.value;
+        chartData.setRangeEnd(rangeEndInput.value);
+        updateChart();
+    });
 }
 
 addCountyFunction('onclick', changeColorOfCounty);

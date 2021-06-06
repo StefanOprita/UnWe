@@ -93,12 +93,12 @@
                 <div class="range-selector collision-box">
                     <div class="selector selector-start chart-setting">
                         <label for="start">Start range:</label><br>
-                        <input type="month" id="start" name="start" min="2000-01" value="2019-01">
+                        <input type="month" id="start" name="start" min="2019-01" max="2021-02" value="2019-01">
                     </div>
                     <div class="line"></div>
                     <div class="selector selector-end chart-setting">
                         <label for="end">End range:</label><br>
-                        <input type="month" id="end" name="end" min="2000-01" value="2021-05">
+                        <input type="month" id="end" name="end" min="2019-01" max="2021-02" value="2021-02">
                     </div>
                 </div>
             </div>
@@ -117,7 +117,7 @@
 
         </div>
     </div>
-    
+
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;700&display=swap" rel="stylesheet">

@@ -102,11 +102,11 @@ var MyPieChart = function(ctx, colors) {
             // backgroundColor: colors[nrOfDatasets],
             // borderColor: colors[nrOfDatasets],
             backgroundColor: colors,
-            borderColor: Array.from(colors, (color) => color + '88'),
+            // borderColor: Array.from(colors, (color) => color + '88'),
             pointRadius: 5,
             lineTension: .3,
             fill: false,
-            borderWidth: 3
+            borderWidth: 2
         });
 
         chart.update();
@@ -155,6 +155,12 @@ var MyPieChart = function(ctx, colors) {
         chart.update();
     }
 
+    function removeLines() {
+        chart.data.datasets = [];
+        chart.update();
+        nrOfDatasets = 0;
+    }
+
     return {
         setSize: setSize,
         setLabels: setLabels,
@@ -170,6 +176,7 @@ var MyPieChart = function(ctx, colors) {
         setColumns: setColumns,
         removeCircle: removeCircle,
         removeSlice: removeSlice,
+        removeLines: removeLines,
 
         getChart: () => chart
     }

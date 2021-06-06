@@ -19,7 +19,7 @@ class ChartData {
 
     constructor() {
         this.category = new Category();
-        this.countyLabels = ['AA', 'BB', 'CC'];
+        // this.countyLabels = ['AA', 'BB', 'CC'];
     }
 
     createTimeLabels() {
@@ -46,6 +46,10 @@ class ChartData {
 
         this.rangeStartYear = newStartYear;
         this.rangeStartMonth = newStartMonth;
+
+        this.rangeYear = newStartYear;
+        this.rangeMonth = newStartMonth;
+
         if(this.rangeEndYear != 9999 && this.rangeEndMonth != 9999) this.createTimeLabels();
     }
 
@@ -71,6 +75,73 @@ class ChartData {
     getItemClickedFunction() {
         if(this.type.localeCompare('line') == 0) return this.category.singleItemCheckEvent;
         else return this.category.multipleItemCheckEvent;
+    }
+
+    getLines() {
+        var lines = [];
+        // index 0 is ian 2019
+        this.countyLabels.forEach((countyLabel, i) => {
+            let label = countyLabel.toLowerCase();
+
+            let line = [];
+            let county = this.countyDataArray[i];
+
+            // prin asta parcurg lunile
+            let startIndex = (this.rangeStartYear - 2019) * 12 + this.rangeStartMonth - 1;
+            let endIndex = (this.rangeEndYear - 2019) * 12 + this.rangeEndMonth - 1;
+            for(let i = startIndex; i <= endIndex; i++) {
+                let value = county[i].counties[label][this.category.categoryLabel][this.category.getSelectedItems()[0]];
+                line.push(value);
+            }
+            lines.push(line);
+        });
+        return lines;
+    }
+
+    getBars() {
+        var bars = [];
+        // o linie are sv - total, is - total, b - total
+        // a 2-a linie are sv - male, is - male, b - male
+        // liniile sunt nr_judete grupuri de bare
+        // un grup are bare pt total, male, female
+        this.category.getSelectedItems().forEach((label) => {
+            var barSet = [];
+
+            // prin asta parcurg judetele
+            let index = (this.rangeYear - 2019) * 12 + this.rangeMonth - 1;
+            this.countyDataArray.forEach((county, i) => {
+                let value = county[index].counties[Object.keys(county[index].counties)[0]][this.category.categoryLabel][label];
+                barSet.push(value);
+            });
+            bars.push(barSet);
+        });
+        return bars;
+    }
+
+    getPies() {
+        console.log('start here #################');
+        var pies = [];
+        // un pie are is - male 53%, female 47%
+        this.countyLabels.forEach((countyLabelUppercase, i) => {
+            let countyLabel = countyLabelUppercase.toLowerCase();
+
+            let pie = [];
+            let county = this.countyDataArray[i];
+
+            // prin asta parcurg item-urile din categorii
+            let index = (this.rangeYear - 2019) * 12 + this.rangeMonth - 1;
+            this.category.getSelectedItems().forEach((label) => {
+                console.log(countyLabel);
+                console.log(county[index]);
+                let value = county[index].counties[countyLabel][this.category.categoryLabel][label];
+                pie.push(value);
+            });
+            pies.push(pie);
+        });
+
+        console.log(pies);
+        console.log('end here #################');
+        return pies;
     }
 
 }
