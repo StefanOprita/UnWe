@@ -78,7 +78,7 @@ function jsonFormat($resultArray, $categs)
 
         $envir['urban'] = $urb;
         $envir['rural'] = $rur;
-        $toAdd['environment'] = $envir;
+        $toAdd['environment'] = $resultArray['total_rural'];
     }
 
 
