@@ -3,14 +3,14 @@ var MyBarChart = function(ctx, colors) {
     var nrOfDatasets = 0;
     // var colors = [];
 
-    addLine("# of nrs", [12, 19, 3, 5, 2, 3]);
+    // addLine("# of nrs", [12, 19, 3, 5, 2, 3]);
 
 
     function initChart(ctx) {
         let chart = new Chart(ctx, {
             type: 'bar',
             data: {
-                labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+                // labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
             },
             options: {
                 responsive: true,
@@ -71,10 +71,28 @@ var MyBarChart = function(ctx, colors) {
 
     function addColumn(label, columnData) {
         chart.data.labels.push(label);
-        chart.data.datasets.forEach((dataset, i) => {
-            dataset.data.push(columnData[i]);
-        });
+        // chart.data.datasets.forEach((dataset, i) => {
+        //     dataset.data.push(columnData[i]);
+        // });
 
+        chart.update();
+    }
+
+    function getLines() {
+        return chart.data.datasets;
+    }
+
+    function getColumns() {
+        return chart.data.labels;
+    }
+
+    function setLines(lines) {
+        chart.data.datasets = lines;
+        chart.update();
+    }
+
+    function setColumns(columns) {
+        chart.data.labels = columns;
         chart.update();
     }
 
@@ -98,6 +116,10 @@ var MyBarChart = function(ctx, colors) {
         setGridColor: setGridColor,
         addLine: addLine,
         addColumn: addColumn,
+        getLines: getLines,
+        getColumns: getColumns,
+        setLines: setLines,
+        setColumns: setColumns,
         removeLine: removeLine,
         removeColumn: removeColumn,
 

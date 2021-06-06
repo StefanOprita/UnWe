@@ -5,7 +5,7 @@ var countyIdtoPathMap = new Map();
 var countyIdtoNameMap = new Map();
 var countyNameToIdMap = new Map();
 var countyIdToColorMap = new Map();
-var listOfSelectedCountys = [];
+var listOfSelectedCounties = [];
 
 var CountyOnClickFunctions = new Array;
 var CountyOnMouseEnterFunctions = new Array;
@@ -13,14 +13,10 @@ var CountyOnMouseLeaveFunctions = new Array;
 
 
 //variabila care are lunile anului
-
 var monthNames = ["Jan", "Feb", "Mar",
                   "Apr", "May", "June",
                   "July", "Aug", "Sept",
                   "Oct", "Nov", "Dec"];
-
-console.log(monthNames);
-
 
 // let countyColors = [
 //     '#F44336', '#9C27B0', '#2196F3', '#009688', '#FFEB3B', '#795548',
@@ -47,6 +43,7 @@ var theme = THEME_DARK;
 var darkGridColor = '#1F1E25';
 var lightGridColor = '#EBEBEB';
 var chart;
+var chartData;
 
 let availableCountyColors = countyColors;
 
@@ -55,7 +52,6 @@ window.addEventListener('DOMContentLoaded', (event) => {
     setAnimation();
     initializeMaps();
     setSearchCountyInput();
-    setCharts();
 });
 
 function setTheme(themeName) {
@@ -65,14 +61,13 @@ function setTheme(themeName) {
     theme = themeName;
     Chart.defaults.global.defaultFontColor = (theme == THEME_DARK ? lightGridColor : darkGridColor);
     if(typeof chart !== 'undefined') {
-        chart.setGridColor(((theme == THEME_DARK ? lightGridColor : darkGridColor) + '44'));
+        chart.setGridColor(((theme == THEME_DARK ? lightGridColor : darkGridColor) + '22'));
         chart.getChart().update();
         // document.querySelectorAll('.range-selector .selector input::-webkit-calendar-picker-indicator').style.filter = (theme == THEME_DARK ? INVERT_DARK : INVERT_LIGHT);
     }
 
 }
 function toggleTheme() {
-    console.log('test theme change')
     if(localStorage.getItem('theme') === THEME_DARK) {
         setTheme(THEME_LIGHT);
         // document.getElementById('theme-icon').innerHTML = 'light_mode';
@@ -89,15 +84,6 @@ function toggleTheme() {
 }
 setTheme(THEME_DARK);
 
-function setSearchCountyInput() {
-    var searchBox = document.getElementsByClassName('search')[0];
-    searchBox.addEventListener('input', function(e) {
-        console.log(e.target.value);
-        searchInput = e.target.value;
-        initializeSearchItems();
-    })
-}
-
 function setUX() {
     setMenu();
     setThemeButton();
@@ -112,6 +98,14 @@ function setUX() {
     setRangePicker();
 
 
+}
+
+function setSearchCountyInput() {
+    var searchBox = document.getElementsByClassName('search')[0];
+    searchBox.addEventListener('input', function(e) {
+        searchInput = e.target.value;
+        initializeSearchItems();
+    })
 }
 
 function setAnimation() {
@@ -211,6 +205,15 @@ function setMap() {
 }
 
 function setChart() {
+    // line chart
+        // only one option from category, with a default one
+        // all time, evolution
+    // bar chart
+        // IS has 3 bars, male, female, total(or less than 3, on what is checked) and so on
+        // only one month is selected
+    // pie chart
+        // it shows all items of selected category, gender: 53% male, 47% female, and so on
+        // only one month is selected
     Chart.defaults.global.defaultFontFamily = 'Ubuntu';
 
     var buttons = document.querySelectorAll('.chart-type-container .item');
@@ -225,50 +228,27 @@ function setChart() {
     canvas.height = rect.height;
 
 
-    var range = getRangePickers();
+    chartData = new ChartData();
 
-    //determin lista de luni care trebuie pusa pe axa Ox
-    var monthsList = [];
+    chartData.setRangeStart(document.getElementById("start").value);
+    chartData.setRangeEnd(document.getElementById("end").value);
 
-    var startYear = parseInt(range.startRange.split('-')[0]);
-    var startMonth = parseInt(range.startRange.split('-')[1]);
-
-
-    var endYear = parseInt(range.endRange.split("-")[0]);
-    var endMonth = parseInt(range.endRange.split('-')[1]);
-
-    var currentYear = startYear;
-    var currentMonth = startMonth;
-
-    do {
-        monthsList.push(monthNames[currentMonth - 1] + "," + currentYear);
-        currentMonth++;
-        if(currentMonth > 12) {
-            currentMonth = 1;
-            currentYear++;
-        }
-    } while(currentYear < endYear || (currentYear == endYear && currentMonth <= endMonth));
-
-    console.log(monthsList);
-
-    chart = MyLineChart(ctx, MAIN_COLORS, monthsList);
+    chart = MyLineChart(ctx, MAIN_COLORS, chartData.timeLabels);
     chart.setSize(canvas.width, canvas.height);
-    chart.setGridColor(((theme == THEME_DARK ? lightGridColor : darkGridColor) + '44'));
+    chart.setGridColor(((theme == THEME_DARK ? lightGridColor : darkGridColor) + '22'));
 
     buttons.forEach(button => {
         button.addEventListener('click', function() {
-            chart.getChart().destroy();
+            // var columns = chart.getColumns();
+            // var lines = chart.getLines();
+            // chart.getChart().destroy();
             for(let i = 0; i < buttons.length; i++) {
                 if(buttons[i] == button) {
                     buttons[i].classList.add('item--selected');
 
-                    if(i == 0) chart = MyLineChart(ctx, MAIN_COLORS);
-                    else if(i == 1) chart = MyBarChart(ctx, MAIN_COLORS);
-                    else if(i == 2) chart = MyPieChart(ctx, MAIN_COLORS);
-
-                    // chart = (i == 0 ? MyLineChart(ctx, MAIN_COLORS) : i == 1 ? MyBarChart(ctx, MAIN_COLORS) : MyPieChart(ctx, MAIN_COLORS))
-                    chart.setGridColor(((theme == THEME_DARK ? lightGridColor : darkGridColor) + '44'));
-                    
+                    if(i == 0) changeChartTypeToLine(ctx);
+                    else if(i == 1) changeChartTypeToBar(ctx);
+                    else if(i == 2) changeChartTypeToPie(ctx);
                 } else {
                     buttons[i].classList.remove('item--selected');
                 }
@@ -280,6 +260,92 @@ function setChart() {
 
 }
 
+function changeChartTypeToLine(ctx) {
+    // only one option from category, with a default one
+    // all time, evolution
+    chartData.type = 'line';
+
+    var chartOptions = document.querySelectorAll('.chart-settings-contianer .chart-setting');
+    chartOptions.forEach(el => el.classList.remove('hidden'));
+    var startRangePicker = document.querySelectorAll('.chart-settings-contianer .chart-setting.selector-start label')[0];
+    startRangePicker.innerText = 'Start Range:';
+
+    var categoryOptions = document.querySelectorAll('.chart-settings-contianer .categories-list input');
+
+    categoryOptions.forEach((el, i) => {
+        el.checked = i == 0;
+        el.removeEventListener('click', chartData.category.multipleItemCheckEvent);
+        el.addEventListener('click', chartData.category.singleItemCheckEvent);
+    });
+
+    var columns = chart.getColumns();
+    var lines = chart.getLines();
+    chart.getChart().destroy();
+
+    chart = MyLineChart(ctx, MAIN_COLORS, chartData.timeLabels);
+    chart.setGridColor(((theme == THEME_DARK ? lightGridColor : darkGridColor) + '22'));
+    chart.setLines(lines);
+    chart.setColumns(columns);
+
+    // chart = newChart;
+}
+
+function changeChartTypeToBar(ctx) {
+    // IS/VS/SV/B/.. has 3 bars, male, female, total(or less than 3, or what is checked) and so on
+    // only one month is selected
+    chartData.type = 'bar';
+
+    var endRangePicker = document.querySelectorAll('.chart-settings-contianer .chart-setting.selector-end')[0];
+    endRangePicker.classList.add('hidden');
+    var startRangePicker = document.querySelectorAll('.chart-settings-contianer .chart-setting.selector-start label')[0];
+    startRangePicker.innerText = 'Range:';
+
+    var categoryOptions = document.querySelectorAll('.chart-settings-contianer .categories-list input');
+    categoryOptions.forEach(el => {
+        el.removeEventListener('click', chartData.category.singleItemCheckEvent);
+        el.addEventListener('click', chartData.category.multipleItemCheckEvent);
+    });
+
+    var columns = chart.getColumns();
+    var lines = chart.getLines();
+    chart.getChart().destroy();
+
+    chart = MyBarChart(ctx, MAIN_COLORS, chartData.countyLabels);
+    chart.setGridColor(((theme == THEME_DARK ? lightGridColor : darkGridColor) + '22'));
+    chart.setLines(lines);
+    // chart.setColumns(columns);
+}
+
+function changeChartTypeToPie(ctx) {
+    // it shows all items of selected category, gender: 53% male, 47% female, and so on
+    // only one month is selected
+    chartData.type = 'pie';
+
+    var endRangePicker = document.querySelectorAll('.chart-settings-contianer .chart-setting.selector-end')[0];
+    endRangePicker.classList.add('hidden');
+    var startRangePicker = document.querySelectorAll('.chart-settings-contianer .chart-setting.selector-start label')[0];
+    startRangePicker.innerText = 'Range:';
+
+    var categoryOptions = document.querySelectorAll('.chart-settings-contianer .categories-list input');
+    categoryOptions.forEach(el => {
+        el.removeEventListener('click', chartData.category.singleItemCheckEvent);
+        el.addEventListener('click', chartData.category.multipleItemCheckEvent);
+    });
+
+    var columns = chart.getColumns();
+    var lines = chart.getLines();
+    chart.getChart().destroy();
+
+    chart = MyPieChart(ctx, MAIN_COLORS, chartData.timeLabels);
+    chart.setGridColor(((theme == THEME_DARK ? lightGridColor : darkGridColor) + '22'));
+    chart.setLines(lines);
+    chart.setColumns(columns);
+}
+
+function updateChart() {
+    
+}
+
 
 function initializeSearchItems() {
     console.log(searchInput);
@@ -287,7 +353,7 @@ function initializeSearchItems() {
     countySelector.textContent = '';
 
     for(var id in countyIdtoNameMap) {
-        if(undefined == listOfSelectedCountys.find(function(element) {
+        if(undefined == listOfSelectedCounties.find(function(element) {
                 return element === id;
             })) {
             //fac aceste transformari ca sa nu conteze daca scrii cu diacritice sau nu
@@ -408,7 +474,8 @@ function initializeMaps() {
 }
 
 function addCountyToList(countyId) {
-    listOfSelectedCountys.push(countyId);
+    listOfSelectedCounties.push(countyId);
+    chartData.countyLabels.push(countyId);
     const itemDiv = document.createElement('div');
 
     itemDiv.classList.add('item');
@@ -441,16 +508,21 @@ function addCountyToList(countyId) {
 }
 
 async function addCountyToLineChart(countyId) {
-
     console.log("uhm, adaugam linie la chart, uwu");
     console.log(countyId);
-    var range = getRangePickers();
-    var startYear = parseInt(range.startRange.split('-')[0]);
-    var startMonth = parseInt(range.startRange.split('-')[1]);
+
+    // var range = getRangePickers();
+
+    // var startYear = parseInt(range.startRange.split('-')[0]);
+    // var startMonth = parseInt(range.startRange.split('-')[1]);
+    var startYear = chartData.rangeStartYear;
+    var startMonth = chartData.rangeStartMonth;
 
 
-    var endYear = parseInt(range.endRange.split("-")[0]);
-    var endMonth = parseInt(range.endRange.split('-')[1]);
+    // var endYear = parseInt(range.endRange.split("-")[0]);
+    // var endMonth = parseInt(range.endRange.split('-')[1]);
+    var endYear = chartData.rangeEndYear;
+    var endMonth = chartData.rangeEndMonth;
 
     var res = await fetch("/api/query?counties=" + countyId +
                           "&startYear=" + startYear +
@@ -461,7 +533,8 @@ async function addCountyToLineChart(countyId) {
 
     var json = await res.json();
 
-    console.log("lungimea e: " + json.length);
+    console.log("lungimea e: " + json.length + ' id: ' + countyId);
+    console.log(`lungimea e: ${json.length} id: ${countyId}`);
     console.log(json);
 
     //fac asa pentru ca asa sunt puse momentan in json
@@ -469,6 +542,10 @@ async function addCountyToLineChart(countyId) {
 
 
     var lineData = [];
+
+    chartData.countyDataArray.push(json);
+
+    updateChart();
 
     //mergem prin fiecare an rezultat
     for(var i = 0 ; i < json.length; ++i) {
@@ -515,12 +592,13 @@ function removeCountyFromList(countyId) {
 
 
 
-                listOfSelectedCountys = listOfSelectedCountys.filter(
+                listOfSelectedCounties = listOfSelectedCounties.filter(
                     function(value, index, arr) {
                         if(value === countyId) indexToRemove = index;
                         return value != countyId;
                     }
                 );
+                chartData.countyLabels = listOfSelectedCounties;
 
                 console.log("removing index " + indexToRemove);
                 chart.removeLine(indexToRemove);
@@ -608,12 +686,12 @@ function extractColor() {
 
 
 function setCategorySelector(e) {
-    var selector = document.querySelectorAll('.chart-options .category-selector')[0];
-    var text = document.querySelectorAll('.chart-options .category-selector .top .text')[0];
+    var selector = document.querySelectorAll('.chart-settings-contianer .category-selector')[0];
+    var text = document.querySelectorAll('.chart-settings-contianer .category-selector .top .text')[0];
     var optionsList = document.querySelectorAll('.category-selector .options-list')[0];
     var options = Array.from(optionsList.children);
 
-    var categoriesList = document.querySelectorAll('.chart-options .categories-list')[0];
+    var categoriesList = document.querySelectorAll('.chart-settings-contianer .categories-list')[0];
 
     selector.addEventListener('click', function(e) {
         if(optionsList.contains(e.target)) return;
@@ -636,19 +714,29 @@ function setCategorySelector(e) {
     categoriesList.innerHTML = "";
     categoriesList.innerHTML +=
         "<label class='label' for='category" + 0 + "'>" +
-            "<input id='category" + 0 + "' type='checkbox' name='favorite1' value='" + options[0].innerHTML + "' checked onclick='categoryItemChecked(this)'/>" +
+            "<input id='category" + 0 + "' type='checkbox' name='favorite1' value='" + options[0].innerHTML + "' checked/>" +
             "<span>" + options[0].innerHTML + "</span>" +
         "</label>";
     categoriesList.innerHTML +=
         "<label class='label' for='category" + 1 + "'>" +
-            "<input id='category" + 1 + "' type='checkbox' name='favorite1' value='" + options[0].innerHTML + "' checked onclick='categoryItemChecked(this)'/>" +
+            "<input id='category" + 1 + "' type='checkbox' name='favorite1' value='" + options[0].innerHTML + "' checked/>" +
             "<span>" + options[0].innerHTML + "</span>" +
         "</label>";
     categoriesList.innerHTML +=
         "<label class='label' for='category" + 2 + "'>" +
-            "<input id='category" + 2 + "' type='checkbox' name='favorite1' value='" + options[0].innerHTML + "' checked onclick='categoryItemChecked(this)'/>" +
+            "<input id='category" + 2 + "' type='checkbox' name='favorite1' value='" + options[0].innerHTML + "' checked/>" +
             "<span>" + options[0].innerHTML + "</span>" +
         "</label>";
+
+    var checkboxes = document.querySelectorAll('.chart-settings-contianer .categories-list input');
+    checkboxes.forEach((box, i) => {
+        // box.checked = false;
+        box.checked = i == 0;
+        box.addEventListener('click', chartData.getItemClickedFunction());
+    });
+
+    chartData.category.updateItems();
+
 
     for(var i = 0; i < options.length; i++) {
         const option = options[i];
@@ -659,39 +747,44 @@ function setCategorySelector(e) {
             categoriesList.innerHTML = "";
             categoriesList.innerHTML +=
                 "<label class='label' for='category" + i + "'>" +
-                    "<input id='category" + i + "' type='checkbox' name='favorite1' value='" + option.innerHTML + "' checked onclick='categoryItemChecked(this)'/>" +
+                    "<input id='category" + i + "' type='checkbox' name='favorite1' value='" + option.innerHTML + "' checked/>" +
                     "<span>" + option.innerHTML + "</span>" +
                 "</label>";
             categoriesList.innerHTML +=
                 "<label class='label' for='category" + 1 + "'>" +
-                    "<input id='category" + 1 + "' type='checkbox' name='favorite1' value='" + option.innerHTML + "' checked onclick='categoryItemChecked(this)'/>" +
+                    "<input id='category" + 1 + "' type='checkbox' name='favorite1' value='" + option.innerHTML + "' checked/>" +
                     "<span>" + option.innerHTML + "</span>" +
                 "</label>";
             categoriesList.innerHTML +=
                 "<label class='label' for='category" + 2 + "'>" +
-                    "<input id='category" + 2 + "' type='checkbox' name='favorite1' value='" + option.innerHTML + "' checked onclick='categoryItemChecked(this)'/>" +
+                    "<input id='category" + 2 + "' type='checkbox' name='favorite1' value='" + option.innerHTML + "' checked/>" +
                     "<span>" + option.innerHTML + "</span>" +
                 "</label>";
+
+
+            var checkboxes = document.querySelectorAll('.chart-settings-contianer .categories-list input');
+            checkboxes.forEach((box, i) => {
+                // box.checked = false;
+                box.checked = i == 0;
+                box.addEventListener('click', chartData.getItemClickedFunction());
+            });
+
+            chartData.category.updateItems();
         });
     }
 
 }
 
-function categoryItemChecked(element) {
-    if(element.checked) element.parentElement.classList.remove('label--unchecked');
-    else element.parentElement.classList.add('label--unchecked');
-}
-
 
 function setDownloadType() {
-    var downloadButton = document.querySelectorAll('.chart-options .download-options .download')[0];
-    var options = document.querySelectorAll('.chart-options .download-options .option');
+    var downloadButton = document.querySelectorAll('.chart-settings-contianer .download-options .download')[0];
+    var options = document.querySelectorAll('.chart-settings-contianer .download-options .option');
 
     downloadButton.addEventListener('mouseenter', function() {
-        document.querySelectorAll('.chart-options .download-options .material-icons')[0].classList.add('material-icons--hover');
+        document.querySelectorAll('.chart-settings-contianer .download-options .material-icons')[0].classList.add('material-icons--hover');
     });
     downloadButton.addEventListener('mouseleave', function() {
-        document.querySelectorAll('.chart-options .download-options .material-icons')[0].classList.remove('material-icons--hover');
+        document.querySelectorAll('.chart-settings-contianer .download-options .material-icons')[0].classList.remove('material-icons--hover');
     });
 
     options.forEach(option => {
