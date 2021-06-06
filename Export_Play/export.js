@@ -84,22 +84,3 @@ function exportToPdf(filename, rows) {
         }
     });
 }
-
-
-function goExportPdf() {
-    exportToPdf('exportPdf.pdf', [
-        ['name', 'birthplace'],
-        ['Gica', 'Hagi'],
-        ['Mirela', 'Iasi'],
-        ['Dar22', 'AC3R']
-    ])
-}
-
-function goExportCsv() {
-    exportToCsv('exportCsv.csv', [
-        ['name', 'birthplace'],
-        ['Gica', 'Hagi'],
-        ['Mirela', 'Iasi'],
-        ['Dar22', 'AC3R']
-    ])
-}
