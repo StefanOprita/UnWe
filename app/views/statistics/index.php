@@ -119,29 +119,29 @@
 
         </div>
     </div>
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <script src="https://momentjs.com/downloads/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
+    <script src="../../../public/js/info.js"></script>
+
+    <script src="../../../public/js/Category.js"></script>
+    <script src="../../../public/js/ChartData.js"></script>
+    <script src="../../../public/js/script-statistics.js"></script>
+
+    <script src="../../../public/js/dot.js"></script>
+    <script src="../../../public/js/box.js"></script>
+    <script src="../../../public/js/animation.js"></script>
+    <script src="../../../public/js/charts/my-line-chart.js"></script>
+    <script src="../../../public/js/charts/my-bar-chart.js"></script>
+    <script src="../../../public/js/charts/my-pie-chart.js"></script>
+
+    <script src="https://jsuites.net/v4/jsuites.js"></script>
+    <link rel="stylesheet" href="https://jsuites.net/v4/jsuites.css" type="text/css" />
 </body>
 
 </html>
-
-<link rel="preconnect" href="https://fonts.gstatic.com">
-<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;700&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-
-<script src="https://momentjs.com/downloads/moment.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
-<script src="../../../public/js/info.js"></script>
-
-<script src="../../../public/js/Category.js"></script>
-<script src="../../../public/js/ChartData.js"></script>
-<script src="../../../public/js/script-statistics.js"></script>
-
-<script src="../../../public/js/dot.js"></script>
-<script src="../../../public/js/box.js"></script>
-<script src="../../../public/js/animation.js"></script>
-<script src="../../../public/js/charts/my-line-chart.js"></script>
-<script src="../../../public/js/charts/my-bar-chart.js"></script>
-<script src="../../../public/js/charts/my-pie-chart.js"></script>
-
-<script src="https://jsuites.net/v4/jsuites.js"></script>
-<link rel="stylesheet" href="https://jsuites.net/v4/jsuites.css" type="text/css" />
