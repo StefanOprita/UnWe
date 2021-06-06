@@ -480,8 +480,6 @@ async function addCountyToLineChart(countyId) {
     //console.log("Test " + json[0].countries[upperId].name);
 
     chart.addLine(countyId, lineData);
-    chart.update();
-    
 }
 
 
