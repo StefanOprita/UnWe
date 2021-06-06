@@ -565,6 +565,11 @@ async function addCountyToLineChart(countyId) {
     //
     // chart.addLine(countyId, lineData);
 
+
+
+
+    //exportToSvg(chart);
+
 }
 
 
