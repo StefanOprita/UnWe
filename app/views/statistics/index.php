@@ -139,8 +139,14 @@
     <script src="../../../public/js/charts/my-line-chart.js"></script>
     <script src="../../../public/js/charts/my-bar-chart.js"></script>
     <script src="../../../public/js/charts/my-pie-chart.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.22/pdfmake.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.min.js"></script>
+    <script src="../../../public/js/export.js"></script>
+    <script src="../../../public/js/canvas2svg.js"></script>
 
     <script src="https://jsuites.net/v4/jsuites.js"></script>
+
     <link rel="stylesheet" href="https://jsuites.net/v4/jsuites.css" type="text/css" />
 </body>
 

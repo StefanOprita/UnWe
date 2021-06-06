@@ -508,9 +508,6 @@ function addCountyToList(countyId) {
 }
 
 async function addCountyToLineChart(countyId) {
-    console.log("uhm, adaugam linie la chart, uwu");
-    console.log(countyId);
-
     // var range = getRangePickers();
 
     // var startYear = parseInt(range.startRange.split('-')[0]);
@@ -561,6 +558,11 @@ async function addCountyToLineChart(countyId) {
     //console.log("Test " + json[0].countries[upperId].name);
 
     chart.addLine(countyId, lineData);
+
+
+
+
+    //exportToSvg(chart);
 
 }
 
