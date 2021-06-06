@@ -22,7 +22,6 @@ var Dot = function(boxes) {
             for(var i = 0; i < boxes.length; i++) {
                 if(boxes[i].checkIfInside(x, y)) {
                     insideBox = true;
-                    console.log('spawned inside box');
                     break;
                 }
             }
