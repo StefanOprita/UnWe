@@ -61,14 +61,23 @@
                 display: block
                 position: relative
 
-            &:first-of-type
+            &.button-first
                 background-color: var(--color-secondary)
                 color: var(--color-on-surface-variant)
                 border: none
 
-            &:first-of-type:hover
+            &.button-first:hover
                 background-color: var(--color-primary)
                 color: var(--color-on-surface)
+
+            // &:first-of-type
+            //     background-color: var(--color-secondary)
+            //     color: var(--color-on-surface-variant)
+            //     border: none
+            //
+            // &:first-of-type:hover
+            //     background-color: var(--color-primary)
+            //     color: var(--color-on-surface)
 
             &:hover
                 cursor: pointer
