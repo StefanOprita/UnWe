@@ -22,6 +22,7 @@
                 <a class="item" href="/public/home">Home</a>
                 <a class="item item--selected" href="/public/statistics">Statistics</a>
                 <a class="item" href="/public/api">API</a>
+                <a class="item" href="/public/login">Login</a>
                 <a class="item theme">
                     <span class="material-icons theme-dark-button">dark_mode</span>
                     <span class="material-icons theme-light-button">light_mode</span>
@@ -122,7 +123,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="../../../public/style.css">
+    <link rel="stylesheet" href="../../../public/css/style.css">
 
 
     <script src="https://momentjs.com/downloads/moment.min.js"></script>

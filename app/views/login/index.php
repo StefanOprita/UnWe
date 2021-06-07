@@ -19,10 +19,10 @@
             <div class="title collision-box">Un<span>We</span></div>
             <div class="menu-button"><span class="material-icons">menu</span></div>
             <div class="menu collision-box">
-                <a class="item item--selected" href="/public/home">Home</a>
+                <a class="item" href="/public/home">Home</a>
                 <a class="item" href="/public/statistics">Statistics</a>
                 <a class="item" href="/public/api">API</a>
-                <a class="item" href="/public/login">Login</a>
+                <a class="item item--selected" href="/public/login">Login</a>
                 <a class="item theme">
                     <span class="material-icons theme-dark-button">dark_mode</span>
                     <span class="material-icons theme-light-button">light_mode</span>
@@ -53,11 +53,11 @@
     </div>
 
 
-    <link rel="stylesheet" href="../../../public/css/style.css">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="../../../public/css/style.css">
 
     <script src="../../../public/js/theme.js"></script>
     <script src="../../../public/js/script-home.js"></script>

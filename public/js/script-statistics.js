@@ -291,7 +291,7 @@ function changeChartTypeToLine(ctx) {
 function changeChartTypeToBar(ctx) {
     // IS/VS/SV/B/.. has 3 bars, male, female, total(or less than 3, or what is checked) and so on
     // only one month is selected
-    
+
     chartData.type = 'bar';
 
     console.log("hei ioooo");
@@ -546,6 +546,8 @@ async function addCountyToLineChart(countyId) {
     var json = await res.json();
 
     let lowerId = countyId.toLowerCase();
+
+    console.log(json);
 
     chartData.countyDataArray[lowerId] = json;
 
