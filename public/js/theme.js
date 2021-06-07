@@ -30,4 +30,3 @@ function toggleTheme(apiPage=false) {
     }
 }
 
-setTheme('theme-dark');
