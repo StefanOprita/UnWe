@@ -4,11 +4,13 @@
     // echo print_r($querries);
     require_once '../app/database.php';
     require_once "./query-routes.php";
+    require_once "./admin-routes.php";
     require_once "errorHandling.php";
 
     $allRoutes = [];
 
     array_push($allRoutes, ...$query_routes);
+    array_push($allRoutes, ...$admin_routes);
 
     $allHeaders = getallheaders();
 
@@ -24,7 +26,7 @@
         $route["handler"](
             $matchResult["params"],
             $matchResult["queryParams"],
-            $payloadString ? json_decode($payloadString) : NULL,
+            $payloadString ? json_decode($payloadString, true) : NULL,
             $allHeaders
         );
         exit;
