@@ -6,14 +6,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Unemployment in Romania</title>
-    <link rel="shortcut icon" href="../../../public/unwe.ico">
+    <link rel="shortcut icon" href="/public/unwe.ico">
 
+    <link rel="stylesheet" href="/public/css/hidden.css">
 </head>
 
 <body style="background-color: black;">
     <div class="statistics-container">
         <div class="background"></div>
-        <img id="dot" src="../../../public/dot.svg" alt="">
+        <img id="dot" src="/public/dot.svg" alt="">
         <canvas id="canvas"></canvas>
         <header class="header">
             <div class="title collision-box">Un<span>We</span></div>
@@ -22,6 +23,7 @@
                 <a class="item" href="/public/home">Home</a>
                 <a class="item item--selected" href="/public/statistics">Statistics</a>
                 <a class="item" href="/public/api">API</a>
+                <a class="item" href="/public/admin">Admin</a>
                 <a class="item theme">
                     <span class="material-icons theme-dark-button">dark_mode</span>
                     <span class="material-icons theme-light-button">light_mode</span>
@@ -122,28 +124,28 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="../../../public/style.css">
+    <link rel="stylesheet" href="/public/css/style.css">
 
 
     <script src="https://momentjs.com/downloads/moment.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
-    <script src="../../../public/js/info.js"></script>
+    <script src="/public/js/info.js"></script>
 
-    <script src="../../../public/js/Category.js"></script>
-    <script src="../../../public/js/ChartData.js"></script>
-    <script src="../../../public/js/script-statistics.js"></script>
+    <script src="/public/js/Category.js"></script>
+    <script src="/public/js/ChartData.js"></script>
+    <script src="/public/js/script-statistics.js"></script>
 
-    <script src="../../../public/js/dot.js"></script>
-    <script src="../../../public/js/box.js"></script>
-    <script src="../../../public/js/animation.js"></script>
-    <script src="../../../public/js/charts/my-line-chart.js"></script>
-    <script src="../../../public/js/charts/my-bar-chart.js"></script>
-    <script src="../../../public/js/charts/my-pie-chart.js"></script>
+    <script src="/public/js/dot.js"></script>
+    <script src="/public/js/box.js"></script>
+    <script src="/public/js/animation.js"></script>
+    <script src="/public/js/charts/my-line-chart.js"></script>
+    <script src="/public/js/charts/my-bar-chart.js"></script>
+    <script src="/public/js/charts/my-pie-chart.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.22/pdfmake.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.min.js"></script>
-    <script src="../../../public/js/export.js"></script>
-    <script src="../../../public/js/canvas2svg.js"></script>
+    <script src="/public/js/export.js"></script>
+    <script src="/public/js/canvas2svg.js"></script>
     <script src="/public/js/download.js"></script>
 
     <script src="https://jsuites.net/v4/jsuites.js"></script>

@@ -1,0 +1,131 @@
+.info-box
+    width: 90%
+    max-width: 980px
+    margin: auto
+    border-color: var(--color-surface)
+    text-align: center
+
+    .info
+        margin-bottom: .5em
+        font-size: 3em
+        font-weight: 300
+        font-family: 'Roboto'
+        color: var(--color-on-surface)
+
+        span
+            display: inline-block
+            font-weight: 400
+            color: var(--color-primary)
+            border-bottom: 2px dashed var(--color-primary)
+            text-decoration-style: dashed
+
+    .last-info
+        margin-top: 0
+        margin-bottom: 2em
+        font-size: 1.7em
+        font-weight: 300
+        padding-top: 0
+
+    @media (max-width: 60em)
+        // background-color: $silver06
+
+        .info
+            font-size: 1.6em
+
+            &:first-of-type
+                font-size: 1.8em
+
+    .button-box
+        width: 100%
+
+        .button
+            position: relative
+            display: inline-block
+            width: 12em
+            min-width: 6.5em
+            height: 3.3em
+            margin: 0 1.3em
+            margin-bottom: 5%
+            border: 1px solid var(--color-primary)
+            font-family: 'Ubuntu'
+            font-size: 1.3em
+            font-weight: 600
+            text-transform: uppercase
+            letter-spacing: 1px
+            color: var(--color-primary)
+            background-color: transparent
+            transition: .25s
+            overflow: hidden
+
+            span
+                display: block
+                position: relative
+
+            &.button-first
+                background-color: var(--color-secondary)
+                color: var(--color-on-surface-variant)
+                border: none
+
+            &.button-first:hover
+                background-color: var(--color-primary)
+                color: var(--color-on-surface)
+
+            // &:first-of-type
+            //     background-color: var(--color-secondary)
+            //     color: var(--color-on-surface-variant)
+            //     border: none
+            //
+            // &:first-of-type:hover
+            //     background-color: var(--color-primary)
+            //     color: var(--color-on-surface)
+
+            &:hover
+                cursor: pointer
+                background-color: var(--color-primary)
+
+            &:hover span
+                color: var(--color-on-surface)
+
+            &:hover::before
+                width: 100%
+                left: 0
+
+            &::before
+                content: ''
+                position: absolute
+                width: 0
+                height: 100%
+                right: 0
+                bottom: 0
+                left: auto
+                background-color: var(--color-primary)
+                transition: .25s
+
+.showcase-hint
+    position: relative
+    bottom: 0
+    margin-right: auto
+    margin-left: auto
+
+    .text
+        padding-bottom: 2em
+        font-size: 1.2em
+        color: var(--color-on-surface)
+
+    .line
+        width: 2px
+        height: 4em
+        margin: auto
+        margin-top: .4em
+        background-color: var(--color-primary)
+
+.showcase-container
+    display: inline-block
+    width: 100%
+    height: 100%
+    font-family: 'Roboto'
+    font-size: 1.4em
+    padding: 4em 10em
+    box-sizing: border-box
+    background-color: $gray
+    color: var(--color-surface)

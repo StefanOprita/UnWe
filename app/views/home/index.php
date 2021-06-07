@@ -6,14 +6,16 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Unemployment in Romania</title>
-    <link rel="shortcut icon" href="../../../public/unwe.ico">
+    <link rel="shortcut icon" href="/public/unwe.ico">
+
+    <link rel="stylesheet" href="/public/css/firstPaint.css">
 
 </head>
 
-<body style="background-color: black;">
+<body>
+    <img id="dot" src="/public/dot.svg" alt="">
     <div class="container">
         <div class="background"></div>
-        <img id="dot" src="../../../public/dot.svg" alt="">
         <canvas id="canvas"></canvas>
         <header class="header">
             <div class="title collision-box">Un<span>We</span></div>
@@ -22,6 +24,7 @@
                 <a class="item item--selected" href="/public/home">Home</a>
                 <a class="item" href="/public/statistics">Statistics</a>
                 <a class="item" href="/public/api">API</a>
+                <a class="item" href="/public/admin">Admin</a>
                 <a class="item theme">
                     <span class="material-icons theme-dark-button">dark_mode</span>
                     <span class="material-icons theme-light-button">light_mode</span>
@@ -33,8 +36,8 @@
             <p class="info collision-box">There are <span>350</span> unemployed people in Romania.</p>
             <p class="info last-info collision-box">There are <span>350</span> unemployed people.</p>
             <div class="button-box">
-                <button type="button" name="button1" class="button collision-box"><span>Statistics</span></button>
-                <button type="button" name="button2" class="button collision-box"><span>API</span></button>
+                <a href="/public/statistics"><button type="button" name="button1" class="button button-first collision-box"><span>Statistics</span></button></a>
+                <a href="/public/api"><button type="button" name="button2" class="button collision-box"><span>API</span></button></a>
             </div>
         </div>
 
@@ -56,14 +59,14 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="../../../public/style.css">
+    <link rel="stylesheet" href="/public/css/style.css">
 
-    <script src="../../../public/js/theme.js"></script>
-    <script src="../../../public/js/script-home.js"></script>
-    <script src="../../../public/js/info.js"></script>
-    <script src="../../../public/js/dot.js"></script>
-    <script src="../../../public/js/box.js"></script>
-    <script src="../../../public/js/animation.js"></script>
+    <script src="/public/js/theme.js"></script>
+    <script src="/public/js/script-home.js"></script>
+    <script src="/public/js/info.js"></script>
+    <script src="/public/js/dot.js"></script>
+    <script src="/public/js/box.js"></script>
+    <script src="/public/js/animation.js"></script>
 </body>
 
 </html>

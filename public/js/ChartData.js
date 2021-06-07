@@ -6,7 +6,7 @@ class ChartData {
 
     timeLabels = [];
     countyLabels = [];
-    countyDataArray = [];
+    countyDataArray = {};
 
     singleItemCheck = true;
 
@@ -84,12 +84,15 @@ class ChartData {
             let label = countyLabel.toLowerCase();
 
             let line = [];
-            let county = this.countyDataArray[i];
+            let county = this.countyDataArray[label];
+            // console.log('####################');
+            // console.log(county);
 
             // prin asta parcurg lunile
             let startIndex = (this.rangeStartYear - 2019) * 12 + this.rangeStartMonth - 1;
             let endIndex = (this.rangeEndYear - 2019) * 12 + this.rangeEndMonth - 1;
             for(let i = startIndex; i <= endIndex; i++) {
+                
                 let value = county[i].counties[label][this.category.categoryLabel][this.category.getSelectedItems()[0]];
                 line.push(value);
             }
@@ -109,10 +112,15 @@ class ChartData {
 
             // prin asta parcurg judetele
             let index = (this.rangeYear - 2019) * 12 + this.rangeMonth - 1;
-            this.countyDataArray.forEach((county, i) => {
+            for(let key in this.countyDataArray) {
+                let county = this.countyDataArray[key];
                 let value = county[index].counties[Object.keys(county[index].counties)[0]][this.category.categoryLabel][label];
                 barSet.push(value);
-            });
+            }
+            // this.countyDataArray.forEach((county, i) => {
+            //     let value = county[index].counties[Object.keys(county[index].counties)[0]][this.category.categoryLabel][label];
+            //     barSet.push(value);
+            // });
             bars.push(barSet);
         });
         return bars;
@@ -126,7 +134,7 @@ class ChartData {
             let countyLabel = countyLabelUppercase.toLowerCase();
 
             let pie = [];
-            let county = this.countyDataArray[i];
+            let county = this.countyDataArray[countyLabel];
 
             // prin asta parcurg item-urile din categorii
             let index = (this.rangeYear - 2019) * 12 + this.rangeMonth - 1;

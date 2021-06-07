@@ -5,7 +5,7 @@ class Category {
 
     ageLabels = ['lesser25', 'from25to29', 'from30to39', 'from40to49', 'from50to55', 'greater55'];
     genderLabels = ['male', 'female'];
-    educationLabels = ['bachelors', 'highschool', 'middleschool', 'noEducation', 'postHighschool', 'primary', 'professional'];
+    educationLabels = ['noEducation', 'primary', 'middleschool', 'highschool', 'bachelors', 'postHighschool', 'professional'];
     environmentLabels = ['urban', 'rural'];
     compensationLabels = ['compensated', 'nonCompensated'];
 
