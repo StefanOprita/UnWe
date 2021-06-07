@@ -5,7 +5,7 @@ class Statistics extends Controller {
         $user = $this->model('User');
         //$user->name = $name;
 
-        $this->view('statistics/index.php', ['name' => $user->name]);
+        $this->view('statistics/index.php', ['name' => $user->name, 'pageId' => 'admin']);
     }
 
     private function dbTest() {

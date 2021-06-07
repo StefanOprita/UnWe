@@ -8,23 +8,22 @@
     <title>Unemployment in Romania</title>
     <link rel="shortcut icon" href="/public/unwe.ico">
 
-    <link rel="stylesheet" href="/public/css/firstPaint.css">
-
+    <link rel="stylesheet" href="/public/css/hidden.css">
 </head>
 
-<body>
-    <img id="dot" src="/public/dot.svg" alt="">
+<body style="background-color: black;">
     <div class="container">
         <div class="background"></div>
+        <img id="dot" src="/public/dot.svg" alt="">
         <canvas id="canvas"></canvas>
         <header class="header">
             <div class="title collision-box">Un<span>We</span></div>
             <div class="menu-button"><span class="material-icons">menu</span></div>
             <div class="menu collision-box">
-                <a class="item item--selected" href="/public/home">Home</a>
+                <a class="item" href="/public/home">Home</a>
                 <a class="item" href="/public/statistics">Statistics</a>
                 <a class="item" href="/public/api">API</a>
-                <a class="item" href="/public/admin">Admin</a>
+                <a class="item item--selected" href="/public/admin">Admin</a>
                 <a class="item theme">
                     <span class="material-icons theme-dark-button">dark_mode</span>
                     <span class="material-icons theme-light-button">light_mode</span>
@@ -32,32 +31,27 @@
             </div>
         </header>
 
-        <div class="info-box">
-            <p class="info collision-box">There are <span>350</span> unemployed people in Romania.</p>
-            <p class="info last-info collision-box">There are <span>350</span> unemployed people.</p>
-            <div class="button-box">
-                <a href="/public/statistics"><button type="button" name="button1" class="button button-first collision-box"><span>Statistics</span></button></a>
-                <a href="/public/api"><button type="button" name="button2" class="button collision-box"><span>API</span></button></a>
-            </div>
-        </div>
+        <form class="login-form" action="/action_page.php" method="post">
+            <label class="collision-box" for="uname"><b>Username</b></label>
+            <input class="collision-box" type="text" placeholder="Enter Username" name="uname" required>
 
-        <div class="showcase-hint collision-box">
-            <span class="text">showcase</span>
-            <div class="line"></div>
-        </div>
-    </div>
-    <div class="showcase-container">
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-            labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-            laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in
-            voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat
-            non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+            <label class="collision-box" for="psw"><b>Password</b></label>
+            <input class="collision-box" type="password" placeholder="Enter Password" name="psw" required>
+
+            <button type="submit" class="collision-box" type="button" name="button1" class="button collision-box" onclick="console.log('aaaaaaaaaa')"><span>Login</span></button>
+
+            <label class="collision-box">
+                <input type="checkbox" name="remember">
+                <span>Remember me</span>
+            </label>
+        </form>
+
     </div>
 
 
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@500;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="/public/css/style.css">
 
