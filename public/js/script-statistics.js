@@ -279,8 +279,11 @@ function changeChartTypeToLine(ctx) {
 function changeChartTypeToBar(ctx) {
     // IS/VS/SV/B/.. has 3 bars, male, female, total(or less than 3, or what is checked) and so on
     // only one month is selected
+    
     chartData.type = 'bar';
 
+    console.log("hei ioooo");
+    console.log(chartData.type);
     var endRangePicker = document.querySelectorAll('.chart-settings-contianer .chart-setting.selector-end')[0];
     endRangePicker.classList.add('hidden');
     document.querySelectorAll('.range-selector #start')[0].max = '2021-02';

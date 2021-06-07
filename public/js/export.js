@@ -3,30 +3,56 @@
 
 
 function exportChartToCsv(chart) {
+    console.log("helo cica descarcam un csv");
     var rows = [];
 
     var topLabels = [];
 
     topLabels.push("County ID");
-    
-    chart.getChart().data.labels.forEach(label => {
-        topLabels.push(label);
-    });
-
-    rows.push(topLabels);
-
-    chart.getChart().data.datasets.forEach(line => {
-        var row = [];
-        row.push(line.label);
-        line.data.forEach(data => {
-            row.push(data);
+    if(chartData.type == 'line' || chartData.type == 'pie') {
+        chart.getChart().data.labels.forEach(label => {
+            topLabels.push(label);
         });
+    
+        rows.push(topLabels);
+    
+        chart.getChart().data.datasets.forEach(line => {
+            var row = [];
+            row.push(line.label);
+            line.data.forEach(data => {
+                row.push(data);
+            });
+    
+            rows.push(row);
+        });
+    } else {
+        chart.getChart().data.datasets.forEach(label => {
 
-        rows.push(row);
-    });
+            topLabels.push(label.label);
+        });
+    
+        rows.push(topLabels);
 
+        chart.getChart().data.labels.forEach(label => {
+            var row = [];
+            row.push(label);
 
-    exportToCsv("lineGraph.csv", rows);
+            rows.push(row);
+        })
+
+        chart.getChart().data.datasets.forEach(line => {
+            for (let index = 0; index < line.data.length; index++) {
+                const data = line.data[index];
+                rows[index + 1].push(data);
+            }
+        });
+    }
+
+    //console.log('');
+    console.log(rows);
+    
+
+    exportToCsv(chartData.type  + "Chart.csv", rows);
 }
 
 
@@ -42,7 +68,7 @@ function exportChartToPdf(chart) {
     doc.setFontSize(20);
     doc.text(15, 15, "Super Cool Chart");
     doc.addImage(newCanvasImg, 'JPEG', 10, 10, 280, 150 );
-    doc.save('new-canvas.pdf');
+    doc.save(chartData.type  + 'Chart.pdf');
 }
 
 function exportToCsv(filename, rows) {
@@ -161,7 +187,7 @@ function exportToSvg(chart) {
     };
 
     //modificam imd
-    configuration.type = 'line';
+    configuration.type = chartData.type;
     configuration.data = chart.getChart().data;
     configuration.options = chart.getChart().options;
 
@@ -181,7 +207,7 @@ function exportToSvg(chart) {
 
     var element = document.createElement('a');
     element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(svgText));
-    element.setAttribute('download', 'chart.svg');
+    element.setAttribute('download', chartData.type + 'Chart.svg');
 
     element.style.display = 'none';
     document.body.appendChild(element);
