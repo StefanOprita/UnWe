@@ -39,8 +39,8 @@ function loginAdmin($params, $queryParams, $body, $headers) {
     if(!adminExists($username)) {
         http_response_code(400);
         echo json_encode([ 
-            "code" => 400,
-            "message" => "This username is taken!"
+            'code' => 400,
+            'message' => 'Bad credentials!',
         ]);
         return;   
     }
@@ -54,13 +54,13 @@ function loginAdmin($params, $queryParams, $body, $headers) {
   
 
     $response = [
-        "code" => 200,
-        "message" => $responseMatch
+        'code' => 200,
+        'message' => $responseMatch
     ];
 
     if($match) {
         $token = bin2hex(random_bytes(64));
-        setcookie("token", $token, 0, "", "", false, true);
+        setcookie('token', $token, 0, '/public/admin', '', false, true);
         saveAuthToken($token);
     }
 
