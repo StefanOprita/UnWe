@@ -1,35 +1,49 @@
 window.addEventListener('DOMContentLoaded', (event) => {
+    verifyLogOn();
     setUX();
 
     setAnimation();
-
-    testAdminApi();
+    //testAdminApi();
 });
 
-async function testAdminApi() {
-    console.log("ieeeeeei");
-    JSON.stringify({
-        username: 'Stefan',
-        password: '1234'
-    });
-    var rawResponse = await fetch('/api/admin/login', {
-        method: 'POST',
-        body:JSON.stringify({
-            username: 'Stefan',
-            password: '1234'
-        })
-    });
-
-    var content = await rawResponse.json();
-    console.log(content);
-    
-    
+async function verifyLogOn() {
+    console.log(' oaihsdoiajdoijaoisd');
     rawResponse = await fetch('/api/admin/logged', {
         method: 'POST',
     });
 
     content = await rawResponse.json();
-    console.log(content);
+    console.log(content); 
+    if(!content.ok) {
+        console.log('nu e bine:(');
+    }
+}
+
+
+async function testAdminApi() {
+    // console.log("ieeeeeei");
+    // JSON.stringify({
+    //     username: 'Stefan',
+    //     password: '1234'
+    // });
+    // var rawResponse = await fetch('/api/admin/login', {
+    //     method: 'POST',
+    //     body:JSON.stringify({
+    //         username: 'Stefan',
+    //         password: '1234'
+    //     })
+    // });
+
+    // var content = await rawResponse.json();
+    // console.log(content);
+    
+    
+    // rawResponse = await fetch('/api/admin/logged', {
+    //     method: 'POST',
+    // });
+
+    // content = await rawResponse.json();
+    // console.log(content);
     
     // fetch('/api/admin/create', {
     //     method: 'POST',
