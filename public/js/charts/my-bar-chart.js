@@ -1,10 +1,6 @@
 var MyBarChart = function(ctx, colors) {
     var chart = initChart(ctx);
     var nrOfDatasets = 0;
-    // var colors = [];
-
-    // addLine("# of nrs", [12, 19, 3, 5, 2, 3]);
-
 
     function initChart(ctx) {
         let chart = new Chart(ctx, {
@@ -27,9 +23,9 @@ var MyBarChart = function(ctx, colors) {
                 }
             }
         });
-        chart.canvas.parentNode.style.width = '100vw';
-        chart.canvas.parentNode.style.height = '100vh';
-
+        // chart.canvas.parentNode.style.width = '100vw';
+        // chart.canvas.parentNode.style.height = '100vh';
+        
         return chart;
     }
 

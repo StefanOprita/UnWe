@@ -18,6 +18,19 @@ var monthNames = ["Jan", "Feb", "Mar",
                   "July", "Aug", "Sept",
                   "Oct", "Nov", "Dec"];
 
+var categoriesLabels = [
+    ['< 25', '25 - 29', '30 - 39', '40 - 49', '50 - 55', '55 >'],
+    ['Male', 'Female'],
+    ['No education', 'Primary', 'Middleschool', 'Highschool', 'Bachelors', 'Post highschool', 'Professional'],
+    ['Urban', 'Rural'],
+    ['Compensated', 'Not compensated']
+];
+// var ageOptions = ['< 25', '25 - 29', '30 - 39', '40 - 49', '50 - 55', '55 >'];
+// var genderLabels = ['Male', 'Female'];
+// var educationLabels = ['Bachelors', 'Highschool', 'Middleschool', 'No education', 'Post highschool', 'Primary', 'Professional'];
+// var environmentLabels = ['Urban', 'Rural'];
+// var compensationLabels = ['Compensated', 'Not compensated'];
+
 // let countyColors = [
 //     '#F44336', '#9C27B0', '#2196F3', '#009688', '#FFEB3B', '#795548',
 //     '#E91E63', '#673AB7', '#3F51B5', '#03A9F4', '#00BCD4', '#4CAF50',
@@ -147,7 +160,6 @@ function setCounties() {
         document.getElementsByClassName('county-add-icon')[0].style.margin = 'auto 10px';
 
         selectorContainer.classList.add('county-selector-container--opened');
-        console.log('added class')
 
         initializeSearchItems();
 
@@ -356,12 +368,11 @@ function updateChart() {
 
 
 function initializeSearchItems() {
-    console.log(searchInput);
     var countySelector = document.getElementById('counties-selector');
     countySelector.textContent = '';
 
     for(var id in countyIdtoNameMap) {
-        if(undefined == listOfSelectedCounties.find(function(element) {
+        if(undefined == chartData.countyLabels.find(function(element) {
                 return element === id;
             })) {
             //fac aceste transformari ca sa nu conteze daca scrii cu diacritice sau nu
@@ -387,7 +398,6 @@ function initializeSearchItems() {
             itemDiv.setAttribute('value', id);
             itemDiv.innerHTML = countyIdtoNameMap[id];
             itemDiv.addEventListener('click', function() {
-                console.log('ai apasat aici\n');
                 setTimeout(function() {
                     itemDiv.parentNode.removeChild(itemDiv);
                 }, 10);
@@ -482,7 +492,6 @@ function initializeMaps() {
 }
 
 function addCountyToList(countyId) {
-    listOfSelectedCounties.push(countyId);
     chartData.countyLabels.push(countyId);
     const itemDiv = document.createElement('div');
 
@@ -516,9 +525,6 @@ function addCountyToList(countyId) {
 }
 
 async function addCountyToLineChart(countyId) {
-    console.log("uhm, adaugam linie la chart, uwu");
-    console.log(countyId);
-
     var startYear = chartData.rangeStartYear;
     var startMonth = chartData.rangeStartMonth;
 
@@ -536,54 +542,23 @@ async function addCountyToLineChart(countyId) {
 
     var json = await res.json();
 
-    console.log("lungimea e: " + json.length + ' id: ' + countyId);
-    console.log(`lungimea e: ${json.length} id: ${countyId}`);
-    console.log(json);
+    let lowerId = countyId.toLowerCase();
 
-    //fac asa pentru ca asa sunt puse momentan in json
-    // var lowerId = countyId.toLowerCase();
-
-
-    // var lineData = [];
-
-    chartData.countyDataArray.push(json);
+    chartData.countyDataArray[lowerId] = json;
 
     updateChart();
-
-    //mergem prin fiecare an rezultat
-    // for(var i = 0 ; i < json.length; ++i) {
-    //
-    //     var countyInfo = json[i].counties[lowerId];
-    //
-    //     //aici trebuie sa vina ceva logica mai complicata, sa se uite la
-    //     //optiunile alese de utilizator... dar momentan afisez doar totalul
-    //
-    //     lineData.push(countyInfo.total);
-    // }
-    //
-    // //console.log("Test " + json[0].countries[upperId].name);
-    //
-    // chart.addLine(countyId, lineData);
-
-
-
-
-    //exportToSvg(chart);
 
 }
 
 
 function removeCountyFromList(countyId) {
-    console.log(countyId);
     var countiesBar = document.getElementsByClassName('counties-bar')[0];
     var items = countiesBar.getElementsByClassName('item');
     for(let index = 0; index < items.length; index++) {
         const element = items[index];
-        //console.log(element);
         var spans = element.getElementsByTagName('span');
         if(spans.length != 0) {
             var id = spans[0].innerHTML;
-            console.log(id);
 
             if(id == countyId) {
 
@@ -600,16 +575,14 @@ function removeCountyFromList(countyId) {
 
 
 
-                listOfSelectedCounties = listOfSelectedCounties.filter(
+                chartData.countyLabels = chartData.countyLabels.filter(
                     function(value, index, arr) {
                         if(value === countyId) indexToRemove = index;
                         return value != countyId;
                     }
                 );
-                chartData.countyLabels = listOfSelectedCounties;
-
-                console.log("removing index " + indexToRemove);
-                chart.removeLine(indexToRemove);
+                delete chartData.countyDataArray[countyId.toLowerCase()];
+                updateChart();
 
                 break;
             }
@@ -624,7 +597,6 @@ function onClickCounty(event) {
         const Function = CountyOnClickFunctions[index];
         Function(element);
     }
-    console.log(element.id);
 
 
 }
@@ -664,14 +636,12 @@ function changeColorOfCounty(element) {
     var elementId = element.id;
     var style = window.getComputedStyle(element);
     var hexCode = style.getPropertyValue('fill');
-    console.log(hexCode);
     if(initialColorOfCounty === '?') {
         initialColorOfCounty = hexCode;
     }
 
     if(hexCode == initialColorOfCounty) {
         var color = extractColor();
-        console.log(color, availableCountyColors);
         element.style['fill'] = color;
         countyIdToColorMap[elementId] = color;
         addCountyToList(elementId);
@@ -697,45 +667,38 @@ function extractColor() {
 function setCategorySelector(e) {
     var selector = document.querySelectorAll('.chart-settings-contianer .category-selector')[0];
     var text = document.querySelectorAll('.chart-settings-contianer .category-selector .top .text')[0];
-    var optionsList = document.querySelectorAll('.category-selector .options-list')[0];
-    var options = Array.from(optionsList.children);
+    var categoryList = document.querySelectorAll('.category-selector .options-list')[0];
+    var category = Array.from(categoryList.children);
 
     var categoriesList = document.querySelectorAll('.chart-settings-contianer .categories-list')[0];
 
     selector.addEventListener('click', function(e) {
-        if(optionsList.contains(e.target)) return;
+        if(categoryList.contains(e.target)) return;
 
-        optionsList.classList.add('options-list--opened');
+        categoryList.classList.add('options-list--opened');
         // Array.from(options).forEach(option => {
-        options.forEach(option => {
+        category.forEach(option => {
             option.classList.add('option--opened');
         });
     });
 
 
     document.body.addEventListener('click', function(e) {
-        if(selector.contains(e.target) || optionsList.contains(e.target)) return;
+        if(selector.contains(e.target) || categoryList.contains(e.target)) return;
 
-        optionsList.classList.remove('options-list--opened');
+        categoryList.classList.remove('options-list--opened');
     });
 
 
     categoriesList.innerHTML = "";
-    categoriesList.innerHTML +=
-        "<label class='label' for='category" + 0 + "'>" +
-            "<input id='category" + 0 + "' type='checkbox' name='favorite1' value='" + options[0].innerHTML + "' checked/>" +
-            "<span>" + options[0].innerHTML + "</span>" +
-        "</label>";
-    categoriesList.innerHTML +=
-        "<label class='label' for='category" + 1 + "'>" +
-            "<input id='category" + 1 + "' type='checkbox' name='favorite1' value='" + options[0].innerHTML + "' checked/>" +
-            "<span>" + options[0].innerHTML + "</span>" +
-        "</label>";
-    categoriesList.innerHTML +=
-        "<label class='label' for='category" + 2 + "'>" +
-            "<input id='category" + 2 + "' type='checkbox' name='favorite1' value='" + options[0].innerHTML + "' checked/>" +
-            "<span>" + options[0].innerHTML + "</span>" +
-        "</label>";
+    categoriesLabels[0].forEach((optionText, i) => {
+        categoriesList.innerHTML +=
+            `<label class="label" for="category${i}">
+                <input id="category${i}" type="checkbox" name="category${i}" value="${optionText}" checked/>
+                <span>${optionText}</span>
+            </label>`;
+    });
+
 
     var checkboxes = document.querySelectorAll('.chart-settings-contianer .categories-list input');
     checkboxes.forEach((box, i) => {
@@ -749,28 +712,29 @@ function setCategorySelector(e) {
     chartData.category.updateItems();
 
 
-    for(var i = 0; i < options.length; i++) {
-        const option = options[i];
-        option.addEventListener('click', function() {
+    for(let i = 0; i < category.length; i++) {
+        const option = category[i];
+        console.log(categoriesLabels);
+        var localCategoriesLabels = categoriesLabels;
+        option.addEventListener('click', () => {
+            console.log('parent: ');
+            console.log(parent.categoriesLabels);
             text.innerHTML = option.innerHTML;
-            optionsList.classList.remove('options-list--opened');
+            categoryList.classList.remove('options-list--opened');
 
             categoriesList.innerHTML = "";
-            categoriesList.innerHTML +=
-                "<label class='label' for='category" + i + "'>" +
-                    "<input id='category" + i + "' type='checkbox' name='favorite1' value='" + option.innerHTML + "' checked/>" +
-                    "<span>" + option.innerHTML + "</span>" +
-                "</label>";
-            categoriesList.innerHTML +=
-                "<label class='label' for='category" + 1 + "'>" +
-                    "<input id='category" + 1 + "' type='checkbox' name='favorite1' value='" + option.innerHTML + "' checked/>" +
-                    "<span>" + option.innerHTML + "</span>" +
-                "</label>";
-            categoriesList.innerHTML +=
-                "<label class='label' for='category" + 2 + "'>" +
-                    "<input id='category" + 2 + "' type='checkbox' name='favorite1' value='" + option.innerHTML + "' checked/>" +
-                    "<span>" + option.innerHTML + "</span>" +
-                "</label>";
+            console.log(parent.categoriesLabels);
+            console.log(i);
+            parent.categoriesLabels[i].forEach((optionText, j) => {
+                categoriesList.innerHTML += `
+                    <label class="label" for="category${j}">
+                        <input id="category${j}" type="checkbox" name="category${j}" value="${optionText}" checked/>
+                        <span>${optionText}</span>
+                    </label>
+                `;
+
+            });
+
 
 
             var checkboxes = document.querySelectorAll('.chart-settings-contianer .categories-list input');
