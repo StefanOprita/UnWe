@@ -30,15 +30,15 @@
                 </a>
             </div>
         </header>
-   
-        <form class="login-form"  method="post" onsubmit="submitLoginForm(); return false;">
+
+        <form class="login-form" action="/action_page.php" method="post">
             <label class="collision-box" for="uname"><b>Username</b></label>
-            <input class="collision-box" type="text" placeholder="Enter Username" id="uname" required>
+            <input class="collision-box" type="text" placeholder="Enter Username" name="uname" required>
 
             <label class="collision-box" for="psw"><b>Password</b></label>
-            <input class="collision-box" type="password" placeholder="Enter Password" id="psw" required>
+            <input class="collision-box" type="password" placeholder="Enter Password" name="psw" required>
 
-            <button type="submit" name="button1" class="button collision-box" onclick="console.log('aaaaaaaaaa')"><span>Login</span></button>
+            <button type="submit" class="collision-box" type="button" name="button1" class="button collision-box" onclick="console.log('aaaaaaaaaa')"><span>Login</span></button>
 
             <label class="collision-box">
                 <input type="checkbox" name="remember">
@@ -56,8 +56,7 @@
     <link rel="stylesheet" href="/public/css/style.css">
 
     <script src="/public/js/theme.js"></script>
-    <!-- <script src="/public/js/script-home.js"></script> -->
-    <script src="/public/js/login.js"></script>
+    <script src="/public/js/script-home.js"></script>
     <script src="/public/js/info.js"></script>
     <script src="/public/js/dot.js"></script>
     <script src="/public/js/box.js"></script>
