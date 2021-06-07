@@ -19,10 +19,10 @@
             <div class="title collision-box">Un<span>We</span></div>
             <div class="menu-button"><span class="material-icons">menu</span></div>
             <div class="menu collision-box">
-                <a class="item item--selected" href="/public/home">Home</a>
+                <a class="item" href="/public/home">Home</a>
                 <a class="item" href="/public/statistics">Statistics</a>
                 <a class="item" href="/public/api">API</a>
-                <a class="item" href="/public/login">Login</a>
+                <a class="item item--selected" href="/public/login">Login</a>
                 <a class="item theme">
                     <span class="material-icons theme-dark-button">dark_mode</span>
                     <span class="material-icons theme-light-button">light_mode</span>

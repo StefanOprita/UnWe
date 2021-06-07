@@ -1,0 +1,41 @@
+#api-canvas
+    position: fixed
+    width: 100%
+    margin: auto
+    z-index: -1
+
+.examples
+    width: 60%
+    margin-left: auto
+    margin-right: auto
+    margin-bottom: 8em
+    font-family: 'Ubuntu'
+    color: var(--color-on-surface)
+    transition: 0.25s
+    text-align: center
+    @media (max-width: $menuLayoutThreshold)
+        width: 85%
+    .snippet
+        border-radius: 5px
+        padding: 10px 0px
+    h2
+        text-align: left
+    h3
+        text-align: left
+    .text
+        font-family: 'Roboto'
+        font-weight: 300
+        letter-spacing: 1px
+        font-size: 1.3em
+        text-align: left
+
+        ul
+            li
+                margin-top: 15px
+
+pre, code
+    overflow: auto
+    word-wrap: normal
+    white-space: pre
+    padding: 0
+    margin: 0

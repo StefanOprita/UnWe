@@ -5,7 +5,7 @@
         "node-sass": "^5.0.0"
     },
     "scripts": {
-        "dev": "node-sass -w public/style.sass public/style.css",
+        "dev": "node-sass -rw public/css/style.sass public/css/style.css --output-style compressed",
         "dev2": "node-sass -w documentation/style.sass documentation/style.css",
         "build:css": "node-sass public/style.sass public/style.css"
     }
