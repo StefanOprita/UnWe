@@ -33,8 +33,8 @@
         </header>
 
         <div class="info-box">
-            <p class="info collision-box">There are <span>350</span> unemployed people in Romania.</p>
-            <p class="info last-info collision-box">There are <span>350</span> unemployed people.</p>
+            <p class="info collision-box">There are <span id='total-unemployed'>350</span> unemployed people in Romania.</p>
+            <p class="info last-info collision-box">There are <span id='county-unemployed'>350</span> unemployed people.</p>
             <div class="button-box">
                 <a href="/public/statistics"><button type="button" name="button1" class="button button-first collision-box"><span>Statistics</span></button></a>
                 <a href="/public/api"><button type="button" name="button2" class="button collision-box"><span>API</span></button></a>

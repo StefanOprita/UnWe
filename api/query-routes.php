@@ -297,6 +297,17 @@ function advancedQuery($params, $queryParams, $body, $headers)
         }
 
 
+        if($startYear == 2021) {
+            $startMonth = min(2, $startMonth);
+        }
+
+        if($endYear == 2021) {
+            $endMonth = min(2, $endMonth);
+        }
+
+
+        
+
         if (array_key_exists('categories', $queryParams))
             $categs = explode('+', $queryParams['categories']);
         else
