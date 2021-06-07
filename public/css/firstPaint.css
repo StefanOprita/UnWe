@@ -27,3 +27,35 @@ html, body {
     position: absolute;
     transform: translateX(-100%) translateY(-100%);
 }
+
+.header {
+    position: relative;
+    width: 70vw;
+    height: auto;
+    min-height: 4em;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.title {
+    position: relative;
+    margin-left: 1em;
+    margin-top: .3em;
+    float: left;
+    transition: .25s;
+}
+
+.menu {
+    position: relative;
+    float: right;
+    display: flex;
+    top: 2.1em;
+    z-index: 1;
+}
+
+.info-box {
+    width: 90%;
+    max-width: 980px;
+    margin: auto;
+    text-align: center;
+}
