@@ -31,7 +31,7 @@ class DBManager {
         return self::$conn;
     }
 
-    private function getArrayTypes($array) {
+    private static function getArrayTypes($array) {
         $bindTypes = '';
         for($i = 0; $i < count($array); $i++) {
             $c = getType($array[$i])[0];
@@ -45,7 +45,7 @@ class DBManager {
         return $bindTypes;
     }
 
-    public function execSelect($query, $binds=[]) {
+    public static function execSelect($query, $binds=[]) {
         $stmt = self::$conn->prepare($query);
         if(!empty($binds)) $stmt->bind_param(self::getArrayTypes($binds), ...$binds);
         if(!$stmt->execute()) return false;
@@ -62,7 +62,7 @@ class DBManager {
         return $rows;
     }
 
-    public function execInsert($query, $binds=[]) {
+    public static function execInsert($query, $binds=[]) {
         $stmt = self::$conn->prepare($query);
         if($stmt == false) {
             // echo 'insert failed(prepare returns false)<br>' . $query;
