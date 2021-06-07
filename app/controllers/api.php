@@ -5,7 +5,7 @@ class Api extends Controller {
         $user = $this->model('User');
         //$user->name = $name;
 
-        $this->view('api/index.html', ['name' => $user->name, 'pageId' => 'admin']);
+        $this->view('api/index.php', ['name' => $user->name, 'pageId' => 'api']);
     }
 
     public function query($params = []) {
