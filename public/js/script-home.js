@@ -3,42 +3,8 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
     setAnimation();
 
-    getNumbersToDisplay();
     //testAdminApi();
 });
-
-async function getNumbersToDisplay() {
-    //o sa luam noi cum trebuia anul si luna... ramane asa pe moment
-    var res = await fetch(
-        "/api/query?counties=all" +
-        "&startingYear=2021" +
-        "&startMonth=6" +
-        "&endingYear=2021" +
-        "&endMonth=6" 
-    );
-
-    var jsonResponse = await res.json();
-
-    var total = 0;
-    console.log(jsonResponse);
-
-    console.log(jsonResponse[0].counties);    
-
-    for (const key in jsonResponse[0].counties) {
-        if (Object.hasOwnProperty.call(jsonResponse[0].counties, key)) {
-            const county = jsonResponse[0].counties[key];
-            total += county.total;
-        }
-    }
-
-    console.log(total);
-    document.getElementById('total-unemployed').innerText = total;
-    // obj.counties.forEach(county => {
-    //     total += county['total'];
-    // });
-    // console.log(total);
-
-}
 
 async function testAdminApi() {
     console.log("ieeeeeei");
