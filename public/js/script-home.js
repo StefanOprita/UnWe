@@ -2,7 +2,45 @@ window.addEventListener('DOMContentLoaded', (event) => {
     setUX();
 
     setAnimation();
+
+    testAdminApi();
 });
+
+async function testAdminApi() {
+    console.log("ieeeeeei");
+    JSON.stringify({
+        username: 'Stefan',
+        password: '1234'
+    });
+    var rawResponse = await fetch('/api/admin/login', {
+        method: 'POST',
+        body:JSON.stringify({
+            username: 'Stefan',
+            password: '1234'
+        })
+    });
+
+    var content = await rawResponse.json();
+    console.log(content);
+    
+    
+    rawResponse = await fetch('/api/admin/logged', {
+        method: 'POST',
+    });
+
+    content = await rawResponse.json();
+    console.log(content);
+    
+    // fetch('/api/admin/create', {
+    //     method: 'POST',
+    //     body: JSON.stringify({
+    //         username: "Stefan",
+    //         password: "1234"
+    //     })
+    // }).then(response => response.text())
+    // .then(json => console.log(json));
+    //console.log(content);
+}
 
 function setUX() {
     menuBtn = document.getElementsByClassName('menu-button')[0];
