@@ -40,8 +40,8 @@ var MyPieChart = function(ctx, colors) {
                 }
             }
         });
-        chart.canvas.parentNode.style.width = '100vw';
-        chart.canvas.parentNode.style.height = '100vh';
+        // chart.canvas.parentNode.style.width = '100vw';
+        // chart.canvas.parentNode.style.height = '100vh';
 
         return chart;
     }
