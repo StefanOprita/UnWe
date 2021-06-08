@@ -3,7 +3,6 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
     setAnimation();
 
-    getNumbersToDisplay();
     //testAdminApi();
 });
 
@@ -68,6 +67,7 @@ async function getNumbersToDisplay() {
     // console.log(total);
 
 }
+
 
 async function testAdminApi() {
     console.log("ieeeeeei");
