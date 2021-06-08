@@ -63,12 +63,6 @@
             </div>
 
             <div class="chart-settings-contianer">
-                <div class="aaa">
-
-                </div>
-                <div class="aaa">
-
-                </div>
                 <div class="download-options chart-setting collision-box">
                     <span class="download" onclick="downloadChart()">Download</span>
                     <span class="option option--selected svg">svg</span>/
