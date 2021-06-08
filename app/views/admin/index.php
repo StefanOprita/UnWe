@@ -15,11 +15,11 @@
     <div class="container">
         <div class="background"></div>
         <img id="dot" src="/public/dot.svg" alt="">
-        <canvas id="canvas"></canvas>
+        <!-- <canvas id="canvas"></canvas> -->
         <?php include "../app/views/components/header.php" ?>
 
         <div class="admin-container">
-            <label class="add collision-box"><b>Add</b></label>
+            <label class="add collision-box"><b>Insert</b></label>
             <form class="add-form" action="/action_page.php" method="post">
                 <input class="collision-box" type="number" step="1" min="1970" max="2999" placeholder="Year" name="uname" required>
                 <input class="collision-box" type="number" step="1" min="1" max="12" placeholder="Month" name="uname" required>
@@ -47,9 +47,9 @@
                 <div class="break"></div>
 
                 <button type="submit" class="collision-box" type="button" name="button1" class="button collision-box"><span>Insert</span></button>
-
             </form>
 
+            <label class="add collision-box"><b>Remove</b></label>
             <form class="remove-form" action="/action_page.php" method="post">
                 <input class="collision-box" type="number" step="1" min="1970" max="2999" placeholder="Year" name="uname" required>
                 <input class="collision-box" type="number" step="1" min="1" max="12" placeholder="Month" name="uname" required>
@@ -58,7 +58,6 @@
                 <div class="break"></div>
 
                 <button type="submit" class="collision-box" type="button" name="button1" class="button collision-box"><span>Remove</span></button>
-
             </form>
         </div>
 
