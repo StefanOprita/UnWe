@@ -31,7 +31,9 @@ $admin_routes = [
 
 function addEntry($params, $queryParams, $body, $headers) {
     //DBManager::execInsert($sqlString, [........])
+    echo "aici e ceva";
     header("Content-Type: application/json");
+    echo "pana aici e bine";
     if(!tokenCheck()) {
         http_response_code(400);
         echo json_encode([
@@ -40,10 +42,43 @@ function addEntry($params, $queryParams, $body, $headers) {
         ]);
         return;
     }
+    echo "  facurai token";
     //logica
+    $year=$body['year'];
+    $month=$body['month'];
+    $county=$body['county'];
+    $sub25=$body['sub25'];
+    $from25to29=$body['from25to29'];
+    $from30to39=$body['from30to39'];
+    $from40to49=$body['from40to49'];
+    $from50to55=$body['from50to55'];
+    $over55=$body['over55'];
+    $male=$body['male'];
+    $female=$body['female'];
+    $noedu=$body['noedu'];
+    $primary=$body['primary'];
+    $middle=$body['middle'];
+    $high=$body['high'];
+    $bachelors=$body['bachelors'];
+    $post=$body['post'];
+    $prof=$body['prof'];
+    $urban=$body['urban'];
+    $rural=$body['rural'];
+    $comp=$body['comp'];
+    $nonComp=$body['nonComp'];
     
+
+
+    $sqlString = 'INSERT INTO information(year,month,judet,sub_25,25_29,30_39,40_49,50_55,peste_55,total_barbati,total_femei,fara_studii,
+    invatamant_primar,invatamant_gimnazial,invatamant_liceal,invatamant_universitar,invatamant_post,invatamant_profesional,total_urban,
+    total_rural,indemnizati,neindemnizati) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)';
+
+    DBManager::execInsert($sqlString, [$year,$month,$county,$sub25,$from25to29,$from30to39,$from40to49,$from50to55,$over55,$male,$female,$noedu,
+    $primary,$middle,$high,$bachelors,$post,$prof,$urban,$rural,$comp,$nonComp]);
+
+    http_response_code(200);
     echo json_encode([
-        'message' => 'Totu bine'
+        'message' => 'Succesfully inserted'
     ]);
 }
 
