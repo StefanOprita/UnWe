@@ -6,6 +6,69 @@ window.addEventListener('DOMContentLoaded', (event) => {
     //testAdminApi();
 });
 
+async function getNumbersToDisplay() {
+    //o sa luam noi cum trebuia anul si luna... ramane asa pe moment
+    var res = await fetch(
+        "/api/query?counties=all" +
+        "&startingYear=2021" +
+        "&startMonth=6" +
+        "&endingYear=2021" +
+        "&endMonth=6" 
+    );
+
+    var jsonResponse = await res.json();
+
+    var total = 0;
+    console.log(jsonResponse);
+
+    console.log(jsonResponse[0].counties);    
+
+    for (const key in jsonResponse[0].counties) {
+        if (Object.hasOwnProperty.call(jsonResponse[0].counties, key)) {
+            const county = jsonResponse[0].counties[key];
+            total += county.total;
+        }
+    }
+
+    document.getElementById('total-unemployed').innerText = total;
+
+    document.getElementsByClassName('info')[0].style.fontSize = '3em';
+
+
+    res = await fetch('http://ip-api.com/json');
+
+    jsonResponse = await res.json();
+    
+
+
+    document.getElementById('county-unemployed-name').innerText = jsonResponse.regionName;
+
+    var region = jsonResponse.region
+
+    res = await fetch(
+        "/api/query?counties=" + region + 
+        "&startingYear=2021" +
+        "&startMonth=6" +
+        "&endingYear=2021" +
+        "&endMonth=6" 
+    );
+
+    var jsonResponse = await res.json();
+
+
+    document.getElementById('county-unemployed').innerText =  jsonResponse[0].counties[region.toLowerCase()].total
+
+
+    document.getElementsByClassName('last-info')[0].style.fontSize = '1.7em';
+
+    // obj.counties.forEach(county => {
+    //     total += county['total'];
+    // });
+    // console.log(total);
+
+}
+
+
 async function testAdminApi() {
     console.log("ieeeeeei");
     JSON.stringify({
