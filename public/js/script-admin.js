@@ -1,14 +1,13 @@
 window.addEventListener('DOMContentLoaded', (event) => {
-    //verifyLogOn();
+    verifyLogOn();
     setUX();
 
     setAnimation();
     //testAdminApi();
 });
 
-
-//functia asta nu mai e folosita
 async function verifyLogOn() {
+    console.log(' oaihsdoiajdoijaoisd');
     rawResponse = await fetch('/api/admin/logged', {
         method: 'POST',
     });
@@ -16,7 +15,7 @@ async function verifyLogOn() {
     content = await rawResponse.json();
     console.log(content); 
     if(!content.ok) {
-        window.location.replace('/public/admin');
+        console.log('nu e bine:(');
     }
 }
 

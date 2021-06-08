@@ -3,7 +3,6 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
     setAnimation();
 
-    getNumbersToDisplay();
     //testAdminApi();
 });
 
