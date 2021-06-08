@@ -93,7 +93,7 @@ class DBManager {
         }
     }
 
-    public function execDelete($query, $binds=[]) {
+    public static function execDelete($query, $binds=[]) {
         $stmt = self::$conn->prepare($query);
         if(!empty($binds)) $stmt->bind_param(self::getArrayTypes($binds), ...$binds);
 
