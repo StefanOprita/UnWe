@@ -1,5 +1,9 @@
+.container
+    height: auto
+
 .admin-container
     width: 70%
+    height: auto
     margin: auto
     margin-top: 8em
 
@@ -24,19 +28,16 @@
         border-color: var(--color-surface)
         text-align: center
 
-        @media (max-width: $menuLayoutThreshold)
-            width: 80%
-            margin-top: 5em
-
         input
             width: 5em
-            height: 2em
+            // height: 2.2em
             margin-right: .5em
             margin-bottom: .6em
-            padding: 16px 8px
-            font-size: .9em
+            padding: 8px
+            font-size: 1em
             font-weight: 300
             font-family: 'Ubuntu'
+            text-align: center
             border: 1px solid var(--color-primary)
             color: var(--color-primary)
             background-color: transparent
@@ -45,6 +46,7 @@
             &::placeholder
                 color: var(--color-on-surface)
                 opacity: .6
+                font-size: .95em
 
             &::-webkit-inner-spin-button,
             &::-webkit-outer-spin-button
