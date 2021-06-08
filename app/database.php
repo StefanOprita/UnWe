@@ -53,6 +53,7 @@ class DBManager {
         $data = $stmt->get_result();
         $rows = $data->fetch_all(MYSQLI_ASSOC);
 
+
         // for($i = 0; $i < count($rows); $i++) {
         //     echo implode(' - ', $rows[$i]) . '<br>';
         // }
