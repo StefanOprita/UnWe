@@ -34,8 +34,10 @@ class Query {
         $selectString =  file_get_contents('select.sql', FILE_USE_INCLUDE_PATH);
 
         $countyList = implode(',', array_fill(0, count($this->counties), '?'));
+        
 
         $countyList = '(' . $countyList . ')';
+        
         $conn = DBManager::getConnection();
 
         //inlocuim lista de judete cu ? ca sa putem face bind
@@ -50,6 +52,8 @@ class Query {
         array_push($params, ...$this->counties);
 
         $toReturn = [];
+
+
 
         $results = DBManager::execSelect($selectString, $params);
 

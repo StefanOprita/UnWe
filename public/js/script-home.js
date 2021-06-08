@@ -1,4 +1,7 @@
 window.addEventListener('DOMContentLoaded', (event) => {
+
+    getNumbersToDisplay();
+
     setUX();
 
     setAnimation();
