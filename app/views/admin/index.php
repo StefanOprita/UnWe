@@ -15,7 +15,7 @@
     <div class="container">
         <div class="background"></div>
         <img id="dot" src="/public/dot.svg" alt="">
-        <!-- <canvas id="canvas"></canvas> -->
+        <canvas id="canvas"></canvas>
         <?php include "../app/views/components/header.php" ?>
 
         <div class="admin-container">
