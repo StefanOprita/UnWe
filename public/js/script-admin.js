@@ -13,7 +13,7 @@ async function verifyLogOn() {
     });
 
     content = await rawResponse.json();
-    console.log(content); 
+    console.log(content);
     if(!content.ok) {
         console.log('nu e bine:(');
     }
@@ -36,15 +36,15 @@ async function testAdminApi() {
 
     // var content = await rawResponse.json();
     // console.log(content);
-    
-    
+
+
     // rawResponse = await fetch('/api/admin/logged', {
     //     method: 'POST',
     // });
 
     // content = await rawResponse.json();
     // console.log(content);
-    
+
     // fetch('/api/admin/create', {
     //     method: 'POST',
     //     body: JSON.stringify({
@@ -82,7 +82,7 @@ function setAnimation() {
     var ctx = canvas.getContext('2d');
 
     canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
+    canvas.height = window.innerHeight - 10;
 
     screenWidth = canvas.width;
     screenHeight = canvas.height;

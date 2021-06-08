@@ -1,0 +1,110 @@
+.container
+    // height: auto
+
+.admin-container
+    width: 70%
+    height: auto
+    margin: auto
+    margin-top: 8em
+
+    @media (max-width: $menuLayoutThreshold)
+        width: 90%
+        margin-top: 5em
+
+    label
+        font-size: 1.4em
+        font-weight: 500
+        font-family: 'Ubuntu'
+        color: var(--color-on-surface)
+        text-align: left
+
+    form
+        display: flex
+        flex-direction: row
+        width: 100%
+        margin-top: .6em
+        margin-bottom: 2em
+        flex-wrap: wrap
+        border-color: var(--color-surface)
+        text-align: center
+
+        input
+            width: 5em
+            // height: 2.2em
+            margin-right: .5em
+            margin-bottom: .6em
+            padding: 8px
+            font-size: 1em
+            font-weight: 300
+            font-family: 'Ubuntu'
+            text-align: center
+            border: 1px solid var(--color-primary)
+            color: var(--color-primary)
+            background-color: transparent
+            box-sizing: border-box
+
+            &::placeholder
+                color: var(--color-on-surface)
+                opacity: .6
+                font-size: .95em
+
+            &::-webkit-inner-spin-button,
+            &::-webkit-outer-spin-button
+                -webkit-appearance: none
+                margin: 0
+
+        .break
+            width: 100%
+            height: 0
+
+        button
+            position: relative
+            display: inline-block
+            width: 8em
+            height: 2.2em
+            // margin-top: .5em
+            border: 1px solid var(--color-primary)
+            font-family: 'Ubuntu'
+            font-size: 1.1em
+            font-weight: 600
+            text-transform: uppercase
+            letter-spacing: 2px
+            color: var(--color-primary)
+            background-color: transparent
+            transition: .25s
+            overflow: hidden
+
+            span
+                display: block
+                position: relative
+
+            &:first-of-type
+                background-color: var(--color-secondary)
+                color: var(--color-on-surface-variant)
+                border: none
+
+            &:first-of-type:hover
+                background-color: var(--color-primary)
+                color: var(--color-on-surface)
+
+            &:hover
+                cursor: pointer
+                background-color: var(--color-primary)
+
+            &:hover span
+                color: var(--color-on-surface)
+
+            &:hover::before
+                width: 100%
+                left: 0
+
+            &::before
+                content: ''
+                position: absolute
+                width: 0
+                height: 100%
+                right: 0
+                bottom: 0
+                left: auto
+                background-color: var(--color-primary)
+                transition: .25s
