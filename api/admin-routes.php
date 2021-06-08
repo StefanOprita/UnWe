@@ -26,7 +26,8 @@ function isLoggedOn($params, $queryParams, $body, $headers) {
     http_response_code(200);
     echo json_encode([
         "code" => 200,
-        "message" => ($check)? 'Yes': 'No'
+        "message" => ($check)? 'Yes': 'No',
+        "ok" => $check
     ]);
 }
 
