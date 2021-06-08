@@ -19,12 +19,12 @@
 
         <div class="admin-container">
             <label class="add collision-box"><b>Insert</b></label>
-            <form class="add-form" action="/action_page.php" method="post">
+            <form class="add-form" onsubmit="addEntry(); return false;">
                 <input class="collision-box" type="number" step="1" min="1970" max="2999" placeholder="Year" name="uname" required>
                 <input class="collision-box" type="number" step="1" min="1" max="12" placeholder="Month" name="uname" required>
-                <input class="collision-box" type="text" placeholder="County" name="uname" required>
-                <input class="collision-box" type="number" step="1" min="0" placeholder="< 25" name="uname" required>
-                <input class="collision-box" type="number" step="1" min="0" placeholder="25 - 29" name="uname" required>
+                <input class="collision-box" type="text" placeholder="County" name="uname" required id='county'>
+                <input class="collision-box" type="number" step="1" min="0" placeholder="< 25" name="uname" required >
+                <input class="collision-box" type="number" step="1" min="0" placeholder="25 - 29" name="uname" required >
                 <input class="collision-box" type="number" step="1" min="0" placeholder="30 - 39" name="uname" required>
                 <input class="collision-box" type="number" step="1" min="0" placeholder="40 - 49" name="uname" required>
                 <input class="collision-box" type="number" step="1" min="0" placeholder="50 - 55" name="uname" required>
@@ -49,10 +49,10 @@
             </form>
 
             <label class="add collision-box"><b>Remove</b></label>
-            <form class="remove-form" action="/action_page.php" method="post">
-                <input class="collision-box" type="number" step="1" min="1970" max="2999" placeholder="Year" name="uname" required>
-                <input class="collision-box" type="number" step="1" min="1" max="12" placeholder="Month" name="uname" required>
-                <input class="collision-box" type="text" placeholder="County" name="uname" required>
+            <form class="remove-form" onsubmit="deleteEntry(); return false;">
+                <input class="collision-box" type="number" step="1" min="1970" max="2999" placeholder="Year" name="uname" required id='remove-year'>
+                <input class="collision-box" type="number" step="1" min="1" max="12" placeholder="Month" name="uname" required id='remove-month'>
+                <input class="collision-box" type="text" placeholder="County" name="uname" required id='remove-county'>
 
                 <div class="break"></div>
 

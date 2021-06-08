@@ -15,8 +15,74 @@ $admin_routes = [
         'method' => 'GET',
         'url' => '/api/admin/logged',
         'handler' => 'isLoggedOn'
+    ],
+    [
+        'method' => 'DELETE',
+        'url' => '/api/admin/:county/:year/:month',
+        'handler' => 'removeEntry'
+    ],
+    [
+        'method' => 'POST',
+        'url' => '/api/admin/info',
+        'handler' => 'addEntry'
     ]
 ];
+
+
+function addEntry($params, $queryParams, $body, $headers) {
+    //DBManager::execInsert($sqlString, [........])
+    header("Content-Type: application/json");
+    if(!tokenCheck()) {
+        http_response_code(400);
+        echo json_encode([
+            'code' => 400,
+            'message' => 'User not logged in!'
+        ]);
+        return;
+    }
+    //logica
+    
+    echo json_encode([
+        'message' => 'Totu bine'
+    ]);
+}
+
+function removeEntry($params, $queryParams, $body, $headers) {
+    header("Content-Type: application/json");
+    if(!tokenCheck()) {
+        http_response_code(400);
+        echo json_encode([
+            'code' => 400,
+            'message' => 'User not logged in!'
+        ]);
+        return;
+    }
+    $countyName = Query::validateCounty($params['county']);
+    global $countyIdToNames;
+    if(array_key_exists($countyName, $countyIdToNames)) {
+        $countyName = $countyIdToNames[$countyName];
+    }
+
+    if($countyName === 'N/A') {
+        http_response_code(400);
+        echo json_encode([
+            'code' => 400,
+            'message' => $params['county'] . ' is not a valid county name!'
+        ]);
+        return;
+    }
+
+    $sqlString = 'DELETE FROM information WHERE year = ? AND month = ? AND (judet = ?)';
+
+    
+    DBManager::execDelete($sqlString, [$params['year'], $params['month'], $countyName]);
+    http_response_code(200);
+    echo json_encode([
+        'code' => 200,
+        'message' => 'Succesfully deleted '. $countyName . '!'
+    ]);
+}
+
 
 function isLoggedOn($params, $queryParams, $body, $headers) {
     header("Content-Type: application/json");
@@ -60,7 +126,7 @@ function loginAdmin($params, $queryParams, $body, $headers) {
 
     if($match) {
         $token = bin2hex(random_bytes(64));
-        setcookie("token", $token, 0, "", "", false, true);
+        setcookie("token", $token, 0, "/public/admin", "", false, true);
         saveAuthToken($token);
     }
 

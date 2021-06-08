@@ -1,5 +1,5 @@
 window.addEventListener('DOMContentLoaded', (event) => {
-    verifyLogOn();
+    //verifyLogOn();
     setUX();
 
     setAnimation();
@@ -54,6 +54,64 @@ async function testAdminApi() {
     // }).then(response => response.text())
     // .then(json => console.log(json));
     //console.log(content);
+}
+
+/*
+
+Valorea pt Harghita 22
+HUNEDOARA
+6423
+3212
+3211
+3243
+3180
+3.64
+3.89
+3.42
+4374
+2190
+2184
+2049
+1022
+1027
+502
+497
+1544
+1870
+128
+1336
+546
+855
+418
+1300
+1509
+798
+829
+1
+2019
+*/
+
+async function deleteEntry() {
+    var year = document.getElementById('remove-year').value;
+    var month = document.getElementById('remove-month').value;
+    var county = document.getElementById('remove-county').value;
+
+    var uri = '/api/admin/' + county + '/' + year + '/' + month;
+
+    
+
+    var rawResponse = await fetch(uri, {
+        method: 'DELETE'
+    });
+
+    var json = await rawResponse.text();
+
+    console.log(json);
+
+}
+
+async function addEntry() {
+    console.log('merge adaugarea');
 }
 
 function setUX() {
