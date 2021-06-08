@@ -35,12 +35,12 @@
 
         <form class="login-form" action="/action_page.php" method="post">
             <label class="collision-box" for="uname"><b>Username</b></label>
-            <input class="collision-box" type="text" placeholder="Enter Username" name="uname" required>
+            <input id="uname" class="collision-box" type="text" placeholder="Enter Username" name="uname" required>
 
             <label class="collision-box" for="psw"><b>Password</b></label>
-            <input class="collision-box" type="password" placeholder="Enter Password" name="psw" required>
+            <input id="psw" class="collision-box" type="password" placeholder="Enter Password" name="psw" required>
 
-            <button type="submit" class="collision-box" type="button" name="button1" class="button collision-box" onclick="console.log('aaaaaaaaaa')"><span>Login</span></button>
+            <button type="submit" class="button collision-box" name="button1"><span>Login</span></button>
 
             <label class="collision-box">
                 <input type="checkbox" name="remember">

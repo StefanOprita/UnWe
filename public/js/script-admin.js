@@ -82,7 +82,7 @@ function setAnimation() {
     var ctx = canvas.getContext('2d');
 
     canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight - 10;
+    canvas.height = window.innerHeight;
 
     screenWidth = canvas.width;
     screenHeight = canvas.height;
