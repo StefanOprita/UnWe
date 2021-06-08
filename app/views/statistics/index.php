@@ -7,12 +7,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Unemployment in Romania</title>
     <link rel="shortcut icon" href="/public/unwe.ico">
-    <link rel="stylesheet" href="/public/css/hidden.css">
-
+    <!-- <link rel="stylesheet" href="/public/css/hidden.css"> -->
+    <meta name="description" content="UnEmployment website">
 
 </head>
 
-<body style="background-color: black;">
+<body>
 
     <div class="statistics-container">
         <div class="background"></div>

@@ -8,8 +8,6 @@ class App {
     protected $params = [];
 
     public function __construct() {
-        // echo 'test app<br>';
-
         $url = $this->parseUrl();
 
         if(file_exists('../app/controllers/' . $url[0] . '.php')) {
@@ -38,5 +36,6 @@ class App {
         if(isset($_GET['url'])) {
             return $url = explode('/', filter_var(rtrim($_GET['url'], '/'), FILTER_SANITIZE_URL));
         }
+        return ['index'];
     }
 }

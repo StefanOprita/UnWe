@@ -5,11 +5,12 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="UnEmployment website">
     <title>Unemployment in Romania</title>
     <link rel="shortcut icon" href="/public/unwe.ico">
-    <link rel="stylesheet" href="/public/css/hidden.css">
 </head>
-<body style="background-color: black;">
+
+<body>
     <div class="container">
         <div class="background"></div>
         <img id="dot" src="/public/dot.svg" alt="">

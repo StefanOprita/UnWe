@@ -5,13 +5,12 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="UnEmployment website">
     <title>Unemployment in Romania</title>
     <link rel="shortcut icon" href="/public/unwe.ico">
-    <link rel="stylesheet" href="/public/css/hidden.css">
-
 </head>
 
-<body style="background-color: black;">
+<body>
 
     <div class="api-container">
         <div class="background"></div>
@@ -44,59 +43,171 @@
             </div>
             <div class="text">
                 All you have to do it's to send an HTTP request using the <code class="language-http">GET</code> method and with the data parameter set to
-                your search parameters in a <code class="language-http">JSON</code> file. We'll process your request and send you the response in a the form of a <code class="language-http">JSON</code> file
+                your search parameters. We'll process your request and send you the response in a the form of a <code class="language-http">JSON</code> file.
+                <br><br>
+                For example, if you are using <code class="language-http">javascript</code> and you want to send the request to get data about <b>Iasi</b> (all the available information about the unemployment in that county):
+                <div class="snippet">
+                    <pre class="line-numbers">
+                        <code class="language-javascript">
+                            url = "https://unwe2021.herokuapp.com/api/query/is";
+                            var xhr = new XMLHttpRequest();
+                            xhr.open('GET', url, true);
+                            xhr.responseType = 'json';
+                            xhr.onload = function() {
+                                var status = xhr.status;
+                                if (status === 200) {
+                                    callback(null, xhr.response);
+                                } else {
+                                    callback(status, xhr.response);
+                                }
+                            };
+                            xhr.send();
+                        </code>
+                    </pre>
+                </div>
 
-                For example, if you are using <code class="language-http">javascript</code> and you want to send the request with <code class="language-http">AJAX</code>:
             </div>
-            <div class="snippet">
-                <pre class="line-numbers">
-                    <code class="language-javascript">
-                        var xhr = new XMLHttpRequest();
-                        var url = "ourUrl?data=" + encodeURIComponent(JSON.stringify({"yourRequestAsAJSONHere": 0}));
-                        xhr.open("GET", url, true);
-                        xhr.setRequestHeader("Content-Type", "application/json");
-                        xhr.onreadystatechange = function () {
-                            if (xhr.readyState === 4 && xhr.status === 200) {
-                                var json = JSON.parse(xhr.responseText);
-                                console.log(json.email + ", " + json.password);
-                            }
-                        };
-                        xhr.send();
-                    </code>
-                </pre>
-            </div>
-            <h2>Structure of the JSON file</h2>
+
+            <h2>Usage</h2>
             <div class="text">
-                The json object you send can have this keys:
+                There are four routes you can use in order to get acces to our data:
                 <ul>
                     <li>
-                        <code class="language-json">"counties":["countyName1",(...)]</code> - this field <b>CANNOT</b> be missing. It represents the counties
-                        you want information about. Each <code class="language-json">"countyNameX"</code> can either be in full form
-                        (<code class="language-json">"Botoșani"</code>) or their short-form (<code class="language-json">"BT"</code>)
+                        <code class="language-http">https://unwe2021.herokuapp.com/api/query/desired_city</code>
                     </li>
                     <li>
-                        <code class="language-json">"category":["category1",(...)]</code> - if you only want only some information, you can specify it's category
-                        in this field. The possible values for <code class="language-json">"categoryX"</code> are:
-                            <code class="language-json">"total"</code>,
-                            <code class="language-json">"gender"</code>,
-                            <code class="language-json">"compensation"</code>,
-                            <code class="language-json">"education"</code> and
-                            <code class="language-json">"age"</code>
+                        <code class="language-http">https://unwe2021.herokuapp.com/api/query/desired_city/desired_year</code>
                     </li>
                     <li>
-                        <code class="language-json">"years":["year1",(...)]</code> - if you want the statistics from specific years. If this key it's not present in your
-                        request, we'll send information from the curent month of the curent year.
+                        <code class="language-http">https://unwe2021.herokuapp.com/api/query/desired_city/desired_year/desired_month</code>
                     </li>
                     <li>
-                        <code class="language-json">"start": "startingYear" </code> - if you want a range of years, instead of the  <code class="language-json">"years"</code> (or use it in conjunction) field you can use
-                        this one. We'll send information starting from <code class="language-json">"startingYear"</code>
+                        <code class="language-http">https://unwe2021.herokuapp.com/api/query/?counties=list_of_counties</code>
                     </li>
-                    <li>
-                        <code class="language-json">"end": "endYear" </code> - if you want a range of years, instead of the  <code class="language-json">"years"</code> (or use it in conjunction) field you can use
-                        this one. We'll send information up until the year <code class="language-json">"endYear"</code>
-                    </li>
-
                 </ul>
+                The first three URIs shall be used when you only need information about only one county, one year only or one month only, and they all come with
+                the option of using <code class="language-http">?categories=desired_categories</code>.<br><br>
+                The categories you can use (in place of <code class="language-http">desired_categories</code>) are as follows:
+                <code class="language-json">"gender"</code>,
+                <code class="language-json">"compensation"</code>,
+                <code class="language-json">"education"</code>,
+                <code class="language-json">"rate"</code>,
+                <code class="language-json">"environment"</code> and
+                <code class="language-json">"age"</code>.
+
+                <br>
+
+                The fourth one shall be used when you need specific data over a period of time. For example, if we need data about different counties (Iasi and Galati),
+                between <i>2019 December</i> and <i>2020 March</i>, and only the <i>gender</i> we'd use
+                <code class="language-http"> counties=gl+is&startingYear=2019&startMonth=12&endingYear=2020&endMonth=3&categories=gender </code>, and the <code class="language-http">JSON</code> will look like this:
+                <div class="snippet">
+                    <pre class="line-numbers">
+                        <code class="language-json">
+                        [
+   {
+      "year":"2019",
+      "month":"12",
+      "counties":{
+         "gl":{
+            "name":"GALATI",
+            "id":"GL",
+            "total":10578,
+            "gender":{
+               "male":6054,
+               "female":4524
+            }
+         },
+         "is":{
+            "name":"IASI",
+            "id":"IS",
+            "total":8035,
+            "gender":{
+               "male":4403,
+               "female":3632
+            }
+         }
+      }
+   },
+   {
+      "year":2020,
+      "month":1,
+      "counties":{
+         "gl":{
+            "name":"GALATI",
+            "id":"GL",
+            "total":10414,
+            "gender":{
+               "male":6017,
+               "female":4397
+            }
+         },
+         "is":{
+            "name":"IASI",
+            "id":"IS",
+            "total":8011,
+            "gender":{
+               "male":4441,
+               "female":3570
+            }
+         }
+      }
+   },
+   {
+      "year":2020,
+      "month":2,
+      "counties":{
+         "gl":{
+            "name":"GALATI",
+            "id":"GL",
+            "total":10323,
+            "gender":{
+               "male":5960,
+               "female":4363
+            }
+         },
+         "is":{
+            "name":"IASI",
+            "id":"IS",
+            "total":8106,
+            "gender":{
+               "male":4552,
+               "female":3554
+            }
+         }
+      }
+   },
+   {
+      "year":2020,
+      "month":3,
+      "counties":{
+         "gl":{
+            "name":"GALATI",
+            "id":"GL",
+            "total":10247,
+            "gender":{
+               "male":5880,
+               "female":4367
+            }
+         },
+         "is":{
+            "name":"IASI",
+            "id":"IS",
+            "total":7613,
+            "gender":{
+               "male":4232,
+               "female":3381
+            }
+         }
+      }
+   }
+]       
+                        </code>
+                    </pre>
+                </div>
+
+                <b>ATENTION!</b>
+                The parameter "counties" <b>must not</b> be missing from the request, otherwise you won't get any information about any county, only the status:
+                <code class="language-json">{"status":404,"message":"No counties given!"}</code>, so please pay attention!
 
             </div>
             <h2>Examples</h2>
@@ -106,153 +217,918 @@
 
             <h3>Simple search</h3>
             <div class="text">
-                If you want all the information about <code class="language-json">"Botoșani"</code> and <code class="language-json">"Suceava"</code>  from the curent month and year,
-                you'll send this:
+                If you want all the information about <code class="language-json">"Botoșani"</code> from <i>March 2020</i>,
+                you'll send a request to <code class="language-html">https://unwe2021.herokuapp.com/api/query/bt/2020/3</code>.
+                The <code class="language-http">JSON</code> file you'll receive will look like this:
             </div>
             <div class="snippet">
                 <pre class="line-numbers">
                     <code class="language-json">
-                        {
-                            "counties": ["SV", "Botoșani"]
-                        }
+                    [
+   {
+      "name":"BOTOSANI",
+      "id":"BT",
+      "total":3132,
+      "gender":{
+         "male":1742,
+         "female":1390
+      },
+      "compensation":{
+         "compensated":779,
+         "nonCompensated":2353
+      },
+      "education":{
+         "noEducation":170,
+         "primary":1070,
+         "middleschool":774,
+         "highschool":507,
+         "postHighschool":51,
+         "professional":485,
+         "bachelors":75
+      },
+      "rate":{
+         "total":2.3,
+         "male":2.46,
+         "female":2.12
+      },
+      "environment":{
+         "urban":1122,
+         "rural":2010
+      },
+      "age":{
+         "lesser25":199,
+         "from25to29":100,
+         "from30to39":461,
+         "from40to49":925,
+         "from50to55":633,
+         "greater55":814
+      }
+   }
+]
                     </code>
                 </pre>
             </div>
+
+
             <div class="text">
-                The <code class="language-http">JSON</code> file you'll receive would look something like this:
-            </div>
-            <div class="snippet">
-                <pre class="line-numbers">
-                    <code class="language-json">
-                        [
-                        {
-                            "name": "Botoșani",
-                            "id" : "BT",
-                            "total" : 2000,
-                            "gender" : {
-                                "male": 1200,
-                                "female": 800
-                            },
-                            "compensation": {
-                                "compensated": 900,
-                                "not-compensated": 1100
-                            },
-                            "education": {
-                                "no education": 100,
-                                "primary": 400,
-                                "middleschool": 500,
-                                "highschool": 200,
-                                "bachelors": 800
-                            },
-                            "environment": {
-                                "urban": 1300,
-                                "rural": 700
-                            },
-                            "age": {
-                                "&lt;25": 20,
-                                "25-29": 100,
-                                "30-39": 120,
-                                "40-49": 500,
-                                "50-55": 800,
-                                ">55": 460
-                            }
-
-
-
-                        },
-                        {
-                            "name": "Suceava",
-                            "id": "SV",
-                            "total" : 2000,
-                            "gender" : {
-                                "male": 1200,
-                                "female": 800
-                            },
-                            "compensation": {
-                                "compensated": 900,
-                                "not-compensated": 1100
-                            },
-                            "education": {
-                                "no education": 100,
-                                "primary": 400,
-                                "middleschool": 500,
-                                "highschool": 200,
-                                "bachelors": 800
-                            },
-                            "environment": {
-                                "urban": 1300,
-                                "rural": 700
-                            },
-                            "age": {
-                                "&lt;25": 20,
-                                "25-29": 100,
-                                "30-39": 120,
-                                "40-49": 500,
-                                "50-55": 800,
-                                ">55": 460
-                            }
-                        }
-                    ]
-                    </code>
-                </pre>
-            </div>
-            <div class="text">
-                As you can see, it's an array of objects, each object representing a county.
+                Now, let's use the example with the 4th URI used. As you can see, it's an array of objects, each object representing a combination of year and month. The 
+                <code class="language-json">"counties"</code> contains the objects that contain information about required counties.
                 Inside each county object you have all the categories, which themselves are objects that contain keys representing the way they are split up.
             </div>
             <br>
             <h3>Choose categories</h3>
             <div class="text">
-                But maybe you don't want <b>ALL</b> of this information. Maybe you only want the total number of unemployed people:
+                But maybe you don't want <b>ALL</b> of this information. Maybe you only want the total number of unemployed people, divided only into ages:
+                    <code class="language-html">https://unwe2021.herokuapp.com/api/query/?counties=gl+is&categories=age</code>
             </div>
 
             <div class="snippet">
                 <pre class="line-numbers">
                     <code class="language-json">
-                        {
-                            "counties": ["Botoșani", "Suceava"],
-                            "categories": ["total"]
-                        }
-                    </code>
-                </pre>
-            </div>
-
-            <div class="snippet">
-                <pre class="line-numbers">
-                    <code class="language-json">
-                        [
-                        {
-                            "name": "Botoșani",
-                            "id" : "BT",
-                            "total" : 2000
-                        },
-                        {
-                            "name": "Suceava",
-                            "id": "SV",
-                            "total" : 2000,
-                        }
-                        ]
+                    [
+   {
+      "year":2019,
+      "month":1,
+      "counties":{
+         "gl":{
+            "name":"GALATI",
+            "id":"GL",
+            "total":11698,
+            "age":{
+               "lesser25":1752,
+               "from25to29":1107,
+               "from30to39":3691,
+               "from40to49":6037,
+               "from50to55":3623,
+               "greater55":3887
+            }
+         },
+         "is":{
+            "name":"IASI",
+            "id":"IS",
+            "total":8961,
+            "age":{
+               "lesser25":427,
+               "from25to29":215,
+               "from30to39":875,
+               "from40to49":1598,
+               "from50to55":998,
+               "greater55":1135
+            }
+         }
+      }
+   },
+   {
+      "year":2019,
+      "month":2,
+      "counties":{
+         "gl":{
+            "name":"GALATI",
+            "id":"GL",
+            "total":11718,
+            "age":{
+               "lesser25":717,
+               "from25to29":413,
+               "from30to39":1831,
+               "from40to49":3728,
+               "from50to55":2302,
+               "greater55":2727
+            }
+         },
+         "is":{
+            "name":"IASI",
+            "id":"IS",
+            "total":8860,
+            "age":{
+               "lesser25":694,
+               "from25to29":228,
+               "from30to39":1322,
+               "from40to49":2544,
+               "from50to55":1753,
+               "greater55":2319
+            }
+         }
+      }
+   },
+   {
+      "year":2019,
+      "month":3,
+      "counties":{
+         "gl":{
+            "name":"GALATI",
+            "id":"GL",
+            "total":11368,
+            "age":{
+               "lesser25":659,
+               "from25to29":402,
+               "from30to39":1765,
+               "from40to49":3593,
+               "from50to55":2244,
+               "greater55":2705
+            }
+         },
+         "is":{
+            "name":"IASI",
+            "id":"IS",
+            "total":8690,
+            "age":{
+               "lesser25":642,
+               "from25to29":226,
+               "from30to39":1293,
+               "from40to49":2524,
+               "from50to55":1737,
+               "greater55":2268
+            }
+         }
+      }
+   },
+   {
+      "year":2019,
+      "month":4,
+      "counties":{
+         "gl":{
+            "name":"GALATI",
+            "id":"GL",
+            "total":10676,
+            "age":{
+               "lesser25":621,
+               "from25to29":381,
+               "from30to39":1629,
+               "from40to49":3394,
+               "from50to55":2145,
+               "greater55":2506
+            }
+         },
+         "is":{
+            "name":"IASI",
+            "id":"IS",
+            "total":8657,
+            "age":{
+               "lesser25":603,
+               "from25to29":230,
+               "from30to39":1296,
+               "from40to49":2513,
+               "from50to55":1750,
+               "greater55":2265
+            }
+         }
+      }
+   },
+   {
+      "year":2019,
+      "month":5,
+      "counties":{
+         "gl":{
+            "name":"GALATI",
+            "id":"GL",
+            "total":10532,
+            "age":{
+               "lesser25":587,
+               "from25to29":365,
+               "from30to39":1599,
+               "from40to49":3348,
+               "from50to55":2122,
+               "greater55":2511
+            }
+         },
+         "is":{
+            "name":"IASI",
+            "id":"IS",
+            "total":8313,
+            "age":{
+               "lesser25":535,
+               "from25to29":214,
+               "from30to39":1232,
+               "from40to49":2390,
+               "from50to55":1735,
+               "greater55":2207
+            }
+         }
+      }
+   },
+   {
+      "year":2019,
+      "month":6,
+      "counties":{
+         "gl":{
+            "name":"GALATI",
+            "id":"GL",
+            "total":10823,
+            "age":{
+               "lesser25":895,
+               "from25to29":347,
+               "from30to39":1588,
+               "from40to49":3326,
+               "from50to55":2143,
+               "greater55":2524
+            }
+         },
+         "is":{
+            "name":"IASI",
+            "id":"IS",
+            "total":8545,
+            "age":{
+               "lesser25":846,
+               "from25to29":226,
+               "from30to39":1220,
+               "from40to49":2357,
+               "from50to55":1698,
+               "greater55":2198
+            }
+         }
+      }
+   },
+   {
+      "year":2019,
+      "month":7,
+      "counties":{
+         "gl":{
+            "name":"GALATI",
+            "id":"GL",
+            "total":11127,
+            "age":{
+               "lesser25":1318,
+               "from25to29":350,
+               "from30to39":1560,
+               "from40to49":3285,
+               "from50to55":2125,
+               "greater55":2489
+            }
+         },
+         "is":{
+            "name":"IASI",
+            "id":"IS",
+            "total":8387,
+            "age":{
+               "lesser25":926,
+               "from25to29":205,
+               "from30to39":1179,
+               "from40to49":2272,
+               "from50to55":1641,
+               "greater55":2164
+            }
+         }
+      }
+   },
+   {
+      "year":2019,
+      "month":8,
+      "counties":{
+         "gl":{
+            "name":"GALATI",
+            "id":"GL",
+            "total":11127,
+            "age":{
+               "lesser25":1318,
+               "from25to29":350,
+               "from30to39":1560,
+               "from40to49":3285,
+               "from50to55":2125,
+               "greater55":2489
+            }
+         },
+         "is":{
+            "name":"IASI",
+            "id":"IS",
+            "total":8387,
+            "age":{
+               "lesser25":926,
+               "from25to29":205,
+               "from30to39":1179,
+               "from40to49":2272,
+               "from50to55":1641,
+               "greater55":2164
+            }
+         }
+      }
+   },
+   {
+      "year":2019,
+      "month":9,
+      "counties":{
+         "gl":{
+            "name":"GALATI",
+            "id":"GL",
+            "total":11058,
+            "age":{
+               "lesser25":1397,
+               "from25to29":342,
+               "from30to39":1512,
+               "from40to49":3173,
+               "from50to55":2122,
+               "greater55":2512
+            }
+         },
+         "is":{
+            "name":"IASI",
+            "id":"IS",
+            "total":8877,
+            "age":{
+               "lesser25":1274,
+               "from25to29":212,
+               "from30to39":1224,
+               "from40to49":2296,
+               "from50to55":1674,
+               "greater55":2197
+            }
+         }
+      }
+   },
+   {
+      "year":2019,
+      "month":10,
+      "counties":{
+         "gl":{
+            "name":"GALATI",
+            "id":"GL",
+            "total":10624,
+            "age":{
+               "lesser25":1368,
+               "from25to29":373,
+               "from30to39":1469,
+               "from40to49":3063,
+               "from50to55":2037,
+               "greater55":2314
+            }
+         },
+         "is":{
+            "name":"IASI",
+            "id":"IS",
+            "total":8553,
+            "age":{
+               "lesser25":1281,
+               "from25to29":189,
+               "from30to39":1147,
+               "from40to49":2192,
+               "from50to55":1609,
+               "greater55":2135
+            }
+         }
+      }
+   },
+   {
+      "year":2019,
+      "month":11,
+      "counties":{
+         "gl":{
+            "name":"GALATI",
+            "id":"GL",
+            "total":10836,
+            "age":{
+               "lesser25":1359,
+               "from25to29":375,
+               "from30to39":1511,
+               "from40to49":3122,
+               "from50to55":2116,
+               "greater55":2353
+            }
+         },
+         "is":{
+            "name":"IASI",
+            "id":"IS",
+            "total":8242,
+            "age":{
+               "lesser25":1240,
+               "from25to29":196,
+               "from30to39":1098,
+               "from40to49":2130,
+               "from50to55":1518,
+               "greater55":2060
+            }
+         }
+      }
+   },
+   {
+      "year":2019,
+      "month":12,
+      "counties":{
+         "gl":{
+            "name":"GALATI",
+            "id":"GL",
+            "total":10578,
+            "age":{
+               "lesser25":1050,
+               "from25to29":358,
+               "from30to39":1504,
+               "from40to49":3153,
+               "from50to55":2142,
+               "greater55":2371
+            }
+         },
+         "is":{
+            "name":"IASI",
+            "id":"IS",
+            "total":8035,
+            "age":{
+               "lesser25":1150,
+               "from25to29":175,
+               "from30to39":1077,
+               "from40to49":2095,
+               "from50to55":1507,
+               "greater55":2031
+            }
+         }
+      }
+   },
+   {
+      "year":2020,
+      "month":1,
+      "counties":{
+         "gl":{
+            "name":"GALATI",
+            "id":"GL",
+            "total":10414,
+            "age":{
+               "lesser25":748,
+               "from25to29":374,
+               "from30to39":1502,
+               "from40to49":3191,
+               "from50to55":2200,
+               "greater55":2399
+            }
+         },
+         "is":{
+            "name":"IASI",
+            "id":"IS",
+            "total":8011,
+            "age":{
+               "lesser25":878,
+               "from25to29":208,
+               "from30to39":1098,
+               "from40to49":2154,
+               "from50to55":1575,
+               "greater55":2098
+            }
+         }
+      }
+   },
+   {
+      "year":2020,
+      "month":2,
+      "counties":{
+         "gl":{
+            "name":"GALATI",
+            "id":"GL",
+            "total":10323,
+            "age":{
+               "lesser25":682,
+               "from25to29":343,
+               "from30to39":1483,
+               "from40to49":3193,
+               "from50to55":2218,
+               "greater55":2404
+            }
+         },
+         "is":{
+            "name":"IASI",
+            "id":"IS",
+            "total":8106,
+            "age":{
+               "lesser25":824,
+               "from25to29":204,
+               "from30to39":1134,
+               "from40to49":2233,
+               "from50to55":1593,
+               "greater55":2118
+            }
+         }
+      }
+   },
+   {
+      "year":2020,
+      "month":3,
+      "counties":{
+         "gl":{
+            "name":"GALATI",
+            "id":"GL",
+            "total":10247,
+            "age":{
+               "lesser25":590,
+               "from25to29":347,
+               "from30to39":1463,
+               "from40to49":3196,
+               "from50to55":2253,
+               "greater55":2398
+            }
+         },
+         "is":{
+            "name":"IASI",
+            "id":"IS",
+            "total":7613,
+            "age":{
+               "lesser25":585,
+               "from25to29":188,
+               "from30to39":1062,
+               "from40to49":2122,
+               "from50to55":1554,
+               "greater55":2102
+            }
+         }
+      }
+   },
+   {
+      "year":2020,
+      "month":4,
+      "counties":{
+         "gl":{
+            "name":"GALATI",
+            "id":"GL",
+            "total":10350,
+            "age":{
+               "lesser25":568,
+               "from25to29":352,
+               "from30to39":1530,
+               "from40to49":3267,
+               "from50to55":2293,
+               "greater55":2340
+            }
+         },
+         "is":{
+            "name":"IASI",
+            "id":"IS",
+            "total":7909,
+            "age":{
+               "lesser25":570,
+               "from25to29":208,
+               "from30to39":1129,
+               "from40to49":2217,
+               "from50to55":1660,
+               "greater55":2125
+            }
+         }
+      }
+   },
+   {
+      "year":2020,
+      "month":5,
+      "counties":{
+         "gl":{
+            "name":"GALATI",
+            "id":"GL",
+            "total":10350,
+            "age":{
+               "lesser25":568,
+               "from25to29":352,
+               "from30to39":1530,
+               "from40to49":3267,
+               "from50to55":2293,
+               "greater55":2340
+            }
+         },
+         "is":{
+            "name":"IASI",
+            "id":"IS",
+            "total":7909,
+            "age":{
+               "lesser25":570,
+               "from25to29":208,
+               "from30to39":1129,
+               "from40to49":2217,
+               "from50to55":1660,
+               "greater55":2125
+            }
+         }
+      }
+   },
+   {
+      "year":2020,
+      "month":6,
+      "counties":{
+         "gl":{
+            "name":"GALATI",
+            "id":"GL",
+            "total":10768,
+            "age":{
+               "lesser25":742,
+               "from25to29":374,
+               "from30to39":1578,
+               "from40to49":3272,
+               "from50to55":2344,
+               "greater55":2458
+            }
+         },
+         "is":{
+            "name":"IASI",
+            "id":"IS",
+            "total":8446,
+            "age":{
+               "lesser25":477,
+               "from25to29":248,
+               "from30to39":1248,
+               "from40to49":2441,
+               "from50to55":1788,
+               "greater55":2244
+            }
+         }
+      }
+   },
+   {
+      "year":2020,
+      "month":7,
+      "counties":{
+         "gl":{
+            "name":"GALATI",
+            "id":"GL",
+            "total":11726,
+            "age":{
+               "lesser25":1557,
+               "from25to29":381,
+               "from30to39":1600,
+               "from40to49":3313,
+               "from50to55":2374,
+               "greater55":2501
+            }
+         },
+         "is":{
+            "name":"IASI",
+            "id":"IS",
+            "total":9037,
+            "age":{
+               "lesser25":751,
+               "from25to29":240,
+               "from30to39":1284,
+               "from40to49":2568,
+               "from50to55":1881,
+               "greater55":2313
+            }
+         }
+      }
+   },
+   {
+      "year":2020,
+      "month":8,
+      "counties":{
+         "gl":{
+            "name":"GALATI",
+            "id":"GL",
+            "total":11944,
+            "age":{
+               "lesser25":1656,
+               "from25to29":397,
+               "from30to39":1617,
+               "from40to49":3333,
+               "from50to55":2416,
+               "greater55":2525
+            }
+         },
+         "is":{
+            "name":"IASI",
+            "id":"IS",
+            "total":9311,
+            "age":{
+               "lesser25":891,
+               "from25to29":246,
+               "from30to39":1336,
+               "from40to49":2583,
+               "from50to55":1926,
+               "greater55":2329
+            }
+         }
+      }
+   },
+   {
+      "year":2020,
+      "month":9,
+      "counties":{
+         "gl":{
+            "name":"GALATI",
+            "id":"GL",
+            "total":12027,
+            "age":{
+               "lesser25":1628,
+               "from25to29":404,
+               "from30to39":1652,
+               "from40to49":3344,
+               "from50to55":2456,
+               "greater55":2543
+            }
+         },
+         "is":{
+            "name":"IASI",
+            "id":"IS",
+            "total":9078,
+            "age":{
+               "lesser25":923,
+               "from25to29":250,
+               "from30to39":1324,
+               "from40to49":2523,
+               "from50to55":1838,
+               "greater55":2220
+            }
+         }
+      }
+   },
+   {
+      "year":2020,
+      "month":10,
+      "counties":{
+         "gl":{
+            "name":"GALATI",
+            "id":"GL",
+            "total":11677,
+            "age":{
+               "lesser25":1621,
+               "from25to29":415,
+               "from30to39":1623,
+               "from40to49":3280,
+               "from50to55":2375,
+               "greater55":2363
+            }
+         },
+         "is":{
+            "name":"IASI",
+            "id":"IS",
+            "total":9026,
+            "age":{
+               "lesser25":895,
+               "from25to29":241,
+               "from30to39":1283,
+               "from40to49":2552,
+               "from50to55":1839,
+               "greater55":2216
+            }
+         }
+      }
+   },
+   {
+      "year":2020,
+      "month":11,
+      "counties":{
+         "gl":{
+            "name":"GALATI",
+            "id":"GL",
+            "total":12092,
+            "age":{
+               "lesser25":1633,
+               "from25to29":436,
+               "from30to39":1692,
+               "from40to49":3418,
+               "from50to55":2432,
+               "greater55":2481
+            }
+         },
+         "is":{
+            "name":"IASI",
+            "id":"IS",
+            "total":9132,
+            "age":{
+               "lesser25":897,
+               "from25to29":245,
+               "from30to39":1329,
+               "from40to49":2576,
+               "from50to55":1859,
+               "greater55":2226
+            }
+         }
+      }
+   },
+   {
+      "year":2020,
+      "month":12,
+      "counties":{
+         "gl":{
+            "name":"GALATI",
+            "id":"GL",
+            "total":12190,
+            "age":{
+               "lesser25":1506,
+               "from25to29":430,
+               "from30to39":1728,
+               "from40to49":3511,
+               "from50to55":2485,
+               "greater55":2530
+            }
+         },
+         "is":{
+            "name":"IASI",
+            "id":"IS",
+            "total":9356,
+            "age":{
+               "lesser25":881,
+               "from25to29":254,
+               "from30to39":1375,
+               "from40to49":2658,
+               "from50to55":1911,
+               "greater55":2277
+            }
+         }
+      }
+   },
+   {
+      "year":2021,
+      "month":1,
+      "counties":{
+         "gl":{
+            "name":"GALATI",
+            "id":"GL",
+            "total":11856,
+            "age":{
+               "lesser25":1039,
+               "from25to29":435,
+               "from30to39":1719,
+               "from40to49":3565,
+               "from50to55":2550,
+               "greater55":2548
+            }
+         },
+         "is":{
+            "name":"IASI",
+            "id":"IS",
+            "total":9708,
+            "age":{
+               "lesser25":932,
+               "from25to29":265,
+               "from30to39":1429,
+               "from40to49":2736,
+               "from50to55":1994,
+               "greater55":2352
+            }
+         }
+      }
+   },
+   {
+      "year":2021,
+      "month":2,
+      "counties":{
+         "gl":{
+            "name":"GALATI",
+            "id":"GL",
+            "total":11733,
+            "age":{
+               "lesser25":962,
+               "from25to29":441,
+               "from30to39":1733,
+               "from40to49":3538,
+               "from50to55":2538,
+               "greater55":2521
+            }
+         },
+         "is":{
+            "name":"IASI",
+            "id":"IS",
+            "total":9810,
+            "age":{
+               "lesser25":854,
+               "from25to29":276,
+               "from30to39":1430,
+               "from40to49":2805,
+               "from50to55":2057,
+               "greater55":2388
+            }
+         }
+      }
+   }
+]
                     </code>
                 </pre>
             </div>
             <h3>Filter Years</h3>
             <div class="text">
-                What if you want statistics about <code class="language-json">"Botoșani"</code>, but for the years <code class="language-html">2017-2019</code>?
+                What if you want statistics about <code class="language-json">"Galati"</code> and <code class="language-json">"Iasi"</code>, but for the years <code class="language-html">2020-2021</code>?
             </div>
             <br>
             <div class="text">
-                Then you'll send this file
-            </div>
-            <div class="snippet">
-                <pre class="line-numbers">
-                    <code class="language-json">
-                        {
-                            "counties": ["Botoșani"],
-                            "start": "2017",
-                            "end": "2019"
-                        }
-                    </code>
-                </pre>
+                Then you'll use: <code class="language-html"> https://unwe2021.herokuapp.com/api/query/?counties=gl+is&categories=age&startingYear=2020&endingYear=2021 </code>
             </div>
 
             <div class="text">
@@ -261,31 +1137,459 @@
             <div class="snippet">
                 <pre class="line-numbers">
                     <code class="language-json">
-                        {
-                            "2017": {
-                                "january":[
-                                    {
-                                        "name": "Botoșani",
-                                        "id": "BT",
-                                        "total": 2000
-                                    }
-                                ],
-                                "february":["..."],
-                                "allTheMonthsOfTheYear":"Array of counties for each month"
-                            },
-                            "2018": "Same structure as 2017",
-                            "2019": "Same structure as 2018"
-                        }
+                    [
+   {
+      "year":"2020",
+      "month":1,
+      "counties":{
+         "gl":{
+            "name":"GALATI",
+            "id":"GL",
+            "total":10414,
+            "age":{
+               "lesser25":748,
+               "from25to29":374,
+               "from30to39":1502,
+               "from40to49":3191,
+               "from50to55":2200,
+               "greater55":2399
+            }
+         },
+         "is":{
+            "name":"IASI",
+            "id":"IS",
+            "total":8011,
+            "age":{
+               "lesser25":878,
+               "from25to29":208,
+               "from30to39":1098,
+               "from40to49":2154,
+               "from50to55":1575,
+               "greater55":2098
+            }
+         }
+      }
+   },
+   {
+      "year":"2020",
+      "month":2,
+      "counties":{
+         "gl":{
+            "name":"GALATI",
+            "id":"GL",
+            "total":10323,
+            "age":{
+               "lesser25":682,
+               "from25to29":343,
+               "from30to39":1483,
+               "from40to49":3193,
+               "from50to55":2218,
+               "greater55":2404
+            }
+         },
+         "is":{
+            "name":"IASI",
+            "id":"IS",
+            "total":8106,
+            "age":{
+               "lesser25":824,
+               "from25to29":204,
+               "from30to39":1134,
+               "from40to49":2233,
+               "from50to55":1593,
+               "greater55":2118
+            }
+         }
+      }
+   },
+   {
+      "year":"2020",
+      "month":3,
+      "counties":{
+         "gl":{
+            "name":"GALATI",
+            "id":"GL",
+            "total":10247,
+            "age":{
+               "lesser25":590,
+               "from25to29":347,
+               "from30to39":1463,
+               "from40to49":3196,
+               "from50to55":2253,
+               "greater55":2398
+            }
+         },
+         "is":{
+            "name":"IASI",
+            "id":"IS",
+            "total":7613,
+            "age":{
+               "lesser25":585,
+               "from25to29":188,
+               "from30to39":1062,
+               "from40to49":2122,
+               "from50to55":1554,
+               "greater55":2102
+            }
+         }
+      }
+   },
+   {
+      "year":"2020",
+      "month":4,
+      "counties":{
+         "gl":{
+            "name":"GALATI",
+            "id":"GL",
+            "total":10350,
+            "age":{
+               "lesser25":568,
+               "from25to29":352,
+               "from30to39":1530,
+               "from40to49":3267,
+               "from50to55":2293,
+               "greater55":2340
+            }
+         },
+         "is":{
+            "name":"IASI",
+            "id":"IS",
+            "total":7909,
+            "age":{
+               "lesser25":570,
+               "from25to29":208,
+               "from30to39":1129,
+               "from40to49":2217,
+               "from50to55":1660,
+               "greater55":2125
+            }
+         }
+      }
+   },
+   {
+      "year":"2020",
+      "month":5,
+      "counties":{
+         "gl":{
+            "name":"GALATI",
+            "id":"GL",
+            "total":10350,
+            "age":{
+               "lesser25":568,
+               "from25to29":352,
+               "from30to39":1530,
+               "from40to49":3267,
+               "from50to55":2293,
+               "greater55":2340
+            }
+         },
+         "is":{
+            "name":"IASI",
+            "id":"IS",
+            "total":7909,
+            "age":{
+               "lesser25":570,
+               "from25to29":208,
+               "from30to39":1129,
+               "from40to49":2217,
+               "from50to55":1660,
+               "greater55":2125
+            }
+         }
+      }
+   },
+   {
+      "year":"2020",
+      "month":6,
+      "counties":{
+         "gl":{
+            "name":"GALATI",
+            "id":"GL",
+            "total":10768,
+            "age":{
+               "lesser25":742,
+               "from25to29":374,
+               "from30to39":1578,
+               "from40to49":3272,
+               "from50to55":2344,
+               "greater55":2458
+            }
+         },
+         "is":{
+            "name":"IASI",
+            "id":"IS",
+            "total":8446,
+            "age":{
+               "lesser25":477,
+               "from25to29":248,
+               "from30to39":1248,
+               "from40to49":2441,
+               "from50to55":1788,
+               "greater55":2244
+            }
+         }
+      }
+   },
+   {
+      "year":"2020",
+      "month":7,
+      "counties":{
+         "gl":{
+            "name":"GALATI",
+            "id":"GL",
+            "total":11726,
+            "age":{
+               "lesser25":1557,
+               "from25to29":381,
+               "from30to39":1600,
+               "from40to49":3313,
+               "from50to55":2374,
+               "greater55":2501
+            }
+         },
+         "is":{
+            "name":"IASI",
+            "id":"IS",
+            "total":9037,
+            "age":{
+               "lesser25":751,
+               "from25to29":240,
+               "from30to39":1284,
+               "from40to49":2568,
+               "from50to55":1881,
+               "greater55":2313
+            }
+         }
+      }
+   },
+   {
+      "year":"2020",
+      "month":8,
+      "counties":{
+         "gl":{
+            "name":"GALATI",
+            "id":"GL",
+            "total":11944,
+            "age":{
+               "lesser25":1656,
+               "from25to29":397,
+               "from30to39":1617,
+               "from40to49":3333,
+               "from50to55":2416,
+               "greater55":2525
+            }
+         },
+         "is":{
+            "name":"IASI",
+            "id":"IS",
+            "total":9311,
+            "age":{
+               "lesser25":891,
+               "from25to29":246,
+               "from30to39":1336,
+               "from40to49":2583,
+               "from50to55":1926,
+               "greater55":2329
+            }
+         }
+      }
+   },
+   {
+      "year":"2020",
+      "month":9,
+      "counties":{
+         "gl":{
+            "name":"GALATI",
+            "id":"GL",
+            "total":12027,
+            "age":{
+               "lesser25":1628,
+               "from25to29":404,
+               "from30to39":1652,
+               "from40to49":3344,
+               "from50to55":2456,
+               "greater55":2543
+            }
+         },
+         "is":{
+            "name":"IASI",
+            "id":"IS",
+            "total":9078,
+            "age":{
+               "lesser25":923,
+               "from25to29":250,
+               "from30to39":1324,
+               "from40to49":2523,
+               "from50to55":1838,
+               "greater55":2220
+            }
+         }
+      }
+   },
+   {
+      "year":"2020",
+      "month":10,
+      "counties":{
+         "gl":{
+            "name":"GALATI",
+            "id":"GL",
+            "total":11677,
+            "age":{
+               "lesser25":1621,
+               "from25to29":415,
+               "from30to39":1623,
+               "from40to49":3280,
+               "from50to55":2375,
+               "greater55":2363
+            }
+         },
+         "is":{
+            "name":"IASI",
+            "id":"IS",
+            "total":9026,
+            "age":{
+               "lesser25":895,
+               "from25to29":241,
+               "from30to39":1283,
+               "from40to49":2552,
+               "from50to55":1839,
+               "greater55":2216
+            }
+         }
+      }
+   },
+   {
+      "year":"2020",
+      "month":11,
+      "counties":{
+         "gl":{
+            "name":"GALATI",
+            "id":"GL",
+            "total":12092,
+            "age":{
+               "lesser25":1633,
+               "from25to29":436,
+               "from30to39":1692,
+               "from40to49":3418,
+               "from50to55":2432,
+               "greater55":2481
+            }
+         },
+         "is":{
+            "name":"IASI",
+            "id":"IS",
+            "total":9132,
+            "age":{
+               "lesser25":897,
+               "from25to29":245,
+               "from30to39":1329,
+               "from40to49":2576,
+               "from50to55":1859,
+               "greater55":2226
+            }
+         }
+      }
+   },
+   {
+      "year":"2020",
+      "month":12,
+      "counties":{
+         "gl":{
+            "name":"GALATI",
+            "id":"GL",
+            "total":12190,
+            "age":{
+               "lesser25":1506,
+               "from25to29":430,
+               "from30to39":1728,
+               "from40to49":3511,
+               "from50to55":2485,
+               "greater55":2530
+            }
+         },
+         "is":{
+            "name":"IASI",
+            "id":"IS",
+            "total":9356,
+            "age":{
+               "lesser25":881,
+               "from25to29":254,
+               "from30to39":1375,
+               "from40to49":2658,
+               "from50to55":1911,
+               "greater55":2277
+            }
+         }
+      }
+   },
+   {
+      "year":2021,
+      "month":1,
+      "counties":{
+         "gl":{
+            "name":"GALATI",
+            "id":"GL",
+            "total":11856,
+            "age":{
+               "lesser25":1039,
+               "from25to29":435,
+               "from30to39":1719,
+               "from40to49":3565,
+               "from50to55":2550,
+               "greater55":2548
+            }
+         },
+         "is":{
+            "name":"IASI",
+            "id":"IS",
+            "total":9708,
+            "age":{
+               "lesser25":932,
+               "from25to29":265,
+               "from30to39":1429,
+               "from40to49":2736,
+               "from50to55":1994,
+               "greater55":2352
+            }
+         }
+      }
+   },
+   {
+      "year":2021,
+      "month":2,
+      "counties":{
+         "gl":{
+            "name":"GALATI",
+            "id":"GL",
+            "total":11733,
+            "age":{
+               "lesser25":962,
+               "from25to29":441,
+               "from30to39":1733,
+               "from40to49":3538,
+               "from50to55":2538,
+               "greater55":2521
+            }
+         },
+         "is":{
+            "name":"IASI",
+            "id":"IS",
+            "total":9810,
+            "age":{
+               "lesser25":854,
+               "from25to29":276,
+               "from30to39":1430,
+               "from40to49":2805,
+               "from50to55":2057,
+               "greater55":2388
+            }
+         }
+      }
+   }
+]
                     </code>
                 </pre>
             </div>
-
-            <div class="text">
-                As you can see, the <code class="language-html">JSON</code> file would represent an object with a field for each
-                year that you want, each year consisting of an object that has fields for every month.
-                For enery month, there is an array of objects representing the counties and their statistics (or the statistics you've requested).
-            </div>
-
         </div>
     </div>
 
@@ -299,7 +1603,7 @@
 
     <script src="/public/js/theme.js"></script>
     <script src="/public/js/script-api.js"></script>
-    <script id ="prismJs" src="/public/prism-dark.js"></script>
+    <script id="prismJs" src="/public/prism-dark.js"></script>
     <script src="/public/js/info.js"></script>
     <script src="/public/js/dot.js"></script>
     <script src="/public/js/box.js"></script>
