@@ -8,7 +8,7 @@
     <title>Unemployment in Romania</title>
     <link rel="shortcut icon" href="/public/unwe.ico">
     <!-- <link rel="stylesheet" href="/public/css/hidden.css"> -->
-
+    <meta name="description" content="UnEmployment website">
 
 </head>
 
