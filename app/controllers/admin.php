@@ -7,7 +7,7 @@ class Admin extends Controller {
         //$user->name = $name;
 
         $this->view('admin/index.php', ['name' => $user->name, 'pageId' => 'admin']);
-        
+
 
     }
 }
