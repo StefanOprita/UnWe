@@ -38,7 +38,7 @@ async function getNumbersToDisplay() {
     document.getElementsByClassName('info')[0].style.fontSize = '3em';
 
 
-    res = await fetch('https://ip-api.com/json');
+    res = await fetch('http://ip-api.com/json');
 
     jsonResponse = await res.json();
     
