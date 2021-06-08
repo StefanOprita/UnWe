@@ -1,5 +1,7 @@
+
 <?php
 require_once './Query/Query.php';
+
 $query_routes = [
     [
         'method' => 'GET',
@@ -253,8 +255,19 @@ function advancedQuery($params, $queryParams, $body, $headers)
     } else {
 
         if (array_key_exists('counties', $queryParams)) {
+            
             $county = explode('+', $queryParams['counties']);
             $countyList = explode(' ', $county[0]);
+            //echo print_r($countyList);
+            if(in_array('all', $countyList)) {
+                global $countyNames, $countyIdToNames;
+                $countyList = [];
+                foreach ($countyIdToNames as $key => $value) {
+                    if($key === 'total') continue;
+                   // echo 'inseram uuu ' . $key . ' ';
+                    array_push($countyList, $key);
+                }
+            }
         } else {
             echo handle404('No counties given!');
             exit;
@@ -284,6 +297,17 @@ function advancedQuery($params, $queryParams, $body, $headers)
                 $endMonth = 12;
         }
 
+
+        if($startYear == 2021) {
+            $startMonth = min(2, $startMonth);
+        }
+
+        if($endYear == 2021) {
+            $endMonth = min(2, $endMonth);
+        }
+
+
+        
 
         if (array_key_exists('categories', $queryParams))
             $categs = explode('+', $queryParams['categories']);
@@ -322,8 +346,8 @@ function advancedQuery($params, $queryParams, $body, $headers)
     if ($startYear > $endYear) {
         echo "ceva";
     } else {
+        $counter = 0;
         for ($i = $startYear; $i <= $endYear; $i++) {
-            $counter = 0;
             $year = [];
             $year['year'] = $i;
             if ($i != 2021) {
@@ -343,7 +367,10 @@ function advancedQuery($params, $queryParams, $body, $headers)
                     $year['month'] = $j;
                     $counties = [];
                     for ($k = 0; $k < count($countyList); $k++) {
-                        $counties[strtolower(Query::getIdCounty(Query::validateCounty($countyList[$k])))] = jsonFormat($resultArray[$counter], $categs);
+                        if($counter == count($resultArray)) continue;
+                        $formated = jsonFormat($resultArray[$counter], $categs);
+                        $counties[strtolower($formated['id'])] = $formated;
+                        //$counties[strtolower(Query::getIdCounty(Query::validateCounty($countyList[$k])))] = jsonFormat($resultArray[$counter], $categs);
                         $counter = $counter + 1;
                     }
                     $year['counties'] = $counties;
@@ -367,7 +394,9 @@ function advancedQuery($params, $queryParams, $body, $headers)
                     $year['month'] = $j;
                     $counties = [];
                     for ($k = 0; $k < count($countyList); $k++) {
-                        $counties[strtolower(Query::getIdCounty(Query::validateCounty($countyList[$k])))] = jsonFormat($resultArray[$counter], $categs);
+                        if($counter == count($resultArray)) continue;
+                        $formated = jsonFormat($resultArray[$counter], $categs);
+                        $counties[strtolower($formated['id'])] = $formated;
                         $counter = $counter + 1;
                     }
                     $year['counties'] = $counties;
