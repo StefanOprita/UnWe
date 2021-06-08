@@ -138,12 +138,15 @@ async function addEntry() {
         + from50to55 + " " + over55 + " " + male + " " + female + " " + noedu + " " + primary + " " + middle + " " + high + " " + bachelors + " " + post + " " + prof + " " + urban + " "
         + rural + " " + comp + " " + nonComp);
 
-    console.log('merge adaugarea');
+    var total = intval(male) + intval(female);
+
+    console.log(total);
 
     var uri = '/api/admin/info';
     var rawResponse = await fetch(uri, {
         method: 'POST',
         body: JSON.stringify({
+            // total: total,
             year: year,
             month: month,
             county: county,
