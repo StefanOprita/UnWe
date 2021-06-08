@@ -8,10 +8,11 @@
     <title>Unemployment in Romania</title>
     <link rel="shortcut icon" href="/public/unwe.ico">
 
-    <link rel="stylesheet" href="/public/css/hidden.css">
 </head>
 
 <body style="background-color: black;">
+<link rel="stylesheet" href="/public/css/hidden.css">
+
     <div class="statistics-container">
         <div class="background"></div>
         <img id="dot" src="/public/dot.svg" alt="">
