@@ -31,8 +31,37 @@ async function getNumbersToDisplay() {
         }
     }
 
-    console.log(total);
     document.getElementById('total-unemployed').innerText = total;
+
+    document.getElementsByClassName('info')[0].style.fontSize = '3em';
+
+
+    res = await fetch('http://ip-api.com/json');
+
+    jsonResponse = await res.json();
+    
+
+
+    document.getElementById('county-unemployed-name').innerText = jsonResponse.regionName;
+
+    var region = jsonResponse.region
+
+    res = await fetch(
+        "/api/query?counties=" + region + 
+        "&startingYear=2021" +
+        "&startMonth=6" +
+        "&endingYear=2021" +
+        "&endMonth=6" 
+    );
+
+    var jsonResponse = await res.json();
+
+
+    document.getElementById('county-unemployed').innerText =  jsonResponse[0].counties[region.toLowerCase()].total
+
+
+    document.getElementsByClassName('last-info')[0].style.fontSize = '1.7em';
+
     // obj.counties.forEach(county => {
     //     total += county['total'];
     // });
