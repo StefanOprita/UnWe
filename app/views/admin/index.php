@@ -72,7 +72,8 @@
     <link rel="stylesheet" href="/public/css/style.css">
 
     <script src="/public/js/theme.js"></script>
-    <script src="/public/js/script-home.js"></script>
+    <!-- <script src="/public/js/script-home.js"></script> -->
+    <script src="/public/js/script-admin.js"></script>
     <script src="/public/js/info.js"></script>
     <script src="/public/js/dot.js"></script>
     <script src="/public/js/box.js"></script>

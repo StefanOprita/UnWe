@@ -3,7 +3,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
 
     setAnimation();
 
-    testAdminApi();
+    //testAdminApi();
 });
 
 async function testAdminApi() {
