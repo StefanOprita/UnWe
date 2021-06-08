@@ -47,7 +47,7 @@
 
                 <div class="break"></div>
 
-                <button type="submit" class="collision-box" type="button" name="button1" class="button collision-box"><span>Insert</span></button>
+                <button type="submit" class="button collision-box" name="button1"><span>Insert</span></button>
             </form>
 
             <label class="add collision-box"><b>Remove</b></label>
@@ -58,7 +58,7 @@
 
                 <div class="break"></div>
 
-                <button type="submit" class="collision-box" type="button" name="button1" class="button collision-box"><span>Remove</span></button>
+                <button type="submit" class="button collision-box" name="button1"><span>Remove</span></button>
             </form>
         </div>
 
