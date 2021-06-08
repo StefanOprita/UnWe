@@ -126,7 +126,7 @@ function loginAdmin($params, $queryParams, $body, $headers) {
 
     if($match) {
         $token = bin2hex(random_bytes(64));
-        setcookie("token", $token, 0, "/public/admin", "", false, true);
+        setcookie("token", $token, 0, "", "", false, true);
         saveAuthToken($token);
     }
 
@@ -217,10 +217,10 @@ function tokenCheck() {
     if(!isset($_COOKIE["token"])) {
         return false;
     }
-   
+
     $token = $_COOKIE["token"];
 
-    $sqlString = "SELECT * FROM authtokens WHERE token = ?";
+    $sqlString = "SELECT * FROM authtokens WHERE token LIKE ?";
     $results = DBManager::execSelect($sqlString, [$token]);
     if(count($results) == 0) return false;
 

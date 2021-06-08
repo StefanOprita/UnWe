@@ -7,6 +7,9 @@
     require_once "./admin-routes.php";
     require_once "errorHandling.php";
 
+
+    $loggedIn =  tokenCheck();
+
     $allRoutes = [];
 
     array_push($allRoutes, ...$query_routes);
