@@ -12,7 +12,7 @@
 
 </head>
 
-<body style="background-color: #1F1E25;">
+<body>
 
     <div class="statistics-container">
         <div class="background"></div>
