@@ -126,7 +126,7 @@ function loginAdmin($params, $queryParams, $body, $headers) {
 
     if($match) {
         $token = bin2hex(random_bytes(64));
-        setcookie("token", $token, 0, "", "", false, true);
+        setcookie("token", $token, 0, "/", "", false, true);
         saveAuthToken($token);
     }
 
