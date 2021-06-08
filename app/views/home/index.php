@@ -7,12 +7,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Unemployment in Romania</title>
     <link rel="shortcut icon" href="/public/unwe.ico">
-
+    <link rel="stylesheet" href="/public/css/firstPaint.css">
 
 </head>
 
 <body>
-    <link rel="stylesheet" href="/public/css/firstPaint.css">
     <img id="dot" src="/public/dot.svg" alt="">
     <div class="container">
         <div class="background"></div>
