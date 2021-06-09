@@ -443,12 +443,12 @@
     <link href="/public/css/font-roboto.css" rel="stylesheet">
     <link href="/public/css/font-ubuntu.css" rel="stylesheet">
     <link href="/public/css/font-icons.css" rel="stylesheet">
-    <!-- <link id="prismCss" rel="stylesheet" href="/public/prism-dark.css"> -->
+    <link id="prismCss" rel="stylesheet" href="/public/prism-dark.css">
 
 
     <script src="/public/js/theme.js"></script>
     <script src="/public/js/script-api.js"></script>
-    <!-- <script id="prismJs" src="/public/prism-dark.js"></script> -->
+    <script id="prismJs" src="/public/prism-dark.js"></script>
     <script src="/public/js/info.js"></script>
     <script src="/public/js/dot.js"></script>
     <script src="/public/js/box.js"></script>
