@@ -10,7 +10,7 @@
     <link rel="shortcut icon" href="/public/unwe.ico">
 </head>
 
-<body>
+<body style="background-color: #1F1E25;">
     <div class="container">
         <div class="background"></div>
         <img id="dot" src="/public/dot.svg" alt="">
