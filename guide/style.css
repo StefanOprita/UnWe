@@ -20,6 +20,7 @@ h2 {
   font-size: 2.2em; }
 
 h3 {
+  margin-bottom: 0;
   font-family: 'Ubuntu';
   font-weight: 500;
   font-size: 1.5em; }
@@ -32,33 +33,13 @@ a {
   a:hover {
     color: #26A69A; }
 
-dl {
-  margin-top: 2em;
-  margin-left: 10px; }
-
-dt {
-  margin-top: .6em;
-  font-size: 1.3em;
-  font-family: 'Ubuntu'; }
-
-dd {
-  margin-bottom: .2em;
-  font-size: 1.1em; }
-
 p {
+  margin-top: .3em;
   letter-spacing: 1px;
   font-size: 1.14em; }
 
 section {
   margin-top: 50px; }
-
-li {
-  margin-bottom: .5em;
-  color: #26A69A;
-  letter-spacing: 1px;
-  font-size: 1.24em; }
-  li span {
-    color: #EBEBEB; }
 
 .gif1 {
   width: 35%;

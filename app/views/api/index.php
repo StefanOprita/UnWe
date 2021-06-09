@@ -33,7 +33,6 @@
 
         <div class="info-box">
             <p class="info collision-box">API documentation</p>
-            <p class="info last-info collision-box">(WIP, for we haven't made the server yet)</p>
         </div>
 
         <div class="examples">
@@ -200,7 +199,7 @@
          }
       }
    }
-]       
+]
                         </code>
                     </pre>
                 </div>
@@ -271,7 +270,7 @@
 
 
             <div class="text">
-                Now, let's use the example with the 4th URI used. As you can see, it's an array of objects, each object representing a combination of year and month. The 
+                Now, let's use the example with the 4th URI used. As you can see, it's an array of objects, each object representing a combination of year and month. The
                 <code class="language-json">"counties"</code> contains the objects that contain information about required counties.
                 Inside each county object you have all the categories, which themselves are objects that contain keys representing the way they are split up.
             </div>
