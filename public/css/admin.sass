@@ -45,8 +45,19 @@
 
             &::placeholder
                 color: var(--color-on-surface)
-                opacity: .6
+                opacity: .5
                 font-size: .95em
+
+
+            &:-webkit-autofill,
+            &:-webkit-autofill:hover,
+            &:-webkit-autofill:focus,
+            &:-webkit-autofill:active
+                -webkit-box-shadow: 0 0 0 30px var(--color-surface) inset
+                color: var(--color-primary)
+
+            &:-webkit-autofill
+                -webkit-text-fill-color: var(--color-primary)
 
             &::-webkit-inner-spin-button,
             &::-webkit-outer-spin-button

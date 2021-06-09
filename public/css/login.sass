@@ -22,12 +22,27 @@
         color: var(--color-on-surface)
         text-align: left
 
-        &:last-of-type
+        &.remember-me
             font-size: 1.3em
             margin: .5em 0
 
         span
             margin-left: 1.6em
+
+    .failed-message
+        margin-top: .1em
+        margin-bottom: .5em
+        font-size: 1.2em
+        font-weight: 500
+        font-family: 'Ubuntu'
+        text-align: left
+        color: transparent
+        opacity: 0
+        transition: .25s
+
+        &.show
+            color: $red
+            opacity: 1
 
     input
         font-size: 1.3em

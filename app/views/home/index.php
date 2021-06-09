@@ -33,7 +33,7 @@
         </header>
 
         <div class="info-box">
-            <p class="info collision-box">There are <span id='total-unemployed'>...</span> unemployed people in Romania.</p>
+            <p class="info">There are <span id='total-unemployed'>...</span> unemployed people in Romania.</p>
             <!-- <p class="info last-info collision-box">
                 There are <span id='county-unemployed'>350</span> unemployed people in
                 <span id='county-unemployed-name'>Dorohoi</span>.
@@ -41,22 +41,27 @@
             <div class="button-box">
                 <!-- <a href="/public/statistics"><button type="button" name="button1" onclick="location.href='/public/statistics';" class="button button-first collision-box"><span>Statistics</span></button></a>
                 <a href="/public/api"><button type="button" name="button2" onclick="location.href='/public/api';" class="button collision-box"><span>API</span></button></a> -->
-                <a href="/public/statistics" class="button button-first collision-box"><span>Statistics</span></a>
-                <a href="/public/api" class="button collision-box"><span>API</span></a>
+                <a href="/public/statistics" class="button button-first"><span>Statistics</span></a>
+                <a href="/public/api" class="button"><span>API</span></a>
             </div>
         </div>
 
         <div class="showcase-hint collision-box">
-            <span class="text">showcase</span>
+            <span class="text">Authors</span>
             <div class="line"></div>
         </div>
     </div>
     <div class="showcase-container">
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+
+        <a href="https://github.com/LiviuC-glitch"><span>Cristea Liviu Andrei</span></a>
+        <a href="https://github.com/StefanOprita"><span>Opriță Ștefan-Simion</span></a>
+        <a href="https://github.com/iulyus01"><span>Vultur Iulian</span></a>
+
+        <!-- <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
             labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
             laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in
             voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat
-            non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+            non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p> -->
     </div>
 
 

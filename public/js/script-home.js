@@ -16,7 +16,7 @@ async function getNumbersToDisplay() {
         "&startingYear=2021" +
         "&startMonth=6" +
         "&endingYear=2021" +
-        "&endMonth=6" 
+        "&endMonth=6"
     );
 
     var jsonResponse = await res.json();
@@ -24,7 +24,7 @@ async function getNumbersToDisplay() {
     var total = 0;
     console.log(jsonResponse);
 
-    console.log(jsonResponse[0].counties);    
+    console.log(jsonResponse[0].counties);
 
     for (const key in jsonResponse[0].counties) {
         if (Object.hasOwnProperty.call(jsonResponse[0].counties, key)) {
@@ -41,7 +41,7 @@ async function getNumbersToDisplay() {
     // res = await fetch('http://ip-api.com/json');
 
     // jsonResponse = await res.json();
-    
+
 
 
     // document.getElementById('county-unemployed-name').innerText = jsonResponse.regionName;
@@ -49,11 +49,11 @@ async function getNumbersToDisplay() {
     // var region = jsonResponse.region
 
     // res = await fetch(
-    //     "/api/query?counties=" + region + 
+    //     "/api/query?counties=" + region +
     //     "&startingYear=2021" +
     //     "&startMonth=6" +
     //     "&endingYear=2021" +
-    //     "&endMonth=6" 
+    //     "&endMonth=6"
     // );
 
     // var jsonResponse = await res.json();
@@ -87,15 +87,15 @@ async function testAdminApi() {
 
     var content = await rawResponse.json();
     console.log(content);
-    
-    
+
+
     rawResponse = await fetch('/api/admin/logged', {
         method: 'POST',
     });
 
     content = await rawResponse.json();
     console.log(content);
-    
+
     // fetch('/api/admin/create', {
     //     method: 'POST',
     //     body: JSON.stringify({
@@ -126,17 +126,4 @@ function setUX() {
     });
 
     document.getElementsByClassName('theme')[0].addEventListener('click', toggleTheme);
-}
-
-function setAnimation() {
-    var canvas = document.getElementById('canvas');
-    var ctx = canvas.getContext('2d');
-
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-
-    screenWidth = canvas.width;
-    screenHeight = canvas.height;
-
-    Animation(ctx);
 }

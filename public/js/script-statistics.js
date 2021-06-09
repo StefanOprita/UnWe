@@ -111,19 +111,6 @@ function setSearchCountyInput() {
     })
 }
 
-function setAnimation() {
-    var canvas = document.getElementById('canvas');
-    var ctx = canvas.getContext('2d');
-
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-
-    screenWidth = canvas.width;
-    screenHeight = canvas.height;
-
-    Animation(ctx);
-}
-
 function setMenu() {
     menuBtn = document.getElementsByClassName('menu-button')[0];
     nav = document.getElementsByClassName('menu')[0];
@@ -294,8 +281,8 @@ function changeChartTypeToBar(ctx) {
 
     chartData.type = 'bar';
 
-    console.log("hei ioooo");
-    console.log(chartData.type);
+    // console.log("hei ioooo");
+    // console.log(chartData.type);
     var endRangePicker = document.querySelectorAll('.chart-settings-contianer .chart-setting.selector-end')[0];
     endRangePicker.classList.add('hidden');
     document.querySelectorAll('.range-selector #start')[0].max = '2021-02';
@@ -547,7 +534,7 @@ async function addCountyToLineChart(countyId) {
 
     let lowerId = countyId.toLowerCase();
 
-    console.log(json);
+    // console.log(json);
 
     chartData.countyDataArray[lowerId] = json;
 
@@ -651,7 +638,7 @@ function changeColorOfCounty(element) {
         countyIdToColorMap[elementId] = color;
         addCountyToList(elementId);
     } else {
-        availableCountyColors.push(hexCode);
+        availableCountyColors.splice(0, 0, hexCode);
         element.style['fill'] = initialColorOfCounty;
         countyIdToColorMap[elementId] = '?';
         removeCountyFromList(elementId);
@@ -662,6 +649,7 @@ function extractColor() {
     // var randomIndex = Math.floor(Math.random() * availableCountyColors.length);
     var randomIndex = 0;
     var color = availableCountyColors[randomIndex];
+    console.log(color);
     availableCountyColors = availableCountyColors.filter(function(value, index, arr) {
         return index != randomIndex;
     });
@@ -719,17 +707,17 @@ function setCategorySelector(e) {
 
     for(let i = 0; i < category.length; i++) {
         const option = category[i];
-        console.log(categoriesLabels);
+        // console.log(categoriesLabels);
         var localCategoriesLabels = categoriesLabels;
         option.addEventListener('click', () => {
-            console.log('parent: ');
-            console.log(parent.categoriesLabels);
+            // console.log('parent: ');
+            // console.log(parent.categoriesLabels);
             text.innerHTML = option.innerHTML;
             categoryList.classList.remove('options-list--opened');
 
             categoriesList.innerHTML = "";
-            console.log(parent.categoriesLabels);
-            console.log(i);
+            // console.log(parent.categoriesLabels);
+            // console.log(i);
             parent.categoriesLabels[i].forEach((optionText, j) => {
                 categoriesList.innerHTML += `
                     <label class="label" for="category${j}">

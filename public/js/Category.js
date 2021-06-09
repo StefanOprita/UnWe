@@ -24,7 +24,7 @@ class Category {
     }
 
     multipleItemCheckEvent(element) {
-        console.log('multiple item check event');
+        // console.log('multiple item check event');
     }
 
     updateItems() {

@@ -1,4 +1,28 @@
-var Animation = function(ctx, withCollision = true) {
+function setAnimation() {
+    var canvas = document.getElementById('canvas');
+    var ctx = canvas.getContext('2d');
+
+    canvas.width = window.innerWidth;
+    // canvas.height = window.innerHeight;
+    canvas.height = document.getElementsByTagName("BODY")[0].getBoundingClientRect().height;
+
+    screenWidth = canvas.width;
+    screenHeight = canvas.height;
+
+    Animation(ctx);
+}
+
+var Animation = function(ctxa, withCollision = true) {
+    var canvas = document.getElementById('canvas');
+    var ctx = canvas.getContext('2d');
+
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    screenWidth = canvas.width;
+    screenHeight = canvas.height;
+
+    // Animation(ctx);
 
     var count = 0;
     var delta = 0;
