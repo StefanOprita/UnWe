@@ -93,7 +93,12 @@ class ChartData {
             let endIndex = (this.rangeEndYear - 2019) * 12 + this.rangeEndMonth - 1;
             for(let i = startIndex; i <= endIndex; i++) {
 
-                let value = county[i].counties[label][this.category.categoryLabel][this.category.getSelectedItems()[0]];
+                let value;
+                try {
+                    value = county[i].counties[label][this.category.categoryLabel][this.category.getSelectedItems()[0]];
+                } catch(e) {
+                    value = line.length > 0 ? line[line.length - 1] : 0;
+                }
                 line.push(value);
             }
             lines.push(line);
@@ -114,7 +119,11 @@ class ChartData {
             let index = (this.rangeYear - 2019) * 12 + this.rangeMonth - 1;
             for(let key in this.countyDataArray) {
                 let county = this.countyDataArray[key];
-                let value = county[index].counties[Object.keys(county[index].counties)[0]][this.category.categoryLabel][label];
+                try {
+                    value = county[index].counties[Object.keys(county[index].counties)[0]][this.category.categoryLabel][label];
+                } catch(e) {
+                    value = barSet.length > 0 ? barSet[barSet.length - 1] : 0;
+                }
                 barSet.push(value);
             }
             // this.countyDataArray.forEach((county, i) => {
@@ -141,7 +150,12 @@ class ChartData {
             this.category.getSelectedItems().forEach((label) => {
                 // console.log(countyLabel);
                 // console.log(county[index]);
-                let value = county[index].counties[countyLabel][this.category.categoryLabel][label];
+                let value;
+                try {
+                    value = county[index].counties[countyLabel][this.category.categoryLabel][label];
+                } catch(e) {
+                    value = pie.length > 0 ? pie[pie.length - 1] : 0;
+                }
                 pie.push(value);
             });
             pies.push(pie);

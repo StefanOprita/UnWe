@@ -10,335 +10,45 @@
     <link rel="stylesheet" href="../public/prism-dark.css">
     <script src="../public/prism-dark.js"></script>
     <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="/public/unwe.ico">
 </head>
 
 <body prefix="schema: http://schema.org">
     <header>
-        <h1>UnWE - documentation</h1>
+        <h1>UnWE - guide</h1>
     </header>
-    <div class="top-info" role="contentinfo">
-        <dl>
-            <dt>Autori</dt>
-            <dd typeof="sa:ContributorRole" property="schema:author">
-                <span typeof="schema:Person">
-                    <meta property="schema:givenName" content="Liviu">
-                    <meta property="schema:additionalName" content="Andrei">
-                    <meta property="schema:familyName" content="Cristea">
-                    <a href="https://github.com/LiviuC-glitch">
-                        <span property="schema:name">Cristea Liviu Andrei</span>
-                    </a>
-                </span>
-            </dd>
-            <dd typeof="sa:ContributorRole" property="schema:author">
-                <span typeof="schema:Person">
-                    <meta property="schema:givenName" content="Stefan">
-                    <meta property="schema:additionalName" content="Simion">
-                    <meta property="schema:familyName" content="Oprita">
-                    <a href="https://github.com/StefanOprita">
-                        <span property="schema:name">Opriță Ștefan-Simion</span>
-                    </a>
-                </span>
-            </dd>
-            <dd typeof="sa:ContributorRole" property="schema:author">
-                <span typeof="schema:Person">
-                    <meta property="schema:givenName" content="Iulian">
-                    <meta property="schema:familyName" content="Vultur">
-                    <a href="https://github.com/iulyus01">
-                        <span property="schema:name">Vultur Iulian</span>
-                    </a>
-                </span>
-            </dd>
-            <dt>Bugs & Feedback</dt>
-            <dd>
-                <a href="https://github.com/StefanOprita/UnWe">Issues and PRs welcome</a>
-            </dd>
-            <dt>Licență</dt>
-            <dd>
-                <a href="https://opensource.org/licenses/MIT">MIT</a>
-            </dd>
-        </dl>
-    </div>
 
     <section typeof="sa:Abstract" id="abstract" role="doc-abstract">
-        <h2><span>1. </span>Cerință</h2>
         <p>
-            Să se realizeze un instrument Web de vizualizare și de comparare multi-criteriala (pe județe,
-            nivel de educație, grupe de vârstă, mediu, perioadă de timp etc.) a
-            <span typeof="schema:GovernmentOrganization" resource="https://data.gov.ro/dataset">
-                <span property="schema:copyrightHolder" typeof="Organization">
-                    <meta property="schema:name" content="Data Governamental">
-                    <meta property="schema:url" content="https://data.gov.ro">
-                </span>
-                <a href="https://data.gov.ro/dataset?q=somaj&sort=metadata_modified+desc">
-                    <span property="schema:name">
-                        datelor publice referitoare la șomajul din România
-                    </span>
-                </a>
-            </span>
-            pe ultimele N luni (minim 12). De asemenea, Statisticile, plus vizualizările generate – minim 3 maniere,
-            plus cele cartografice pe baza unor servicii Web de profil – vor putea fi exportate in formatele CSV, SVG si PDF.
+            Aplicația noastră conține paginile Home, Statistics, API și Admin, dintre care vom prezenta cum poate fi
+            folosită pagina Statistics, celelalte fiind self-explanatory.
+
         </p>
     </section>
 
     <section id="introduction">
-        <h2><span>2. </span>Introducere</h2>
+        <h2>Statistics</h2>
+        <h3>Județe</h3>
         <p>
-            Șomajul reprezintă o statistică relevantă pt fiecare țară și multe studii se bazează pe datele referitoare la acesta.
-            Considerăm că este important să existe o unealtă pentru vizualizarea și compararea ușoară a datelor de șomaj în România.
-            <br><br>
-            Ne propunem să face o aplicație web cu acest scop și de asemenea să oferim un API care să fie ușor de folosit pentru alte aplicații.
+            Putem adăuga județe în chart fie prin butonu plus din partea de sus a paginii, fie de pe harta ce se poate deschid cu
+            iconul din dreapta al unei hărți.
         </p>
-    </section>
+        <img class="gif1" src="gif1.gif" alt="Arhitectura aplicatiei">
+        <img class="gif2" src="gif2.gif" alt="Arhitectura aplicatiei">
 
-    <section id="architecture">
-        <h2><span>3. </span>Arhitectura aplicației</h2>
+        <br>
         <p>
-            În diagrama de mai jos este descrisă arhitectura aplicație noastre:
+            Putem schimba tipul chartului, line, bar sau pie cu butoanele din partea stângă.
         </p>
+        <img class="gif3" src="gif3.gif" alt="Arhitectura aplicatiei">
 
-        <img src="ArhitecturaAplicatieiTW(1).svg" alt="Arhitectura aplicatiei">
-
+        <br>
         <p>
-            La nivel de client, modulele importante sunt cele de generat și de exportat diagramele.
-            La nivel de server, Query Manager este modulul ce procură statisticile cerute de către utilizatori ori prin intermediul
-            aplicației ori prin API.
+            Putem alege categoria și opțiunea a ce se afișează în chart prin meniul din dreapta acestuia.
         </p>
-
-    </section>
-
-    <section id="pages">
-        <h2><span>4. </span>Paginile aplicației Web</h2>
-
-        <section id="pages-home">
-            <h3><span>4.1 </span>Home</h3>
-            <p>
-                Pagina Home
-                <!-- <span typeof="schema:WebSite" resource="to be added hosted TODO">
-                    <span property="schema:copyrightHolder" typeof="WebSite">
-                        <meta property="schema:name" content="Home Page">
-                        <meta property="schema:url" content="to be added hosted TODO">
-                    </span>
-                    <a href="to be added hoste TODO"><span property="schema:name">Home</span></a>
-                </span> -->
-                conține informații pe scurt referitoare la numărul de șomeri din România, numărul de șomeri din județul tău,
-                un buton ce duce la statisticile cu aceste informații și alt buton care duce la API.
-            </p>
-
-            <img src="HomePageFINAL.png" alt="Screenshot of home page" class="img-ss">
-        </section>
+        <img class="gif4" src="gif4.gif" alt="Arhitectura aplicatiei">
 
 
-        <section id="pages-statistics">
-            <h3><span>4.2 </span>Statistics</h3>
-            <p>
-                În această pagină, utilizatorul alege ce județe dorește să vizualizeze prin intermediul barei de căutare sau a hărții.
-                De asemenea, acesta poate alege între un line-graph, bar plot sau pie chart, între categoriile de date (vârsta, gen, educație
-                mediu, îndemnizare) și perioada pentru care se afișează datele.
-                <br>
-                <br>
-                Acesta poate descărca diagrama generată în format SVG, CSV sau PDF.
-            </p>
-
-            <img src="Statistics.png" alt="Screenshot of statistics page" class="img-ss">
-
-            <img src="UseCase-TW(3).svg" alt="Use case diagram of statistics page">
-
-        </section>
-
-        <section id="pages-API">
-            <h3><span>4.3 </span>API</h3>
-            <p>
-                În această pagină se oferă documentația API-ul oferit de website-ul nostru.
-                <br>
-                Este prezentat formatul fișierului JSON ce trebuie trimis la server pentru a putea primi rezultatele dorite
-                și cateva exemple de cereri și răspunsuri.
-            </p>
-
-            <img src="API.png" alt="Screenshot of API page" class="img-ss">
-
-            <p>
-            </p>
-        </section>
-    </section>
-
-
-
-
-    <section id="implementation">
-        <h2><span>5. </span>Detalii de implementare</h2>
-        <section id="implementation-wisps">
-            <h3><span>5.1 </span>Wisps</h3>
-            <p>
-                Fundalul paginii are o animație creată din buline care se plimbă și lasă în urmă o linie cu opacitate ce scade în timp.
-                Efectul creat dinamizează background-ul paginii.
-                Bulinele sunt de fapt o imagine care își schimbă poziția în timp și linia lăsată în urmă este un array de linii a căror opacitate scade
-                cu cât se îndepărtează mai tare de bulină.
-                <br><br>
-                Bulinele se pot "izbi" de unele elemente HTML, schimbându-și traiectoria, simulând efectul unui ricoșeu. Pentru a face acest lucru,
-                elementele de care se pot izbi au clasa "collision-box".
-
-                Coliziunile cu elementele HTML se verifică cu următoare funcție:
-            </p>
-            <pre>
-                <code class="language-javascript">
-                    function intersects(line1X1, line1Y1, line1X2, line1Y2, line2X1, line2Y1, line2X2, line2Y2) {
-                        var det, gamma, lambda;
-                        det = (line1X2 - line1X1) * (line2Y2 - line2Y1) - (line2X2 - line2X1) * (line1Y2 - line1Y1);
-                        if(det === 0) {
-                            return false;
-                        } else {
-                            lambda = ((line2Y2 - line2Y1) * (line2X2 - line1X1) + (line2X1 - line2X2) * (line2Y2 - line1Y1)) / det;
-                            gamma = ((line1Y1 - line1Y2) * (line2X2 - line1X1) + (line1X2 - line1X1) * (line2Y2 - line1Y1)) / det;
-                            return (0 &lt; lambda && lambda &lt; 1) && (0 &lt; gamma && gamma &lt; 1);
-                        }
-                    };
-                </code>
-            </pre>
-        </section>
-
-
-        <section id="implementation-search-bar">
-            <h3><span>5.2 </span>Search bar</h3>
-            <p>
-                În primul rând, pentru o utilizare ușoară a search-bar-ului, am implementat-o astfel încât să nu depindă de diacritice, litere mari/mici sau spații.
-            </p>
-            <pre>
-                <code class="language-javascript">
-                    //fac aceste transformari ca sa nu conteze daca scrii cu diacritice sau nu
-                    var normalizedCountyName = countyIdtoNameMap[id].toLowerCase();
-                    normalizedCountyName = normalizedCountyName.replace(/ș/g, 's');
-                    normalizedCountyName = normalizedCountyName.replace(/ț/g, 't');
-                    normalizedCountyName = normalizedCountyName.replace(/ă/g, 'a');
-                    normalizedCountyName = normalizedCountyName.replace(/â/g, 'a');
-                    normalizedCountyName = normalizedCountyName.replace(/î/g, 'i');
-
-                    //also, scoatem whitespace-ul
-                    var normalizedInput = searchInput.toLowerCase().trim();
-                    normalizedInput = normalizedInput.replace(/ș/g, 's');
-                    normalizedInput = normalizedInput.replace(/ț/g, 't');
-                    normalizedInput = normalizedInput.replace(/ă/g, 'a');
-                    normalizedInput = normalizedInput.replace(/â/g, 'a');
-                    normalizedInput = normalizedInput.replace(/î/g, 'i');
-                </code>
-            </pre>
-            <br>
-            <p>
-                Pentru fiecare caracter introdus în search-bar, se actualizează județele afișate.
-                Ca un județ să fie afișat, acesta trebuie să nu fie deja adăugat în lista de județe deja selectate și să înceapă cu șirul de caractere
-                din search-bar normalizat.
-            </p>
-        </section>
-
-        <section id="implementation-map">
-            <h3><span>5.3 </span>Map</h3>
-            <p>
-                Am ales să folosim un
-                <span typeof="schema:DefinedTerm" resource="https://wikipedia.org">
-                    <span property="schema:copyrightHolder" typeof="WebSite">
-                        <meta property="schema:name" content="Wikipedia">
-                        <meta property="schema:url" content="https://ro.wikipedia.org/wiki/Scalable_Vector_Graphics">
-                    </span>
-                    <a href="https://ro.wikipedia.org/wiki/Scalable_Vector_Graphics"><span property="schema:name">svg</span></a>
-                </span>
-                oferit de
-                <span typeof="schema:WebSite" resource="https://www.amcharts.com/">
-                    <span property="schema:copyrightHolder" typeof="WebSite">
-                        <meta property="schema:name" content="amCharts">
-                        <meta property="schema:url" content="https://www.amcharts.com/svg-maps/?map=romania">
-                    </span>
-                    <a href="https://www.amcharts.com/svg-maps/?map=romania"><span property="schema:name">amCharts</span></a>
-                </span>
-                pentru a face o hartă politică interactivă. Fiecare path din svg reprezintă un județ, care este memorat într-o listă de județe:
-                <br><br>
-                <code class="language-javascript">
-                    counties = document.getElementsByTagName('path');
-                </code>
-                <br><br>
-                Pentru fiecare element, adăugam un event listener pentru a-l face interactiv și pentru a reacționa la click-ul utilizatorului.
-            </p>
-        </section>
-
-        <section id="implementation-charts">
-            <h3><span>5.4 </span>Charts</h3>
-            <p>
-                Pentru afișarea chart-urilor am folosit librăria oferită de
-                <span typeof="schema:WebSite" resource="https://www.chartjs.org/">
-                    <span property="schema:copyrightHolder" typeof="WebSite">
-                        <meta property="schema:name" content="amCharts">
-                        <meta property="schema:url" content="https://www.chartjs.org/docs/latest/">
-                    </span>
-                    <a href="https://www.chartjs.org/docs/latest/"><span property="schema:name">Charts.js</span></a>
-                </span>
-
-                . Datele diagramelor se actualizează odată cu fiecare județ selectat și pot fi afișate în 3
-                tipuri diferite(line, bar, pie);
-
-            </p>
-
-            <pre>
-                <code class="language-javascript">
-                    let chart = new Chart(ctx, {
-                        type: 'line',
-                        data: {
-                            labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-                        },
-                        options: {
-                            responsive: true,
-                            maintainAspectRatio: false,
-                            animation: {
-                                duration: 400
-                            },
-                            scales: {
-                                yAxes: [{
-                                    ticks: {
-                                        beginAtZero: true
-                                    }
-                                }]
-                            }
-                        }
-                    });
-                </code>
-            </pre>
-        </section>
-
-    </section>
-
-    <section id="references">
-        <h2><span>6. </span>Referințe</h2>
-        <!-- <p> -->
-            <ul>
-                <li property="schema:citation" typeof="schema:WebSite" resource="https://developer.mozilla.org/en-US/">
-                    <cite property="schema:name">
-                        <a href="https://developer.mozilla.org/en-US/">MDN Web Docs</a>
-                    </cite>
-                </li>
-                <li property="schema:citation" typeof="schema:WebSite" resource="https://www.chartjs.org/docs/latest/">
-                    <cite property="schema:name">
-                        <a href="https://www.chartjs.org/docs/latest/">Charts.js documentation</a>
-                    </cite>
-                </li>
-                <li property="schema:citation" typeof="schema:WebSite" resource="https://www.amcharts.com/svg-maps/?map=romania">
-                    <cite property="schema:name">
-                        <a href="https://www.amcharts.com/svg-maps/?map=romania">Map from amCharts</a>
-                    </cite>
-                </li>
-                <li property="schema:citation" typeof="schema:WebSite" resource="https://www.w3schools.com/">
-                    <cite property="schema:name">
-                        <a href="https://www.w3schools.com/">w3schools</a>
-                    </cite>
-                </li>
-                <li property="schema:citation" typeof="schema:WebSite" resource="https://prismjs.com/index.html">
-                    <cite property="schema:name">
-                        <a href="https://prismjs.com/index.html">Prism</a>
-                    </cite>
-                </li>
-                <li property="schema:citation" typeof="schema:WebSite" resource="http://iulyus01.com/">
-                    <cite property="schema:name">
-                        <a href="http://iulyus01.com/">Inspiratia pentru wisps</a>
-                    </cite>
-                </li>
-            </ul>
-        <!-- </p> -->
 
     </section>
 

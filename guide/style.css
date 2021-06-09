@@ -60,8 +60,19 @@ li {
   li span {
     color: #EBEBEB; }
 
-img {
-  margin: 10px 40px; }
+.gif1 {
+  width: 35%;
+  transform-origin: top left; }
+
+.gif2 {
+  width: 50%;
+  margin-left: 8%; }
+
+.gif3 {
+  width: 50%; }
+
+.gif4 {
+  width: 70%; }
 
 .img-ss {
   width: 70%;
