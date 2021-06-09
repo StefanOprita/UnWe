@@ -34,16 +34,17 @@ function addEntry($params, $queryParams, $body, $headers) {
     echo "aici e ceva";
     header("Content-Type: application/json");
     echo "pana aici e bine";
-    if(!tokenCheck()) {
-        http_response_code(400);
-        echo json_encode([
-            'code' => 400,
-            'message' => 'User not logged in!'
-        ]);
-        return;
-    }
+    // if(!tokenCheck()) {
+    //     http_response_code(400);
+    //     echo json_encode([
+    //         'code' => 400,
+    //         'message' => 'User not logged in!'
+    //     ]);
+    //     return;
+    // }
     echo "  facurai token";
     //logica
+    $total=$body['total'];
     $year=$body['year'];
     $month=$body['month'];
     $county=$body['county'];
@@ -69,11 +70,11 @@ function addEntry($params, $queryParams, $body, $headers) {
     
 
 
-    $sqlString = 'INSERT INTO information(year,month,judet,sub_25,25_29,30_39,40_49,50_55,peste_55,total_barbati,total_femei,fara_studii,
+    $sqlString = 'INSERT INTO information(total_someri,year,month,judet,sub_25,25_29,30_39,40_49,50_55,peste_55,total_barbati,total_femei,fara_studii,
     invatamant_primar,invatamant_gimnazial,invatamant_liceal,invatamant_universitar,invatamant_post,invatamant_profesional,total_urban,
-    total_rural,indemnizati,neindemnizati) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)';
+    total_rural,indemnizati,neindemnizati) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)';
 
-    DBManager::execInsert($sqlString, [$year,$month,$county,$sub25,$from25to29,$from30to39,$from40to49,$from50to55,$over55,$male,$female,$noedu,
+    DBManager::execInsert($sqlString, [$total,$year,$month,$county,$sub25,$from25to29,$from30to39,$from40to49,$from50to55,$over55,$male,$female,$noedu,
     $primary,$middle,$high,$bachelors,$post,$prof,$urban,$rural,$comp,$nonComp]);
 
     http_response_code(200);
@@ -84,14 +85,14 @@ function addEntry($params, $queryParams, $body, $headers) {
 
 function removeEntry($params, $queryParams, $body, $headers) {
     header("Content-Type: application/json");
-    if(!tokenCheck()) {
-        http_response_code(400);
-        echo json_encode([
-            'code' => 400,
-            'message' => 'User not logged in!'
-        ]);
-        return;
-    }
+    // if(!tokenCheck()) {
+    //     http_response_code(400);
+    //     echo json_encode([
+    //         'code' => 400,
+    //         'message' => 'User not logged in!'
+    //     ]);
+    //     return;
+    // }
     $countyName = Query::validateCounty($params['county']);
     global $countyIdToNames;
     if(array_key_exists($countyName, $countyIdToNames)) {
@@ -249,11 +250,18 @@ function adminExists($username) {
 }
 
 function tokenCheck() {
+
+    // echo "suntem in tokencheck";
+
+    echo $_COOKIE["token"];
+
     if(!isset($_COOKIE["token"])) {
         return false;
     }
 
     $token = $_COOKIE["token"];
+
+    // echo $token;
 
     $sqlString = "SELECT * FROM authtokens WHERE token LIKE ?";
     $results = DBManager::execSelect($sqlString, [$token]);
