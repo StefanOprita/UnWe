@@ -138,15 +138,18 @@ async function addEntry() {
         + from50to55 + " " + over55 + " " + male + " " + female + " " + noedu + " " + primary + " " + middle + " " + high + " " + bachelors + " " + post + " " + prof + " " + urban + " "
         + rural + " " + comp + " " + nonComp);
 
-    var total = intval(male) + intval(female);
+    var total = parseInt(male) + parseInt(female);
 
+    console.log("asadada");
+
+    // console.log(total);
     console.log(total);
 
     var uri = '/api/admin/info';
     var rawResponse = await fetch(uri, {
         method: 'POST',
         body: JSON.stringify({
-            // total: total,
+            total: total,
             year: year,
             month: month,
             county: county,

@@ -1,8 +1,14 @@
 <?php
 function tokenCheck() {
+
+    // echo "cookie here";
+    // echo $_COOKIE["token"];
+
     if(!isset($_COOKIE["token"])) {
         return false;
     }
+
+ 
    
     $token = $_COOKIE["token"];
 
