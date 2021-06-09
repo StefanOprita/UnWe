@@ -123,7 +123,7 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
 
-    <script src="https://momentjs.com/downloads/moment.min.js"></script>
+    <!-- <script src="https://momentjs.com/downloads/moment.min.js"></script> -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
     <script src="/public/js/info.js"></script>
 
