@@ -12,7 +12,7 @@
 
 </head>
 
-<body>
+<body style="background-color: #1F1E25;">
     <img id="dot" src="/public/dot.svg" alt="">
     <div class="container">
         <div class="background"></div>
