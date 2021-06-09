@@ -12,7 +12,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
 async function getNumbersToDisplay() {
     //o sa luam noi cum trebuia anul si luna... ramane asa pe moment
     var res = await fetch(
-        "/api/query?counties=all" +
+        "/api/query?counties=bt" +
         "&startingYear=2021" +
         "&startMonth=6" +
         "&endingYear=2021" +
@@ -102,15 +102,15 @@ async function testAdminApi() {
     content = await rawResponse.json();
     console.log(content);
 
-    // fetch('/api/admin/create', {
-    //     method: 'POST',
-    //     body: JSON.stringify({
-    //         username: "Stefan",
-    //         password: "1234"
-    //     })
-    // }).then(response => response.text())
-    // .then(json => console.log(json));
-    //console.log(content);
+    fetch('/api/admin/create', {
+        method: 'POST',
+        body: JSON.stringify({
+            username: "Stefan",
+            password: "1234"
+        })
+    }).then(response => response.text())
+    .then(json => console.log(json));
+    console.log(content);
 }
 
 function setUX() {
