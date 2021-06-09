@@ -1,15 +1,16 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="ro" dir="ltr">
 
 <head>
     <meta charset="utf-8">
-    <title>UnWE</title>
+    <title>UnWe - Documentation</title>
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@500;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&family=Ubuntu:wght@500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../public/prism-dark.css">
     <script src="../public/prism-dark.js"></script>
     <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="/public/unwe.ico">
 </head>
 
 <body prefix="schema: http://schema.org">
@@ -96,7 +97,7 @@
             În diagrama de mai jos este descrisă arhitectura aplicație noastre:
         </p>
 
-        <img src="ArhitecturaAplicatieiTW (1).svg" alt="Arhitectura aplicatiei">
+        <img src="ArhitecturaAplicatieiTW(1).svg" alt="Arhitectura aplicatiei">
 
         <p>
             La nivel de client, modulele importante sunt cele de generat și de exportat diagramele.
@@ -106,11 +107,95 @@
 
     </section>
 
+    <section id="database">
+        <h2><span>4. </span>Baza de date</h2>
+        <p>
+            Pentru stocarea datelor am folosit o bază de date MySQL găzduită pe
+            <span typeof="schema:WebSite" resource="https://www.heroku.com/">
+                <span property="schema:copyrightHolder" typeof="WebSite">
+                    <meta property="schema:name" content="amCharts">
+                    <meta property="schema:url" content="https://www.heroku.com/">
+                </span>
+                <a href="https://www.heroku.com/"><span property="schema:name">Heroku</span></a>
+            </span>
+            , același mediu în care am făcut deploy. Am creat un singleton DatabaseManager care se ocupă de administrarea conexiunii și de executarea
+            query-urilor. Vom prezenta structura tabelelor din această bază de date.
+
+            <br>
+
+        </p>
+
+        <section id="information-table">
+            <h3><span>4.1 </span>Tabela information</h3>
+
+            <p>
+                Acest tabel conține datele ce urmează a fi afișate ca statistici sau accesate prin API. Screenshot-ul cuprinde doar o parte din tabel.
+            </p>
+
+            <img class="img-ss-smaller" src="InformationTable.png" alt="Screenshot of information table structure">
+
+
+        </section>
+
+        <section id="admin-table">
+            <h3><span>4.2 </span>Tabela administrators</h3>
+
+            <p>
+                Acest tabel conține datele de conectare ale administratorilor. Acesta, împreună cu un tabel de tokenuri ajută la menținerea sesiunii
+                unui administrator.
+            </p>
+
+            <img class="img-ss-smaller" src="AdministratorsTable.png" alt="Screenshot of information table structure">
+
+
+        </section>
+
+    </section>
+
+    <section id="architecture">
+        <h2><span>5. </span>API</h2>
+
+        <p>
+            Am creat o clasă Query care se ocupă ocupă de toate query-urile la API. Primește comanda, validează datele și apoi returnează
+            rezultatul query-ului.
+            <br>
+            Query-routes este route handler-ul ce se ocupă de uri-urile rutelor pe care ar putea să facă cerere utilizatorul.
+        </p>
+
+        <pre>
+            <code class="language-javascript">
+                $query_routes = [
+                    [
+                        'method' => 'GET',
+                        'url' => '/api/query/:county',
+                        'handler' => 'queryDatabaseForCounty'
+                    ],
+                    [
+                        'method' => 'GET',
+                        'url' => '/api/query/:county/:year',
+                        'handler' => 'queryDatabase'
+                    ],
+                    [
+                        'method' => 'GET',
+                        'url' => '/api/query/:county/:year/:month',
+                        'handler' => 'queryDatabaseMonth'
+                    ],
+                    [
+                        'method' => 'GET',
+                        'url' => '/api/query/',
+                        'handler' => 'advancedQuery'
+                    ]
+                ];
+            </code>
+        </pre>
+
+    </section>
+
     <section id="pages">
-        <h2><span>4. </span>Paginile aplicației Web</h2>
+        <h2><span>6. </span>Paginile aplicației Web</h2>
 
         <section id="pages-home">
-            <h3><span>4.1 </span>Home</h3>
+            <h3><span>6.1 </span>Home</h3>
             <p>
                 Pagina Home
                 <!-- <span typeof="schema:WebSite" resource="to be added hosted TODO">
@@ -124,12 +209,12 @@
                 un buton ce duce la statisticile cu aceste informații și alt buton care duce la API.
             </p>
 
-            <img src="HomePageFINAL.png" alt="Screenshot of home page" class="img-ss">
+            <img src="Home.png" alt="Screenshot of home page" class="img-ss">
         </section>
 
 
         <section id="pages-statistics">
-            <h3><span>4.2 </span>Statistics</h3>
+            <h3><span>6.2 </span>Statistics</h3>
             <p>
                 În această pagină, utilizatorul alege ce județe dorește să vizualizeze prin intermediul barei de căutare sau a hărții.
                 De asemenea, acesta poate alege între un line-graph, bar plot sau pie chart, între categoriile de date (vârsta, gen, educație
@@ -139,14 +224,14 @@
                 Acesta poate descărca diagrama generată în format SVG, CSV sau PDF.
             </p>
 
-            <img src="Statistics.png" alt="Screenshot of statistics page" class="img-ss">
+            <img class="img-ss" src="Statistics.png" alt="Screenshot of statistics page">
 
-            <img src="UseCase-TW (3).svg" alt="Use case diagram of statistics page">
+            <img class="img-ss" src="UseCase-TW(3).svg" alt="Use case diagram of statistics page">
 
         </section>
 
         <section id="pages-API">
-            <h3><span>4.3 </span>API</h3>
+            <h3><span>6.3 </span>API</h3>
             <p>
                 În această pagină se oferă documentația API-ul oferit de website-ul nostru.
                 <br>
@@ -156,8 +241,16 @@
 
             <img src="API.png" alt="Screenshot of API page" class="img-ss">
 
+        </section>
+
+        <section id="pages-API">
+            <h3><span>6.3 </span>Admin</h3>
             <p>
+                În această pagină te conectezi ca administrator și ai posibilitatea de a adăugat sau șterge intrări din baza de date
             </p>
+
+            <img src="Admin.png" alt="Screenshot of admin page" class="img-ss">
+
         </section>
     </section>
 
@@ -165,9 +258,9 @@
 
 
     <section id="implementation">
-        <h2><span>5. </span>Detalii de implementare</h2>
+        <h2><span>7. </span>Detalii de implementare</h2>
         <section id="implementation-wisps">
-            <h3><span>5.1 </span>Wisps</h3>
+            <h3><span>7.1 </span>Wisps</h3>
             <p>
                 Fundalul paginii are o animație creată din buline care se plimbă și lasă în urmă o linie cu opacitate ce scade în timp.
                 Efectul creat dinamizează background-ul paginii.
@@ -189,7 +282,7 @@
                         } else {
                             lambda = ((line2Y2 - line2Y1) * (line2X2 - line1X1) + (line2X1 - line2X2) * (line2Y2 - line1Y1)) / det;
                             gamma = ((line1Y1 - line1Y2) * (line2X2 - line1X1) + (line1X2 - line1X1) * (line2Y2 - line1Y1)) / det;
-                            return (0 < lambda && lambda < 1) && (0 < gamma && gamma < 1);
+                            return (0 &lt; lambda && lambda &lt; 1) && (0 &lt; gamma && gamma &lt; 1);
                         }
                     };
                 </code>
@@ -198,38 +291,39 @@
 
 
         <section id="implementation-search-bar">
-            <h3><span>5.2 </span>Search bar</h3>
+            <h3><span>7.2 </span>Search bar</h3>
             <p>
                 În primul rând, pentru o utilizare ușoară a search-bar-ului, am implementat-o astfel încât să nu depindă de diacritice, litere mari/mici sau spații.
-                <pre>
-                    <code class="language-javascript">
-                        //fac aceste transformari ca sa nu conteze daca scrii cu diacritice sau nu
-                        var normalizedCountyName = countyIdtoNameMap[id].toLowerCase();
-                        normalizedCountyName = normalizedCountyName.replace(/ș/g, 's');
-                        normalizedCountyName = normalizedCountyName.replace(/ț/g, 't');
-                        normalizedCountyName = normalizedCountyName.replace(/ă/g, 'a');
-                        normalizedCountyName = normalizedCountyName.replace(/â/g, 'a');
-                        normalizedCountyName = normalizedCountyName.replace(/î/g, 'i');
+            </p>
+            <pre>
+                <code class="language-javascript">
+                    //fac aceste transformari ca sa nu conteze daca scrii cu diacritice sau nu
+                    var normalizedCountyName = countyIdtoNameMap[id].toLowerCase();
+                    normalizedCountyName = normalizedCountyName.replace(/ș/g, 's');
+                    normalizedCountyName = normalizedCountyName.replace(/ț/g, 't');
+                    normalizedCountyName = normalizedCountyName.replace(/ă/g, 'a');
+                    normalizedCountyName = normalizedCountyName.replace(/â/g, 'a');
+                    normalizedCountyName = normalizedCountyName.replace(/î/g, 'i');
 
-                        //also, scoatem whitespace-ul
-                        var normalizedInput = searchInput.toLowerCase().trim();
-                        normalizedInput = normalizedInput.replace(/ș/g, 's');
-                        normalizedInput = normalizedInput.replace(/ț/g, 't');
-                        normalizedInput = normalizedInput.replace(/ă/g, 'a');
-                        normalizedInput = normalizedInput.replace(/â/g, 'a');
-                        normalizedInput = normalizedInput.replace(/î/g, 'i');
-                    </code>
-                </pre>
-                <br>
+                    //also, scoatem whitespace-ul
+                    var normalizedInput = searchInput.toLowerCase().trim();
+                    normalizedInput = normalizedInput.replace(/ș/g, 's');
+                    normalizedInput = normalizedInput.replace(/ț/g, 't');
+                    normalizedInput = normalizedInput.replace(/ă/g, 'a');
+                    normalizedInput = normalizedInput.replace(/â/g, 'a');
+                    normalizedInput = normalizedInput.replace(/î/g, 'i');
+                </code>
+            </pre>
+            <br>
+            <p>
                 Pentru fiecare caracter introdus în search-bar, se actualizează județele afișate.
                 Ca un județ să fie afișat, acesta trebuie să nu fie deja adăugat în lista de județe deja selectate și să înceapă cu șirul de caractere
                 din search-bar normalizat.
-
             </p>
         </section>
 
         <section id="implementation-map">
-            <h3><span>5.3 </span>Map</h3>
+            <h3><span>7.3 </span>Map</h3>
             <p>
                 Am ales să folosim un
                 <span typeof="schema:DefinedTerm" resource="https://wikipedia.org">
@@ -258,7 +352,7 @@
         </section>
 
         <section id="implementation-charts">
-            <h3><span>5.4 </span>Charts</h3>
+            <h3><span>7.4 </span>Charts</h3>
             <p>
                 Pentru afișarea chart-urilor am folosit librăria oferită de
                 <span typeof="schema:WebSite" resource="https://www.chartjs.org/">
@@ -268,39 +362,42 @@
                     </span>
                     <a href="https://www.chartjs.org/docs/latest/"><span property="schema:name">Charts.js</span></a>
                 </span>
+
                 . Datele diagramelor se actualizează odată cu fiecare județ selectat și pot fi afișate în 3
                 tipuri diferite(line, bar, pie);
-                <pre>
-                    <code class="language-javascript">
-                        let chart = new Chart(ctx, {
-                            type: 'line',
-                            data: {
-                                labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-                            },
-                            options: {
-                                responsive: true,
-                                maintainAspectRatio: false,
-                                animation: {
-                                    duration: 400
-                                },
-                                scales: {
-                                    yAxes: [{
-                                        ticks: {
-                                            beginAtZero: true
-                                        }
-                                    }]
-                                }
-                            }
-                        });
-                    </code>
-                </pre>
+
             </p>
+
+            <pre>
+                <code class="language-javascript">
+                    let chart = new Chart(ctx, {
+                        type: 'line',
+                        data: {
+                            labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+                        },
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            animation: {
+                                duration: 400
+                            },
+                            scales: {
+                                yAxes: [{
+                                    ticks: {
+                                        beginAtZero: true
+                                    }
+                                }]
+                            }
+                        }
+                    });
+                </code>
+            </pre>
         </section>
 
     </section>
 
     <section id="references">
-        <h2><span>6. </span>Referințe</h2>
+        <h2><span>8. </span>Referințe</h2>
         <!-- <p> -->
             <ul>
                 <li property="schema:citation" typeof="schema:WebSite" resource="https://developer.mozilla.org/en-US/">

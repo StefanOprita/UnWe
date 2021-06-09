@@ -7,6 +7,7 @@
     "scripts": {
         "dev": "node-sass -rw public/css/style.sass public/css/style.css --output-style compressed",
         "dev2": "node-sass -w documentation/style.sass documentation/style.css",
+        "dev3": "node-sass -w guide/style.sass guide/style.css",
         "build:css": "node-sass public/style.sass public/style.css"
     }
 }
