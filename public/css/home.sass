@@ -8,7 +8,7 @@
 
     .info
         margin-bottom: .5em
-        font-size: 3em
+        font-size: 2.9em
         font-weight: 300
         font-family: 'Roboto'
         color: var(--color-on-surface)
@@ -136,10 +136,58 @@
     box-sizing: border-box
     background-color: $gray
 
+    @media (max-height: $menuLayoutThreshold)
+        justify-content: center
+        flex-direction: column
+        padding: 2em 0
+
+    .author-container
+        width: 7em
+        display: flex
+        flex-direction: column
+        // justify-content: center
+
+        &:hover
+            cursor: pointer
+
     a
+        margin: 0 auto
         text-decoration: none
         color: var(--color-primary)
         transition: .1s
 
         &:hover
             color: var(--color-surface)
+
+        .div1
+            position: relative
+            width: 100px
+            height: 100px
+            margin: 0 auto
+            border: 3px solid $black
+            border-radius: 50%
+
+            .div2
+                position: absolute
+                width: 106px
+                height: 106px
+                left: -3px
+                top: -5px
+                border-radius: 50%
+                overflow: hidden
+
+                img
+                    position: absolute
+                    left: 0
+                    right: 0
+                    bottom: 0
+                    width: 4em
+                    height: 4em
+                    margin: 0 auto
+
+        span
+            margin-top: .5em
+            font-family: 'Roboto'
+            font-weight: 400
+            font-size: 1em
+            text-align: center
