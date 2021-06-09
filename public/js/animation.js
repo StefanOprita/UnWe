@@ -1,5 +1,6 @@
 function setAnimation() {
     var canvas = document.getElementById('canvas');
+    if(canvas == null) canvas = document.getElementById('api-canvas');
     var ctx = canvas.getContext('2d');
 
     canvas.width = window.innerWidth;
@@ -12,18 +13,7 @@ function setAnimation() {
     Animation(ctx);
 }
 
-var Animation = function(ctxa, withCollision = true) {
-    var canvas = document.getElementById('canvas');
-    var ctx = canvas.getContext('2d');
-
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-
-    screenWidth = canvas.width;
-    screenHeight = canvas.height;
-
-    // Animation(ctx);
-
+var Animation = function(ctx, withCollision = true) {
     var count = 0;
     var delta = 0;
     var oldMillisecond = 0;
