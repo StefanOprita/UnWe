@@ -53,15 +53,31 @@
     </div>
     <div class="showcase-container">
 
-        <a href="https://github.com/LiviuC-glitch"><span>Cristea Liviu Andrei</span></a>
-        <a href="https://github.com/StefanOprita"><span>Opriță Ștefan-Simion</span></a>
-        <a href="https://github.com/iulyus01"><span>Vultur Iulian</span></a>
+        <a class="author-container">
+            <div class="div1"><div class="div2">
+                <img src="/public/livi.svg" alt="Avatar">
+            </div></div>
+            <span>Cristea Liviu Andrei</span>
+        </a>
 
-        <!-- <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-            labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-            laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in
-            voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat
-            non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p> -->
+        <a class="author-container">
+            <div class="div1"><div class="div2">
+                <img src="/public/stefi.svg" alt="Avatar">
+            </div></div>
+            <span>Opriță Ștefan-Simion</span>
+        </a>
+
+        <a class="author-container">
+            <div class="div1"><div class="div2">
+                <img src="/public/iulian.svg" alt="Avatar">
+            </div></div>
+            <span>Vultur Iulian</span>
+        </a>
+
+        <!-- <a href="https://github.com/LiviuC-glitch"><span>Cristea Liviu Andrei</span></a>
+        <a href="https://github.com/StefanOprita"><span>Opriță Ștefan-Simion</span></a>
+        <a href="https://github.com/iulyus01"><span>Vultur Iulian</span></a> -->
+
     </div>
 
 
