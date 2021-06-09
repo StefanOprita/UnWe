@@ -8,7 +8,9 @@
     <meta name="description" content="UnEmployment website">
     <title>Unemployment in Romania</title>
     <link rel="shortcut icon" href="/public/unwe.ico">
+
     <!-- <link rel="stylesheet" href="/public/css/firstPaint.css"> -->
+    <link rel="stylesheet" href="/public/css/style.css">
 
 </head>
 
@@ -67,7 +69,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="/public/css/style.css">
+
 
     <script src="/public/js/theme.js"></script>
     <script src="/public/js/script-home.js"></script>

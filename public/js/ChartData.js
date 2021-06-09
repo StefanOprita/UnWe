@@ -19,7 +19,6 @@ class ChartData {
 
     constructor() {
         this.category = new Category();
-        // this.countyLabels = ['AA', 'BB', 'CC'];
     }
 
     createTimeLabels() {
@@ -85,9 +84,6 @@ class ChartData {
 
             let line = [];
             let county = this.countyDataArray[label];
-            // console.log('####################');
-            // console.log(county);
-
             // prin asta parcurg lunile
             let startIndex = (this.rangeStartYear - 2019) * 12 + this.rangeStartMonth - 1;
             let endIndex = (this.rangeEndYear - 2019) * 12 + this.rangeEndMonth - 1;
@@ -126,30 +122,20 @@ class ChartData {
                 }
                 barSet.push(value);
             }
-            // this.countyDataArray.forEach((county, i) => {
-            //     let value = county[index].counties[Object.keys(county[index].counties)[0]][this.category.categoryLabel][label];
-            //     barSet.push(value);
-            // });
             bars.push(barSet);
         });
         return bars;
     }
 
     getPies() {
-        // console.log('start here #################');
         var pies = [];
-        // un pie are is - male 53%, female 47%
         this.countyLabels.forEach((countyLabelUppercase, i) => {
             let countyLabel = countyLabelUppercase.toLowerCase();
 
             let pie = [];
             let county = this.countyDataArray[countyLabel];
-
-            // prin asta parcurg item-urile din categorii
             let index = (this.rangeYear - 2019) * 12 + this.rangeMonth - 1;
             this.category.getSelectedItems().forEach((label) => {
-                // console.log(countyLabel);
-                // console.log(county[index]);
                 let value;
                 try {
                     value = county[index].counties[countyLabel][this.category.categoryLabel][label];
@@ -160,9 +146,6 @@ class ChartData {
             });
             pies.push(pie);
         });
-
-        // console.log(pies);
-        // console.log('end here #################');
         return pies;
     }
 
