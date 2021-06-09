@@ -124,6 +124,7 @@
     <script src="/public/js/Category.js"></script>
     <script src="/public/js/ChartData.js"></script>
     <script src="/public/js/script-statistics-minified.js"></script>
+    <!-- <script src="/public/js/script-statistics.js"></script> -->
 
     <script src="/public/js/dot.js"></script>
     <script src="/public/js/box.js"></script>
