@@ -19,9 +19,12 @@ async function getNumbersToDisplay() {
         "&endMonth=6"
     );
 
+
     var jsonResponse = await res.json();
 
     var total = 0;
+    var lesser25 = 0;
+
     console.log(jsonResponse);
 
     console.log(jsonResponse[0].counties);
@@ -30,12 +33,15 @@ async function getNumbersToDisplay() {
         if (Object.hasOwnProperty.call(jsonResponse[0].counties, key)) {
             const county = jsonResponse[0].counties[key];
             total += county.total;
+            lesser25 += county.age.lesser25;
         }
     }
 
     document.getElementById('total-unemployed').innerText = total;
 
-    document.getElementsByClassName('info')[0].style.fontSize = '3em';
+    // console.log('here1');
+
+    // document.getElementsByClassName('info')[0].style.fontSize = '3em';
 
 
     // res = await fetch('http://ip-api.com/json');
@@ -59,7 +65,7 @@ async function getNumbersToDisplay() {
     // var jsonResponse = await res.json();
 
 
-    // document.getElementById('county-unemployed').innerText =  jsonResponse[0].counties[region.toLowerCase()].total
+    document.getElementById('county-unemployed').innerText = lesser25;
 
 
     // document.getElementsByClassName('last-info')[0].style.fontSize = '1.7em';

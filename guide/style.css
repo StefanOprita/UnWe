@@ -67,16 +67,3 @@ img {
   width: 70%;
   transform-origin: top left;
   border: 1px solid #EBEBEB; }
-  @media (max-width: 700px) {
-    .img-ss {
-      width: 100%;
-      margin: 10px 0; } }
-
-.img-ss-smaller {
-  width: 50%;
-  transform-origin: top left;
-  border: 1px solid #EBEBEB; }
-  @media (max-width: 700px) {
-    .img-ss-smaller {
-      width: 100%;
-      margin: 10px 0; } }

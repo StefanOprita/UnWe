@@ -106,95 +106,11 @@
 
     </section>
 
-    <section id="database">
-        <h2><span>4. </span>Baza de date</h2>
-        <p>
-            Pentru stocarea datelor am folosit o bază de date MySQL găzduită pe
-            <span typeof="schema:WebSite" resource="https://www.heroku.com/">
-                <span property="schema:copyrightHolder" typeof="WebSite">
-                    <meta property="schema:name" content="amCharts">
-                    <meta property="schema:url" content="https://www.heroku.com/">
-                </span>
-                <a href="https://www.heroku.com/"><span property="schema:name">Heroku</span></a>
-            </span>
-            , același mediu în care am făcut deploy. Am creat un singleton DatabaseManager care se ocupă de administrarea conexiunii și de executarea
-            query-urilor. Vom prezenta structura tabelelor din această bază de date.
-
-            <br>
-
-        </p>
-
-        <section id="information-table">
-            <h3><span>4.1 </span>Tabela information</h3>
-
-            <p>
-                Acest tabel conține datele ce urmează a fi afișate ca statistici sau accesate prin API. Screenshot-ul cuprinde doar o parte din tabel.
-            </p>
-
-            <img class="img-ss-smaller" src="InformationTable.png" alt="Screenshot of information table structure">
-
-
-        </section>
-
-        <section id="admin-table">
-            <h3><span>4.2 </span>Tabela administrators</h3>
-
-            <p>
-                Acest tabel conține datele de conectare ale administratorilor. Acesta, împreună cu un tabel de tokenuri ajută la menținerea sesiunii
-                unui administrator.
-            </p>
-
-            <img class="img-ss-smaller" src="AdministratorsTable.png" alt="Screenshot of information table structure">
-
-
-        </section>
-
-    </section>
-
-    <section id="architecture">
-        <h2><span>5. </span>API</h2>
-
-        <p>
-            Am creat o clasă Query care se ocupă ocupă de toate query-urile la API. Primește comanda, validează datele și apoi returnează
-            rezultatul query-ului.
-            <br>
-            Query-routes este route handler-ul ce se ocupă de uri-urile rutelor pe care ar putea să facă cerere utilizatorul.
-        </p>
-
-        <pre>
-            <code class="language-javascript">
-                $query_routes = [
-                    [
-                        'method' => 'GET',
-                        'url' => '/api/query/:county',
-                        'handler' => 'queryDatabaseForCounty'
-                    ],
-                    [
-                        'method' => 'GET',
-                        'url' => '/api/query/:county/:year',
-                        'handler' => 'queryDatabase'
-                    ],
-                    [
-                        'method' => 'GET',
-                        'url' => '/api/query/:county/:year/:month',
-                        'handler' => 'queryDatabaseMonth'
-                    ],
-                    [
-                        'method' => 'GET',
-                        'url' => '/api/query/',
-                        'handler' => 'advancedQuery'
-                    ]
-                ];
-            </code>
-        </pre>
-
-    </section>
-
     <section id="pages">
-        <h2><span>6. </span>Paginile aplicației Web</h2>
+        <h2><span>4. </span>Paginile aplicației Web</h2>
 
         <section id="pages-home">
-            <h3><span>6.1 </span>Home</h3>
+            <h3><span>4.1 </span>Home</h3>
             <p>
                 Pagina Home
                 <!-- <span typeof="schema:WebSite" resource="to be added hosted TODO">
@@ -213,7 +129,7 @@
 
 
         <section id="pages-statistics">
-            <h3><span>6.2 </span>Statistics</h3>
+            <h3><span>4.2 </span>Statistics</h3>
             <p>
                 În această pagină, utilizatorul alege ce județe dorește să vizualizeze prin intermediul barei de căutare sau a hărții.
                 De asemenea, acesta poate alege între un line-graph, bar plot sau pie chart, între categoriile de date (vârsta, gen, educație
@@ -223,14 +139,14 @@
                 Acesta poate descărca diagrama generată în format SVG, CSV sau PDF.
             </p>
 
-            <img class="img-ss" src="Statistics.png" alt="Screenshot of statistics page">
+            <img src="Statistics.png" alt="Screenshot of statistics page" class="img-ss">
 
-            <img class="img-ss" src="UseCase-TW(3).svg" alt="Use case diagram of statistics page">
+            <img src="UseCase-TW(3).svg" alt="Use case diagram of statistics page">
 
         </section>
 
         <section id="pages-API">
-            <h3><span>6.3 </span>API</h3>
+            <h3><span>4.3 </span>API</h3>
             <p>
                 În această pagină se oferă documentația API-ul oferit de website-ul nostru.
                 <br>
@@ -240,16 +156,8 @@
 
             <img src="API.png" alt="Screenshot of API page" class="img-ss">
 
-        </section>
-
-        <section id="pages-API">
-            <h3><span>6.3 </span>Admin</h3>
             <p>
-                În această pagină te conectezi ca administrator și ai posibilitatea de a adăugat sau șterge intrări din baza de date
             </p>
-
-            <img src="Admin.png" alt="Screenshot of admin page" class="img-ss">
-
         </section>
     </section>
 
@@ -257,9 +165,9 @@
 
 
     <section id="implementation">
-        <h2><span>7. </span>Detalii de implementare</h2>
+        <h2><span>5. </span>Detalii de implementare</h2>
         <section id="implementation-wisps">
-            <h3><span>7.1 </span>Wisps</h3>
+            <h3><span>5.1 </span>Wisps</h3>
             <p>
                 Fundalul paginii are o animație creată din buline care se plimbă și lasă în urmă o linie cu opacitate ce scade în timp.
                 Efectul creat dinamizează background-ul paginii.
@@ -290,7 +198,7 @@
 
 
         <section id="implementation-search-bar">
-            <h3><span>7.2 </span>Search bar</h3>
+            <h3><span>5.2 </span>Search bar</h3>
             <p>
                 În primul rând, pentru o utilizare ușoară a search-bar-ului, am implementat-o astfel încât să nu depindă de diacritice, litere mari/mici sau spații.
             </p>
@@ -322,7 +230,7 @@
         </section>
 
         <section id="implementation-map">
-            <h3><span>7.3 </span>Map</h3>
+            <h3><span>5.3 </span>Map</h3>
             <p>
                 Am ales să folosim un
                 <span typeof="schema:DefinedTerm" resource="https://wikipedia.org">
@@ -351,7 +259,7 @@
         </section>
 
         <section id="implementation-charts">
-            <h3><span>7.4 </span>Charts</h3>
+            <h3><span>5.4 </span>Charts</h3>
             <p>
                 Pentru afișarea chart-urilor am folosit librăria oferită de
                 <span typeof="schema:WebSite" resource="https://www.chartjs.org/">
@@ -396,7 +304,7 @@
     </section>
 
     <section id="references">
-        <h2><span>8. </span>Referințe</h2>
+        <h2><span>6. </span>Referințe</h2>
         <!-- <p> -->
             <ul>
                 <li property="schema:citation" typeof="schema:WebSite" resource="https://developer.mozilla.org/en-US/">
