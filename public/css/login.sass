@@ -56,6 +56,21 @@
             color: var(--color-on-surface)
             opacity: .6
 
+        &:-webkit-autofill,
+        &:-webkit-autofill:hover,
+        &:-webkit-autofill:focus,
+        &:-webkit-autofill:active
+            -webkit-box-shadow: 0 0 0 30px var(--color-surface) inset
+            color: var(--color-primary)
+
+        &:-webkit-autofill
+            -webkit-text-fill-color: var(--color-primary)
+
+        &::-webkit-inner-spin-button,
+        &::-webkit-outer-spin-button
+            -webkit-appearance: none
+            margin: 0
+
     input[type=text], input[type=password]
         display: inline-block
         width: 100%
