@@ -24,16 +24,3 @@ function setUX() {
 
     document.getElementsByClassName('theme')[0].addEventListener('click', () => toggleTheme(true));
 }
-
-function setAnimation() {
-    var canvas = document.getElementById('api-canvas');
-    var ctx = canvas.getContext('2d');
-
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-
-    screenWidth = canvas.width;
-    screenHeight = canvas.height;
-
-    Animation(ctx, false);
-}

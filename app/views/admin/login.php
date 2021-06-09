@@ -29,17 +29,19 @@
                 </a>
             </div>
         </header>
-   
+
         <form class="login-form" onsubmit="submitLoginForm(); return false;">
             <label class="collision-box" for="uname"><b>Username</b></label>
             <input class="collision-box" type="text" placeholder="Enter Username" id="uname" required>
             <label class="collision-box" for="psw"><b>Password</b></label>
             <input class="collision-box" type="password" placeholder="Enter Password" id="psw" required>
             <button type="submit" name="button1" class="button collision-box" onclick="console.log('aaaaaaaaaa')"><span>Login</span></button>
-            <label class="collision-box">
+            <label class="remember-me collision-box">
                 <input type="checkbox" name="remember">
                 <span>Remember me</span>
             </label>
+
+            <label class="failed-message">Invalid credentials. Please try again.</label>
         </form>
     </div>
     <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -49,7 +51,7 @@
     <link rel="stylesheet" href="/public/css/style.css">
     <script src="/public/js/theme.js"></script>
     <!-- <script src="/public/js/script-home.js"></script> -->
-    <script src="/public/js/login.js"></script>
+    <script src="/public/js/script-login.js"></script>
     <script src="/public/js/info.js"></script>
     <script src="/public/js/dot.js"></script>
     <script src="/public/js/box.js"></script>

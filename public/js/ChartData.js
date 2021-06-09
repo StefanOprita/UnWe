@@ -92,7 +92,7 @@ class ChartData {
             let startIndex = (this.rangeStartYear - 2019) * 12 + this.rangeStartMonth - 1;
             let endIndex = (this.rangeEndYear - 2019) * 12 + this.rangeEndMonth - 1;
             for(let i = startIndex; i <= endIndex; i++) {
-                
+
                 let value = county[i].counties[label][this.category.categoryLabel][this.category.getSelectedItems()[0]];
                 line.push(value);
             }
@@ -127,7 +127,7 @@ class ChartData {
     }
 
     getPies() {
-        console.log('start here #################');
+        // console.log('start here #################');
         var pies = [];
         // un pie are is - male 53%, female 47%
         this.countyLabels.forEach((countyLabelUppercase, i) => {
@@ -139,16 +139,16 @@ class ChartData {
             // prin asta parcurg item-urile din categorii
             let index = (this.rangeYear - 2019) * 12 + this.rangeMonth - 1;
             this.category.getSelectedItems().forEach((label) => {
-                console.log(countyLabel);
-                console.log(county[index]);
+                // console.log(countyLabel);
+                // console.log(county[index]);
                 let value = county[index].counties[countyLabel][this.category.categoryLabel][label];
                 pie.push(value);
             });
             pies.push(pie);
         });
 
-        console.log(pies);
-        console.log('end here #################');
+        // console.log(pies);
+        // console.log('end here #################');
         return pies;
     }
 
