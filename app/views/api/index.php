@@ -8,6 +8,9 @@
     <meta name="description" content="UnEmployment website">
     <title>Unemployment in Romania</title>
     <link rel="shortcut icon" href="/public/unwe.ico">
+
+    <link rel="stylesheet" href="/public/css/style.css">
+    
 </head>
 
 <body style="background-color: #1F1E25;">
@@ -1597,7 +1600,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link id="prismCss" rel="stylesheet" href="/public/prism-dark.css">
-    <link rel="stylesheet" href="/public/css/style.css">
 
 
     <script src="/public/js/theme.js"></script>

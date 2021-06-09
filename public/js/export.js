@@ -1,7 +1,3 @@
-
-
-
-
 function exportChartToCsv(chart) {
     console.log("helo cica descarcam un csv");
     var rows = [];
@@ -13,16 +9,16 @@ function exportChartToCsv(chart) {
         chart.getChart().data.labels.forEach(label => {
             topLabels.push(label);
         });
-    
+
         rows.push(topLabels);
-    
+
         chart.getChart().data.datasets.forEach(line => {
             var row = [];
             row.push(line.label);
             line.data.forEach(data => {
                 row.push(data);
             });
-    
+
             rows.push(row);
         });
     } else {
@@ -30,7 +26,7 @@ function exportChartToCsv(chart) {
 
             topLabels.push(label.label);
         });
-    
+
         rows.push(topLabels);
 
         chart.getChart().data.labels.forEach(label => {
@@ -50,7 +46,7 @@ function exportChartToCsv(chart) {
 
     //console.log('');
     console.log(rows);
-    
+
 
     exportToCsv(chartData.type  + "Chart.csv", rows);
 }
@@ -113,50 +109,6 @@ function exportToCsv(filename, rows) {
 }
 
 
-function exportToPdf(filename, rows) {
-    var something = eval(rows);
-    var table = document.createElement("TABLE");
-    table.border = "1";
-    table.Id = "tblRows";
-    var columnCount = something[0].length;
-
-    var row = table.insertRow(-1);
-    for (var i = 0; i < columnCount; i++) {
-        var headerCell = document.createElement("TH");
-        headerCell.innerHTML = something[0][i];
-        row.appendChild(headerCell);
-    }
-
-    for (var i = 1; i < something.length; i++) {
-        row = table.insertRow(-1);
-        for (var j = 0; j < columnCount; j++) {
-            var cell = row.insertCell(-1);
-            cell.innerHTML = something[i][j];
-        }
-    }
-
-    var dvTable = document.getElementById("dvTable");
-    dvTable.innerHTML = "";
-    dvTable.appendChild(table);
-
-
-    html2canvas(document.getElementById('dvTable'), {
-        onrendered: function (canvas) {
-            var data = canvas.toDataURL();
-            var docDefinition = {
-                content: [{
-                    image: data,
-                    width: 500
-                }]
-            };
-            pdfMake.createPdf(docDefinition).download(filename);
-
-            dvTable.innerHTML = "";
-        }
-    });
-}
-
-
 function exportToSvg(chart) {
     //tweakLib();
     //var data = chart.getChart().data;
@@ -192,7 +144,7 @@ function exportToSvg(chart) {
     configuration.options = chart.getChart().options;
 
 
-    
+
 
     var mySvg = new Chart(svgContext, configuration);
 
@@ -216,7 +168,7 @@ function exportToSvg(chart) {
 
     document.body.removeChild(element);
 
-    
+
 }
 
 //cod ca sa "reparam" C2S sa mearga cu chart-urile din chart.js
@@ -227,16 +179,16 @@ function tweakLib(){
       }
       return null;
     }
-  
+
     C2S.prototype.style = function () {
         return this.__canvas.style
     }
-  
+
     C2S.prototype.getAttribute = function (name) {
         return this[name];
     }
-  
-    C2S.prototype.addEventListener =  function(type, listener, eventListenerOptions) {  
+
+    C2S.prototype.addEventListener =  function(type, listener, eventListenerOptions) {
       console.log("canvas2svg.addEventListener() not implemented.")
     }
 }
