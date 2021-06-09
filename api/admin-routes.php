@@ -253,7 +253,7 @@ function tokenCheck() {
 
     // echo "suntem in tokencheck";
 
-    echo $_COOKIE["token"];
+    // echo $_COOKIE["token"];
 
     if(!isset($_COOKIE["token"])) {
         return false;
