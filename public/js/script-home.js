@@ -14,7 +14,9 @@ async function getNumbersToDisplay() {
     var res = await fetch(
         "/api/query?counties=bt" +
         "&startingYear=2021" +
-        "&startMonth=2"
+        "&startMonth=6" +
+        "&endingYear=2021" +
+        "&endMonth=6"
     );
 
     var jsonResponse = await res.json();
