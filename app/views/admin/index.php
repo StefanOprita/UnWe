@@ -10,7 +10,7 @@
     <link rel="shortcut icon" href="/public/unwe.ico">
 
     <link rel="stylesheet" href="/public/css/style.css">
-    
+
 </head>
 
 <body style="background-color: #1F1E25;">
@@ -67,9 +67,12 @@
 
 
     <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+    <!-- <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@500;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> -->
+    <link href="/public/css/font-roboto.css" rel="stylesheet">
+    <link href="/public/css/font-ubuntu.css" rel="stylesheet">
+    <link href="/public/css/font-icons.css" rel="stylesheet">
 
     <script src="/public/js/theme.js"></script>
     <!-- <script src="/public/js/script-home.js"></script> -->
