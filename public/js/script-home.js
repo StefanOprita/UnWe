@@ -12,7 +12,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
 async function getNumbersToDisplay() {
     //o sa luam noi cum trebuia anul si luna... ramane asa pe moment
     var res = await fetch(
-        "/api/query?counties=bt" +
+        "/api/query?counties=all" +
         "&startingYear=2021" +
         "&startMonth=6" +
         "&endingYear=2021" +
