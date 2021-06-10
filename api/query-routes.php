@@ -153,7 +153,7 @@ function queryDatabaseForCounty($params, $queryParams, $body, $headers)
     // print_r($resultArray);
     $jsonFinal = array();
     array_push($jsonFinal, jsonFormat($resultArray[0], $categs));
-
+    header("Content-Type: application/json");
     print_r(json_encode($jsonFinal));
 }
 
@@ -189,7 +189,7 @@ function queryDatabase($params, $queryParams, $body, $headers)
         $jsonFinal = array();
         array_push($jsonFinal, jsonYearFormat($resultArray, $categs, 1, 12));
     }
-
+    header("Content-Type: application/json");
     print_r(json_encode($jsonFinal));
 }
 
@@ -239,7 +239,7 @@ function queryDatabaseMonth($params, $queryParams, $body, $headers)
     $jsonFinal = array();
     array_push($jsonFinal, jsonFormat($resultArray[0], $categs));
 
-
+    header("Content-Type: application/json");
     echo json_encode($jsonFinal);
 }
 
