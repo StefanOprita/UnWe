@@ -1,3 +1,5 @@
+Header Set Access-Control-Allow-Origin "https://unwe2021.herokuapp.com"
+
 RewriteEngine On
 
 RewriteRule ^(.*)$ REST_Handler.php [NC,L]  

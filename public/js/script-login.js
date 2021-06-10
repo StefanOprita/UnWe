@@ -10,7 +10,7 @@ async function submitLoginForm() {
     var username = document.getElementById('uname').value;
     var password = document.getElementById('psw').value;
 
-    var rawResponse = await fetch('/api/admin/login', {
+    var rawResponse = await fetch('https://unwe2021.herokuapp.com/api/admin/login', {
         method: 'POST',
         body:JSON.stringify({
             username: username,

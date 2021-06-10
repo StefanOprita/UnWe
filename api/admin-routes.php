@@ -31,18 +31,16 @@ $admin_routes = [
 
 function addEntry($params, $queryParams, $body, $headers) {
     //DBManager::execInsert($sqlString, [........])
-    echo "aici e ceva";
     header("Content-Type: application/json");
-    echo "pana aici e bine";
-    // if(!tokenCheck()) {
-    //     http_response_code(400);
-    //     echo json_encode([
-    //         'code' => 400,
-    //         'message' => 'User not logged in!'
-    //     ]);
-    //     return;
-    // }
-    echo "  facurai token";
+    if(!tokenCheck()) {
+        http_response_code(400);
+        echo json_encode([
+            'code' => 400,
+            'message' => 'User not logged in!'
+        ]);
+        return;
+    }
+
     //logica
     $total=$body['total'];
     $year=$body['year'];
@@ -85,14 +83,14 @@ function addEntry($params, $queryParams, $body, $headers) {
 
 function removeEntry($params, $queryParams, $body, $headers) {
     header("Content-Type: application/json");
-    // if(!tokenCheck()) {
-    //     http_response_code(400);
-    //     echo json_encode([
-    //         'code' => 400,
-    //         'message' => 'User not logged in!'
-    //     ]);
-    //     return;
-    // }
+    if(!tokenCheck()) {
+        http_response_code(400);
+        echo json_encode([
+            'code' => 400,
+            'message' => 'User not logged in!'
+        ]);
+        return;
+    }
     $countyName = Query::validateCounty($params['county']);
     global $countyIdToNames;
     if(array_key_exists($countyName, $countyIdToNames)) {
